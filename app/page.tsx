@@ -14,6 +14,7 @@ import {
   Briefcase,
   Network,
 } from "lucide-react";
+import { AuroraHeroLighting } from "@/components/aurora/AuroraHeroLighting";
 
 /*  Aurora — Credit markets for Bitcoin on chain
     Tokens
@@ -60,37 +61,38 @@ function Nav() {
     { href: "#vision", label: "Vision" },
   ];
   return (
-    <header className="sticky top-0 z-50 bg-[#F2EEE6]/85 backdrop-blur">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#06111E]/45 text-[#F8F5ED] shadow-[0_12px_45px_-28px_rgba(0,0,0,0.9)] backdrop-blur-2xl">
       <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-6 md:px-10">
         <a href="#top" className="flex items-baseline gap-3">
-          <span className="font-serif text-[20px] italic text-[#1B384C]">Aurora</span>
-          <span className="hidden font-mono text-[10px] uppercase tracking-[0.22em] text-[#0B1620]/45 sm:inline">
+          <span className="font-serif text-[20px] italic text-[#F8F5ED]">Aurora</span>
+          <span className="hidden font-mono text-[10px] uppercase tracking-[0.22em] text-[#F8F5ED]/45 sm:inline">
             by Fairway
           </span>
         </a>
-        <nav className="hidden items-center gap-7 text-[11px] uppercase tracking-[0.16em] text-[#0B1620]/65 lg:flex">
+        <nav className="hidden items-center gap-7 text-[11px] uppercase tracking-[0.16em] text-[#F8F5ED]/62 lg:flex">
           {links.map((l) => (
-            <a key={l.href} href={l.href} className="hover:text-[#1B384C]">
+            <a key={l.href} href={l.href} className="transition hover:text-[#FFE0A0]">
               {l.label}
             </a>
           ))}
         </nav>
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-3 md:gap-5">
           <a
             href="#"
-            className="hidden items-center gap-1.5 text-[11px] uppercase tracking-[0.18em] text-[#0B1620]/55 md:inline-flex"
+            className="hidden items-center gap-1.5 text-[11px] uppercase tracking-[0.18em] text-[#F8F5ED]/52 transition hover:text-[#FFE0A0] md:inline-flex"
           >
             <Moon className="h-3 w-3" /> Kaamos
           </a>
           <a
             href="#cta"
-            className="inline-flex items-center gap-2 bg-[#1B384C] px-4 py-2.5 text-[11px] font-medium uppercase tracking-[0.18em] text-[#F2EEE6] transition hover:bg-[#0E2333]"
+            className="inline-flex items-center gap-2 border border-white/15 bg-white/[0.08] px-3 py-2.5 text-[11px] font-medium uppercase tracking-[0.18em] text-[#F8F5ED] shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] transition hover:border-[#E8C97A]/55 hover:bg-[#E8C97A]/15 hover:text-[#FFE0A0] sm:px-4"
           >
-            Request access
+            <span className="hidden sm:inline">Request access</span>
+            <span className="sm:hidden">Access</span>
           </a>
         </div>
       </div>
-      <div className="h-px bg-gradient-to-r from-transparent via-[#E8C97A]/60 to-transparent" />
+      <div className="h-px bg-gradient-to-r from-transparent via-[#E8C97A]/35 to-transparent" />
     </header>
   );
 }
@@ -99,48 +101,64 @@ function Nav() {
 
 function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden border-b border-[#0B1620]/10">
-      <div aria-hidden className="pointer-events-none absolute inset-0">
-        <div className="absolute right-[-220px] top-24 h-[760px] w-[960px] rounded-full bg-gradient-to-bl from-[#E8C97A]/30 via-[#E8C97A]/10 to-transparent blur-3xl" />
-        <div className="absolute -left-40 top-80 h-[480px] w-[640px] rounded-full bg-gradient-to-tr from-[#7AAD8C]/15 to-transparent blur-3xl" />
-      </div>
-
-      <div className="relative mx-auto max-w-[1440px] px-6 pt-20 pb-20 md:px-10 md:pt-28 md:pb-28">
+    <AuroraHeroLighting>
+      <div className="relative mx-auto max-w-[1440px] px-6 pt-32 pb-20 md:px-10 md:pt-36 md:pb-28">
         <div className="mb-12 flex flex-wrap items-baseline justify-between gap-3">
-          <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#0B1620]/45">
+          <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#F8F5ED]/50">
             Aurora · v0.1 · Bitcoin credit markets
           </div>
-          <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#0B1620]/45">
-            Reykjavík · Helsinki · 64.1466° N
+          <div className="text-left font-mono text-[10px] uppercase tracking-[0.22em] text-[#F8F5ED]/50 md:text-right">
+            <div>Reykjavík · Helsinki · 64.1466° N</div>
+            <div className="mt-2 hidden text-[9px] text-[#E8C97A]/55 md:block">
+              Move mouse or use WASD / arrow keys
+            </div>
           </div>
         </div>
 
-        <h1 className="font-serif text-[48px] font-normal leading-[0.96] tracking-[-0.02em] text-[#0B1620] md:text-[120px]">
+        <h1
+          className="max-w-[1040px] bg-clip-text font-serif text-[48px] font-normal leading-[0.96] text-transparent md:text-[120px]"
+          style={{
+            backgroundImage:
+              "linear-gradient(112deg, #fffaf0 0%, #f8f5ed 34%, #ffca55 52%, #ffffff 68%, #8fb8d0 100%)",
+            backgroundPosition: "var(--aurora-light-x-percent) 50%",
+            backgroundSize: "210% 100%",
+            textShadow:
+              "0 0 34px rgba(255, 184, 19, var(--aurora-light-headline-alpha)), 0 16px 64px rgba(0, 0, 0, 0.58)",
+          }}
+        >
           Credit markets for
           <br />
-          <span className="italic text-[#1B384C]">Bitcoin, on chain.</span>
+          <span className="italic">Bitcoin, on chain.</span>
         </h1>
 
         <div className="mt-12 grid gap-10 md:mt-20 md:grid-cols-12 md:gap-12">
-          <p className="md:col-span-6 max-w-2xl text-[17px] leading-[1.65] text-[#0B1620]/75">
+          <p className="max-w-2xl text-[17px] leading-[1.65] text-[#F8F5ED]/72 md:col-span-6">
             Aurora is Fairway&apos;s institutional layer for Bitcoin-backed credit
             markets — turning the world&apos;s hardest asset into{" "}
-            <span className="italic text-[#1B384C]">
+            <span className="italic text-[#FFE0A0]">
               productive collateral for verified, programmable on-chain credit.
             </span>
           </p>
 
-          <div className="md:col-span-5 md:col-start-8 flex flex-wrap items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4 md:col-span-5 md:col-start-8">
             <a
               href="#cta"
-              className="group inline-flex items-center gap-3 bg-[#1B384C] px-6 py-4 text-[11px] font-medium uppercase tracking-[0.18em] text-[#F2EEE6] transition hover:bg-[#0E2333]"
+              className="group inline-flex items-center gap-3 bg-[#F8F5ED] px-6 py-4 text-[11px] font-medium uppercase tracking-[0.18em] text-[#06101D] transition hover:bg-[#FFE8AD]"
+              style={{
+                boxShadow:
+                  "0 0 42px rgba(255, 184, 19, var(--aurora-light-card-alpha)), inset 0 1px 0 rgba(255, 255, 255, 0.64)",
+              }}
             >
               Request access
               <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
             </a>
             <a
               href="#how-it-works"
-              className="inline-flex items-center gap-2 border border-[#0B1620]/20 px-6 py-4 text-[11px] font-medium uppercase tracking-[0.18em] text-[#0B1620]/75 transition hover:border-[#1B384C] hover:text-[#1B384C]"
+              className="inline-flex items-center gap-2 border border-white/15 bg-[#06111E]/35 px-6 py-4 text-[11px] font-medium uppercase tracking-[0.18em] text-[#F8F5ED]/80 backdrop-blur-xl transition hover:border-[#E8C97A]/45 hover:text-[#FFE0A0]"
+              style={{
+                boxShadow:
+                  "0 0 34px rgba(255, 184, 19, var(--aurora-light-card-alpha)), inset 0 1px 0 rgba(255, 255, 255, 0.08)",
+              }}
             >
               Explore Aurora
             </a>
@@ -151,7 +169,7 @@ function Hero() {
           <CapitalMarketsDashboard />
         </div>
       </div>
-    </section>
+    </AuroraHeroLighting>
   );
 }
 
@@ -159,37 +177,43 @@ function Hero() {
 
 function CapitalMarketsDashboard() {
   return (
-    <div className="overflow-hidden border border-[#0B1620]/15 bg-[#F8F5ED] shadow-[0_30px_80px_-30px_rgba(11,22,32,0.18)]">
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#0B1620]/12 bg-[#F2EEE6] px-6 py-3">
+    <div
+      className="overflow-hidden border border-white/10 bg-white/[0.045] shadow-[0_38px_110px_-46px_rgba(0,0,0,0.78)] backdrop-blur-xl"
+      style={{
+        boxShadow:
+          "0 38px 110px -46px rgba(0, 0, 0, 0.78), 0 0 62px rgba(255, 184, 19, var(--aurora-light-card-alpha)), inset 0 1px 0 rgba(255, 255, 255, 0.09)",
+      }}
+    >
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 bg-white/[0.055] px-6 py-3">
         <div className="flex items-center gap-4">
-          <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#0B1620]/55">
+          <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#F8F5ED]/58">
             Aurora · Bitcoin credit markets
           </div>
-          <div className="hidden h-3 w-px bg-[#0B1620]/15 md:block" />
-          <div className="hidden font-mono text-[10px] text-[#0B1620]/55 md:block">
+          <div className="hidden h-3 w-px bg-white/15 md:block" />
+          <div className="hidden font-mono text-[10px] text-[#F8F5ED]/52 md:block">
             Mainnet · audited
           </div>
         </div>
         <div className="flex items-center gap-5">
-          <div className="hidden items-center gap-2 font-mono text-[10px] uppercase tracking-[0.22em] text-[#0B1620]/55 md:flex">
+          <div className="hidden items-center gap-2 font-mono text-[10px] uppercase tracking-[0.22em] text-[#F8F5ED]/52 md:flex">
             <span>Verified NAV</span>
-            <span className="font-serif text-[14px] not-italic text-[#1B384C]">$4.21B</span>
+            <span className="font-serif text-[14px] not-italic text-[#FFE0A0]">$4.21B</span>
           </div>
-          <div className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-[#5C8FB0]">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#5C8FB0]" />
+          <div className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-[#9FC8DF]">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#FDB813]" />
             Live
           </div>
         </div>
       </div>
 
-      <div className="grid gap-px bg-[#0B1620]/10 md:grid-cols-2">
+      <div className="grid gap-px bg-white/10 md:grid-cols-2">
         <CollateralVaultPanel />
         <CreditOpportunityPanel />
         <LoanInstrumentPanel />
         <UnderwritingPanel />
       </div>
 
-      <div className="grid gap-6 border-t border-[#0B1620]/12 bg-[#F2EEE6] px-6 py-4 font-mono text-[10px] uppercase tracking-[0.22em] text-[#0B1620]/55 md:grid-cols-4">
+      <div className="grid gap-6 border-t border-white/10 bg-white/[0.045] px-6 py-4 font-mono text-[10px] uppercase tracking-[0.22em] text-[#F8F5ED]/54 md:grid-cols-4">
         <Strip k="BTC under collateral" v="32,841" />
         <Strip k="Active counterparties" v="148" />
         <Strip k="Tokenized loans" v="87" />
@@ -203,20 +227,20 @@ function Strip({ k, v }: { k: string; v: string }) {
   return (
     <div className="flex items-baseline justify-between gap-3">
       <span>{k}</span>
-      <span className="font-serif text-[16px] not-italic text-[#1B384C]">{v}</span>
+      <span className="font-serif text-[16px] not-italic text-[#FFE0A0]">{v}</span>
     </div>
   );
 }
 
 function PanelHeader({ kicker, status }: { kicker: string; status?: string }) {
   return (
-    <div className="flex items-center justify-between border-b border-[#0B1620]/12 px-6 py-3">
-      <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#0B1620]/55">
+    <div className="flex items-center justify-between border-b border-white/10 px-6 py-3">
+      <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#F8F5ED]/54">
         {kicker}
       </div>
       {status ? (
-        <div className="inline-flex items-center gap-1.5 font-mono text-[9.5px] uppercase tracking-[0.22em] text-[#5C8FB0]">
-          <span className="h-1.5 w-1.5 rounded-full bg-[#5C8FB0]" />
+        <div className="inline-flex items-center gap-1.5 font-mono text-[9.5px] uppercase tracking-[0.22em] text-[#9FC8DF]">
+          <span className="h-1.5 w-1.5 rounded-full bg-[#FDB813]" />
           {status}
         </div>
       ) : null}
@@ -226,32 +250,32 @@ function PanelHeader({ kicker, status }: { kicker: string; status?: string }) {
 
 function CollateralVaultPanel() {
   return (
-    <div className="bg-[#F8F5ED]">
+    <div className="bg-[#07111F]/78">
       <PanelHeader kicker="Collateral vault" status="Active" />
       <div className="space-y-6 px-6 py-6 md:px-8">
         <div>
-          <div className="font-serif text-[40px] leading-none tracking-[-0.02em] text-[#1B384C] md:text-[52px]">
-            1,847.2 <span className="font-mono text-[18px] tracking-normal text-[#0B1620]/50">BTC</span>
+          <div className="font-serif text-[40px] leading-none text-[#FFE0A0] md:text-[52px]">
+            1,847.2 <span className="font-mono text-[18px] tracking-normal text-[#F8F5ED]/48">BTC</span>
           </div>
-          <div className="mt-2 font-mono text-[11px] text-[#0B1620]/65">
+          <div className="mt-2 font-mono text-[11px] text-[#F8F5ED]/58">
             $124.32M @ $67,302 / BTC
           </div>
         </div>
 
         <div>
-          <div className="flex items-baseline justify-between font-mono text-[10px] uppercase tracking-[0.22em] text-[#0B1620]/55">
+          <div className="flex items-baseline justify-between font-mono text-[10px] uppercase tracking-[0.22em] text-[#F8F5ED]/54">
             <span>LTV</span>
-            <span className="text-[#1B384C]">42%</span>
+            <span className="text-[#FFE0A0]">42%</span>
           </div>
-          <div className="mt-2 h-1 overflow-hidden rounded-full bg-[#0B1620]/10">
+          <div className="mt-2 h-1 overflow-hidden rounded-full bg-white/10">
             <div
-              className="h-full rounded-full bg-gradient-to-r from-[#1B384C] to-[#C8923D]"
+              className="h-full rounded-full bg-gradient-to-r from-[#5C8FB0] via-[#E8C97A] to-[#FDB813]"
               style={{ width: "42%" }}
             />
           </div>
-          <div className="mt-3 flex items-baseline justify-between font-mono text-[10px] text-[#0B1620]/55">
+          <div className="mt-3 flex items-baseline justify-between font-mono text-[10px] text-[#F8F5ED]/54">
             <span>Liquidation</span>
-            <span className="text-[#0B1620]">$31,210 / BTC</span>
+            <span className="text-[#F8F5ED]">$31,210 / BTC</span>
           </div>
         </div>
 
@@ -266,14 +290,14 @@ function CollateralVaultPanel() {
 
 function CreditOpportunityPanel() {
   return (
-    <div className="bg-[#F8F5ED]">
+    <div className="bg-[#07111F]/72">
       <PanelHeader kicker="Open credit request" status="A+ tier" />
       <div className="space-y-6 px-6 py-6 md:px-8">
         <div>
-          <div className="font-serif text-[40px] leading-none tracking-[-0.02em] text-[#1B384C] md:text-[52px]">
-            12,000,000 <span className="font-mono text-[18px] tracking-normal text-[#0B1620]/50">USDC</span>
+          <div className="font-serif text-[40px] leading-none text-[#FFE0A0] md:text-[52px]">
+            12,000,000 <span className="font-mono text-[18px] tracking-normal text-[#F8F5ED]/48">USDC</span>
           </div>
-          <div className="mt-2 font-mono text-[11px] text-[#0B1620]/65">
+          <div className="mt-2 font-mono text-[11px] text-[#F8F5ED]/58">
             9.20% APR · 180d · bullet
           </div>
         </div>
@@ -297,30 +321,30 @@ function CreditOpportunityPanel() {
 
 function LoanInstrumentPanel() {
   return (
-    <div className="bg-[#F8F5ED]">
+    <div className="bg-[#07111F]/72">
       <PanelHeader kicker="Loan instrument" status="Issued" />
       <div className="space-y-6 px-6 py-6 md:px-8">
         <div>
-          <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#0B1620]/45">
+          <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#F8F5ED]/48">
             Series III · BTC-backed
           </div>
-          <div className="mt-1 font-serif text-[36px] leading-none tracking-[-0.01em] text-[#1B384C] md:text-[44px]">
+          <div className="mt-1 font-serif text-[36px] leading-none text-[#FFE0A0] md:text-[44px]">
             FWY—BOND—024
           </div>
-          <div className="mt-2 font-serif text-[14px] italic text-[#0B1620]/65">
+          <div className="mt-2 font-serif text-[14px] italic text-[#F8F5ED]/58">
             European treasury financing
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-3 border-t border-[#0B1620]/15 pt-5">
+        <div className="grid grid-cols-2 gap-3 border-t border-white/10 pt-5">
           <Field k="Standard" v="CIP-113 · ERC-3643" />
           <Field k="Maturity" v="2027 · Q3" />
           <Field k="Holders" v="KYC&apos;d only" />
           <Field k="Coupon" v="Quarterly · 6.40%" />
         </div>
 
-        <div className="flex items-center justify-between border-t border-[#0B1620]/15 pt-4">
-          <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#0B1620]/45">
+        <div className="flex items-center justify-between border-t border-white/10 pt-4">
+          <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#F8F5ED]/48">
             Transferable · permissioned
           </div>
           <div className="h-7 w-7 rounded-full bg-gradient-to-br from-[#E8C97A] via-[#C8923D] to-[#1B384C]" />
@@ -332,23 +356,23 @@ function LoanInstrumentPanel() {
 
 function UnderwritingPanel() {
   return (
-    <div className="bg-[#F8F5ED]">
+    <div className="bg-[#07111F]/78">
       <PanelHeader kicker="Underwriting signal" status="Refreshed 4m" />
       <div className="space-y-5 px-6 py-6 md:px-8">
         <div className="flex items-baseline justify-between">
           <div>
-            <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#0B1620]/45">
+            <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#F8F5ED]/48">
               Risk band
             </div>
-            <div className="mt-2 font-serif text-[64px] leading-none tracking-[-0.02em] text-[#1B384C] md:text-[80px]">
+            <div className="mt-2 font-serif text-[64px] leading-none text-[#FFE0A0] md:text-[80px]">
               A
             </div>
           </div>
           <div className="text-right">
-            <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#0B1620]/45">
+            <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#F8F5ED]/48">
               Composite
             </div>
-            <div className="mt-2 font-serif text-[28px] text-[#1B384C]">782</div>
+            <div className="mt-2 font-serif text-[28px] text-[#FFE0A0]">782</div>
           </div>
         </div>
 
@@ -359,9 +383,9 @@ function UnderwritingPanel() {
           <SignalBar label="Off-chain attestation" pct={71} />
         </div>
 
-        <div className="flex items-center justify-between border-t border-[#0B1620]/15 pt-3 font-mono text-[10px] uppercase tracking-[0.22em] text-[#0B1620]/45">
+        <div className="flex items-center justify-between border-t border-white/10 pt-3 font-mono text-[10px] uppercase tracking-[0.22em] text-[#F8F5ED]/48">
           <span>Raw data exposed</span>
-          <span className="text-[#1B384C]">none · zk-attested</span>
+          <span className="text-[#FFE0A0]">none · zk-attested</span>
         </div>
       </div>
     </div>
@@ -371,13 +395,13 @@ function UnderwritingPanel() {
 function SignalBar({ label, pct }: { label: string; pct: number }) {
   return (
     <div>
-      <div className="flex items-baseline justify-between font-mono text-[10px] text-[#0B1620]/65">
+      <div className="flex items-baseline justify-between font-mono text-[10px] text-[#F8F5ED]/58">
         <span className="uppercase tracking-[0.18em]">{label}</span>
-        <span className="text-[#1B384C]">{pct}</span>
+        <span className="text-[#FFE0A0]">{pct}</span>
       </div>
-      <div className="mt-1 h-1 overflow-hidden rounded-full bg-[#0B1620]/8">
+      <div className="mt-1 h-1 overflow-hidden rounded-full bg-white/10">
         <div
-          className="h-full rounded-full bg-gradient-to-r from-[#1B384C] to-[#5C8FB0]"
+          className="h-full rounded-full bg-gradient-to-r from-[#5C8FB0] via-[#E8C97A] to-[#FDB813]"
           style={{ width: `${pct}%` }}
         />
       </div>
@@ -387,9 +411,15 @@ function SignalBar({ label, pct }: { label: string; pct: number }) {
 
 function Field({ k, v }: { k: string; v: string }) {
   return (
-    <div className="border border-[#0B1620]/15 bg-[#F2EEE6] px-3 py-2">
-      <div className="font-mono text-[9px] uppercase tracking-[0.22em] text-[#0B1620]/45">{k}</div>
-      <div className="mt-0.5 font-mono text-[11px] text-[#1B384C]">{v}</div>
+    <div
+      className="border border-white/10 bg-white/[0.045] px-3 py-2"
+      style={{
+        boxShadow:
+          "0 0 18px rgba(255, 184, 19, var(--aurora-light-card-alpha)), inset 0 1px 0 rgba(255, 255, 255, 0.06)",
+      }}
+    >
+      <div className="font-mono text-[9px] uppercase tracking-[0.22em] text-[#F8F5ED]/45">{k}</div>
+      <div className="mt-0.5 font-mono text-[11px] text-[#FFE0A0]">{v}</div>
     </div>
   );
 }
@@ -402,7 +432,7 @@ function Tag({
   label: string;
 }) {
   return (
-    <span className="inline-flex items-center gap-1.5 border border-[#5C8FB0]/40 bg-[#5C8FB0]/10 px-2.5 py-1 font-mono text-[9.5px] uppercase tracking-[0.22em] text-[#1B384C]">
+    <span className="inline-flex items-center gap-1.5 border border-[#5C8FB0]/40 bg-[#5C8FB0]/10 px-2.5 py-1 font-mono text-[9.5px] uppercase tracking-[0.22em] text-[#D7EFFA]">
       <Icon className="h-3 w-3" />
       {label}
     </span>
@@ -1452,4 +1482,3 @@ function FooterCol({ title, links }: { title: string; links: string[] }) {
     </div>
   );
 }
-

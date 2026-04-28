@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { KeyboardControls, useKeyboardControls } from "@react-three/drei";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import * as THREE from "three";
 
@@ -13,20 +12,18 @@ export type AuroraLightPosition = {
 };
 
 export type AuroraSunSceneProps = {
-  mouseX?: number;
   onLightMove?: (position: AuroraLightPosition) => void;
+  scrollProgress?: number;
 };
-
-type SunControl = "left" | "right" | "up" | "down";
 
 const SUN_LIMITS = {
-  xMin: 0.35,
-  xMax: 3.55,
-  yMin: -1.2,
-  yMax: 1.35,
+  xMin: 0.25,
+  xMax: 3.05,
+  yMin: -2.25,
+  yMax: 1.12,
 };
 
-const INITIAL_SUN_POSITION = new THREE.Vector3(2.55, 0.04, 0);
+const INITIAL_SUN_POSITION = new THREE.Vector3(2.18, -1.82, -0.7);
 
 const sunVertexShader = `
   varying vec3 vNormal;
@@ -89,6 +86,28 @@ const sunShadowFragmentShader = `
   }
 `;
 
+const planetFragmentShader = `
+  uniform float uTime;
+  varying vec3 vNormal;
+  varying vec3 vWorldPosition;
+
+  void main() {
+    vec3 n = normalize(vNormal);
+    vec3 viewDirection = normalize(cameraPosition - vWorldPosition);
+    float edge = pow(1.0 - max(dot(n, viewDirection), 0.0), 2.85);
+    float horizon = smoothstep(-0.12, 0.52, n.y);
+    float slowBand = sin(vWorldPosition.x * 1.6 + vWorldPosition.y * 3.1 + uTime * 0.035) * 0.5 + 0.5;
+
+    vec3 night = vec3(0.006, 0.014, 0.028);
+    vec3 navy = vec3(0.018, 0.052, 0.09);
+    vec3 color = mix(night, navy, slowBand * 0.18);
+    color += vec3(0.95, 0.53, 0.12) * edge * horizon * 0.72;
+    color += vec3(1.0, 0.75, 0.32) * edge * edge * horizon * 0.38;
+
+    gl_FragColor = vec4(color, 1.0);
+  }
+`;
+
 function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max);
 }
@@ -113,9 +132,9 @@ function usePrefersReducedMotion() {
 }
 
 function SunObject({
-  mouseX = 0.74,
   onLightMove,
   reducedMotion,
+  scrollProgress = 0,
 }: AuroraSunSceneProps & { reducedMotion: boolean }) {
   const groupRef = useRef<THREE.Group>(null);
   const coreRef = useRef<THREE.Mesh>(null);
@@ -125,9 +144,7 @@ function SunObject({
   const targetPosition = useRef(INITIAL_SUN_POSITION.clone());
   const visiblePosition = useRef(INITIAL_SUN_POSITION.clone());
   const framePosition = useRef(INITIAL_SUN_POSITION.clone());
-  const keyboardOffset = useRef(new THREE.Vector2(0, 0));
   const lastEmit = useRef<AuroraLightPosition | null>(null);
-  const [, getControls] = useKeyboardControls<SunControl>();
   const viewport = useThree((state) => state.viewport);
 
   const sunUniforms = useMemo(
@@ -157,7 +174,9 @@ function SunObject({
       const normalized = {
         x: clamp(x, 0, 1),
         y: clamp(y, 0, 1),
-        strength: reducedMotion ? 0.34 : clamp(0.5 + position.x * 0.08, 0.42, 0.72),
+        strength: reducedMotion
+          ? 0.3
+          : clamp(0.2 + scrollProgress * 0.58 + position.y * 0.04, 0.18, 0.78),
       };
       const previous = lastEmit.current;
 
@@ -171,7 +190,7 @@ function SunObject({
         onLightMove(normalized);
       }
     },
-    [onLightMove, reducedMotion],
+    [onLightMove, reducedMotion, scrollProgress],
   );
 
   useEffect(() => {
@@ -179,30 +198,23 @@ function SunObject({
   }, [emitLightPosition]);
 
   useFrame(({ clock }, delta) => {
-    const controls = getControls();
-    const movementSpeed = reducedMotion ? 0.28 : 0.58;
-    const movement = movementSpeed * delta;
     const target = targetPosition.current;
-    const offset = keyboardOffset.current;
     const wideViewport = viewport.width > 7;
     const tabletViewport = viewport.width > 5;
-    const rangeMin = wideViewport ? 1.72 : tabletViewport ? 1.02 : 0.62;
-    const rangeMax = wideViewport ? 3.02 : tabletViewport ? 1.92 : 1.28;
-    const baseY = wideViewport ? 0.02 : tabletViewport ? 0.34 : 0.78;
+    const easedProgress = THREE.MathUtils.smoothstep(scrollProgress, 0, 1);
+    const baseX = wideViewport ? 2.12 : tabletViewport ? 1.38 : 0.78;
+    const startY = wideViewport ? -1.86 : tabletViewport ? -1.45 : -1.1;
+    const endY = wideViewport ? 0.58 : tabletViewport ? 0.6 : 0.5;
 
-    if (controls.left) offset.x -= movement;
-    if (controls.right) offset.x += movement;
-    if (controls.up) offset.y += movement;
-    if (controls.down) offset.y -= movement;
+    target.x = clamp(baseX, SUN_LIMITS.xMin, SUN_LIMITS.xMax);
+    target.y = clamp(
+      THREE.MathUtils.lerp(startY, endY, easedProgress),
+      SUN_LIMITS.yMin,
+      SUN_LIMITS.yMax,
+    );
+    target.z = -0.74;
 
-    offset.x = clamp(offset.x, -0.38, 0.38);
-    offset.y = clamp(offset.y, -0.36, 0.36);
-
-    const mouseDrivenX = THREE.MathUtils.lerp(rangeMin, rangeMax, mouseX);
-    target.x = clamp(mouseDrivenX + offset.x, rangeMin - 0.48, rangeMax + 0.48);
-    target.y = clamp(baseY + offset.y, SUN_LIMITS.yMin, SUN_LIMITS.yMax);
-
-    const idleY = reducedMotion ? 0 : Math.sin(clock.elapsedTime * 0.42) * 0.045;
+    const idleY = reducedMotion ? 0 : Math.sin(clock.elapsedTime * 0.32) * 0.018;
     framePosition.current.set(target.x, target.y + idleY, target.z);
     visiblePosition.current.set(
       THREE.MathUtils.damp(visiblePosition.current.x, framePosition.current.x, reducedMotion ? 4.2 : 2.55, delta),
@@ -212,14 +224,14 @@ function SunObject({
 
     const group = groupRef.current;
     if (group) {
-      const targetScale = wideViewport ? 1.58 : tabletViewport ? 1.2 : 0.9;
+      const targetScale = wideViewport ? 0.84 : tabletViewport ? 0.72 : 0.56;
       group.position.copy(visiblePosition.current);
       group.scale.setScalar(
         THREE.MathUtils.damp(group.scale.x, targetScale, 3.2, delta),
       );
-      group.rotation.y += delta * (reducedMotion ? 0.025 : 0.095);
-      group.rotation.x = visiblePosition.current.y * 0.08;
-      group.rotation.z = -visiblePosition.current.x * 0.035;
+      group.rotation.y += delta * (reducedMotion ? 0.018 : 0.08);
+      group.rotation.x = visiblePosition.current.y * 0.04;
+      group.rotation.z = -visiblePosition.current.x * 0.016;
     }
 
     if (coreRef.current) {
@@ -330,40 +342,162 @@ function SunObject({
   );
 }
 
-export default function AuroraSunScene({ mouseX, onLightMove }: AuroraSunSceneProps) {
-  const reducedMotion = usePrefersReducedMotion();
-  const controls = useMemo(
-    () => [
-      { name: "left" as const, keys: ["ArrowLeft", "KeyA", "a", "A"] },
-      { name: "right" as const, keys: ["ArrowRight", "KeyD", "d", "D"] },
-      { name: "up" as const, keys: ["ArrowUp", "KeyW", "w", "W"] },
-      { name: "down" as const, keys: ["ArrowDown", "KeyS", "s", "S"] },
-    ],
+function StarField({ reducedMotion }: { reducedMotion: boolean }) {
+  const pointsRef = useRef<THREE.Points>(null);
+  const positions = useMemo(() => {
+    const count = 560;
+    const values = new Float32Array(count * 3);
+
+    for (let index = 0; index < count; index += 1) {
+      const seed = index + 1;
+      const xRaw = Math.sin(seed * 12.9898) * 43758.5453;
+      const yRaw = Math.sin(seed * 78.233) * 19341.113;
+      const zRaw = Math.sin(seed * 39.425) * 9713.77;
+      const x = xRaw - Math.floor(xRaw);
+      const y = yRaw - Math.floor(yRaw);
+      const z = zRaw - Math.floor(zRaw);
+
+      values[index * 3] = (x * 2 - 1) * 6.2;
+      values[index * 3 + 1] = (y * 2 - 1) * 3.2;
+      values[index * 3 + 2] = -2.2 - z * 3.2;
+    }
+
+    return values;
+  }, []);
+
+  useFrame(({ clock }) => {
+    if (pointsRef.current && !reducedMotion) {
+      pointsRef.current.rotation.y = Math.sin(clock.elapsedTime * 0.025) * 0.025;
+      pointsRef.current.rotation.x = Math.sin(clock.elapsedTime * 0.018) * 0.012;
+    }
+  });
+
+  return (
+    <points ref={pointsRef}>
+      <bufferGeometry>
+        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
+      </bufferGeometry>
+      <pointsMaterial
+        color="#d8ecff"
+        depthWrite={false}
+        opacity={0.68}
+        size={0.015}
+        sizeAttenuation
+        transparent
+      />
+    </points>
+  );
+}
+
+function PlanetForeground({ reducedMotion }: { reducedMotion: boolean }) {
+  const planetRef = useRef<THREE.Group>(null);
+  const materialRef = useRef<THREE.ShaderMaterial>(null);
+  const viewport = useThree((state) => state.viewport);
+  const planetUniforms = useMemo(
+    () => ({
+      uTime: { value: 0 },
+    }),
     [],
   );
 
+  useFrame(({ clock }, delta) => {
+    const wideViewport = viewport.width > 7;
+    const tabletViewport = viewport.width > 5;
+    const targetScale = wideViewport ? 4.95 : tabletViewport ? 3.85 : 2.95;
+    const targetY = wideViewport ? -4.35 : tabletViewport ? -3.52 : -2.75;
+    const targetX = wideViewport ? 0.55 : tabletViewport ? 0.25 : 0.08;
+
+    if (planetRef.current) {
+      planetRef.current.position.x = THREE.MathUtils.damp(
+        planetRef.current.position.x,
+        targetX,
+        3,
+        delta,
+      );
+      planetRef.current.position.y = THREE.MathUtils.damp(
+        planetRef.current.position.y,
+        targetY,
+        3,
+        delta,
+      );
+      planetRef.current.scale.setScalar(
+        THREE.MathUtils.damp(planetRef.current.scale.x, targetScale, 3, delta),
+      );
+      planetRef.current.rotation.z += delta * (reducedMotion ? 0.001 : 0.006);
+    }
+
+    if (materialRef.current) {
+      materialRef.current.uniforms.uTime.value = clock.elapsedTime;
+    }
+  });
+
   return (
-    <KeyboardControls map={controls}>
-      <Canvas
-        aria-hidden="true"
-        camera={{ fov: 38, position: [0, 0, 6.8] }}
-        className="pointer-events-none h-full w-full bg-transparent"
-        dpr={[1, 1.55]}
-        gl={{ alpha: true, antialias: true, premultipliedAlpha: false, powerPreference: "high-performance" }}
-        onCreated={({ gl }) => {
-          gl.setClearColor("#000000", 0);
-        }}
-      >
-        <SunObject mouseX={mouseX} onLightMove={onLightMove} reducedMotion={reducedMotion} />
-        <EffectComposer multisampling={0}>
-          <Bloom
-            intensity={reducedMotion ? 0.2 : 0.72}
-            luminanceSmoothing={0.72}
-            luminanceThreshold={0.28}
-            mipmapBlur
-          />
-        </EffectComposer>
-      </Canvas>
-    </KeyboardControls>
+    <group ref={planetRef} position={[0.55, -4.35, 0.18]} scale={4.95}>
+      <mesh>
+        <sphereGeometry args={[1, 128, 96]} />
+        <shaderMaterial
+          ref={materialRef}
+          args={[
+            {
+              fragmentShader: planetFragmentShader,
+              uniforms: planetUniforms,
+              vertexShader: sunVertexShader,
+            },
+          ]}
+        />
+      </mesh>
+      <mesh scale={1.012}>
+        <sphereGeometry args={[1, 96, 64]} />
+        <meshBasicMaterial
+          blending={THREE.AdditiveBlending}
+          color="#e8a733"
+          depthWrite={false}
+          opacity={0.055}
+          side={THREE.BackSide}
+          transparent
+        />
+      </mesh>
+    </group>
+  );
+}
+
+export default function AuroraSunScene({
+  onLightMove,
+  scrollProgress,
+}: AuroraSunSceneProps) {
+  const reducedMotion = usePrefersReducedMotion();
+
+  return (
+    <Canvas
+      aria-hidden="true"
+      camera={{ fov: 38, position: [0, 0, 6.8] }}
+      className="pointer-events-none h-full w-full bg-transparent"
+      dpr={[1, 1.55]}
+      gl={{
+        alpha: true,
+        antialias: true,
+        premultipliedAlpha: false,
+        powerPreference: "high-performance",
+      }}
+      onCreated={({ gl }) => {
+        gl.setClearColor("#000000", 0);
+      }}
+    >
+      <StarField reducedMotion={reducedMotion} />
+      <SunObject
+        onLightMove={onLightMove}
+        reducedMotion={reducedMotion}
+        scrollProgress={scrollProgress}
+      />
+      <PlanetForeground reducedMotion={reducedMotion} />
+      <EffectComposer multisampling={0}>
+        <Bloom
+          intensity={reducedMotion ? 0.2 : 0.72}
+          luminanceSmoothing={0.72}
+          luminanceThreshold={0.28}
+          mipmapBlur
+        />
+      </EffectComposer>
+    </Canvas>
   );
 }

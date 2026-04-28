@@ -110,7 +110,7 @@ function Hero() {
           <div className="text-left font-mono text-[10px] uppercase tracking-[0.22em] text-[#F8F5ED]/50 md:text-right">
             <div>Reykjavík · Helsinki · 64.1466° N</div>
             <div className="mt-2 hidden text-[9px] text-[#E8C97A]/55 md:block">
-              Move mouse or use WASD / arrow keys
+              Scroll to raise the sun
             </div>
           </div>
         </div>

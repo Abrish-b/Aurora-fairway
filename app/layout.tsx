@@ -25,13 +25,13 @@ const instrumentSerif = Instrument_Serif({
 export const metadata: Metadata = {
   metadataBase: new URL("https://aurora.fairway.xyz"),
   title: {
-    default: "Aurora — Credit markets for Bitcoin on chain",
-    template: "%s — Aurora by Fairway",
+    default: "Aurora - Credit markets for Bitcoin on chain",
+    template: "%s - Aurora by Fairway",
   },
   description:
-    "Aurora is Fairway's institutional infrastructure layer for Bitcoin-backed credit markets on-chain — verified counterparties, programmable loan instruments, and privacy-preserving underwriting for the world's hardest asset.",
+    "Aurora is Fairway's institutional infrastructure layer for Bitcoin-backed credit markets on-chain: verified counterparties, programmable loan instruments, and privacy-preserving underwriting for the world's hardest asset.",
   openGraph: {
-    title: "Aurora — Credit markets for Bitcoin on chain",
+    title: "Aurora - Credit markets for Bitcoin on chain",
     description:
       "The institutional layer for Bitcoin-backed credit markets on-chain. Verified counterparties. Programmable loan instruments. Privacy-preserving underwriting.",
     siteName: "Aurora by Fairway",
@@ -50,7 +50,9 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} h-full scroll-smooth antialiased`}
     >
-      <body className="min-h-full flex flex-col" suppressHydrationWarning>{children}</body>
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
+        {children}
+      </body>
     </html>
   );
 }

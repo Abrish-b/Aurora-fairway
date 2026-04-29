@@ -9,6 +9,9 @@
   --color-steel: #5C8FB0;
   --color-aurora: #7AAD8C;
   --color-btc: #C8923D;
+  --color-night: #0A1220;
+  --color-night-soft: #0F1D2A;
+  --color-paper-bright: #FAF7F0;
 
   --font-sans: var(--font-geist-sans);
   --font-serif: var(--font-instrument-serif);

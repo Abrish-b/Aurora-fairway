@@ -209,7 +209,7 @@ export default function AuroraPage() {
         <WhyCardano />
         <AuroraStack />
         <SundialPartnership />
-        <BuiltWithSundialPanel />
+        {/* <BuiltWithSundialPanel /> */}
         <BuiltForTrust />
         <BitcoinCreditCTA />
         <FAQ />

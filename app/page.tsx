@@ -1,6 +1,6 @@
 import type { ComponentType, ReactNode } from "react";
+import Image from "next/image";
 import {
-  Activity,
   ArrowRight,
   BadgeCheck,
   BarChart3,
@@ -13,7 +13,7 @@ import {
   Fingerprint,
   Layers,
   LockKeyhole,
-  Network,
+  Menu,
   Plus,
   ScanLine,
   ShieldCheck,
@@ -31,110 +31,173 @@ type StackLayer = {
   role: string;
   description: ReactNode;
   icon: IconType;
-  visual: "wallet" | "score" | "market" | "bond" | "aurora";
+  visual: "wallet" | "score" | "market" | "bond";
   chips: string[];
+  bullets?: string[];
+  ctas: string[];
+  ctaLinks: string[];
+  logo?: string;
+  logoAlt?: string;
+  featured?: boolean;
 };
 
 const stackLayers: StackLayer[] = [
   {
     number: "01",
-    name: "Beam Wallet",
-    role: "Identity layer",
-    description: "Reusable identity and KYC credentials for verified participation.",
+    name: "Polaris Wallet",
+    role: "Identity Layer",
+    description:
+      "SSI-based identity infrastructure for KYC / KYB, verifiable credentials, and zero-knowledge proofs. Polaris Wallet enables participants to prove eligibility without exposing unnecessary raw data.",
     icon: WalletCards,
     visual: "wallet",
-    chips: ["Credential card", "KYC badge", "Verified participant"],
+    chips: ["SSI credentials", "KYC / KYB", "Reusable onboarding"],
+    ctas: ["Open Wallet", "Learn More"],
+    ctaLinks: ["https://wallet.fairway.global", "#docs"],
+    logo: "/brand/polaris.jpg",
+    logoAlt: "Polaris logo",
   },
   {
     number: "02",
-    name: "Aurora Score",
-    role: "Credit intelligence layer",
-    description: "ZK-powered credit inputs from private and public data.",
+    name: "Aamu Aurora",
+    role: "Credit Inputs",
+    description:
+      "Aamu Aurora turns off-chain financial and borrower data into privacy-preserving credit signals using ZK-TLS and proof-based verification.",
     icon: BarChart3,
     visual: "score",
-    chips: ["Risk signal", "ZK proof", "Public/private streams"],
+    chips: ["ZK-TLS", "Credit signals", "Private inputs"],
+    ctas: ["View Docs", "Explore Inputs"],
+    ctaLinks: ["#docs", "#docs"],
+    logo: "/brand/aamu.jpg",
+    logoAlt: "Aamu logo",
   },
   {
     number: "03",
     name: "Sundown",
-    role: "Marketplace layer",
+    role: "Credit Market Discovery Layer",
     description: (
       <>
-        Fairway &times; Sundial marketplace layer for discoverable on-chain loans.
+        Sundown is the Bitcoin-backed credit market layer built in
+        collaboration with Sundial. Sundial provides Bitcoin liquidity and base
+        infrastructure. Aurora extends that foundation with identity, credit
+        inputs, loan discovery, and compliance-aware market participation.
       </>
     ),
     icon: Filter,
     visual: "market",
-    chips: ["Loan discovery", "Lender filters", "Verified loan card"],
+    chips: ["UTXO loan requests", "Policy filters", "Orderbook-style matching"],
+    bullets: [
+      "UTXO-based loan requests with borrower metadata",
+      "Filtering by jurisdiction, credentials, borrower type, and risk profile",
+      "Verified counterparty discovery before lending participation",
+      "Built on Cardano extended UTXO, metadata support, and deterministic execution",
+    ],
+    ctas: ["Explore Markets", "Learn More"],
+    ctaLinks: ["#partnership", "#docs"],
+    logo: "/brand/sundial.png",
+    logoAlt: "Sundial logo",
+    featured: true,
   },
   {
     number: "04",
-    name: "Bond Minter",
-    role: "Issuance layer",
-    description: "Issue compliant tokenized loans and credit instruments.",
+    name: "Solstice Aurora",
+    role: "Issuance Layer",
+    description:
+      "Solstice Aurora enables tokenized bonds and structured credit instruments using Cardano programmable token standards, including CIP-113.",
     icon: FileCheck2,
     visual: "bond",
-    chips: ["Tokenized loan", "Bond certificate", "Eligible holder rule"],
-  },
-  {
-    number: "05",
-    name: "Aurora",
-    role: "Unified credit market layer",
-    description:
-      "All layers combined into a programmable on-chain credit market.",
-    icon: Network,
-    visual: "aurora",
-    chips: ["Full stack", "BTC collateral", "Tokenized credit"],
+    chips: ["CIP-113", "Tokenized bonds", "Transfer restrictions"],
+    bullets: [
+      "Identity-gated ownership",
+      "Compliance-aware enforcement",
+      "Aurora provides infrastructure, not the license",
+    ],
+    ctas: ["Launch Minter", "Read Spec"],
+    ctaLinks: ["https://kyc.fairway.global", "#docs"],
+    logo: "/brand/cip113-logo.png",
+    logoAlt: "CIP-113 logo",
   },
 ];
 
 const frameworkRows = [
-  ["Identity", "Verified access"],
-  ["Credit", "Risk inputs"],
-  ["Markets", "Loan discovery"],
-  ["Issuance", "Tokenized credit instruments"],
-  ["Aurora", "Programmable credit market orchestration"],
+  { layer: "Polaris Wallet", value: "Identity", purpose: "Verified access" },
+  { layer: "Aamu Aurora", value: "Credit", purpose: "Risk inputs" },
+  { layer: "Sundown", value: "Markets", purpose: "Loan discovery" },
+  { layer: "Solstice Aurora", value: "Issuance", purpose: "Tokenized bonds" },
+];
+
+const cardanoCards = [
+  {
+    icon: Blocks,
+    title: "Extended UTXO Model",
+    copy: "Cardano's extended UTXO architecture enables structured, predictable financial transactions with clear validation rules.",
+  },
+  {
+    icon: FileText,
+    title: "Metadata-Rich Transactions",
+    copy: "Identity proofs, credit signals, and loan metadata can be attached to transaction flows without turning the chain into a centralized database.",
+  },
+  {
+    icon: Coins,
+    title: "Native Assets",
+    copy: "Credit instruments and tokenized bonds can use Cardano native assets, reducing unnecessary smart contract complexity.",
+  },
+  {
+    icon: CircleCheck,
+    title: "Deterministic Execution",
+    copy: "Predictable settlement and validation align with institutional expectations for financial infrastructure.",
+  },
 ];
 
 const faqItems: { q: string; a: ReactNode }[] = [
   {
-    q: "What is the Aurora Stack?",
-    a: "The Aurora Stack combines Beam Wallet, Aurora Score, Sundown, Bond Minter, and Aurora into a programmable on-chain credit market for Bitcoin-backed capital markets.",
-  },
-  {
-    q: "What is Beam Wallet?",
-    a: "Beam Wallet provides reusable identity and KYC credentials for verified participation.",
-  },
-  {
-    q: "What is Aurora Score?",
-    a: "Aurora Score provides ZK-powered credit inputs from private and public data.",
-  },
-  {
-    q: "What is Sundown?",
-    a: (
-      <>
-        Sundown is the Fairway &times; Sundial marketplace layer for
-        discoverable on-chain loans.
-      </>
-    ),
-  },
-  {
-    q: "What is Bond Minter?",
-    a: "Bond Minter issues compliant tokenized loans and credit instruments.",
-  },
-  {
     q: "What is Aurora?",
-    a: "Aurora is the unified programmable on-chain credit market created by combining all stack layers.",
+    a: "Aurora is layered credit market infrastructure for Bitcoin-backed lending. It provides identity, credit inputs, loan discovery, and tokenized issuance layers built on Cardano.",
+  },
+  {
+    q: "Is Aurora a Bitcoin L2?",
+    a: "No. Aurora is not a Bitcoin L2 or base layer. It sits above existing infrastructure and enables institutional credit workflows around Bitcoin-backed lending.",
+  },
+  {
+    q: "Does Aurora compete with Sundial?",
+    a: "No. Sundial provides Bitcoin liquidity and base infrastructure. Aurora extends that stack with identity, credit signals, loan discovery, and programmable credit issuance.",
   },
   {
     q: "How does Aurora work with Sundial?",
-    a: "Sundial provides Bitcoin-backed lending infrastructure. Aurora adds identity, discovery, tokenization, and market orchestration so verified participants can access programmable BTC credit markets.",
+    a: "Sundial provides Bitcoin liquidity infrastructure. Aurora adds identity, credit inputs, discovery, and tokenized issuance. Sundown is the market layer where those capabilities become usable.",
+  },
+  {
+    q: "What chains does Aurora support?",
+    a: "Aurora is built on Cardano first because Cardano's extended UTXO model, metadata support, native assets, and deterministic execution are well suited for structured financial transactions. The architecture may support future multi-chain expansion where appropriate.",
+  },
+  {
+    q: "Why is Aurora built on Cardano?",
+    a: "Cardano's extended UTXO model, metadata support, native assets, and deterministic execution make it well suited for structured financial transactions and programmable credit instruments.",
+  },
+  {
+    q: "What is Polaris Wallet?",
+    a: "Polaris Wallet provides reusable SSI-based credentials for KYC, KYB, accreditation, and verified market participation.",
+  },
+  {
+    q: "What is Aamu Aurora?",
+    a: "Aamu Aurora converts off-chain financial and borrower data into privacy-preserving credit inputs using ZK-TLS and proof-based verification.",
+  },
+  {
+    q: "What is Sundown?",
+    a: "Sundown is Aurora's credit market discovery layer built in collaboration with Sundial. It enables UTXO-based loan requests, borrower metadata, credential-aware filtering, and orderbook-style matching.",
+  },
+  {
+    q: "Does Aurora issue loans or act as a lender?",
+    a: "No. Aurora provides infrastructure. Institutions, issuers, and regulated entities use Aurora's tools within their own legal, licensing, and compliance frameworks.",
+  },
+  {
+    q: "What is Solstice Aurora?",
+    a: "Solstice Aurora is Aurora's issuance layer for tokenized bonds and structured credit instruments using Cardano programmable token standards such as CIP-113.",
   },
 ];
 
 export default function AuroraPage() {
   return (
-    <div className="min-h-screen bg-[#fffaf0] text-[#07111b] font-sans antialiased">
+    <div className="min-h-screen bg-[#fffaf2] text-[#07111b] font-sans antialiased">
       <Nav />
       <main>
         <Hero />
@@ -142,12 +205,12 @@ export default function AuroraPage() {
         <FeatureCards />
         <ThesisLine />
         <LayeredCredit />
-        <AuroraStack />
         <Framework />
-        <BuiltForTrust />
-        <Metrics />
-        <BitcoinCreditCTA />
+        <WhyCardano />
+        <AuroraStack />
         <SundialPartnership />
+        <BuiltForTrust />
+        <BitcoinCreditCTA />
         <FAQ />
         <FooterCTA />
       </main>
@@ -167,25 +230,52 @@ function Nav() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 text-[#fff8e7]">
-      <div className="mx-auto flex max-w-[1320px] items-center justify-between">
+      <div className="mx-auto flex w-full max-w-[1320px] items-center justify-between rounded-[8px] border border-white/12 bg-[#020711]/74 px-4 py-3 shadow-[0_18px_80px_rgba(0,0,0,0.32)] backdrop-blur-2xl sm:px-5">
         <AuroraWordmark href="#top" tone="light" />
-        <nav className="hidden items-center gap-1 rounded-full border border-[#ffd27a]/18 bg-[#020611]/64 p-1 text-[12px] font-semibold uppercase text-[#fff8e7]/78 shadow-[0_18px_70px_rgba(0,0,0,0.3)] backdrop-blur-xl lg:flex">
+
+        <nav className="hidden items-center gap-1 text-[12px] font-semibold uppercase text-[#fff8e7]/72 lg:flex">
           {links.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="rounded-full px-5 py-3 transition hover:bg-[#ffd27a]/12 hover:text-[#ffd27a]"
+              className="rounded-full px-4 py-2.5 transition duration-200 hover:bg-white/7 hover:text-[#ffcc73] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ffcc73]"
             >
               {link.label}
             </a>
           ))}
         </nav>
-        <a
-          href="#footer-cta"
-          className="inline-flex min-h-11 items-center justify-center rounded-full border border-[#f4b642]/75 bg-[#020611]/64 px-5 text-[12px] font-bold uppercase text-[#ffd27a] shadow-[0_18px_70px_rgba(0,0,0,0.3)] backdrop-blur-xl transition hover:bg-[#f4b642]/16"
-        >
-          Request Access
-        </a>
+
+        <div className="flex items-center gap-2">
+          <a
+            href="#footer-cta"
+            className="hidden min-h-10 items-center justify-center rounded-full border border-[#f6b84b]/70 bg-[#f6b84b] px-5 text-[12px] font-bold uppercase text-[#130b02] shadow-[0_14px_44px_rgba(246,184,75,0.24)] transition duration-200 hover:border-[#ffcc73] hover:bg-[#ffcc73] sm:inline-flex"
+          >
+            Request Access
+          </a>
+          <details className="group relative lg:hidden">
+            <summary className="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-full border border-white/14 bg-white/6 text-[#ffcc73] transition hover:border-[#ffcc73]/60 hover:bg-[#ffcc73]/10 [&::-webkit-details-marker]:hidden">
+              <span className="sr-only">Open navigation</span>
+              <Menu className="h-5 w-5" strokeWidth={1.7} />
+            </summary>
+            <div className="absolute right-0 top-12 w-[240px] rounded-[8px] border border-white/12 bg-[#020711]/96 p-2 shadow-[0_24px_80px_rgba(0,0,0,0.42)] backdrop-blur-2xl">
+              {links.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="block rounded-[6px] px-4 py-3 text-[12px] font-semibold uppercase text-[#fff8e7]/78 transition hover:bg-white/7 hover:text-[#ffcc73]"
+                >
+                  {link.label}
+                </a>
+              ))}
+              <a
+                href="#footer-cta"
+                className="mt-2 flex min-h-10 items-center justify-center rounded-[6px] bg-[#f6b84b] px-4 text-[12px] font-bold uppercase text-[#130b02]"
+              >
+                Request Access
+              </a>
+            </div>
+          </details>
+        </div>
       </div>
     </header>
   );
@@ -204,16 +294,12 @@ function AuroraWordmark({
     <span
       aria-label="Aurora"
       className={[
-        "flex items-center font-serif font-normal leading-none",
-        compact ? "gap-[0.22em] text-[17px]" : "gap-[0.32em] text-[21px]",
-        tone === "light" ? "text-[#ffd27a]" : "text-[#0a1421]",
+        "flex items-center font-serif font-normal leading-none tracking-[0.24em]",
+        compact ? "text-[16px]" : "text-[21px]",
+        tone === "light" ? "text-[#ffcc73]" : "text-[#0a1421]",
       ].join(" ")}
     >
-      {"AURORA".split("").map((letter, index) => (
-        <span key={`${letter}-${index}`} aria-hidden="true">
-          {letter}
-        </span>
-      ))}
+      AURORA
     </span>
   );
 
@@ -222,7 +308,10 @@ function AuroraWordmark({
   }
 
   return (
-    <a href={href} className="inline-flex items-center">
+    <a
+      href={href}
+      className="inline-flex items-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffcc73]"
+    >
       {content}
     </a>
   );
@@ -232,46 +321,44 @@ function Hero() {
   return (
     <section
       id="top"
-      className="relative isolate min-h-screen overflow-hidden bg-[#020611] text-[#fff8e7]"
+      className="relative isolate min-h-screen overflow-hidden bg-[#020711] text-[#fff8e7]"
     >
       <HeroAtmosphere />
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-[1320px] flex-col items-center justify-center px-5 pb-28 pt-32 text-center sm:px-8 lg:px-12">
-        <div className="max-w-[850px]">
-          <div className="mx-auto inline-flex rounded-full border border-[#ffd27a]/22 bg-[#020611]/46 px-5 py-2 text-[12px] font-bold uppercase text-[#ffd27a]/88 shadow-[0_14px_60px_rgba(0,0,0,0.28)] backdrop-blur-xl">
-            Aurora credit stack
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-[1320px] flex-col justify-center px-5 pb-12 pt-28 sm:px-8 lg:px-12 lg:pb-16 lg:pt-32">
+        <div className="grid items-center gap-10 lg:grid-cols-[0.92fr_0.78fr]">
+          <div className="max-w-[760px]">
+            <div className="inline-flex rounded-full border border-[#ffcc73]/24 bg-[#020711]/52 px-4 py-2 text-[11px] font-bold uppercase text-[#ffcc73] shadow-[0_14px_60px_rgba(0,0,0,0.32)] backdrop-blur-xl">
+              A layered credit stack for Bitcoin
+            </div>
+            <h1 className="mt-8 text-[43px] font-normal leading-[0.98] text-[#fffaf2] drop-shadow-[0_12px_44px_rgba(0,0,0,0.46)] sm:text-[64px] lg:text-[82px]">
+              <span className="block">Building</span>
+              <span className="block text-[#f6b84b]">on-chain</span>
+              <span className="block">credit markets</span>
+              <span className="block">
+                for <span className="text-[#f6b84b]">Bitcoin.</span>
+              </span>
+            </h1>
+            <p className="mt-8 max-w-[640px] text-[17px] font-medium leading-8 text-[#fffaf2]/88">
+              Aurora is the identity, credit, and capital markets layer for
+              Bitcoin-backed lending infrastructure built with Sundial on
+              Cardano.
+            </p>
+            <p className="mt-4 max-w-[600px] text-[15px] leading-7 text-[#fffaf2]/68">
+              Verified participants. Smarter underwriting. Tokenized credit.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <PrimaryButton href="#stack">Explore Stack</PrimaryButton>
+              <SecondaryButton href="#footer-cta" tone="dark">
+                Request Access
+              </SecondaryButton>
+            </div>
+            <EcosystemStrip />
           </div>
-          <h1 className="mt-8 text-[38px] font-normal leading-[0.95] tracking-[-0.01em] text-[#fff8e7] drop-shadow-[0_12px_44px_rgba(0,0,0,0.42)] sm:text-[54px] lg:text-[76px]">
-            <span className="block">Building</span>
-            <span className="block text-[#ffbf48]">on-chain</span>
-            <span className="block">credit markets</span>
-            <span className="block">
-              for <span className="text-[#ffbf48]">Bitcoin.</span>
-            </span>
-          </h1>
-          {/* <p className="mx-auto mt-8 max-w-[560px] text-[15px] font-medium leading-7 text-[#fff8e7]/88">
-            Aurora turns Bitcoin collateral into identity-aware, discoverable,
-            tokenized credit markets.
-          </p> */}
-          <p className="mx-auto mt-4 max-w-[560px] text-[15px] leading-7 text-[#fff8e7]/72">
-            Aurora turns Bitcoin collateral into verified, programmable credit markets built with Sundial on Cardano
-          </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <a
-              href="#stack"
-              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-gradient-to-b from-[#ffe3a4] via-[#ffc95a] to-[#d68d19] px-7 text-[13px] font-bold uppercase text-[#130b02] shadow-[0_20px_70px_rgba(255,190,72,0.28)] transition hover:translate-y-[-1px] hover:from-[#fff0c9] hover:to-[#f4a51f]"
-            >
-              Explore Stack
-              <ArrowRight className="h-4 w-4" strokeWidth={1.8} />
-            </a>
-            <a
-              href="#footer-cta"
-              className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#f4b642]/70 bg-[#020611]/34 px-7 text-[13px] font-bold uppercase text-[#ffd27a] backdrop-blur-md transition hover:border-[#ffd27a] hover:bg-[#f4b642]/10"
-            >
-              Request Access
-            </a>
-          </div>
+
+          <HeroMarketPanel />
         </div>
-        <EcosystemStrip />
+
+        <HeroInfrastructureRow />
       </div>
     </section>
   );
@@ -279,100 +366,198 @@ function Hero() {
 
 function HeroAtmosphere() {
   return (
-    <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
+    >
       <video
         autoPlay
         loop
         muted
         playsInline
         preload="auto"
-        poster=""
-        className="absolute inset-0 z-0 h-full w-full object-cover object-center"
+        className="absolute inset-0 h-full w-full object-cover object-center opacity-80"
       >
-        <source src="https://i.imgur.com/cwE2dJE.mp4" type="video/mp4" />
+        <source src="https://i.imgur.com/ZCaGc1u.mp4" type="video/mp4" />
       </video>
-      <div className="absolute inset-0 z-[1] bg-[#020611]/35" />
-      <div
-        className="absolute inset-0 z-[3]"
+      <div className="absolute inset-0 bg-[#020711]/42" />
+      {/*<div
+        className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(180deg, rgba(2,6,17,0.18) 0%, rgba(2,6,17,0.05) 42%, rgba(2,6,17,0.55) 100%), linear-gradient(90deg, rgba(2,6,17,0.32) 0%, rgba(2,6,17,0.04) 50%, rgba(2,6,17,0.24) 100%)",
+            "linear-gradient(90deg, rgba(2,7,17,0.9) 0%, rgba(2,7,17,0.54) 45%, rgba(2,7,17,0.18) 100%), linear-gradient(180deg, rgba(2,7,17,0.22) 0%, rgba(2,7,17,0.08) 46%, rgba(2,7,17,0.88) 100%)",
+        }}
+      />*/}
+      {/*<div
+        className="absolute inset-x-0 bottom-[-18%] h-[46%] opacity-85"
+        style={{
+          background:
+            "radial-gradient(ellipse at 58% 0%, rgba(246,184,75,0.36) 0%, rgba(217,154,43,0.16) 18%, rgba(6,19,31,0.78) 48%, #020711 76%)",
+        }}
+      />*/}
+      <div
+        className="absolute inset-x-[-10%] top-[12%] h-[42%] opacity-60 animate-[auroraPulse_10s_ease-in-out_infinite]"
+        style={{
+          background:
+            "linear-gradient(104deg, transparent 0%, rgba(54,245,197,0.14) 34%, rgba(114,255,224,0.22) 48%, rgba(246,184,75,0.1) 60%, transparent 78%)",
+          filter: "blur(22px)",
         }}
       />
-      <div className="absolute inset-x-0 bottom-0 z-[8] h-40 bg-gradient-to-b from-transparent via-[#020611]/40 to-[#020611]" />
+      <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-b from-transparent via-[#020711]/62 to-[#020711]" />
     </div>
   );
 }
 
-function CloudBank({
-  className,
-  soft = false,
-}: {
-  className: string;
-  soft?: boolean;
-}) {
-  const puffs = [
-    { left: "-6%", top: "48%", width: "42%", height: "34%" },
-    { left: "10%", top: "28%", width: "50%", height: "42%" },
-    { left: "30%", top: "42%", width: "48%", height: "36%" },
-    { left: "48%", top: "24%", width: "50%", height: "44%" },
-    { left: "68%", top: "44%", width: "44%", height: "34%" },
+function HeroMarketPanel() {
+  const flow = [
+    { icon: Coins, title: "Bitcoin collateral", note: "BTC-backed lending" },
+    { icon: BadgeCheck, title: "Verified access", note: "KYC / KYB proofs" },
+    { icon: Filter, title: "Sundown discovery", note: "Policy-aware markets" },
+    { icon: FileCheck2, title: "Tokenized issuance", note: "CIP-113 instruments" },
   ];
 
   return (
-    <div className={`absolute z-[6] ${className}`}>
-      {puffs.map((puff, index) => (
-        <span
-          key={index}
-          className={[
-            "absolute rounded-[50%]",
-            soft ? "blur-[28px]" : "blur-[15px]",
-          ].join(" ")}
-          style={{
-            left: puff.left,
-            top: puff.top,
-            width: puff.width,
-            height: puff.height,
-            background:
-              "radial-gradient(ellipse at 42% 34%, rgba(255,250,232,0.66) 0%, rgba(194,181,151,0.48) 32%, rgba(71,78,82,0.36) 58%, transparent 78%)",
-            boxShadow:
-              "inset -34px -22px 44px rgba(2,6,17,0.5), inset 22px 12px 30px rgba(255,227,164,0.14)",
-          }}
-        />
-      ))}
-      <span
-        className={["absolute inset-x-0 bottom-0 h-[44%]", soft ? "blur-[18px]" : "blur-[8px]"].join(" ")}
-        style={{
-          background:
-            "linear-gradient(180deg, transparent 0%, rgba(217,202,170,0.4) 38%, rgba(13,18,22,0.52) 100%)",
-        }}
-      />
+    <div className="relative hidden lg:block">
+      <div className="absolute inset-0 translate-x-5 translate-y-5 rounded-[8px] border border-[#36f5c5]/18 bg-[#36f5c5]/5 blur-sm" />
+      <div className="relative rounded-[8px] border border-white/14 bg-[#06131f]/78 p-5 shadow-[0_28px_120px_rgba(0,0,0,0.46)] backdrop-blur-2xl">
+        <div className="flex items-center justify-between border-b border-white/10 pb-4">
+          <div>
+            <p className="text-[11px] font-bold uppercase text-[#72ffe0]">
+              Market object
+            </p>
+            <h2 className="mt-2 text-[22px] font-semibold text-[#fffaf2]">
+              UTXO-based credit request
+            </h2>
+          </div>
+          <div className="rounded-full border border-[#f6b84b]/34 px-3 py-1 text-[11px] font-bold uppercase text-[#ffcc73]">
+            Cardano
+          </div>
+        </div>
+        <div className="mt-5 space-y-3">
+          {flow.map((item, index) => (
+            <div
+              key={item.title}
+              className="grid grid-cols-[44px_1fr_auto] items-center gap-4 rounded-[6px] border border-white/10 bg-white/[0.045] px-4 py-3"
+            >
+              <div className="flex h-11 w-11 items-center justify-center rounded-full border border-[#f6b84b]/32 bg-[#f6b84b]/8">
+                <item.icon className="h-5 w-5 text-[#f6b84b]" strokeWidth={1.45} />
+              </div>
+              <div>
+                <p className="text-[14px] font-semibold text-[#fffaf2]">
+                  {item.title}
+                </p>
+                <p className="mt-1 text-[12px] text-[#fffaf2]/52">{item.note}</p>
+              </div>
+              <span className="text-[11px] font-semibold text-[#fffaf2]/38">
+                0{index + 1}
+              </span>
+            </div>
+          ))}
+        </div>
+        <div className="mt-5 rounded-[6px] border border-[#72ffe0]/20 bg-[#72ffe0]/8 p-4">
+          <p className="text-[12px] font-bold uppercase text-[#72ffe0]">
+            Relationship clarity
+          </p>
+          <p className="mt-2 text-[14px] leading-6 text-[#fffaf2]/78">
+            Sundial supplies Bitcoin liquidity. Sundown exposes market
+            discovery. Aurora provides identity, credit, discovery, and
+            issuance infrastructure.
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
 
 function EcosystemStrip() {
-  const items = [
-    { icon: Sparkles, label: "Fairway" },
-    { icon: Sun, label: "Sundial" },
-    { icon: Activity, label: "Cardano" },
-    { icon: CircleCheck, label: "Midnight" },
-    { icon: ShieldCheck, label: "Veridian" },
-    { icon: Blocks, label: "CIP-113" },
+  const items: {
+    icon?: IconType;
+    logo?: string;
+    alt?: string;
+    label: string;
+  }[] = [
+    { logo: "/brand/fairway-logo.png", alt: "Fairway logo", label: "Fairway" },
+    { logo: "/brand/sundial.png", alt: "Sundial logo", label: "Sundial" },
+    { logo: "/brand/cardano.png", alt: "Cardano logo", label: "Cardano" },
+    { logo: "/brand/midnight.png", alt: "Midnight logo", label: "Midnight" },
+    { logo: "/brand/veridian.png", alt: "Veridian logo", label: "Veridian" },
+    { logo: "/brand/cip113-logo.png", alt: "CIP-113 logo", label: "CIP-113" },
   ];
 
   return (
-    <div className="mt-14 grid grid-cols-2 gap-y-6 border-y border-white/12 py-5 sm:grid-cols-3 lg:mt-40 lg:grid-cols-6">
-      {items.map((item, index) => (
+    <div className="mt-10 max-w-[720px] rounded-[8px] border border-white/12 bg-[#020711]/38 px-4 py-4 backdrop-blur-xl">
+      <p className="mb-4 text-[10px] font-bold uppercase text-[#fffaf2]/46">
+        Trusted Ecosystem
+      </p>
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+        {items.map((item) => (
+          <div key={item.label} className="flex items-center gap-2">
+            {item.logo ? (
+              <span className="relative h-4 w-4 overflow-hidden rounded-full">
+                <Image
+                  src={item.logo}
+                  alt={item.alt ?? `${item.label} logo`}
+                  fill
+                  sizes="16px"
+                  className="object-contain"
+                />
+              </span>
+            ) : item.icon ? (
+              <item.icon className="h-4 w-4 text-[#f6b84b]" strokeWidth={1.5} />
+            ) : null}
+            <span className="text-[11px] font-bold uppercase text-[#fffaf2]/72">
+              {item.label}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function HeroInfrastructureRow() {
+  const items = [
+    {
+      icon: Coins,
+      title: "Bitcoin Collateral",
+      subtitle: "BTC-backed lending markets",
+    },
+    {
+      icon: BadgeCheck,
+      title: "Verified Participants",
+      subtitle: "KYC / KYB through verifiable credentials",
+    },
+    {
+      icon: BarChart3,
+      title: "Credit Inputs",
+      subtitle: "Privacy-preserving borrower signals",
+    },
+    {
+      icon: Filter,
+      title: "Loan Discovery",
+      subtitle: "Filterable credit opportunities",
+    },
+    {
+      icon: FileCheck2,
+      title: "Tokenized Instruments",
+      subtitle: "Programmable credit and bond issuance",
+    },
+  ];
+
+  return (
+    <div className="mt-10 grid gap-px overflow-hidden rounded-[8px] border border-white/12 bg-white/12 shadow-[0_24px_90px_rgba(0,0,0,0.28)] backdrop-blur-2xl sm:grid-cols-2 lg:grid-cols-5">
+      {items.map((item) => (
         <div
-          key={item.label}
-          className={[
-            "flex items-center justify-center gap-3 px-4 text-[#fff8e7]",
-            index > 0 ? "lg:border-l lg:border-white/16" : "",
-          ].join(" ")}
+          key={item.title}
+          className="bg-[#020711]/64 p-5 transition duration-200 hover:bg-[#06131f]/82"
         >
-          <item.icon className="h-6 w-6 text-[#ffc95a]" strokeWidth={1.55} />
-          <span className="text-[12px] font-bold uppercase">{item.label}</span>
+          <item.icon className="h-6 w-6 text-[#f6b84b]" strokeWidth={1.45} />
+          <h3 className="mt-4 text-[14px] font-semibold text-[#fffaf2]">
+            {item.title}
+          </h3>
+          <p className="mt-2 text-[12px] leading-5 text-[#fffaf2]/58">
+            {item.subtitle}
+          </p>
         </div>
       ))}
     </div>
@@ -381,38 +566,29 @@ function EcosystemStrip() {
 
 function MarketStats() {
   return (
-    <section className="relative isolate overflow-hidden bg-[#020711] text-[#fff8e7]">
-      {/* Blurred video continuation — extends the hero atmosphere */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          className="absolute inset-0 h-full w-full scale-[1.18] object-cover object-center"
-          style={{ filter: "blur(36px) saturate(1.05)" }}
-        >
-          <source src="https://i.imgur.com/cwE2dJE.mp4" type="video/mp4" />
-        </video>
-        {/* Top fade — seamless join with hero bottom */}
-        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#020611] via-[#020611]/70 to-transparent" />
-        {/* Tint over the blurred video */}
-        <div className="absolute inset-0 bg-[#020611]/72" />
-        {/* Subtle warm glow at top so it feels like the sun bled through */}
-        <div
-          className="absolute inset-x-0 top-0 h-1/2 opacity-60"
-          style={{
-            background:
-              "radial-gradient(ellipse at 50% 0%, rgba(255,191,72,0.18) 0%, transparent 60%)",
-          }}
-        />
-        {/* Bottom fade into the next section */}
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent via-[#020611]/55 to-[#020611]" />
-      </div>
-
-      <div className="relative z-10 mx-auto max-w-[1320px] px-5 py-16 sm:px-8 lg:px-12">
-        <div className="grid overflow-hidden rounded-[2px] border border-[#f4b642]/22 bg-white/[0.04] shadow-[0_24px_110px_rgba(0,0,0,0.5)] backdrop-blur-2xl md:grid-cols-2">
+    <section className="relative isolate overflow-hidden bg-[#020711] px-5 py-18 text-[#fffaf2] sm:px-8 lg:px-12">
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 opacity-70"
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 0%, rgba(246,184,75,0.15), transparent 56%), linear-gradient(180deg, #020711 0%, #06131f 48%, #020711 100%)",
+        }}
+      />
+      <div className="relative mx-auto max-w-[1180px]">
+        <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <SectionLabel tone="dark">The Opportunity</SectionLabel>
+            <h2 className="mt-3 text-[28px] font-normal leading-tight text-[#fffaf2] sm:text-[40px]">
+              Bitcoin credit is becoming market infrastructure.
+            </h2>
+          </div>
+          <p className="max-w-[430px] text-[14px] leading-6 text-[#fffaf2]/58">
+            Collateral demand is visible. Institutional scale depends on
+            identity, credit visibility, discovery, and compliant instruments.
+          </p>
+        </div>
+        <div className="grid overflow-hidden rounded-[8px] border border-[#f6b84b]/22 bg-white/[0.045] shadow-[0_28px_120px_rgba(0,0,0,0.48)] backdrop-blur-2xl md:grid-cols-2">
           <StatBlock
             label="The Opportunity"
             value="$846T"
@@ -439,12 +615,14 @@ function StatBlock({
   copy: string;
 }) {
   return (
-    <div className="relative flex min-h-[230px] flex-col items-center justify-center border-b border-[#f4b642]/14 px-6 py-10 text-center last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0">
-      <p className="text-[12px] font-semibold uppercase text-[#f4b642]">{label}</p>
-      <div className="mt-3 text-[54px] font-normal leading-none text-[#ffc95a] sm:text-[68px]">
+    <div className="relative min-h-[245px] border-b border-[#f6b84b]/14 px-7 py-9 last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0">
+      <p className="text-[11px] font-bold uppercase text-[#ffcc73]">{label}</p>
+      <div className="mt-5 font-serif text-[58px] font-normal leading-none text-[#f6b84b] sm:text-[76px]">
         {value}
       </div>
-      <p className="mt-5 max-w-[360px] text-[14px] leading-6 text-[#fff8e7]/74">{copy}</p>
+      <p className="mt-5 max-w-[420px] text-[15px] leading-7 text-[#fffaf2]/70">
+        {copy}
+      </p>
     </div>
   );
 }
@@ -467,29 +645,36 @@ function FeatureCards() {
       number: "03",
       icon: Blocks,
       title: "Tokenized Debt Rails",
-      copy: "Turn loans into programmable credit instruments designed for compliant and efficient ownership.",
+      copy: "Turn loans into programmable credit instruments designed for compliant ownership.",
     },
   ];
 
   return (
-    <section className="bg-[#020711] px-5 pb-20 pt-8 text-[#fff8e7] sm:px-8 lg:px-12">
-      <div className="mx-auto grid max-w-[1060px] gap-4 md:grid-cols-3">
+    <section className="bg-[#020711] px-5 pb-20 text-[#fffaf2] sm:px-8 lg:px-12">
+      <div className="mx-auto grid max-w-[1180px] gap-4 md:grid-cols-3">
         {cards.map((card) => (
-          <div
+          <article
             key={card.number}
-            className="group border border-[#f4b642]/22 bg-[#07111b]/88 p-7 shadow-[0_24px_70px_rgba(0,0,0,0.28)] transition hover:-translate-y-1 hover:border-[#ffc95a]/75 hover:bg-[#091823]"
+            className="group rounded-[8px] border border-white/12 bg-[#06131f]/82 p-7 shadow-[0_24px_80px_rgba(0,0,0,0.28)] transition duration-200 hover:-translate-y-1 hover:border-[#f6b84b]/62 hover:bg-[#081a28]"
           >
             <div className="flex items-start justify-between">
-              <span className="text-[15px] text-[#ffc95a]">{card.number}</span>
-              <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#22d3ee]/38 bg-[#22d3ee]/8 transition group-hover:border-[#ffc95a]/55 group-hover:bg-[#ffc95a]/10">
-                <card.icon className="h-6 w-6 text-[#22d3ee] transition group-hover:text-[#ffc95a]" strokeWidth={1.45} />
+              <span className="text-[13px] font-semibold text-[#f6b84b]">
+                {card.number}
+              </span>
+              <div className="flex h-11 w-11 items-center justify-center rounded-full border border-[#72ffe0]/24 bg-[#72ffe0]/7 transition group-hover:border-[#f6b84b]/48 group-hover:bg-[#f6b84b]/10">
+                <card.icon
+                  className="h-5 w-5 text-[#72ffe0] transition group-hover:text-[#f6b84b]"
+                  strokeWidth={1.45}
+                />
               </div>
             </div>
-            <h2 className="mt-12 text-[21px] font-semibold leading-7 text-[#ffe1a3]">
+            <h2 className="mt-10 text-[21px] font-semibold leading-7 text-[#fffaf2]">
               {card.title}
             </h2>
-            <p className="mt-4 text-[14px] leading-6 text-[#fff8e7]/72">{card.copy}</p>
-          </div>
+            <p className="mt-4 text-[14px] leading-6 text-[#fffaf2]/66">
+              {card.copy}
+            </p>
+          </article>
         ))}
       </div>
     </section>
@@ -498,62 +683,106 @@ function FeatureCards() {
 
 function ThesisLine() {
   return (
-    <section className="relative overflow-hidden bg-[#020711] px-5 pb-28 pt-4 text-center sm:px-8 lg:px-12">
-      <p className="relative z-10 mx-auto max-w-[960px] text-[18px] leading-8 text-[#fff8e7]/88">
-        Institutional <span className="text-[#ffc95a]">BTC</span>. Verified
-        counterparties. <span className="text-[#ffc95a]">Programmable credit.</span>
+    <section className="relative overflow-hidden bg-[#020711] px-5 pb-28 pt-2 text-center sm:px-8 lg:px-12">
+      <p className="relative z-10 mx-auto max-w-[960px] text-[19px] leading-8 text-[#fffaf2]/88 sm:text-[22px]">
+        Institutional <span className="text-[#f6b84b]">BTC</span>. Verified
+        counterparties.{" "}
+        <span className="text-[#f6b84b]">Programmable credit.</span>
+      </p>
+      <p className="relative z-10 mx-auto mt-3 max-w-[680px] text-[14px] leading-6 text-[#fffaf2]/54">
+        Aurora turns Bitcoin collateral into identity-aware, discoverable,
+        tokenized credit markets.
       </p>
       <div
         aria-hidden="true"
-        className="absolute bottom-[-80px] left-1/2 h-[160px] w-[150vw] -translate-x-1/2 rounded-[50%] border-t border-[#f4b642]/40 bg-[#fffaf0]"
+        className="absolute bottom-[-80px] left-1/2 h-[160px] w-[150vw] -translate-x-1/2 rounded-[50%] border-t border-[#f6b84b]/34 bg-[#fffaf2]"
       />
     </section>
   );
 }
 
 function LayeredCredit() {
-  const layers = [
-    { icon: WalletCards, label: "Beam Wallet", sub: "Verified identity" },
-    { icon: BarChart3, label: "Aurora Score", sub: "Credit intelligence" },
-    { icon: Filter, label: "Sundown", sub: "Loan discovery" },
-    { icon: FileText, label: "Bond Minter", sub: "Bond issuance" },
-    { icon: Network, label: "Aurora", sub: "Market orchestration" },
+  const boxes = [
+    {
+      icon: WalletCards,
+      logo: "/brand/polaris.jpg",
+      logoAlt: "Polaris logo",
+      title: "Polaris Wallet",
+      copy: "Portable identity credentials for KYC, accreditation, and reusable onboarding.",
+    },
+    {
+      icon: BarChart3,
+      logo: "/brand/aamu.jpg",
+      logoAlt: "Aamu logo",
+      title: "Aamu Aurora",
+      copy: "Zero-knowledge powered qualification signals from public and private financial data.",
+    },
+    {
+      icon: Filter,
+      logo: "/brand/sundial.png",
+      logoAlt: "Sundial logo",
+      title: "Sundown",
+      copy: "Fairway and Sundial market layer for discoverable and filterable on-chain loans.",
+    },
   ];
 
   return (
-    <section id="how" className="bg-[#fffaf0] px-5 py-20 sm:px-8 lg:px-12">
-      <div className="mx-auto grid max-w-[1320px] gap-10 lg:grid-cols-[0.82fr_1.18fr]">
+    <section id="how" className="bg-[#fffaf2] px-5 py-24 sm:px-8 lg:px-12">
+      <div className="mx-auto grid max-w-[1180px] gap-12 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
         <div>
           <SectionLabel>Layered On-Chain Credit</SectionLabel>
-          <h2 className="mt-4 text-[40px] font-normal leading-[1.04] text-[#101823] sm:text-[54px]">
+          <h2 className="mt-4 text-[42px] font-normal leading-[1.04] text-[#101823] sm:text-[58px]">
             Credit Without
             <br />
-            Legacy <span className="text-[#d68d19]">Friction</span>
+            <span className="text-[#d99a2b]">Legacy Friction</span>
           </h2>
-          <div className="mt-6 max-w-[520px] space-y-4 text-[15px] leading-7 text-[#17202b]/72">
-            <p>
-              Aurora combines multiple infrastructure layers into one credit
-              market stack.
+          <div className="mt-7 max-w-[560px] space-y-4 text-[16px] leading-8 text-[#17202b]/74">
+            <p className="text-[18px] font-semibold text-[#101823]">
+              Collateral alone is not enough for institutional credit markets.
             </p>
             <p>
-              Wallet identity. Credit intelligence. Loan discovery. Bond
-              issuance. Market orchestration.
+              Lenders need to know who they are lending to, evaluate borrower
+              quality, filter opportunities, and satisfy internal policy
+              requirements.
             </p>
-            <p className="font-semibold text-[#101823]">
-              Built modularly. Designed to scale.
+            <p>
+              Aurora provides the missing infrastructure: identity, credit
+              inputs, loan discovery, and programmable issuance for
+              Bitcoin-backed lending.
             </p>
           </div>
         </div>
-        <div className="grid items-start gap-3 sm:grid-cols-2 xl:grid-cols-5">
-          {layers.map((layer) => (
-            <div
-              key={layer.label}
-              className="border border-[#e4c37a]/45 bg-white/76 p-5 shadow-[0_18px_55px_rgba(176,116,26,0.07)]"
+
+        <div className="grid gap-4">
+          {boxes.map((box) => (
+            <article
+              key={box.title}
+              className="group rounded-[8px] border border-[#1b384c]/14 bg-white p-6 shadow-[0_18px_60px_rgba(33,42,50,0.06)] transition duration-200 hover:-translate-y-1 hover:border-[#d99a2b]/46"
             >
-              <layer.icon className="h-7 w-7 text-[#d68d19]" strokeWidth={1.45} />
-              <h3 className="mt-5 text-[16px] font-semibold text-[#101823]">{layer.label}</h3>
-              <p className="mt-2 text-[13px] leading-5 text-[#17202b]/62">{layer.sub}</p>
-            </div>
+              <div className="flex gap-5">
+                <div className="relative flex h-12 w-12 flex-none items-center justify-center overflow-hidden rounded-[6px] border border-[#d99a2b]/28 bg-[#f6b84b]/10">
+                  {box.logo ? (
+                    <Image
+                      src={box.logo}
+                      alt={box.logoAlt}
+                      width={48}
+                      height={48}
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <box.icon className="h-6 w-6 text-[#d99a2b]" strokeWidth={1.45} />
+                  )}
+                </div>
+                <div>
+                  <h3 className="text-[19px] font-semibold text-[#101823]">
+                    {box.title}
+                  </h3>
+                  <p className="mt-2 text-[14px] leading-6 text-[#17202b]/66">
+                    {box.copy}
+                  </p>
+                </div>
+              </div>
+            </article>
           ))}
         </div>
       </div>
@@ -561,37 +790,109 @@ function LayeredCredit() {
   );
 }
 
-function AuroraStack() {
+function Framework() {
+  const eligibility = [
+    ["Jurisdiction", "Configurable"],
+    ["KYC Level", "KYC / KYB Verified"],
+    ["Entity Type", "Custodian / Fund / Institution / DAO"],
+    ["Risk Profile", "Low / Medium / High"],
+    ["Instrument Access", "Loans / Bonds / OTC"],
+  ];
+
+  const qualities = [
+    ["Verifiable", "Identity-first participation"],
+    ["Compliant", "Policy-aware access"],
+    ["Discoverable", "Market-ready opportunities"],
+    ["Programmable", "Institution-grade issuance"],
+  ];
+
   return (
-    <section id="stack" className="relative overflow-hidden bg-[#fff6e4] px-5 py-20 sm:px-8 lg:px-12">
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 opacity-80"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(255,250,240,0.96) 0%, rgba(255,246,228,0.98) 48%, rgba(255,255,255,0.94) 100%), radial-gradient(ellipse at 50% 0%, rgba(244,182,66,0.26), transparent 56%)",
-        }}
-      />
-      <div className="relative mx-auto max-w-[1320px]">
-        <div className="grid gap-8 lg:grid-cols-[0.62fr_1fr] lg:items-end">
+    <section className="bg-[#f8f3eb] px-5 py-24 sm:px-8 lg:px-12">
+      <div className="mx-auto max-w-[1180px]">
+        <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <SectionLabel>Aurora Stack</SectionLabel>
-            <h2 className="mt-4 max-w-[680px] text-[40px] font-normal leading-[1.04] text-[#101823] sm:text-[58px]">
-              Five layers for programmable Bitcoin credit.
+            <SectionLabel>Aurora Capital Markets Framework</SectionLabel>
+            <h2 className="mt-4 text-[34px] font-normal leading-tight text-[#101823] sm:text-[48px]">
+              Granular participation.
+              <br />
+              <span className="text-[#d99a2b]">Compliant by design.</span>
             </h2>
           </div>
-          <p className="max-w-[640px] text-[16px] leading-7 text-[#17202b]/70 lg:justify-self-end">
-            Aurora combines identity, credit intelligence, loan discovery,
-            tokenized issuance, and market orchestration into one on-chain
-            credit stack.
+          <p className="max-w-[420px] text-[15px] leading-7 text-[#17202b]/66">
+            Aurora separates access, risk inputs, market discovery, and issuance
+            so institutions can map policy requirements into on-chain credit
+            workflows.
           </p>
         </div>
 
-        <div className="relative mt-12">
-          <div className="absolute left-[9%] right-[9%] top-[42px] hidden h-px bg-gradient-to-r from-transparent via-[#d68d19]/70 to-transparent lg:block" />
-          <div className="grid gap-4 lg:grid-cols-5">
-            {stackLayers.map((layer) => (
-              <StackCard key={layer.number} layer={layer} />
+        <div className="overflow-hidden rounded-[8px] border border-[#1b384c]/14 bg-white shadow-[0_24px_90px_rgba(35,42,49,0.08)]">
+          <div className="grid bg-[#06131f] text-[11px] font-bold uppercase text-[#ffcc73] md:grid-cols-4">
+            {["Layer", "Identity", "Credit", "Markets", "Issuance"]
+              .slice(1)
+              .map((heading) => (
+                <div key={heading} className="border-b border-white/10 px-5 py-4 md:border-b-0 md:border-r md:last:border-r-0">
+                  {heading}
+                </div>
+              ))}
+          </div>
+          <div className="grid md:grid-cols-4">
+            {frameworkRows.map((row) => (
+              <div
+                key={row.value}
+                className="border-b border-[#1b384c]/10 px-5 py-6 last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0"
+              >
+                <p className="text-[11px] font-bold uppercase text-[#17202b]/42">
+                  {row.layer}
+                </p>
+                <h3 className="mt-3 text-[22px] font-semibold text-[#101823]">
+                  {row.value}
+                </h3>
+                <p className="mt-2 text-[14px] leading-6 text-[#17202b]/66">
+                  {row.purpose}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="border-t border-[#1b384c]/10 bg-[#fffaf2] p-5 sm:p-7">
+            <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <h3 className="text-[22px] font-semibold text-[#101823]">
+                  Eligible Counterparty Framework
+                </h3>
+                <p className="mt-2 text-[14px] text-[#17202b]/62">
+                  Granular eligibility. Policy-aligned by design.
+                </p>
+              </div>
+              <span className="text-[11px] font-bold uppercase text-[#d99a2b]">
+                Infrastructure rules
+              </span>
+            </div>
+            <div className="grid gap-px overflow-hidden rounded-[6px] border border-[#1b384c]/12 bg-[#1b384c]/12 md:grid-cols-5">
+              {eligibility.map(([label, value]) => (
+                <div key={label} className="bg-white px-4 py-4">
+                  <p className="text-[11px] font-bold uppercase text-[#17202b]/42">
+                    {label}
+                  </p>
+                  <p className="mt-2 text-[13px] font-semibold leading-5 text-[#101823]">
+                    {value}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid border-t border-[#1b384c]/10 md:grid-cols-4">
+            {qualities.map(([title, copy]) => (
+              <div
+                key={title}
+                className="border-b border-[#1b384c]/10 px-5 py-5 last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0"
+              >
+                <p className="text-[15px] font-semibold text-[#101823]">{title}</p>
+                <p className="mt-1 text-[13px] leading-5 text-[#17202b]/58">
+                  {copy}
+                </p>
+              </div>
             ))}
           </div>
         </div>
@@ -600,33 +901,215 @@ function AuroraStack() {
   );
 }
 
-function StackCard({ layer }: { layer: StackLayer }) {
+function WhyCardano() {
   return (
-    <article className="group relative overflow-hidden border border-[#d6a23e]/42 bg-[#fffdf8]/88 p-5 shadow-[0_24px_80px_rgba(150,99,23,0.11)] transition hover:-translate-y-1 hover:border-[#d68d19]/80 hover:bg-white">
-      <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#d68d19] via-[#ffd27a] to-transparent" />
-      <div className="flex items-start justify-between gap-4">
-        <span className="text-[15px] font-semibold text-[#d68d19]">{layer.number}</span>
-        <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#d68d19]/45 bg-[#fff2d3] text-[#d68d19] transition group-hover:bg-[#d68d19] group-hover:text-white">
-          <layer.icon className="h-6 w-6" strokeWidth={1.45} />
+    <section className="relative overflow-hidden bg-[#fffaf2] px-5 py-24 sm:px-8 lg:px-12">
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 opacity-80"
+        style={{
+          background:
+            "linear-gradient(180deg, #fffaf2 0%, #f8f3eb 100%), radial-gradient(ellipse at 82% 20%, rgba(54,245,197,0.12), transparent 42%)",
+        }}
+      />
+      <div className="relative mx-auto max-w-[1180px]">
+        <div className="grid gap-8 lg:grid-cols-[0.72fr_1fr] lg:items-end">
+          <div>
+            <SectionLabel>Why Cardano</SectionLabel>
+            <h2 className="mt-4 text-[38px] font-normal leading-[1.06] text-[#101823] sm:text-[54px]">
+              Structured credit needs deterministic financial infrastructure.
+            </h2>
+          </div>
+          <p className="max-w-[620px] text-[16px] leading-8 text-[#17202b]/70 lg:justify-self-end">
+            Aurora is built on Cardano because institutional credit markets
+            require predictable execution, programmable assets, and
+            transaction-level structure.
+          </p>
+        </div>
+
+        <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {cardanoCards.map((card) => (
+            <article
+              key={card.title}
+              className="rounded-[8px] border border-[#1b384c]/14 bg-white p-6 shadow-[0_20px_70px_rgba(33,42,50,0.06)] transition duration-200 hover:-translate-y-1 hover:border-[#36f5c5]/42"
+            >
+              <div className="flex h-12 w-12 items-center justify-center rounded-[6px] border border-[#36f5c5]/24 bg-[#36f5c5]/8">
+                <card.icon className="h-6 w-6 text-[#0e7c71]" strokeWidth={1.45} />
+              </div>
+              <h3 className="mt-6 text-[20px] font-semibold leading-7 text-[#101823]">
+                {card.title}
+              </h3>
+              <p className="mt-3 text-[14px] leading-6 text-[#17202b]/66">
+                {card.copy}
+              </p>
+            </article>
+          ))}
+        </div>
+        <p className="mt-10 border-l border-[#d99a2b]/48 pl-5 text-[15px] font-semibold leading-7 text-[#101823]">
+          Aurora is built on Cardano because institutional credit markets
+          require structure, determinism, and programmable assets.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function AuroraStack() {
+  return (
+    <section
+      id="stack"
+      className="relative overflow-hidden bg-[#fff6e4] px-5 py-24 sm:px-8 lg:px-12"
+    >
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 opacity-95"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(255,250,242,0.98) 0%, rgba(255,246,228,0.98) 46%, rgba(255,250,242,0.96) 100%), radial-gradient(ellipse at 50% 0%, rgba(246,184,75,0.22), transparent 56%)",
+        }}
+      />
+      <div className="relative mx-auto max-w-[1320px]">
+        <div className="grid gap-8 lg:grid-cols-[0.62fr_1fr] lg:items-end">
+          <div>
+            <SectionLabel>Four Layers for Programmable Bitcoin Credit</SectionLabel>
+            <h2 className="mt-4 max-w-[700px] text-[40px] font-normal leading-[1.04] text-[#101823] sm:text-[58px]">
+              Identity, credit, discovery, and issuance.
+            </h2>
+          </div>
+          <p className="max-w-[640px] text-[16px] leading-8 text-[#17202b]/70 lg:justify-self-end">
+            Aurora is not a Bitcoin L2, base layer, or standalone lender. It is
+            layered credit market infrastructure built on Cardano and integrated
+            with Sundial.
+          </p>
+        </div>
+
+        <div className="mt-12 grid gap-5 lg:grid-cols-[0.85fr_0.85fr_1.3fr]">
+          {stackLayers.map((layer) => (
+            <StackCard key={layer.number} layer={layer} />
+          ))}
         </div>
       </div>
-      <StackVisual kind={layer.visual} />
-      <div className="mt-6 border-t border-[#d6a23e]/24 pt-5">
-        <h3 className="text-[22px] font-semibold leading-7 text-[#101823]">{layer.name}</h3>
-        <p className="mt-2 text-[12px] font-semibold uppercase text-[#d68d19]">
+    </section>
+  );
+}
+
+function StackCard({ layer }: { layer: StackLayer }) {
+  const isBond = layer.name === "Solstice Aurora";
+  const className = [
+    "group relative overflow-hidden rounded-[8px] border bg-[#fffdf8]/92 p-6 shadow-[0_24px_90px_rgba(150,99,23,0.11)] transition duration-200 hover:-translate-y-1",
+    layer.featured
+      ? "border-[#36f5c5]/46 lg:row-span-2 lg:min-h-[640px] shadow-[0_28px_110px_rgba(10,126,113,0.14)]"
+      : "border-[#d99a2b]/32 hover:border-[#d99a2b]/76",
+    isBond ? "lg:col-span-2" : "",
+  ].join(" ");
+
+  return (
+    <article className={className}>
+      <div
+        className={[
+          "absolute inset-x-0 top-0 h-1",
+          layer.featured
+            ? "bg-gradient-to-r from-[#36f5c5] via-[#ffcc73] to-transparent"
+            : "bg-gradient-to-r from-[#d99a2b] via-[#ffcc73] to-transparent",
+        ].join(" ")}
+      />
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <span className="text-[13px] font-bold uppercase text-[#d99a2b]">
+            Layer {layer.number}
+          </span>
+          {layer.featured ? (
+            <span className="ml-3 rounded-full border border-[#36f5c5]/32 bg-[#36f5c5]/9 px-3 py-1 text-[10px] font-bold uppercase text-[#0e7c71]">
+              Most Important
+            </span>
+          ) : null}
+        </div>
+        <div
+          className={[
+            "relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border transition",
+            layer.featured
+              ? "border-[#36f5c5]/38 bg-[#36f5c5]/9 text-[#0e7c71]"
+              : "border-[#d99a2b]/34 bg-[#f6b84b]/10 text-[#d99a2b]",
+          ].join(" ")}
+        >
+          {layer.logo ? (
+            <Image
+              src={layer.logo}
+              alt={layer.logoAlt ?? `${layer.name} logo`}
+              width={48}
+              height={48}
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            <layer.icon className="h-6 w-6" strokeWidth={1.45} />
+          )}
+        </div>
+      </div>
+
+      <StackVisual layer={layer} />
+
+      <div className="mt-6 border-t border-[#1b384c]/10 pt-5">
+        <h3 className="text-[24px] font-semibold leading-7 text-[#101823]">
+          {layer.name}
+        </h3>
+        <p className="mt-2 text-[12px] font-bold uppercase text-[#d99a2b]">
           {layer.role}
         </p>
-        <p className="mt-4 min-h-[72px] text-[14px] leading-6 text-[#17202b]/70">
+        <div
+          className={[
+            "mt-4 text-[14px] leading-7 text-[#17202b]/70",
+            layer.featured ? "max-w-[640px]" : "",
+          ].join(" ")}
+        >
           {layer.description}
-        </p>
+        </div>
+
+        {layer.bullets ? (
+          <ul
+            className={[
+              "mt-5 grid gap-3 text-[13px] leading-6 text-[#17202b]/72",
+              layer.featured ? "sm:grid-cols-2" : "",
+            ].join(" ")}
+          >
+            {layer.bullets.map((bullet) => (
+              <li key={bullet} className="flex gap-3">
+                <CircleCheck
+                  className="mt-0.5 h-4 w-4 flex-none text-[#0e7c71]"
+                  strokeWidth={1.7}
+                />
+                <span>{bullet}</span>
+              </li>
+            ))}
+          </ul>
+        ) : null}
+
         <div className="mt-5 flex flex-wrap gap-2">
           {layer.chips.map((chip) => (
             <span
               key={chip}
-              className="border border-[#d6a23e]/28 bg-[#fff6e4] px-2.5 py-1 text-[11px] font-medium text-[#624313]"
+              className="rounded-full border border-[#d99a2b]/24 bg-[#fff6e4] px-3 py-1.5 text-[11px] font-semibold text-[#624313]"
             >
               {chip}
             </span>
+          ))}
+        </div>
+
+        <div className="mt-7 flex flex-wrap gap-3">
+          {layer.ctas.map((cta, index) => (
+            <a
+              key={cta}
+              href={layer.ctaLinks[index] ?? "#docs"}
+              target={layer.ctaLinks[index]?.startsWith("http") ? "_blank" : undefined}
+              rel={layer.ctaLinks[index]?.startsWith("http") ? "noreferrer" : undefined}
+              className={[
+                "inline-flex min-h-10 items-center justify-center rounded-full px-4 text-[11px] font-bold uppercase transition duration-200",
+                index === 0
+                  ? "border border-[#d99a2b]/42 bg-[#101823] text-[#ffcc73] hover:bg-[#17202b]"
+                  : "border border-[#1b384c]/14 bg-white text-[#101823] hover:border-[#d99a2b]/44",
+              ].join(" ")}
+            >
+              {cta}
+            </a>
           ))}
         </div>
       </div>
@@ -634,19 +1117,51 @@ function StackCard({ layer }: { layer: StackLayer }) {
   );
 }
 
-function StackVisual({ kind }: { kind: StackLayer["visual"] }) {
+function StackVisual({ layer }: { layer: StackLayer }) {
+  const kind = layer.visual;
+  const featured = layer.featured;
+  const heightClass = featured ? "h-44" : "h-36";
+
   if (kind === "wallet") {
     return (
-      <div className="mt-7 h-28 border border-[#d6a23e]/28 bg-gradient-to-br from-[#fffaf0] to-[#f4e4bd] p-4">
-        <div className="h-full border border-[#d68d19]/38 bg-white/70 p-3">
+      <div
+        className={`relative mt-7 ${heightClass} overflow-hidden rounded-[6px] border border-[#d99a2b]/24 bg-gradient-to-br from-[#fffaf2] to-[#f4e4bd] p-4`}
+      >
+        <div className="absolute inset-x-0 top-0 h-px animate-[mockupScan_4.8s_ease-in-out_infinite] bg-gradient-to-r from-transparent via-[#d99a2b]/70 to-transparent" />
+        <div className="h-full rounded-[4px] border border-[#d99a2b]/30 bg-white/78 p-3 shadow-[inset_0_1px_18px_rgba(217,154,43,0.08)]">
           <div className="flex items-center justify-between">
-            <Fingerprint className="h-5 w-5 text-[#d68d19]" strokeWidth={1.35} />
-            <span className="bg-[#123126] px-2 py-1 text-[10px] font-bold uppercase text-[#a8ffd1]">
+            <div className="flex items-center gap-2">
+              {layer.logo ? (
+                <Image
+                  src={layer.logo}
+                  alt={layer.logoAlt ?? `${layer.name} logo`}
+                  width={22}
+                  height={22}
+                  className="h-6 w-6 rounded-full object-cover"
+                />
+              ) : (
+                <Fingerprint className="h-5 w-5 text-[#d99a2b]" strokeWidth={1.35} />
+              )}
+              <Fingerprint className="h-4 w-4 text-[#d99a2b]" strokeWidth={1.35} />
+            </div>
+            <span className="rounded-full bg-[#123126] px-2 py-1 text-[10px] font-bold uppercase text-[#a8ffd1]">
               KYC
             </span>
           </div>
-          <div className="mt-4 h-1.5 w-3/4 bg-[#d68d19]/32" />
-          <div className="mt-2 h-1.5 w-1/2 bg-[#17202b]/16" />
+          <div className="mt-4 h-1.5 w-3/4 overflow-hidden rounded-full bg-[#d99a2b]/18">
+            <div className="h-full w-3/5 animate-[mockupFill_3.8s_ease-in-out_infinite] rounded-full bg-[#d99a2b]/50" />
+          </div>
+          <div className="mt-2 h-1.5 w-1/2 rounded-full bg-[#17202b]/14" />
+          <div className="mt-4 grid grid-cols-3 gap-2">
+            {["KYC", "KYB", "SSI"].map((label) => (
+              <span
+                key={label}
+                className="rounded-full border border-[#d99a2b]/18 bg-[#fff6e4] px-2 py-1 text-center text-[9px] font-bold text-[#7a4d0d]"
+              >
+                {label}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     );
@@ -654,19 +1169,49 @@ function StackVisual({ kind }: { kind: StackLayer["visual"] }) {
 
   if (kind === "score") {
     return (
-      <div className="mt-7 h-28 border border-[#d6a23e]/28 bg-[#fffaf0] p-4">
-        <div className="flex h-full items-end gap-2">
-          {[34, 58, 44, 76, 64].map((height, index) => (
-            <div key={height} className="flex-1 bg-[#d68d19]/18">
-              <div
-                className="bg-gradient-to-t from-[#d68d19] to-[#ffd27a]"
-                style={{ height: `${height}%` }}
-              />
-              <span className="sr-only">Signal {index + 1}</span>
+      <div className={`relative mt-7 ${heightClass} overflow-hidden rounded-[6px] border border-[#d99a2b]/24 bg-[#fffaf2] p-4`}>
+        <div className="absolute inset-x-0 top-0 h-px animate-[mockupScan_5.2s_ease-in-out_infinite] bg-gradient-to-r from-transparent via-[#36f5c5]/60 to-transparent" />
+        <div className="grid h-full grid-cols-[1fr_76px] gap-4">
+          <div className="rounded-[5px] border border-[#1b384c]/10 bg-white/72 p-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                {layer.logo ? (
+                  <Image
+                    src={layer.logo}
+                    alt={layer.logoAlt ?? `${layer.name} logo`}
+                    width={24}
+                    height={24}
+                    className="h-6 w-6 rounded-full object-cover"
+                  />
+                ) : null}
+                <span className="text-[10px] font-bold uppercase text-[#7a4d0d]">
+                  Signal set
+                </span>
+              </div>
+              <span className="rounded-full bg-[#0e7c71]/10 px-2 py-1 text-[9px] font-bold uppercase text-[#0e7c71]">
+                Live
+              </span>
             </div>
-          ))}
-          <div className="ml-2 flex h-12 w-12 items-center justify-center rounded-full border border-[#0e7c71]/35 bg-[#0e7c71]/10 text-[11px] font-bold text-[#0e7c71]">
-            ZK
+            <div className="mt-4 flex h-12 items-end gap-1.5">
+              {[34, 58, 44, 76, 64].map((height, index) => (
+                <div key={`${height}-${index}`} className="flex-1 rounded-t bg-[#d99a2b]/12">
+                  <div
+                    className="animate-[mockupBar_3.8s_ease-in-out_infinite] rounded-t bg-gradient-to-t from-[#d99a2b] to-[#ffcc73]"
+                    style={{
+                      height: `${height}%`,
+                      animationDelay: `${index * 0.18}s`,
+                    }}
+                  />
+                  <span className="sr-only">Signal {index + 1}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="relative flex items-center justify-center">
+            <div className="absolute h-16 w-16 animate-[mockupPulse_3.2s_ease-in-out_infinite] rounded-full border border-[#36f5c5]/28 bg-[#36f5c5]/8" />
+            <div className="relative flex h-12 w-12 items-center justify-center rounded-full border border-[#0e7c71]/35 bg-[#0e7c71]/10 text-[11px] font-bold text-[#0e7c71]">
+              ZK
+            </div>
           </div>
         </div>
       </div>
@@ -675,149 +1220,257 @@ function StackVisual({ kind }: { kind: StackLayer["visual"] }) {
 
   if (kind === "market") {
     return (
-      <div className="mt-7 h-28 border border-[#d6a23e]/28 bg-[#fffaf0] p-4">
+      <div className={`relative mt-7 ${heightClass} overflow-hidden rounded-[6px] border border-[#36f5c5]/30 bg-[#06131f] p-4`}>
+        <div className="absolute inset-y-0 left-0 w-px animate-[mockupScanX_5.4s_ease-in-out_infinite] bg-gradient-to-b from-transparent via-[#36f5c5]/80 to-transparent" />
         <div className="grid h-full grid-cols-[0.42fr_1fr] gap-3">
           <div className="space-y-2">
-            <div className="h-5 bg-[#17202b]/10" />
-            <div className="h-5 bg-[#d68d19]/22" />
-            <div className="h-5 bg-[#17202b]/10" />
+            <div className="h-6 rounded-[4px] bg-white/9" />
+            <div className="h-6 rounded-[4px] bg-[#36f5c5]/18" />
+            <div className="h-6 rounded-[4px] bg-white/9" />
+            {featured ? <div className="h-6 rounded-[4px] bg-[#f6b84b]/18" /> : null}
           </div>
-          <div className="border border-[#d68d19]/35 bg-white p-3">
+          <div className="rounded-[5px] border border-[#36f5c5]/25 bg-white/[0.055] p-3">
             <div className="flex items-center justify-between">
-              <Coins className="h-5 w-5 text-[#d68d19]" strokeWidth={1.4} />
-              <CircleCheck className="h-4 w-4 text-[#0e7c71]" strokeWidth={1.7} />
+              <div className="flex items-center gap-2">
+                {layer.logo ? (
+                  <Image
+                    src={layer.logo}
+                    alt={layer.logoAlt ?? `${layer.name} logo`}
+                    width={22}
+                    height={22}
+                    className="h-5 w-5 object-contain opacity-90"
+                  />
+                ) : (
+                  <Coins className="h-5 w-5 text-[#f6b84b]" strokeWidth={1.4} />
+                )}
+                <Coins className="h-4 w-4 text-[#f6b84b]" strokeWidth={1.4} />
+              </div>
+              <CircleCheck className="h-4 w-4 text-[#72ffe0]" strokeWidth={1.7} />
             </div>
-            <div className="mt-4 h-1.5 w-2/3 bg-[#17202b]/14" />
-            <div className="mt-2 h-1.5 w-1/2 bg-[#d68d19]/30" />
+            <div className="mt-4 h-1.5 w-2/3 rounded-full bg-white/18" />
+            <div className="mt-2 h-1.5 w-1/2 rounded-full bg-[#36f5c5]/28" />
+            <div className="mt-5 flex gap-2">
+              <span className="h-6 flex-1 rounded-full border border-[#36f5c5]/20 bg-[#36f5c5]/10" />
+              <span className="h-6 flex-1 rounded-full border border-[#f6b84b]/20 bg-[#f6b84b]/10" />
+            </div>
           </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (kind === "bond") {
-    return (
-      <div className="mt-7 h-28 border border-[#d6a23e]/28 bg-[#fffaf0] p-4">
-        <div className="relative h-full border border-[#d68d19]/36 bg-white p-3">
-          <FileText className="h-6 w-6 text-[#d68d19]" strokeWidth={1.35} />
-          <div className="absolute right-3 top-3 rounded-full border border-[#d68d19]/40 px-2 py-1 text-[10px] font-bold text-[#d68d19]">
-            RULE
-          </div>
-          <div className="mt-5 h-1.5 w-4/5 bg-[#17202b]/14" />
-          <div className="mt-2 h-1.5 w-3/5 bg-[#17202b]/14" />
-          <div className="mt-3 h-px bg-gradient-to-r from-[#d68d19] to-transparent" />
         </div>
       </div>
     );
   }
 
   return (
-    <div className="mt-7 flex h-28 items-center justify-center border border-[#d6a23e]/28 bg-[#07111b] p-4">
-      <div className="relative flex h-20 w-20 items-center justify-center rounded-full border border-[#ffd27a]/70 bg-[#030812] text-[#ffd27a] shadow-[0_0_45px_rgba(255,201,90,0.28)]">
-        <AuroraWordmark tone="light" compact />
-        <span className="absolute -left-8 top-1/2 h-px w-8 bg-[#ffd27a]/55" />
-        <span className="absolute -right-8 top-1/2 h-px w-8 bg-[#ffd27a]/55" />
-        <span className="absolute left-1/2 top-[-24px] h-6 w-px bg-[#ffd27a]/55" />
-        <span className="absolute bottom-[-24px] left-1/2 h-6 w-px bg-[#ffd27a]/55" />
+    <div className={`relative mt-7 ${heightClass} overflow-hidden rounded-[6px] border border-[#d99a2b]/24 bg-[#fffaf2] p-4`}>
+      <div className="absolute inset-x-0 bottom-0 h-px animate-[mockupScan_4.6s_ease-in-out_infinite] bg-gradient-to-r from-transparent via-[#d99a2b]/70 to-transparent" />
+      <div className="relative h-full rounded-[4px] border border-[#d99a2b]/30 bg-white p-3">
+        {layer.logo ? (
+          <Image
+            src={layer.logo}
+            alt={layer.logoAlt ?? `${layer.name} logo`}
+            width={26}
+            height={26}
+            className="h-7 w-7 object-contain"
+          />
+        ) : (
+          <FileText className="h-6 w-6 text-[#d99a2b]" strokeWidth={1.35} />
+        )}
+        <div className="absolute right-3 top-3 rounded-full border border-[#d99a2b]/36 px-2 py-1 text-[10px] font-bold text-[#d99a2b]">
+          CIP-113
+        </div>
+        <div className="mt-5 h-1.5 w-4/5 overflow-hidden rounded-full bg-[#17202b]/14">
+          <div className="h-full w-2/3 animate-[mockupFill_4.4s_ease-in-out_infinite] rounded-full bg-[#d99a2b]/42" />
+        </div>
+        <div className="mt-2 h-1.5 w-3/5 rounded-full bg-[#17202b]/14" />
+        <div className="mt-3 h-px bg-gradient-to-r from-[#d99a2b] to-transparent" />
+        <div className="mt-3 grid grid-cols-2 gap-2">
+          <span className="rounded-full border border-[#d99a2b]/18 bg-[#fff6e4] px-2 py-1 text-[9px] font-bold text-[#7a4d0d]">
+            Holder rule
+          </span>
+          <span className="rounded-full border border-[#0e7c71]/18 bg-[#0e7c71]/8 px-2 py-1 text-[9px] font-bold text-[#0e7c71]">
+            Transfer gate
+          </span>
+        </div>
       </div>
     </div>
   );
 }
 
-function Framework() {
+function SundialPartnership() {
+  const sundialBullets = [
+    "Bitcoin liquidity",
+    "Base infrastructure",
+    "Bitcoin-backed lending foundation",
+    "Liquidity coordination",
+  ];
+
+  const auroraBullets = [
+    "Identity and KYC / KYB credentials",
+    "Credit signals and borrower inputs",
+    "Loan discovery and filtering",
+    "Tokenized credit issuance",
+  ];
+
   return (
-    <section className="bg-white px-5 py-20 sm:px-8 lg:px-12">
+    <section
+      id="partnership"
+      className="bg-[#fffaf2] px-5 py-24 sm:px-8 lg:px-12"
+    >
       <div className="mx-auto max-w-[1180px]">
-        <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div>
-            <h2 className="text-[32px] font-normal leading-tight text-[#101823] sm:text-[42px]">
-              Aurora Capital Markets Framework
+            <SectionLabel>Built in Collaboration</SectionLabel>
+            <h2 className="mt-4 text-[40px] font-normal leading-[1.05] text-[#101823] sm:text-[56px]">
+              Powered by Sundial.
+              <br />
+              <span className="text-[#d99a2b]">Realized through Sundown.</span>
             </h2>
-            <p className="mt-2 text-[14px] text-[#17202b]/62">
-              Granular participation. Compliant by design.
+            <p className="mt-7 max-w-[610px] text-[16px] leading-8 text-[#17202b]/72">
+              Aurora is not competing with Sundial. It extends Sundial&apos;s
+              Bitcoin liquidity infrastructure with the credit market layers
+              institutions need.
+            </p>
+            <p className="mt-5 max-w-[610px] text-[16px] font-semibold leading-8 text-[#101823]">
+              Liquidity from Sundial. Markets through Sundown. Infrastructure
+              by Aurora.
+            </p>
+            <SecondaryButton href="#docs">Read Partnership</SecondaryButton>
+          </div>
+
+          <div className="rounded-[8px] border border-[#1b384c]/14 bg-white p-5 shadow-[0_24px_90px_rgba(33,42,50,0.08)]">
+            <PartnershipDiagram />
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+              <PartnerColumn title="Sundial" bullets={sundialBullets} icon={Sun} />
+              <PartnerColumn title="Aurora" bullets={auroraBullets} icon={Sparkles} />
+            </div>
+            <p className="mt-6 rounded-[6px] border border-[#d99a2b]/22 bg-[#fff6e4] p-4 text-[14px] leading-7 text-[#17202b]/72">
+              Together, Sundial and Aurora enable Bitcoin-backed lending to
+              move from collateral-only borrowing into verified, discoverable,
+              policy-aware institutional credit markets.
             </p>
           </div>
-          <div className="text-[12px] font-semibold uppercase text-[#d68d19]">
-            Layered market map
-          </div>
-        </div>
-        <div className="overflow-hidden border border-[#d6a23e]/34">
-          <div className="grid grid-cols-[0.42fr_1fr] bg-[#101823] text-[12px] font-semibold uppercase text-[#ffd27a]">
-            <div className="border-r border-white/12 px-5 py-4">Layer</div>
-            <div className="px-5 py-4">Purpose</div>
-          </div>
-          {frameworkRows.map(([layer, purpose]) => (
-            <div
-              key={layer}
-              className="grid grid-cols-[0.42fr_1fr] border-t border-[#d6a23e]/22 bg-[#fffaf0] text-[14px] text-[#17202b]"
-            >
-              <div className="border-r border-[#d6a23e]/22 px-5 py-5 font-semibold text-[#101823]">
-                {layer}
-              </div>
-              <div className="px-5 py-5">{purpose}</div>
-            </div>
-          ))}
         </div>
       </div>
     </section>
   );
 }
 
-function BuiltForTrust() {
+function PartnershipDiagram() {
+  const nodes = [
+    ["Sundial", "BTC liquidity"],
+    ["Sundown", "Market layer"],
+    ["Aurora Credit Layers", "Identity, credit, issuance"],
+  ];
+
   return (
-    <section id="use-cases" className="relative overflow-hidden bg-[#fff8eb] px-5 py-20 sm:px-8 lg:px-12">
+    <div className="grid gap-3 md:grid-cols-[1fr_auto_1fr_auto_1.2fr] md:items-center">
+      {nodes.map(([title, copy], index) => (
+        <div key={title} className="contents">
+          <div className="rounded-[8px] border border-[#1b384c]/12 bg-[#fffaf2] p-4 text-center">
+            <p className="text-[13px] font-bold uppercase text-[#101823]">{title}</p>
+            <p className="mt-1 text-[12px] text-[#17202b]/58">{copy}</p>
+          </div>
+          {index < nodes.length - 1 ? (
+            <ArrowRight
+              className="mx-auto hidden h-5 w-5 text-[#d99a2b] md:block"
+              strokeWidth={1.7}
+            />
+          ) : null}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function PartnerColumn({
+  title,
+  bullets,
+  icon: Icon,
+}: {
+  title: string;
+  bullets: string[];
+  icon: IconType;
+}) {
+  return (
+    <div className="rounded-[8px] border border-[#1b384c]/12 bg-[#fffdf8] p-5">
+      <div className="flex items-center gap-3">
+        <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[#d99a2b]/28 bg-[#f6b84b]/10">
+          <Icon className="h-5 w-5 text-[#d99a2b]" strokeWidth={1.45} />
+        </div>
+        <h3 className="text-[20px] font-semibold text-[#101823]">{title}</h3>
+      </div>
+      <ul className="mt-5 space-y-3 text-[14px] leading-6 text-[#17202b]/70">
+        {bullets.map((bullet) => (
+          <li key={bullet} className="flex gap-3">
+            <CircleCheck
+              className="mt-1 h-4 w-4 flex-none text-[#0e7c71]"
+              strokeWidth={1.7}
+            />
+            <span>{bullet}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function BuiltForTrust() {
+  const metrics = [
+    { icon: ShieldCheck, value: "100%", label: "Self-custody aligned" },
+    { icon: ScanLine, value: "0", label: "Repeated KYC loops" },
+    { icon: Layers, value: "4", label: "Composable layers" },
+    { icon: Zap, value: "<30s", label: "Instant market discovery" },
+  ];
+
+  return (
+    <section
+      id="use-cases"
+      className="relative overflow-hidden bg-[#020711] px-5 py-24 text-[#fffaf2] sm:px-8 lg:px-12"
+    >
       <div
         aria-hidden="true"
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse at 84% 36%, rgba(255,206,118,0.32), transparent 42%), linear-gradient(180deg, #fff8eb 0%, #fffdf7 100%)",
+            "linear-gradient(180deg, #020711 0%, #06131f 48%, #020711 100%), radial-gradient(ellipse at 76% 24%, rgba(54,245,197,0.13), transparent 42%)",
         }}
       />
-      <div className="relative mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-2">
-        <div>
-          <SectionLabel>Built for Trust</SectionLabel>
-          <h2 className="mt-4 text-[40px] font-normal leading-[1.05] text-[#101823] sm:text-[55px]">
-            Open Today.
-            <br />
-            Institutional <span className="text-[#d68d19]">Tomorrow.</span>
-          </h2>
-        </div>
-        <div className="max-w-[600px] text-[16px] leading-8 text-[#17202b]/76 lg:pt-11">
-          <p>
-            Aurora uses Cardano settlement, identity credentials, and
-            zero-knowledge systems to bring trust and credit market clarity to
-            on-chain lending.
-          </p>
-          <p className="mt-5 font-semibold text-[#101823]">
-            We do not just move assets. We structure markets.
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Metrics() {
-  const metrics = [
-    { icon: ShieldCheck, value: "100%", label: "Self-custody aligned" },
-    { icon: ScanLine, value: "0", label: "Repeated KYC loops" },
-    { icon: Layers, value: "5", label: "Composable layers" },
-    { icon: Zap, value: "<30s", label: "Instant market discovery" },
-  ];
-
-  return (
-    <section className="bg-[#fffdf7] px-5 pb-20 sm:px-8 lg:px-12">
-      <div className="mx-auto grid max-w-[1180px] gap-px overflow-hidden border border-[#d6a23e]/24 bg-[#d6a23e]/20 md:grid-cols-4">
-        {metrics.map((metric) => (
-          <div key={metric.label} className="flex items-center gap-5 bg-[#fffdf7] px-6 py-8">
-            <metric.icon className="h-10 w-10 flex-none text-[#d68d19]" strokeWidth={1.35} />
-            <div>
-              <div className="text-[38px] font-normal leading-none text-[#101823]">{metric.value}</div>
-              <p className="mt-2 text-[13px] leading-5 text-[#17202b]/68">{metric.label}</p>
-            </div>
+      <div className="relative mx-auto max-w-[1180px]">
+        <div className="grid gap-10 lg:grid-cols-[0.86fr_1.14fr]">
+          <div>
+            <SectionLabel tone="dark">Built for Trust</SectionLabel>
+            <h2 className="mt-4 text-[40px] font-normal leading-[1.05] text-[#fffaf2] sm:text-[56px]">
+              Trustless where possible.
+              <br />
+              <span className="text-[#f6b84b]">Compliant where required.</span>
+            </h2>
           </div>
-        ))}
+          <div className="max-w-[650px] text-[16px] leading-8 text-[#fffaf2]/72 lg:pt-11">
+            <p>
+              Aurora combines Cardano-native settlement, verifiable
+              credentials, privacy-preserving credit signals, and programmable
+              issuance to support institutional Bitcoin-backed lending.
+            </p>
+            <p className="mt-5 font-semibold text-[#fffaf2]">
+              The goal is not to remove institutional requirements. The goal is
+              to make them programmable, verifiable, and compatible with
+              on-chain credit markets.
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-12 grid gap-px overflow-hidden rounded-[8px] border border-white/12 bg-white/12 md:grid-cols-4">
+          {metrics.map((metric) => (
+            <div key={metric.label} className="bg-[#06131f]/90 px-6 py-7">
+              <metric.icon className="h-8 w-8 text-[#f6b84b]" strokeWidth={1.35} />
+              <div className="mt-5 font-serif text-[42px] font-normal leading-none text-[#fffaf2]">
+                {metric.value}
+              </div>
+              <p className="mt-2 text-[13px] leading-5 text-[#fffaf2]/58">
+                {metric.label}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -825,168 +1478,75 @@ function Metrics() {
 
 function BitcoinCreditCTA() {
   return (
-    <section id="cta" className="bg-[#fffdf7] px-5 pb-20 sm:px-8 lg:px-12">
-      <div className="mx-auto max-w-[1180px] overflow-hidden border border-[#d6a23e]/45">
-        <div className="relative min-h-[220px] px-7 py-10 sm:px-10 lg:px-16">
+    <section id="cta" className="bg-[#fffaf2] px-5 py-20 sm:px-8 lg:px-12">
+      <div className="mx-auto max-w-[1180px] overflow-hidden rounded-[8px] border border-[#d99a2b]/34 shadow-[0_24px_90px_rgba(150,99,23,0.12)]">
+        <div className="relative min-h-[250px] px-7 py-10 sm:px-10 lg:px-16">
           <div
             aria-hidden="true"
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(180deg, rgba(255,248,226,0.9) 0%, rgba(255,213,130,0.68) 48%, rgba(176,110,39,0.6) 100%)",
+                "linear-gradient(135deg, rgba(255,250,242,0.96) 0%, rgba(255,215,139,0.72) 48%, rgba(217,154,43,0.58) 100%)",
             }}
           />
           <div
             aria-hidden="true"
-            className="absolute bottom-0 left-0 h-24 w-full bg-[#4d3824]/55"
-            style={{ clipPath: "polygon(0 68%, 12% 48%, 24% 60%, 42% 38%, 58% 56%, 76% 31%, 100% 49%, 100% 100%, 0 100%)" }}
+            className="absolute inset-x-0 bottom-0 h-32 bg-[#2d2215]/58"
+            style={{
+              clipPath:
+                "polygon(0 70%, 16% 55%, 33% 69%, 50% 47%, 70% 62%, 88% 40%, 100% 54%, 100% 100%, 0 100%)",
+            }}
           />
           <div
             aria-hidden="true"
-            className="absolute bottom-0 left-0 h-20 w-full bg-[#1b1712]/76"
-            style={{ clipPath: "polygon(0 75%, 16% 60%, 33% 72%, 50% 50%, 70% 64%, 88% 42%, 100% 54%, 100% 100%, 0 100%)" }}
+            className="absolute bottom-14 right-[14%] h-24 w-24 rounded-full bg-[#fff7d6] shadow-[0_0_90px_rgba(255,208,116,0.88)]"
           />
-          <div
-            aria-hidden="true"
-            className="absolute bottom-10 right-[18%] h-24 w-24 rounded-full bg-[#fff7d6] shadow-[0_0_80px_rgba(255,208,116,0.9)]"
-          />
-          <div className="relative grid gap-8 lg:grid-cols-[0.9fr_0.8fr_0.6fr] lg:items-center">
-            <h2 className="text-[34px] font-normal leading-[1.1] text-[#101823] sm:text-[46px]">
-              Build the Future of <span className="text-[#d68d19]">Bitcoin</span> Credit
+          <div className="relative grid gap-8 lg:grid-cols-[0.9fr_0.86fr_0.54fr] lg:items-center">
+            <h2 className="text-[36px] font-normal leading-[1.08] text-[#101823] sm:text-[50px]">
+              Build the infrastructure for{" "}
+              <span className="text-[#9d6717]">Bitcoin credit.</span>
             </h2>
-            <p className="max-w-[420px] text-[15px] leading-7 text-[#101823]/76">
-              Join institutions, lenders, and builders creating the next
-              generation of on-chain credit markets.
+            <p className="max-w-[460px] text-[15px] leading-7 text-[#101823]/76">
+              Join institutions and developers building verified, discoverable,
+              and compliant Bitcoin-backed lending markets on Cardano.
             </p>
-            <a
-              href="#footer-cta"
-              className="inline-flex min-h-12 items-center justify-center gap-2 justify-self-start bg-gradient-to-b from-[#ffd98a] to-[#f3ae3d] px-7 text-[13px] font-bold uppercase text-[#130b02] shadow-[0_14px_40px_rgba(78,50,13,0.22)] transition hover:translate-y-[-1px]"
-            >
-              Request Access
-              <ArrowRight className="h-4 w-4" strokeWidth={1.8} />
-            </a>
+            <PrimaryButton href="#footer-cta">Request Access</PrimaryButton>
           </div>
         </div>
       </div>
     </section>
-  );
-}
-
-function SundialPartnership() {
-  const bullets = [
-    { icon: Sun, label: "Bitcoin-backed", sub: "lending infrastructure" },
-    { icon: BadgeCheck, label: "Identity and KYC", sub: "with ZK proofs" },
-    { icon: Filter, label: "Loan discovery", sub: "and indexer" },
-    { icon: Blocks, label: "Tokenization", sub: "and bond rails" },
-  ];
-
-  return (
-    <section id="partnership" className="bg-[#fffaf0] px-5 py-20 sm:px-8 lg:px-12">
-      <div className="mx-auto grid max-w-[1180px] gap-10 border-y border-[#d6a23e]/30 py-12 lg:grid-cols-[0.9fr_0.95fr_0.7fr] lg:items-center">
-        <div>
-          <div className="flex items-center gap-4">
-            <span className="text-[30px] font-normal text-[#101823]">Built with</span>
-            <span className="inline-flex items-center gap-2 text-[18px] font-bold uppercase text-[#101823]">
-              <Sun className="h-7 w-7 text-[#f4a51f]" strokeWidth={1.55} />
-              Sundial
-            </span>
-          </div>
-          <p className="mt-7 max-w-[500px] text-[16px] leading-8 text-[#17202b]/76">
-            Aurora is the identity, discovery, and tokenization layer integrated
-            with Sundial&apos;s Bitcoin-backed lending infrastructure.
-          </p>
-          <p className="mt-5 max-w-[500px] text-[15px] leading-7 text-[#17202b]/68">
-            Sundown remains the Fairway &times; Sundial marketplace layer,
-            enabling verified participants to access programmable BTC credit
-            markets without rebuilding core lending rails.
-          </p>
-          <a
-            href="#docs"
-            className="mt-7 inline-flex min-h-11 items-center justify-center gap-2 border border-[#d6a23e]/55 bg-[#fff2d3] px-5 text-[12px] font-bold uppercase text-[#101823] transition hover:bg-[#ffe3a4]"
-          >
-            Read Partnership
-            <ArrowRight className="h-4 w-4" strokeWidth={1.8} />
-          </a>
-        </div>
-        <div className="flex items-center justify-center">
-          <PartnershipRings />
-        </div>
-        <div className="space-y-5">
-          {bullets.map((bullet) => (
-            <div key={bullet.label} className="flex gap-4">
-              <div className="flex h-11 w-11 flex-none items-center justify-center border border-[#d6a23e]/36 bg-white">
-                <bullet.icon className="h-5 w-5 text-[#d68d19]" strokeWidth={1.45} />
-              </div>
-              <div>
-                <h3 className="text-[15px] font-semibold text-[#101823]">{bullet.label}</h3>
-                <p className="text-[13px] leading-5 text-[#17202b]/62">{bullet.sub}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function PartnershipRings() {
-  return (
-    <div className="relative flex h-[270px] w-full max-w-[430px] items-center justify-center">
-      <div className="absolute inset-0 rounded-full border border-[#d6a23e]/18" />
-      <div className="absolute inset-[10%] rounded-full border border-[#d6a23e]/22" />
-      <div className="absolute inset-[20%] rounded-full border border-[#d6a23e]/26" />
-      <div className="relative flex items-center gap-5">
-        <BrandDisk label="Aurora" type="aurora" />
-        <span className="text-[34px] text-[#101823]/72">&times;</span>
-        <BrandDisk label="Sundial" type="sundial" />
-      </div>
-    </div>
-  );
-}
-
-function BrandDisk({ label, type }: { label: string; type: "aurora" | "sundial" }) {
-  return (
-    <div className="flex h-28 w-28 items-center justify-center rounded-full bg-[#05070b] text-center shadow-[0_20px_60px_rgba(0,0,0,0.18)] ring-1 ring-[#d6a23e]/45">
-      {type === "aurora" ? (
-        <div>
-          <AuroraWordmark tone="light" compact />
-        </div>
-      ) : (
-        <div className="flex flex-col items-center gap-2">
-          <Sun className="h-8 w-8 text-[#f4a51f]" strokeWidth={1.6} />
-          <span className="text-[12px] font-bold uppercase text-[#fff8e7]">{label}</span>
-        </div>
-      )}
-    </div>
   );
 }
 
 function FAQ() {
   return (
-    <section id="docs" className="bg-[#fffdf7] px-5 py-20 sm:px-8 lg:px-12">
-      <div className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[0.45fr_0.55fr]">
+    <section id="docs" className="bg-[#fffdf7] px-5 py-24 sm:px-8 lg:px-12">
+      <div className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[0.42fr_0.58fr]">
         <div>
           <SectionLabel>FAQ</SectionLabel>
-          <h2 className="mt-4 text-[38px] font-normal leading-[1.08] text-[#101823] sm:text-[50px]">
+          <h2 className="mt-4 text-[38px] font-normal leading-[1.08] text-[#101823] sm:text-[52px]">
             Frequently Asked Questions
           </h2>
-          <p className="mt-6 max-w-[430px] border-l border-[#d6a23e]/50 pl-5 text-[15px] leading-7 text-[#17202b]/70">
-            Aurora extends Sundial&apos;s lending infrastructure with identity,
-            credit inputs, discovery, issuance, and programmable market
-            orchestration.
+          <p className="mt-6 max-w-[430px] border-l border-[#d99a2b]/48 pl-5 text-[15px] leading-7 text-[#17202b]/70">
+            Aurora is infrastructure for verified, discoverable, tokenized
+            Bitcoin-backed credit markets. It is not an L2, lender, broker, or
+            replacement for Sundial.
           </p>
         </div>
-        <div className="border-t border-[#d6a23e]/28">
+        <div className="overflow-hidden rounded-[8px] border border-[#1b384c]/14 bg-white shadow-[0_20px_70px_rgba(33,42,50,0.06)]">
           {faqItems.map((item) => (
             <details
               key={item.q}
-              className="group border-b border-[#d6a23e]/28 [&_summary::-webkit-details-marker]:hidden"
+              className="group border-b border-[#1b384c]/10 last:border-b-0 [&_summary::-webkit-details-marker]:hidden"
             >
-              <summary className="flex cursor-pointer items-center justify-between gap-6 py-5 text-left text-[16px] font-semibold text-[#101823] transition hover:text-[#d68d19]">
+              <summary className="flex cursor-pointer items-center justify-between gap-6 px-5 py-5 text-left text-[16px] font-semibold text-[#101823] transition hover:text-[#d99a2b]">
                 <span>{item.q}</span>
-                <Plus className="h-5 w-5 flex-none text-[#d68d19] transition group-open:rotate-45" strokeWidth={1.7} />
+                <Plus
+                  className="h-5 w-5 flex-none text-[#d99a2b] transition duration-200 group-open:rotate-45"
+                  strokeWidth={1.7}
+                />
               </summary>
-              <div className="pb-6 pr-10 text-[14px] leading-7 text-[#17202b]/70">
+              <div className="px-5 pb-6 pr-10 text-[14px] leading-7 text-[#17202b]/70">
                 {item.a}
               </div>
             </details>
@@ -1000,12 +1560,15 @@ function FAQ() {
 function FooterCTA() {
   return (
     <section id="footer-cta" className="bg-[#fffdf7] px-5 pb-16 sm:px-8 lg:px-12">
-      <div className="mx-auto grid max-w-[1180px] gap-6 border-t border-[#d6a23e]/28 pt-10 lg:grid-cols-[0.8fr_1fr] lg:items-center">
+      <div className="mx-auto grid max-w-[1180px] gap-6 rounded-[8px] border border-[#1b384c]/14 bg-[#fffaf2] p-6 shadow-[0_18px_60px_rgba(33,42,50,0.06)] lg:grid-cols-[0.78fr_1fr] lg:items-center">
         <div>
-          <h2 className="text-[27px] font-normal leading-tight text-[#101823]">
-            Ready to unlock Bitcoin-backed credit markets?
+          <h2 className="text-[28px] font-normal leading-tight text-[#101823]">
+            Ready to access institutional Bitcoin credit infrastructure?
           </h2>
-          <p className="mt-2 text-[14px] text-[#17202b]/62">Speak with our team.</p>
+          <p className="mt-2 text-[14px] text-[#17202b]/62">
+            Explore the infrastructure for verified borrowers, discoverable loan
+            opportunities, and programmable credit instruments.
+          </p>
         </div>
         <form className="grid gap-3 sm:grid-cols-[1fr_auto]">
           <label className="sr-only" htmlFor="email">
@@ -1015,11 +1578,11 @@ function FooterCTA() {
             id="email"
             type="email"
             placeholder="your@email.com"
-            className="min-h-12 border border-[#d6a23e]/32 bg-white px-4 text-[14px] text-[#101823] outline-none transition placeholder:text-[#17202b]/38 focus:border-[#d68d19]"
+            className="min-h-12 rounded-full border border-[#1b384c]/18 bg-white px-5 text-[14px] text-[#101823] outline-none transition placeholder:text-[#17202b]/38 focus:border-[#d99a2b]"
           />
           <button
             type="submit"
-            className="inline-flex min-h-12 items-center justify-center gap-2 bg-gradient-to-b from-[#ffd98a] to-[#f3ae3d] px-6 text-[13px] font-bold uppercase text-[#130b02] transition hover:translate-y-[-1px]"
+            className="inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-full bg-gradient-to-b from-[#ffd98a] to-[#f3ae3d] px-6 text-[13px] font-bold uppercase text-[#130b02] shadow-[0_14px_40px_rgba(78,50,13,0.16)] transition duration-200 hover:-translate-y-0.5 hover:from-[#ffe7b3] hover:to-[#f6b84b]"
           >
             Request Access
             <ArrowRight className="h-4 w-4" strokeWidth={1.8} />
@@ -1032,25 +1595,34 @@ function FooterCTA() {
 
 function Footer() {
   return (
-    <footer className="border-t border-[#d6a23e]/28 bg-[#fffaf0] px-5 py-12 sm:px-8 lg:px-12">
+    <footer className="border-t border-[#1b384c]/10 bg-[#f8f3eb] px-5 py-12 sm:px-8 lg:px-12">
       <div className="mx-auto grid max-w-[1180px] gap-10 md:grid-cols-12">
         <div className="md:col-span-4">
           <AuroraWordmark href="#top" />
-          <p className="mt-5 max-w-[340px] text-[14px] leading-7 text-[#17202b]/68">
-            The identity, credit, and bond layer for Bitcoin-backed credit
-            markets. Built with Sundial. Secured by Cardano.
+          <p className="mt-5 max-w-[360px] text-[14px] leading-7 text-[#17202b]/68">
+            Aurora is layered credit market infrastructure for Bitcoin-backed
+            lending, built on Cardano and extended through Sundial.
           </p>
           <p className="mt-8 text-[12px] text-[#17202b]/48">
-            Copyright 2026 Fairway Oy. All rights reserved.
+            Copyright 2026 Aurora / Fairway. All rights reserved.
           </p>
         </div>
         <FooterCol
           title="Products"
-          links={["Beam Wallet", "Aurora Score", "Sundown", "Bond Minter", "Docs"]}
+          links={["Polaris Wallet", "Aamu Aurora", "Sundown", "Solstice Aurora", "Docs"]}
         />
-        <FooterCol title="Company" links={["About", "Partnership", "Blog", "Careers"]} />
-        <FooterCol title="Resources" links={["Documentation", "FAQ", "Contact"]} />
-        <FooterCol title="Legal" links={["Privacy", "Terms", "Compliance"]} />
+        <FooterCol
+          title="Company"
+          links={["About", "Partnerships", "Contact", "Blog", "Careers"]}
+        />
+        <FooterCol
+          title="Resources"
+          links={["Documentation", "FAQ", "API", "Use Cases"]}
+        />
+        <FooterCol
+          title="Legal"
+          links={["Privacy", "Terms", "Compliance", "Disclosures"]}
+        />
       </div>
     </footer>
   );
@@ -1059,11 +1631,16 @@ function Footer() {
 function FooterCol({ title, links }: { title: string; links: string[] }) {
   return (
     <div className="md:col-span-2">
-      <h3 className="text-[12px] font-semibold uppercase text-[#17202b]/48">{title}</h3>
+      <h3 className="text-[12px] font-semibold uppercase text-[#17202b]/48">
+        {title}
+      </h3>
       <ul className="mt-5 space-y-3">
         {links.map((link) => (
           <li key={link}>
-            <a href="#" className="text-[14px] text-[#17202b]/70 transition hover:text-[#d68d19]">
+            <a
+              href="#"
+              className="text-[14px] text-[#17202b]/70 transition hover:text-[#d99a2b]"
+            >
               {link}
             </a>
           </li>
@@ -1073,9 +1650,57 @@ function FooterCol({ title, links }: { title: string; links: string[] }) {
   );
 }
 
-function SectionLabel({ children }: { children: ReactNode }) {
+function PrimaryButton({ href, children }: { href: string; children: ReactNode }) {
   return (
-    <p className="text-[12px] font-bold uppercase text-[#d68d19]">
+    <a
+      href={href}
+      className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-gradient-to-b from-[#ffe3a4] via-[#ffc95a] to-[#d99a2b] px-7 text-[13px] font-bold uppercase text-[#130b02] shadow-[0_20px_70px_rgba(246,184,75,0.24)] transition duration-200 hover:-translate-y-0.5 hover:from-[#fff0c9] hover:to-[#f6b84b] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f6b84b] sm:w-auto"
+    >
+      {children}
+      <ArrowRight className="h-4 w-4" strokeWidth={1.8} />
+    </a>
+  );
+}
+
+function SecondaryButton({
+  href,
+  children,
+  tone = "light",
+}: {
+  href: string;
+  children: ReactNode;
+  tone?: "light" | "dark";
+}) {
+  return (
+    <a
+      href={href}
+      className={[
+        "inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border px-5 text-[12px] font-bold uppercase transition duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 sm:w-auto",
+        tone === "dark"
+          ? "border-[#f6b84b]/62 bg-[#020711]/34 text-[#ffcc73] hover:border-[#ffcc73] hover:bg-[#f6b84b]/10 focus-visible:outline-[#ffcc73]"
+          : "mt-7 border-[#d99a2b]/42 bg-white text-[#101823] hover:border-[#d99a2b]/70 hover:bg-[#fff6e4] focus-visible:outline-[#d99a2b]",
+      ].join(" ")}
+    >
+      {children}
+      <ArrowRight className="h-4 w-4" strokeWidth={1.8} />
+    </a>
+  );
+}
+
+function SectionLabel({
+  children,
+  tone = "light",
+}: {
+  children: ReactNode;
+  tone?: "light" | "dark";
+}) {
+  return (
+    <p
+      className={[
+        "text-[12px] font-bold uppercase",
+        tone === "dark" ? "text-[#ffcc73]" : "text-[#d99a2b]",
+      ].join(" ")}
+    >
       {children}
     </p>
   );

@@ -25,15 +25,15 @@ const instrumentSerif = Instrument_Serif({
 export const metadata: Metadata = {
   metadataBase: new URL("https://aurora.fairway.xyz"),
   title: {
-    default: "Aurora - Credit markets for Bitcoin on chain",
+    default: "Aurora - On-chain credit markets for Bitcoin",
     template: "%s - Aurora by Fairway",
   },
   description:
-    "Aurora is Fairway's institutional infrastructure layer for Bitcoin-backed credit markets on-chain: verified counterparties, programmable loan instruments, and privacy-preserving underwriting for the world's hardest asset.",
+    "Aurora is layered credit market infrastructure for Bitcoin-backed lending: identity, credit inputs, market discovery, and tokenized issuance built on Cardano with Sundial.",
   openGraph: {
-    title: "Aurora - Credit markets for Bitcoin on chain",
+    title: "Aurora - On-chain credit markets for Bitcoin",
     description:
-      "The institutional layer for Bitcoin-backed credit markets on-chain. Verified counterparties. Programmable loan instruments. Privacy-preserving underwriting.",
+      "Layered credit market infrastructure for Bitcoin-backed lending. Built on Cardano with Sundial.",
     siteName: "Aurora by Fairway",
     type: "website",
   },

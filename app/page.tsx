@@ -229,16 +229,16 @@ function Nav() {
   ];
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 text-[#fff8e7]">
-      <div className="mx-auto flex w-full max-w-[1320px] items-center justify-between rounded-[8px] border border-white/12 bg-[#020711]/74 px-4 py-3 shadow-[0_18px_80px_rgba(0,0,0,0.32)] backdrop-blur-2xl sm:px-5">
+    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 text-[#07111F]">
+      <div className="mx-auto flex w-full max-w-[1320px] items-center justify-between rounded-[8px] border border-[#0B1724]/8 bg-[#FFF9EF]/72 px-4 py-3 shadow-[0_8px_32px_rgba(27,56,76,0.06)] backdrop-blur-2xl sm:px-5">
         <AuroraWordmark href="#top" tone="light" />
 
-        <nav className="hidden items-center gap-1 text-[12px] font-semibold uppercase text-[#fff8e7]/72 lg:flex">
+        <nav className="hidden items-center gap-1 text-[12px] font-semibold uppercase text-[#0B1724]/70 lg:flex">
           {links.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="rounded-full px-4 py-2.5 transition duration-200 hover:bg-white/7 hover:text-[#ffcc73] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ffcc73]"
+              className="rounded-full px-4 py-2.5 transition duration-200 hover:bg-[#C88A2D]/8 hover:text-[#8A5A1F] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C88A2D]"
             >
               {link.label}
             </a>
@@ -248,28 +248,28 @@ function Nav() {
         <div className="flex items-center gap-2">
           <a
             href="#footer-cta"
-            className="hidden min-h-10 items-center justify-center rounded-full border border-[#f6b84b]/70 bg-[#f6b84b] px-5 text-[12px] font-bold uppercase text-[#130b02] shadow-[0_14px_44px_rgba(246,184,75,0.24)] transition duration-200 hover:border-[#ffcc73] hover:bg-[#ffcc73] sm:inline-flex"
+            className="hidden min-h-10 items-center justify-center rounded-full border border-[#C88A2D]/55 bg-gradient-to-b from-[#FFF3D8] to-[#E6B766] px-5 text-[12px] font-bold uppercase text-[#3F2A0A] shadow-[0_8px_24px_rgba(138,90,31,0.14)] transition duration-200 hover:from-[#FFEDC2] hover:to-[#D9A14F] sm:inline-flex"
           >
             Request Access
           </a>
           <details className="group relative lg:hidden">
-            <summary className="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-full border border-white/14 bg-white/6 text-[#ffcc73] transition hover:border-[#ffcc73]/60 hover:bg-[#ffcc73]/10 [&::-webkit-details-marker]:hidden">
+            <summary className="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-full border border-[#0B1724]/12 bg-white/70 text-[#8A5A1F] transition hover:border-[#C88A2D]/55 hover:bg-[#FFF3D8]/70 [&::-webkit-details-marker]:hidden">
               <span className="sr-only">Open navigation</span>
               <Menu className="h-5 w-5" strokeWidth={1.7} />
             </summary>
-            <div className="absolute right-0 top-12 w-[240px] rounded-[8px] border border-white/12 bg-[#020711]/96 p-2 shadow-[0_24px_80px_rgba(0,0,0,0.42)] backdrop-blur-2xl">
+            <div className="absolute right-0 top-12 w-[240px] rounded-[8px] border border-[#0B1724]/10 bg-[#FFFCF7]/96 p-2 shadow-[0_24px_60px_rgba(27,56,76,0.14)] backdrop-blur-2xl">
               {links.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="block rounded-[6px] px-4 py-3 text-[12px] font-semibold uppercase text-[#fff8e7]/78 transition hover:bg-white/7 hover:text-[#ffcc73]"
+                  className="block rounded-[6px] px-4 py-3 text-[12px] font-semibold uppercase text-[#0B1724]/74 transition hover:bg-[#C88A2D]/8 hover:text-[#8A5A1F]"
                 >
                   {link.label}
                 </a>
               ))}
               <a
                 href="#footer-cta"
-                className="mt-2 flex min-h-10 items-center justify-center rounded-[6px] bg-[#f6b84b] px-4 text-[12px] font-bold uppercase text-[#130b02]"
+                className="mt-2 flex min-h-10 items-center justify-center rounded-[6px] bg-gradient-to-b from-[#FFF3D8] to-[#E6B766] px-4 text-[12px] font-bold uppercase text-[#3F2A0A]"
               >
                 Request Access
               </a>
@@ -294,10 +294,15 @@ function AuroraWordmark({
     <span
       aria-label="Aurora"
       className={[
-        "flex items-center font-serif font-normal leading-none tracking-[0.24em]",
+        "flex items-center bg-clip-text font-serif font-normal leading-none tracking-[0.24em] text-transparent",
         compact ? "text-[16px]" : "text-[21px]",
-        tone === "light" ? "text-[#ffcc73]" : "text-[#0a1421]",
       ].join(" ")}
+      style={{
+        backgroundImage:
+          tone === "light"
+            ? "linear-gradient(135deg, #C88A2D 0%, #E6B766 50%, #8A5A1F 100%)"
+            : "linear-gradient(180deg, #0a1421 0%, #1B384C 100%)",
+      }}
     >
       AURORA
     </span>
@@ -321,34 +326,55 @@ function Hero() {
   return (
     <section
       id="top"
-      className="relative isolate min-h-screen overflow-hidden bg-[#020711] text-[#fff8e7]"
+      className="relative isolate min-h-screen overflow-hidden text-[#07111F]"
+      style={{
+        background:
+          "linear-gradient(180deg, #FFF9EF 0%, #FFFCF7 48%, #F8F1E7 100%)",
+      }}
     >
       <HeroAtmosphere />
       <div className="relative z-10 mx-auto flex min-h-screen max-w-[1320px] flex-col justify-center px-5 pb-12 pt-28 sm:px-8 lg:px-12 lg:pb-16 lg:pt-32">
         <div className="grid items-center gap-10 lg:grid-cols-[0.92fr_0.78fr]">
           <div className="max-w-[760px]">
-            <div className="inline-flex rounded-full border border-[#ffcc73]/24 bg-[#020711]/52 px-4 py-2 text-[11px] font-bold uppercase text-[#ffcc73] shadow-[0_14px_60px_rgba(0,0,0,0.32)] backdrop-blur-xl">
+            <div className="inline-flex rounded-full border border-[#C88A2D]/35 bg-[#FFFCF7]/72 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-[#8A5A1F] shadow-[0_8px_24px_rgba(138,90,31,0.10)] backdrop-blur-xl">
               A layered credit stack for Bitcoin
             </div>
-            <h1 className="mt-8 text-[43px] font-normal leading-[0.98] text-[#fffaf2] drop-shadow-[0_12px_44px_rgba(0,0,0,0.46)] sm:text-[64px] lg:text-[82px]">
+            <h1 className="mt-8 text-[43px] font-normal leading-[0.98] text-[#07111F] sm:text-[64px] lg:text-[82px]">
               <span className="block">Building</span>
-              <span className="block text-[#f6b84b]">on-chain</span>
+              <span
+                className="block bg-clip-text text-transparent"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(135deg, #C88A2D 0%, #E6B766 50%, #8A5A1F 100%)",
+                }}
+              >
+                on-chain
+              </span>
               <span className="block">credit markets</span>
               <span className="block">
-                for <span className="text-[#f6b84b]">Bitcoin.</span>
+                for{" "}
+                <span
+                  className="bg-clip-text text-transparent"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(135deg, #8A5A1F 0%, #C88A2D 50%, #E6B766 100%)",
+                  }}
+                >
+                  Bitcoin.
+                </span>
               </span>
             </h1>
-            <p className="mt-8 max-w-[640px] text-[17px] font-medium leading-8 text-[#fffaf2]/88">
+            <p className="mt-8 max-w-[640px] text-[17px] font-medium leading-8 text-[#07111F]/85">
               Aurora is the identity, credit, and capital markets layer for
               Bitcoin-backed lending infrastructure built with Sundial on
               Cardano.
             </p>
-            <p className="mt-4 max-w-[600px] text-[15px] leading-7 text-[#fffaf2]/68">
+            <p className="mt-4 max-w-[600px] text-[15px] leading-7 text-[#4E5A66]">
               Verified participants. Smarter underwriting. Tokenized credit.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <PrimaryButton href="#stack">Explore Stack</PrimaryButton>
-              <SecondaryButton href="#footer-cta" tone="dark">
+              <SecondaryButton href="#footer-cta" tone="light">
                 Request Access
               </SecondaryButton>
             </div>
@@ -370,40 +396,64 @@ function HeroAtmosphere() {
       aria-hidden="true"
       className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
     >
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-        className="absolute inset-0 h-full w-full object-cover object-center opacity-80"
-      >
-        <source src="https://i.imgur.com/ZCaGc1u.mp4" type="video/mp4" />
-      </video>
-      <div className="absolute inset-0 bg-[#020711]/42" />
-      {/*<div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(90deg, rgba(2,7,17,0.9) 0%, rgba(2,7,17,0.54) 45%, rgba(2,7,17,0.18) 100%), linear-gradient(180deg, rgba(2,7,17,0.22) 0%, rgba(2,7,17,0.08) 46%, rgba(2,7,17,0.88) 100%)",
-        }}
-      />*/}
-      {/*<div
-        className="absolute inset-x-0 bottom-[-18%] h-[46%] opacity-85"
-        style={{
-          background:
-            "radial-gradient(ellipse at 58% 0%, rgba(246,184,75,0.36) 0%, rgba(217,154,43,0.16) 18%, rgba(6,19,31,0.78) 48%, #020711 76%)",
-        }}
-      />*/}
+      {/* Soft golden sunrise glow upper-right */}
       <div
-        className="absolute inset-x-[-10%] top-[12%] h-[42%] opacity-60 animate-[auroraPulse_10s_ease-in-out_infinite]"
+        className="absolute -top-32 right-[-12%] h-[760px] w-[920px] rounded-full opacity-85 blur-3xl"
         style={{
           background:
-            "linear-gradient(104deg, transparent 0%, rgba(54,245,197,0.14) 34%, rgba(114,255,224,0.22) 48%, rgba(246,184,75,0.1) 60%, transparent 78%)",
-          filter: "blur(22px)",
+            "radial-gradient(circle at center, rgba(230,183,102,0.45) 0%, rgba(255,213,138,0.22) 36%, transparent 72%)",
         }}
       />
-      <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-b from-transparent via-[#020711]/62 to-[#020711]" />
+      {/* Cardano blue/teal undertone bottom-left */}
+      <div
+        className="absolute -bottom-24 left-[-8%] h-[520px] w-[720px] rounded-full opacity-55 blur-3xl"
+        style={{
+          background:
+            "radial-gradient(circle at center, rgba(27,56,76,0.18) 0%, rgba(42,174,155,0.10) 38%, transparent 72%)",
+        }}
+      />
+      {/* Subtle aurora beams — almost transparent */}
+      <div
+        className="absolute inset-x-[-8%] top-[10%] h-[42%] opacity-35 animate-[auroraPulse_12s_ease-in-out_infinite]"
+        style={{
+          background:
+            "linear-gradient(104deg, transparent 0%, rgba(230,183,102,0.18) 34%, rgba(42,174,155,0.10) 50%, rgba(230,183,102,0.14) 64%, transparent 80%)",
+          filter: "blur(28px)",
+        }}
+      />
+      {/* Faint horizon arc */}
+      <svg
+        className="absolute inset-x-0 bottom-0 w-full"
+        viewBox="0 0 1440 220"
+        preserveAspectRatio="none"
+      >
+        <defs>
+          <linearGradient id="hero-horizon-grad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#F8F1E7" stopOpacity="0" />
+            <stop offset="1" stopColor="#EFE4D2" stopOpacity="0.62" />
+          </linearGradient>
+        </defs>
+        <path
+          d="M0 220 L0 92 Q 360 0, 720 92 T 1440 92 L 1440 220 Z"
+          fill="url(#hero-horizon-grad)"
+        />
+        <path
+          d="M0 92 Q 360 0, 720 92 T 1440 92"
+          fill="none"
+          stroke="#C88A2D"
+          strokeOpacity="0.22"
+          strokeWidth="1"
+        />
+      </svg>
+      {/* Faint grid texture (very low opacity) */}
+      <div
+        className="absolute inset-0 opacity-[0.035]"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(7,17,31,1) 1px, transparent 1px), linear-gradient(90deg, rgba(7,17,31,1) 1px, transparent 1px)",
+          backgroundSize: "44px 44px",
+        }}
+      />
     </div>
   );
 }
@@ -418,18 +468,20 @@ function HeroMarketPanel() {
 
   return (
     <div className="relative hidden lg:block">
-      <div className="absolute inset-0 translate-x-5 translate-y-5 rounded-[8px] border border-[#36f5c5]/18 bg-[#36f5c5]/5 blur-sm" />
-      <div className="relative rounded-[8px] border border-white/14 bg-[#06131f]/78 p-5 shadow-[0_28px_120px_rgba(0,0,0,0.46)] backdrop-blur-2xl">
-        <div className="flex items-center justify-between border-b border-white/10 pb-4">
+      <div className="absolute inset-0 translate-x-5 translate-y-5 rounded-[8px] border border-[#2AAE9B]/18 bg-[#2AAE9B]/5 blur-sm" />
+      <div
+        className="relative rounded-[8px] border border-[#1B384C]/12 bg-gradient-to-b from-white/95 to-[#FFFCF7]/85 p-5 shadow-[0_18px_60px_rgba(27,56,76,0.10)] backdrop-blur-xl"
+      >
+        <div className="flex items-center justify-between border-b border-[#1B384C]/10 pb-4">
           <div>
-            <p className="text-[11px] font-bold uppercase text-[#72ffe0]">
+            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#2AAE9B]">
               Market object
             </p>
-            <h2 className="mt-2 text-[22px] font-semibold text-[#fffaf2]">
+            <h2 className="mt-2 text-[22px] font-semibold text-[#07111F]">
               UTXO-based credit request
             </h2>
           </div>
-          <div className="rounded-full border border-[#f6b84b]/34 px-3 py-1 text-[11px] font-bold uppercase text-[#ffcc73]">
+          <div className="rounded-full border border-[#C88A2D]/40 bg-[#FFF3D8]/40 px-3 py-1 text-[11px] font-bold uppercase text-[#8A5A1F]">
             Cardano
           </div>
         </div>
@@ -437,28 +489,28 @@ function HeroMarketPanel() {
           {flow.map((item, index) => (
             <div
               key={item.title}
-              className="grid grid-cols-[44px_1fr_auto] items-center gap-4 rounded-[6px] border border-white/10 bg-white/[0.045] px-4 py-3"
+              className="grid grid-cols-[44px_1fr_auto] items-center gap-4 rounded-[6px] border border-[#1B384C]/10 bg-[#FFFCF7]/85 px-4 py-3"
             >
-              <div className="flex h-11 w-11 items-center justify-center rounded-full border border-[#f6b84b]/32 bg-[#f6b84b]/8">
-                <item.icon className="h-5 w-5 text-[#f6b84b]" strokeWidth={1.45} />
+              <div className="flex h-11 w-11 items-center justify-center rounded-full border border-[#C88A2D]/35 bg-[#FFF3D8]/55">
+                <item.icon className="h-5 w-5 text-[#C88A2D]" strokeWidth={1.45} />
               </div>
               <div>
-                <p className="text-[14px] font-semibold text-[#fffaf2]">
+                <p className="text-[14px] font-semibold text-[#07111F]">
                   {item.title}
                 </p>
-                <p className="mt-1 text-[12px] text-[#fffaf2]/52">{item.note}</p>
+                <p className="mt-1 text-[12px] text-[#4E5A66]">{item.note}</p>
               </div>
-              <span className="text-[11px] font-semibold text-[#fffaf2]/38">
+              <span className="text-[11px] font-semibold text-[#4E5A66]/72">
                 0{index + 1}
               </span>
             </div>
           ))}
         </div>
-        <div className="mt-5 rounded-[6px] border border-[#72ffe0]/20 bg-[#72ffe0]/8 p-4">
-          <p className="text-[12px] font-bold uppercase text-[#72ffe0]">
+        <div className="mt-5 rounded-[6px] border border-[#2AAE9B]/24 bg-[#2AAE9B]/6 p-4">
+          <p className="text-[12px] font-bold uppercase tracking-[0.16em] text-[#2AAE9B]">
             Relationship clarity
           </p>
-          <p className="mt-2 text-[14px] leading-6 text-[#fffaf2]/78">
+          <p className="mt-2 text-[14px] leading-6 text-[#0B1724]/78">
             Sundial supplies Bitcoin liquidity. Sundown exposes market
             discovery. Aurora provides identity, credit, discovery, and
             issuance infrastructure.
@@ -485,8 +537,8 @@ function EcosystemStrip() {
   ];
 
   return (
-    <div className="mt-10 max-w-[720px] rounded-[8px] border border-white/12 bg-[#020711]/38 px-4 py-4 backdrop-blur-xl">
-      <p className="mb-4 text-[10px] font-bold uppercase text-[#fffaf2]/46">
+    <div className="mt-10 max-w-[720px] rounded-[8px] border border-[#1B384C]/12 bg-[#FFFCF7]/72 px-4 py-4 shadow-[0_8px_24px_rgba(27,56,76,0.05)] backdrop-blur-xl">
+      <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.18em] text-[#8A5A1F]">
         Trusted Ecosystem
       </p>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
@@ -503,9 +555,9 @@ function EcosystemStrip() {
                 />
               </span>
             ) : item.icon ? (
-              <item.icon className="h-4 w-4 text-[#f6b84b]" strokeWidth={1.5} />
+              <item.icon className="h-4 w-4 text-[#C88A2D]" strokeWidth={1.5} />
             ) : null}
-            <span className="text-[11px] font-bold uppercase text-[#fffaf2]/72">
+            <span className="text-[11px] font-bold uppercase text-[#0B1724]/72">
               {item.label}
             </span>
           </div>
@@ -545,17 +597,17 @@ function HeroInfrastructureRow() {
   ];
 
   return (
-    <div className="mt-10 grid gap-px overflow-hidden rounded-[8px] border border-white/12 bg-white/12 shadow-[0_24px_90px_rgba(0,0,0,0.28)] backdrop-blur-2xl sm:grid-cols-2 lg:grid-cols-5">
+    <div className="mt-10 grid gap-px overflow-hidden rounded-[8px] border border-[#1B384C]/12 bg-[#1B384C]/10 shadow-[0_18px_60px_rgba(27,56,76,0.10)] backdrop-blur-xl sm:grid-cols-2 lg:grid-cols-5">
       {items.map((item) => (
         <div
           key={item.title}
-          className="bg-[#020711]/64 p-5 transition duration-200 hover:bg-[#06131f]/82"
+          className="bg-gradient-to-b from-white/95 to-[#FFFCF7]/85 p-5 transition duration-200 hover:from-[#FFF3D8]/55 hover:to-[#FFFCF7]/95"
         >
-          <item.icon className="h-6 w-6 text-[#f6b84b]" strokeWidth={1.45} />
-          <h3 className="mt-4 text-[14px] font-semibold text-[#fffaf2]">
+          <item.icon className="h-6 w-6 text-[#C88A2D]" strokeWidth={1.45} />
+          <h3 className="mt-4 text-[14px] font-semibold text-[#07111F]">
             {item.title}
           </h3>
-          <p className="mt-2 text-[12px] leading-5 text-[#fffaf2]/58">
+          <p className="mt-2 text-[12px] leading-5 text-[#4E5A66]">
             {item.subtitle}
           </p>
         </div>
@@ -566,29 +618,29 @@ function HeroInfrastructureRow() {
 
 function MarketStats() {
   return (
-    <section className="relative isolate overflow-hidden bg-[#020711] px-5 py-18 text-[#fffaf2] sm:px-8 lg:px-12">
+    <section className="relative isolate overflow-hidden px-5 py-20 text-[#07111F] sm:px-8 lg:px-12">
       <div
         aria-hidden="true"
-        className="absolute inset-0 opacity-70"
+        className="absolute inset-0 opacity-80"
         style={{
           background:
-            "radial-gradient(ellipse at 50% 0%, rgba(246,184,75,0.15), transparent 56%), linear-gradient(180deg, #020711 0%, #06131f 48%, #020711 100%)",
+            "radial-gradient(ellipse at 50% 0%, rgba(230,183,102,0.18), transparent 56%), linear-gradient(180deg, #FFFCF7 0%, #FFF9EF 48%, #F8F1E7 100%)",
         }}
       />
       <div className="relative mx-auto max-w-[1180px]">
-        <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div className="mb-7 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <SectionLabel tone="dark">The Opportunity</SectionLabel>
-            <h2 className="mt-3 text-[28px] font-normal leading-tight text-[#fffaf2] sm:text-[40px]">
+            <SectionLabel>Market Intelligence</SectionLabel>
+            <h2 className="mt-3 text-[28px] font-normal leading-tight text-[#07111F] sm:text-[40px]">
               Bitcoin credit is becoming market infrastructure.
             </h2>
           </div>
-          <p className="max-w-[430px] text-[14px] leading-6 text-[#fffaf2]/58">
+          <p className="max-w-[430px] text-[14px] leading-6 text-[#4E5A66]">
             Collateral demand is visible. Institutional scale depends on
             identity, credit visibility, discovery, and compliant instruments.
           </p>
         </div>
-        <div className="grid overflow-hidden rounded-[8px] border border-[#f6b84b]/22 bg-white/[0.045] shadow-[0_28px_120px_rgba(0,0,0,0.48)] backdrop-blur-2xl md:grid-cols-2">
+        <div className="grid overflow-hidden rounded-[8px] border border-[#C88A2D]/24 bg-gradient-to-b from-white/95 to-[#FFFCF7]/85 shadow-[0_18px_60px_rgba(27,56,76,0.10)] backdrop-blur-md md:grid-cols-2">
           <StatBlock
             label="The Opportunity"
             value="$846T"
@@ -615,12 +667,18 @@ function StatBlock({
   copy: string;
 }) {
   return (
-    <div className="relative min-h-[245px] border-b border-[#f6b84b]/14 px-7 py-9 last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0">
-      <p className="text-[11px] font-bold uppercase text-[#ffcc73]">{label}</p>
-      <div className="mt-5 font-serif text-[58px] font-normal leading-none text-[#f6b84b] sm:text-[76px]">
+    <div className="relative min-h-[245px] border-b border-[#C88A2D]/16 px-7 py-9 last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0">
+      <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#8A5A1F]">{label}</p>
+      <div
+        className="mt-5 bg-clip-text font-serif text-[58px] font-normal leading-none text-transparent sm:text-[76px]"
+        style={{
+          backgroundImage:
+            "linear-gradient(180deg, #C88A2D 0%, #8A5A1F 100%)",
+        }}
+      >
         {value}
       </div>
-      <p className="mt-5 max-w-[420px] text-[15px] leading-7 text-[#fffaf2]/70">
+      <p className="mt-5 max-w-[420px] text-[15px] leading-7 text-[#4E5A66]">
         {copy}
       </p>
     </div>
@@ -650,28 +708,28 @@ function FeatureCards() {
   ];
 
   return (
-    <section className="bg-[#020711] px-5 pb-20 text-[#fffaf2] sm:px-8 lg:px-12">
+    <section className="px-5 pb-20 text-[#07111F] sm:px-8 lg:px-12">
       <div className="mx-auto grid max-w-[1180px] gap-4 md:grid-cols-3">
         {cards.map((card) => (
           <article
             key={card.number}
-            className="group rounded-[8px] border border-white/12 bg-[#06131f]/82 p-7 shadow-[0_24px_80px_rgba(0,0,0,0.28)] transition duration-200 hover:-translate-y-1 hover:border-[#f6b84b]/62 hover:bg-[#081a28]"
+            className="group rounded-[8px] border border-[#1B384C]/12 bg-gradient-to-b from-white/95 to-[#FFFCF7]/82 p-7 shadow-[0_18px_60px_rgba(27,56,76,0.08)] transition duration-200 hover:-translate-y-1 hover:border-[#C88A2D]/40 hover:shadow-[0_24px_80px_rgba(27,56,76,0.12)]"
           >
             <div className="flex items-start justify-between">
-              <span className="text-[13px] font-semibold text-[#f6b84b]">
+              <span className="text-[13px] font-semibold text-[#C88A2D]">
                 {card.number}
               </span>
-              <div className="flex h-11 w-11 items-center justify-center rounded-full border border-[#72ffe0]/24 bg-[#72ffe0]/7 transition group-hover:border-[#f6b84b]/48 group-hover:bg-[#f6b84b]/10">
+              <div className="flex h-11 w-11 items-center justify-center rounded-full border border-[#2AAE9B]/30 bg-[#2AAE9B]/8 transition group-hover:border-[#C88A2D]/50 group-hover:bg-[#FFF3D8]/55">
                 <card.icon
-                  className="h-5 w-5 text-[#72ffe0] transition group-hover:text-[#f6b84b]"
+                  className="h-5 w-5 text-[#2AAE9B] transition group-hover:text-[#C88A2D]"
                   strokeWidth={1.45}
                 />
               </div>
             </div>
-            <h2 className="mt-10 text-[21px] font-semibold leading-7 text-[#fffaf2]">
+            <h2 className="mt-10 text-[21px] font-semibold leading-7 text-[#07111F]">
               {card.title}
             </h2>
-            <p className="mt-4 text-[14px] leading-6 text-[#fffaf2]/66">
+            <p className="mt-4 text-[14px] leading-6 text-[#4E5A66]">
               {card.copy}
             </p>
           </article>
@@ -683,20 +741,27 @@ function FeatureCards() {
 
 function ThesisLine() {
   return (
-    <section className="relative overflow-hidden bg-[#020711] px-5 pb-28 pt-2 text-center sm:px-8 lg:px-12">
-      <p className="relative z-10 mx-auto max-w-[960px] text-[19px] leading-8 text-[#fffaf2]/88 sm:text-[22px]">
-        Institutional <span className="text-[#f6b84b]">BTC</span>. Verified
-        counterparties.{" "}
-        <span className="text-[#f6b84b]">Programmable credit.</span>
+    <section className="relative overflow-hidden px-5 pb-24 pt-4 text-center sm:px-8 lg:px-12">
+      <p className="relative z-10 mx-auto max-w-[960px] text-[19px] leading-8 text-[#07111F]/82 sm:text-[22px]">
+        Institutional{" "}
+        <span
+          className="bg-clip-text font-semibold text-transparent"
+          style={{ backgroundImage: "linear-gradient(180deg, #C88A2D, #8A5A1F)" }}
+        >
+          BTC
+        </span>
+        . Verified counterparties.{" "}
+        <span
+          className="bg-clip-text font-semibold text-transparent"
+          style={{ backgroundImage: "linear-gradient(180deg, #C88A2D, #8A5A1F)" }}
+        >
+          Programmable credit.
+        </span>
       </p>
-      <p className="relative z-10 mx-auto mt-3 max-w-[680px] text-[14px] leading-6 text-[#fffaf2]/54">
+      <p className="relative z-10 mx-auto mt-3 max-w-[680px] text-[14px] leading-6 text-[#4E5A66]">
         Aurora turns Bitcoin collateral into identity-aware, discoverable,
         tokenized credit markets.
       </p>
-      <div
-        aria-hidden="true"
-        className="absolute bottom-[-80px] left-1/2 h-[160px] w-[150vw] -translate-x-1/2 rounded-[50%] border-t border-[#f6b84b]/34 bg-[#fffaf2]"
-      />
     </section>
   );
 }

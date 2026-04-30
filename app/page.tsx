@@ -209,6 +209,7 @@ export default function AuroraPage() {
         <WhyCardano />
         <AuroraStack />
         <SundialPartnership />
+        <BuiltWithSundialPanel />
         <BuiltForTrust />
         <BitcoinCreditCTA />
         <FAQ />
@@ -229,16 +230,16 @@ function Nav() {
   ];
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 text-[#07111F]">
-      <div className="mx-auto flex w-full max-w-[1320px] items-center justify-between rounded-[8px] border border-[#0B1724]/8 bg-[#FFF9EF]/72 px-4 py-3 shadow-[0_8px_32px_rgba(27,56,76,0.06)] backdrop-blur-2xl sm:px-5">
+    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 text-[#fffaf2]">
+      <div className="mx-auto flex w-full max-w-[1320px] items-center justify-between rounded-[8px] border border-white/12 bg-[#020711]/58 px-4 py-3 shadow-[0_18px_70px_rgba(0,0,0,0.28)] backdrop-blur-2xl sm:px-5">
         <AuroraWordmark href="#top" tone="light" />
 
-        <nav className="hidden items-center gap-1 text-[12px] font-semibold uppercase text-[#0B1724]/70 lg:flex">
+        <nav className="hidden items-center gap-1 text-[12px] font-semibold uppercase text-[#fffaf2]/72 lg:flex">
           {links.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="rounded-full px-4 py-2.5 transition duration-200 hover:bg-[#C88A2D]/8 hover:text-[#8A5A1F] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C88A2D]"
+              className="rounded-full px-4 py-2.5 transition duration-200 hover:bg-white/7 hover:text-[#ffcc73] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ffcc73]"
             >
               {link.label}
             </a>
@@ -248,28 +249,28 @@ function Nav() {
         <div className="flex items-center gap-2">
           <a
             href="#footer-cta"
-            className="hidden min-h-10 items-center justify-center rounded-full border border-[#C88A2D]/55 bg-gradient-to-b from-[#FFF3D8] to-[#E6B766] px-5 text-[12px] font-bold uppercase text-[#3F2A0A] shadow-[0_8px_24px_rgba(138,90,31,0.14)] transition duration-200 hover:from-[#FFEDC2] hover:to-[#D9A14F] sm:inline-flex"
+            className="hidden min-h-10 items-center justify-center rounded-full border border-[#C88A2D]/70 bg-gradient-to-b from-[#ffe3a4] via-[#ffc95a] to-[#d99a2b] px-5 text-[12px] font-bold uppercase text-[#130b02] shadow-[0_14px_44px_rgba(246,184,75,0.22)] transition duration-200 hover:from-[#fff0c9] hover:to-[#f6b84b] sm:inline-flex"
           >
             Request Access
           </a>
           <details className="group relative lg:hidden">
-            <summary className="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-full border border-[#0B1724]/12 bg-white/70 text-[#8A5A1F] transition hover:border-[#C88A2D]/55 hover:bg-[#FFF3D8]/70 [&::-webkit-details-marker]:hidden">
+            <summary className="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-full border border-white/14 bg-white/6 text-[#ffcc73] transition hover:border-[#ffcc73]/60 hover:bg-[#ffcc73]/10 [&::-webkit-details-marker]:hidden">
               <span className="sr-only">Open navigation</span>
               <Menu className="h-5 w-5" strokeWidth={1.7} />
             </summary>
-            <div className="absolute right-0 top-12 w-[240px] rounded-[8px] border border-[#0B1724]/10 bg-[#FFFCF7]/96 p-2 shadow-[0_24px_60px_rgba(27,56,76,0.14)] backdrop-blur-2xl">
+            <div className="absolute right-0 top-12 w-[240px] rounded-[8px] border border-white/12 bg-[#020711]/96 p-2 shadow-[0_24px_80px_rgba(0,0,0,0.42)] backdrop-blur-2xl">
               {links.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="block rounded-[6px] px-4 py-3 text-[12px] font-semibold uppercase text-[#0B1724]/74 transition hover:bg-[#C88A2D]/8 hover:text-[#8A5A1F]"
+                  className="block rounded-[6px] px-4 py-3 text-[12px] font-semibold uppercase text-[#fffaf2]/78 transition hover:bg-white/7 hover:text-[#ffcc73]"
                 >
                   {link.label}
                 </a>
               ))}
               <a
                 href="#footer-cta"
-                className="mt-2 flex min-h-10 items-center justify-center rounded-[6px] bg-gradient-to-b from-[#FFF3D8] to-[#E6B766] px-4 text-[12px] font-bold uppercase text-[#3F2A0A]"
+                className="mt-2 flex min-h-10 items-center justify-center rounded-[6px] bg-gradient-to-b from-[#ffe3a4] via-[#ffc95a] to-[#d99a2b] px-4 text-[12px] font-bold uppercase text-[#130b02]"
               >
                 Request Access
               </a>
@@ -326,26 +327,22 @@ function Hero() {
   return (
     <section
       id="top"
-      className="relative isolate min-h-screen overflow-hidden text-[#07111F]"
-      style={{
-        background:
-          "linear-gradient(180deg, #FFF9EF 0%, #FFFCF7 48%, #F8F1E7 100%)",
-      }}
+      className="relative isolate min-h-screen overflow-hidden bg-[#020711] text-[#fffaf2]"
     >
       <HeroAtmosphere />
       <div className="relative z-10 mx-auto flex min-h-screen max-w-[1320px] flex-col justify-center px-5 pb-12 pt-28 sm:px-8 lg:px-12 lg:pb-16 lg:pt-32">
         <div className="grid items-center gap-10 lg:grid-cols-[0.92fr_0.78fr]">
           <div className="max-w-[760px]">
-            <div className="inline-flex rounded-full border border-[#C88A2D]/35 bg-[#FFFCF7]/72 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-[#8A5A1F] shadow-[0_8px_24px_rgba(138,90,31,0.10)] backdrop-blur-xl">
+            <div className="inline-flex rounded-full border border-[#ffcc73]/28 bg-[#020711]/38 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-[#ffcc73] shadow-[0_12px_44px_rgba(0,0,0,0.28)] backdrop-blur-xl">
               A layered credit stack for Bitcoin
             </div>
-            <h1 className="mt-8 text-[43px] font-normal leading-[0.98] text-[#07111F] sm:text-[64px] lg:text-[82px]">
+            <h1 className="mt-8 text-[43px] font-normal leading-[0.98] text-[#fffaf2] drop-shadow-[0_14px_42px_rgba(0,0,0,0.48)] sm:text-[64px] lg:text-[82px]">
               <span className="block">Building</span>
               <span
                 className="block bg-clip-text text-transparent"
                 style={{
                   backgroundImage:
-                    "linear-gradient(135deg, #C88A2D 0%, #E6B766 50%, #8A5A1F 100%)",
+                    "linear-gradient(135deg, #f6b84b 0%, #ffcc73 52%, #d99a2b 100%)",
                 }}
               >
                 on-chain
@@ -357,24 +354,24 @@ function Hero() {
                   className="bg-clip-text text-transparent"
                   style={{
                     backgroundImage:
-                      "linear-gradient(135deg, #8A5A1F 0%, #C88A2D 50%, #E6B766 100%)",
+                    "linear-gradient(135deg, #f6b84b 0%, #ffcc73 52%, #d99a2b 100%)",
                   }}
                 >
                   Bitcoin.
                 </span>
               </span>
             </h1>
-            <p className="mt-8 max-w-[640px] text-[17px] font-medium leading-8 text-[#07111F]/85">
+            <p className="mt-8 max-w-[640px] text-[17px] font-medium leading-8 text-[#fffaf2]/88 drop-shadow-[0_8px_24px_rgba(0,0,0,0.36)]">
               Aurora is the identity, credit, and capital markets layer for
               Bitcoin-backed lending infrastructure built with Sundial on
               Cardano.
             </p>
-            <p className="mt-4 max-w-[600px] text-[15px] leading-7 text-[#4E5A66]">
+            <p className="mt-4 max-w-[600px] text-[15px] leading-7 text-[#fffaf2]/70">
               Verified participants. Smarter underwriting. Tokenized credit.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <PrimaryButton href="#stack">Explore Stack</PrimaryButton>
-              <SecondaryButton href="#footer-cta" tone="light">
+              <SecondaryButton href="#footer-cta" tone="dark">
                 Request Access
               </SecondaryButton>
             </div>
@@ -396,9 +393,19 @@ function HeroAtmosphere() {
       aria-hidden="true"
       className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
     >
+      <Image
+        src="/brand/hero-re.jpg"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-center opacity-100"
+      />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#020711]/92 via-[#020711]/58 to-[#020711]/10" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#020711]/50 via-[#020711]/12 to-[#020711]/82" />
       {/* Soft golden sunrise glow upper-right */}
       <div
-        className="absolute -top-32 right-[-12%] h-[760px] w-[920px] rounded-full opacity-85 blur-3xl"
+        className="absolute -top-32 right-[-12%] h-[760px] w-[920px] rounded-full opacity-35 blur-3xl"
         style={{
           background:
             "radial-gradient(circle at center, rgba(230,183,102,0.45) 0%, rgba(255,213,138,0.22) 36%, transparent 72%)",
@@ -406,7 +413,7 @@ function HeroAtmosphere() {
       />
       {/* Cardano blue/teal undertone bottom-left */}
       <div
-        className="absolute -bottom-24 left-[-8%] h-[520px] w-[720px] rounded-full opacity-55 blur-3xl"
+        className="absolute -bottom-24 left-[-8%] h-[520px] w-[720px] rounded-full opacity-38 blur-3xl"
         style={{
           background:
             "radial-gradient(circle at center, rgba(27,56,76,0.18) 0%, rgba(42,174,155,0.10) 38%, transparent 72%)",
@@ -414,10 +421,10 @@ function HeroAtmosphere() {
       />
       {/* Subtle aurora beams — almost transparent */}
       <div
-        className="absolute inset-x-[-8%] top-[10%] h-[42%] opacity-35 animate-[auroraPulse_12s_ease-in-out_infinite]"
+        className="absolute inset-x-[-8%] top-[10%] h-[42%] opacity-25 animate-[auroraPulse_12s_ease-in-out_infinite]"
         style={{
           background:
-            "linear-gradient(104deg, transparent 0%, rgba(230,183,102,0.18) 34%, rgba(42,174,155,0.10) 50%, rgba(230,183,102,0.14) 64%, transparent 80%)",
+            "linear-gradient(104deg, transparent 0%, rgba(54,245,197,0.14) 34%, rgba(114,255,224,0.22) 50%, rgba(246,184,75,0.10) 64%, transparent 80%)",
           filter: "blur(28px)",
         }}
       />
@@ -429,8 +436,8 @@ function HeroAtmosphere() {
       >
         <defs>
           <linearGradient id="hero-horizon-grad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor="#F8F1E7" stopOpacity="0" />
-            <stop offset="1" stopColor="#EFE4D2" stopOpacity="0.62" />
+            <stop offset="0" stopColor="#020711" stopOpacity="0" />
+            <stop offset="1" stopColor="#020711" stopOpacity="0.72" />
           </linearGradient>
         </defs>
         <path
@@ -440,17 +447,17 @@ function HeroAtmosphere() {
         <path
           d="M0 92 Q 360 0, 720 92 T 1440 92"
           fill="none"
-          stroke="#C88A2D"
-          strokeOpacity="0.22"
+          stroke="#f6b84b"
+          strokeOpacity="0.28"
           strokeWidth="1"
         />
       </svg>
       {/* Faint grid texture (very low opacity) */}
       <div
-        className="absolute inset-0 opacity-[0.035]"
+        className="absolute inset-0 opacity-[0.055]"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(7,17,31,1) 1px, transparent 1px), linear-gradient(90deg, rgba(7,17,31,1) 1px, transparent 1px)",
+            "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
           backgroundSize: "44px 44px",
         }}
       />
@@ -468,20 +475,20 @@ function HeroMarketPanel() {
 
   return (
     <div className="relative hidden lg:block">
-      <div className="absolute inset-0 translate-x-5 translate-y-5 rounded-[8px] border border-[#2AAE9B]/18 bg-[#2AAE9B]/5 blur-sm" />
+      <div className="absolute inset-0 translate-x-5 translate-y-5 rounded-[8px] border border-[#36f5c5]/18 bg-[#36f5c5]/5 blur-sm" />
       <div
-        className="relative rounded-[8px] border border-[#1B384C]/12 bg-gradient-to-b from-white/95 to-[#FFFCF7]/85 p-5 shadow-[0_18px_60px_rgba(27,56,76,0.10)] backdrop-blur-xl"
+        className="relative rounded-[8px] border border-white/14 bg-[#06131f]/78 p-5 shadow-[0_28px_120px_rgba(0,0,0,0.46)] backdrop-blur-2xl"
       >
-        <div className="flex items-center justify-between border-b border-[#1B384C]/10 pb-4">
+        <div className="flex items-center justify-between border-b border-white/10 pb-4">
           <div>
-            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#2AAE9B]">
+            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#72ffe0]">
               Market object
             </p>
-            <h2 className="mt-2 text-[22px] font-semibold text-[#07111F]">
+            <h2 className="mt-2 text-[22px] font-semibold text-[#fffaf2]">
               UTXO-based credit request
             </h2>
           </div>
-          <div className="rounded-full border border-[#C88A2D]/40 bg-[#FFF3D8]/40 px-3 py-1 text-[11px] font-bold uppercase text-[#8A5A1F]">
+          <div className="rounded-full border border-[#f6b84b]/34 px-3 py-1 text-[11px] font-bold uppercase text-[#ffcc73]">
             Cardano
           </div>
         </div>
@@ -489,28 +496,28 @@ function HeroMarketPanel() {
           {flow.map((item, index) => (
             <div
               key={item.title}
-              className="grid grid-cols-[44px_1fr_auto] items-center gap-4 rounded-[6px] border border-[#1B384C]/10 bg-[#FFFCF7]/85 px-4 py-3"
+              className="grid grid-cols-[44px_1fr_auto] items-center gap-4 rounded-[6px] border border-white/10 bg-white/[0.045] px-4 py-3"
             >
-              <div className="flex h-11 w-11 items-center justify-center rounded-full border border-[#C88A2D]/35 bg-[#FFF3D8]/55">
-                <item.icon className="h-5 w-5 text-[#C88A2D]" strokeWidth={1.45} />
+              <div className="flex h-11 w-11 items-center justify-center rounded-full border border-[#f6b84b]/32 bg-[#f6b84b]/8">
+                <item.icon className="h-5 w-5 text-[#f6b84b]" strokeWidth={1.45} />
               </div>
               <div>
-                <p className="text-[14px] font-semibold text-[#07111F]">
+                <p className="text-[14px] font-semibold text-[#fffaf2]">
                   {item.title}
                 </p>
-                <p className="mt-1 text-[12px] text-[#4E5A66]">{item.note}</p>
+                <p className="mt-1 text-[12px] text-[#fffaf2]/52">{item.note}</p>
               </div>
-              <span className="text-[11px] font-semibold text-[#4E5A66]/72">
+              <span className="text-[11px] font-semibold text-[#fffaf2]/38">
                 0{index + 1}
               </span>
             </div>
           ))}
         </div>
-        <div className="mt-5 rounded-[6px] border border-[#2AAE9B]/24 bg-[#2AAE9B]/6 p-4">
-          <p className="text-[12px] font-bold uppercase tracking-[0.16em] text-[#2AAE9B]">
+        <div className="mt-5 rounded-[6px] border border-[#72ffe0]/20 bg-[#72ffe0]/8 p-4">
+          <p className="text-[12px] font-bold uppercase tracking-[0.16em] text-[#72ffe0]">
             Relationship clarity
           </p>
-          <p className="mt-2 text-[14px] leading-6 text-[#0B1724]/78">
+          <p className="mt-2 text-[14px] leading-6 text-[#fffaf2]/78">
             Sundial supplies Bitcoin liquidity. Sundown exposes market
             discovery. Aurora provides identity, credit, discovery, and
             issuance infrastructure.
@@ -537,8 +544,8 @@ function EcosystemStrip() {
   ];
 
   return (
-    <div className="mt-10 max-w-[720px] rounded-[8px] border border-[#1B384C]/12 bg-[#FFFCF7]/72 px-4 py-4 shadow-[0_8px_24px_rgba(27,56,76,0.05)] backdrop-blur-xl">
-      <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.18em] text-[#8A5A1F]">
+    <div className="mt-10 max-w-[720px] rounded-[8px] border border-white/12 bg-[#020711]/38 px-4 py-4 shadow-[0_18px_60px_rgba(0,0,0,0.24)] backdrop-blur-xl">
+      <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.18em] text-[#fffaf2]/46">
         Trusted Ecosystem
       </p>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
@@ -555,9 +562,9 @@ function EcosystemStrip() {
                 />
               </span>
             ) : item.icon ? (
-              <item.icon className="h-4 w-4 text-[#C88A2D]" strokeWidth={1.5} />
+              <item.icon className="h-4 w-4 text-[#f6b84b]" strokeWidth={1.5} />
             ) : null}
-            <span className="text-[11px] font-bold uppercase text-[#0B1724]/72">
+            <span className="text-[11px] font-bold uppercase text-[#fffaf2]/72">
               {item.label}
             </span>
           </div>
@@ -597,17 +604,17 @@ function HeroInfrastructureRow() {
   ];
 
   return (
-    <div className="mt-10 grid gap-px overflow-hidden rounded-[8px] border border-[#1B384C]/12 bg-[#1B384C]/10 shadow-[0_18px_60px_rgba(27,56,76,0.10)] backdrop-blur-xl sm:grid-cols-2 lg:grid-cols-5">
+    <div className="mt-10 grid gap-px overflow-hidden rounded-[8px] border border-white/12 bg-white/12 shadow-[0_24px_90px_rgba(0,0,0,0.28)] backdrop-blur-2xl sm:grid-cols-2 lg:grid-cols-5">
       {items.map((item) => (
         <div
           key={item.title}
-          className="bg-gradient-to-b from-white/95 to-[#FFFCF7]/85 p-5 transition duration-200 hover:from-[#FFF3D8]/55 hover:to-[#FFFCF7]/95"
+          className="bg-[#020711]/64 p-5 transition duration-200 hover:bg-[#06131f]/82"
         >
-          <item.icon className="h-6 w-6 text-[#C88A2D]" strokeWidth={1.45} />
-          <h3 className="mt-4 text-[14px] font-semibold text-[#07111F]">
+          <item.icon className="h-6 w-6 text-[#f6b84b]" strokeWidth={1.45} />
+          <h3 className="mt-4 text-[14px] font-semibold text-[#fffaf2]">
             {item.title}
           </h3>
-          <p className="mt-2 text-[12px] leading-5 text-[#4E5A66]">
+          <p className="mt-2 text-[12px] leading-5 text-[#fffaf2]/58">
             {item.subtitle}
           </p>
         </div>
@@ -1398,14 +1405,28 @@ function SundialPartnership() {
               Liquidity from Sundial. Markets through Sundown. Infrastructure
               by Aurora.
             </p>
-            <SecondaryButton href="#docs">Read Partnership</SecondaryButton>
+            <div className="mt-7">
+              <SecondaryButton href="#docs">Read Partnership</SecondaryButton>
+            </div>
           </div>
 
           <div className="rounded-[8px] border border-[#1b384c]/14 bg-white p-5 shadow-[0_24px_90px_rgba(33,42,50,0.08)]">
             <PartnershipDiagram />
             <div className="mt-6 grid gap-4 md:grid-cols-2">
-              <PartnerColumn title="Sundial" bullets={sundialBullets} icon={Sun} />
-              <PartnerColumn title="Aurora" bullets={auroraBullets} icon={Sparkles} />
+              <PartnerColumn
+                title="Sundial"
+                bullets={sundialBullets}
+                icon={Sun}
+                logo="/brand/sundial.png"
+                logoAlt="Sundial logo"
+              />
+              <PartnerColumn
+                title="Aurora"
+                bullets={auroraBullets}
+                icon={Sparkles}
+                logo="/brand/aurora-logo-sky.png"
+                logoAlt="Aurora logo"
+              />
             </div>
             <p className="mt-6 rounded-[6px] border border-[#d99a2b]/22 bg-[#fff6e4] p-4 text-[14px] leading-7 text-[#17202b]/72">
               Together, Sundial and Aurora enable Bitcoin-backed lending to
@@ -1450,16 +1471,30 @@ function PartnerColumn({
   title,
   bullets,
   icon: Icon,
+  logo,
+  logoAlt,
 }: {
   title: string;
   bullets: string[];
   icon: IconType;
+  logo?: string;
+  logoAlt?: string;
 }) {
   return (
     <div className="rounded-[8px] border border-[#1b384c]/12 bg-[#fffdf8] p-5">
       <div className="flex items-center gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[#d99a2b]/28 bg-[#f6b84b]/10">
-          <Icon className="h-5 w-5 text-[#d99a2b]" strokeWidth={1.45} />
+        <div className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-[#d99a2b]/28 bg-[#f6b84b]/10">
+          {logo ? (
+            <Image
+              src={logo}
+              alt={logoAlt ?? `${title} logo`}
+              width={40}
+              height={40}
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            <Icon className="h-5 w-5 text-[#d99a2b]" strokeWidth={1.45} />
+          )}
         </div>
         <h3 className="text-[20px] font-semibold text-[#101823]">{title}</h3>
       </div>
@@ -1474,6 +1509,151 @@ function PartnerColumn({
           </li>
         ))}
       </ul>
+    </div>
+  );
+}
+
+function BuiltWithSundialPanel() {
+  const rails = [
+    {
+      icon: Sun,
+      label: "Bitcoin-backed lending infrastructure",
+    },
+    {
+      icon: BadgeCheck,
+      label: "Identity & KYC with ZK proofs",
+    },
+    {
+      icon: Filter,
+      label: "Loan discovery and indexer",
+    },
+    {
+      icon: Blocks,
+      label: "Tokenization and bond rails",
+    },
+  ];
+
+  return (
+    <section className="bg-[#fffaf2] px-5 pb-24 sm:px-8 lg:px-12">
+      <div className="relative mx-auto max-w-[1180px] overflow-hidden rounded-[8px] border border-white/12 bg-[#020711] p-6 text-[#fffaf2] shadow-[0_28px_100px_rgba(2,7,17,0.24)] sm:p-8">
+        <div className="grid gap-8 lg:grid-cols-[0.88fr_1.05fr_0.72fr] lg:items-center">
+          <div>
+            <div className="flex flex-wrap items-center gap-3">
+              <h2 className="text-[26px] font-semibold leading-none text-[#fffaf2]">
+                Built with
+              </h2>
+              <span className="inline-flex items-center gap-3">
+                <span className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-full bg-[#f97316]">
+                  <Image
+                    src="/brand/sundial.png"
+                    alt="Sundial logo"
+                    width={30}
+                    height={30}
+                    className="h-7 w-7 object-contain"
+                  />
+                </span>
+                <span className="text-[18px] font-bold uppercase tracking-[0.34em] text-[#fffaf2]">
+                  Sundial
+                </span>
+              </span>
+            </div>
+            <p className="mt-7 max-w-[430px] text-[14px] leading-7 text-[#fffaf2]/72">
+              Aurora is the identity, discovery, and tokenization layer
+              integrated with Sundial&apos;s Bitcoin-backed lending
+              infrastructure.
+            </p>
+            <p className="mt-5 max-w-[430px] text-[14px] leading-7 text-[#fffaf2]/72">
+              Together, we enable verified participants to access programmable
+              BTC credit markets without rebuilding core lending rails.
+            </p>
+            <a
+              href="#docs"
+              className="mt-7 inline-flex min-h-12 items-center justify-center gap-2 rounded-[6px] bg-gradient-to-b from-[#ffe3a4] via-[#ffc95a] to-[#d99a2b] px-6 text-[12px] font-bold uppercase text-[#130b02] shadow-[0_18px_50px_rgba(246,184,75,0.22)] transition duration-200 hover:-translate-y-0.5 hover:from-[#fff0c9] hover:to-[#f6b84b]"
+            >
+              Read Partnership
+              <ArrowRight className="h-4 w-4" strokeWidth={1.8} />
+            </a>
+          </div>
+
+          <SundialOrbitVisual />
+
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
+            {rails.map((rail) => (
+              <div key={rail.label} className="grid grid-cols-[42px_1fr] gap-4">
+                <div className="flex h-11 w-11 items-center justify-center text-[#d99a2b]">
+                  <rail.icon className="h-8 w-8" strokeWidth={1.35} />
+                </div>
+                <p className="text-[14px] font-medium leading-6 text-[#fffaf2]/78">
+                  {rail.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SundialOrbitVisual() {
+  return (
+    <div className="relative mx-auto flex h-[260px] w-full max-w-[430px] items-center justify-center">
+      <div className="absolute inset-0 rounded-full border border-[#d99a2b]/13" />
+      <div className="absolute inset-[11%] rounded-full border border-[#36f5c5]/13" />
+      <div className="absolute inset-[22%] rounded-full border border-[#d99a2b]/16" />
+      <div
+        aria-hidden="true"
+        className="absolute inset-[7%] animate-[mockupPulse_5.8s_ease-in-out_infinite] rounded-full"
+        style={{
+          background:
+            "conic-gradient(from 30deg, transparent 0deg, rgba(54,245,197,0.16) 48deg, transparent 92deg, rgba(217,154,43,0.12) 180deg, transparent 260deg, rgba(54,245,197,0.12) 322deg, transparent 360deg)",
+        }}
+      />
+      <div className="relative flex items-center gap-6">
+        <PartnerLogoDisk label="Aurora" logo="/brand/aurora-logo-sky.png" />
+        <span className="text-[24px] text-[#fffaf2]/72">x</span>
+        <PartnerLogoDisk label="Sundial" logo="/brand/sundial.png" sundial />
+      </div>
+    </div>
+  );
+}
+
+function PartnerLogoDisk({
+  label,
+  logo,
+  sundial = false,
+}: {
+  label: string;
+  logo: string;
+  sundial?: boolean;
+}) {
+  return (
+    <div className="relative flex h-28 w-28 items-center justify-center rounded-full border border-white/12 bg-[#06131f] shadow-[0_18px_60px_rgba(0,0,0,0.34)]">
+      <div className="absolute inset-[-8px] rounded-full border border-[#36f5c5]/18" />
+      {sundial ? (
+        <div className="flex flex-col items-center gap-2">
+          <span className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-[#f97316]">
+            <Image
+              src={logo}
+              alt={`${label} logo`}
+              width={44}
+              height={44}
+              className="h-10 w-10 object-contain"
+            />
+          </span>
+          <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#fffaf2]">
+            {label}
+          </span>
+        </div>
+      ) : (
+        <Image
+          src={logo}
+          alt={`${label} logo`}
+          width={104}
+          height={104}
+          className="h-full w-full rounded-full object-cover"
+        />
+      )}
     </div>
   );
 }
@@ -1740,10 +1920,10 @@ function SecondaryButton({
     <a
       href={href}
       className={[
-        "inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border px-5 text-[12px] font-bold uppercase transition duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 sm:w-auto",
+        "inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full border px-7 text-[13px] font-bold uppercase transition duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 sm:w-auto",
         tone === "dark"
           ? "border-[#f6b84b]/62 bg-[#020711]/34 text-[#ffcc73] hover:border-[#ffcc73] hover:bg-[#f6b84b]/10 focus-visible:outline-[#ffcc73]"
-          : "mt-7 border-[#d99a2b]/42 bg-white text-[#101823] hover:border-[#d99a2b]/70 hover:bg-[#fff6e4] focus-visible:outline-[#d99a2b]",
+          : "border-[#d99a2b]/42 bg-white text-[#101823] hover:border-[#d99a2b]/70 hover:bg-[#fff6e4] focus-visible:outline-[#d99a2b]",
       ].join(" ")}
     >
       {children}

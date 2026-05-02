@@ -330,48 +330,50 @@ function Hero() {
       className="relative isolate flex min-h-screen flex-col overflow-hidden bg-[#020711] text-[#fffaf2]"
     >
       <HeroAtmosphere />
-      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-[1320px] flex-1 flex-col justify-between px-5 pb-10 pt-32 sm:px-8 lg:px-12 lg:pb-14 lg:pt-40">
-        <div className="max-w-[860px] flex-1 flex flex-col justify-center">
-          <div className="inline-flex w-fit items-center gap-2.5 rounded-full border border-[#ffcc73]/30 bg-[#020711]/45 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-[#ffcc73] shadow-[0_12px_44px_rgba(0,0,0,0.32)] backdrop-blur-xl">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#ffcc73] shadow-[0_0_12px_rgba(255,204,115,0.9)]" />
-            A layered credit stack for Bitcoin
-          </div>
-          <h1 className="mt-10 text-[48px] font-normal leading-[1.02] tracking-[-0.02em] text-[#fffaf2] drop-shadow-[0_14px_42px_rgba(0,0,0,0.55)] sm:text-[72px] lg:text-[92px]">
-            <span className="block">Building</span>
-            <span
-              className="block bg-clip-text text-transparent"
-              style={{
-                backgroundImage:
-                  "linear-gradient(135deg, #f6b84b 0%, #ffcc73 52%, #d99a2b 100%)",
-              }}
-            >
-              on-chain
-            </span>
-            <span className="block">credit markets</span>
-            <span className="block">
-              for{" "}
+      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-[1320px] flex-1 flex-col px-5 pb-14 pt-24 sm:px-8 lg:px-12 lg:pb-20 lg:pt-28">
+        <div className="flex flex-1 flex-col justify-center">
+          <div className="max-w-[820px]">
+            <div className="inline-flex w-fit items-center gap-1.5 rounded-full border border-[#ffcc73]/30 bg-[#020711]/45 px-2.5 py-1 text-[9.5px] font-bold uppercase tracking-[0.16em] text-[#ffcc73] shadow-[0_8px_24px_rgba(0,0,0,0.28)] backdrop-blur-xl">
+              <span className="h-1 w-1 rounded-full bg-[#ffcc73] shadow-[0_0_8px_rgba(255,204,115,0.9)]" />
+              A layered credit stack for Bitcoin
+            </div>
+            <h1 className="mt-7 text-[38px] font-normal leading-[1.02] tracking-[-0.02em] text-[#fffaf2] drop-shadow-[0_14px_42px_rgba(0,0,0,0.55)] sm:text-[52px] lg:text-[64px]">
+              <span className="block">Building</span>
               <span
-                className="bg-clip-text text-transparent"
+                className="block bg-clip-text text-transparent"
                 style={{
                   backgroundImage:
                     "linear-gradient(135deg, #f6b84b 0%, #ffcc73 52%, #d99a2b 100%)",
                 }}
               >
-                Bitcoin.
+                on-chain
               </span>
-            </span>
-          </h1>
-          <p className="mt-10 max-w-[600px] text-[17px] font-medium leading-[1.7] text-[#fffaf2]/85 drop-shadow-[0_8px_24px_rgba(0,0,0,0.4)]">
-            Aurora is the identity, credit, and bond layer for Bitcoin-backed
-            lending markets built with Sundial on Cardano, secured with 2K.
-          </p>
-          <div className="mt-10 flex flex-wrap items-center gap-3">
-            <PrimaryButton href="#stack">Explore the Stack</PrimaryButton>
-            <SecondaryButton href="#footer-cta" tone="dark">
-              Request Access
-            </SecondaryButton>
+              <span className="block">credit markets</span>
+              <span className="block">
+                for{" "}
+                <span
+                  className="bg-clip-text text-transparent"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(135deg, #f6b84b 0%, #ffcc73 52%, #d99a2b 100%)",
+                  }}
+                >
+                  Bitcoin.
+                </span>
+              </span>
+            </h1>
+            <p className="mt-6 max-w-[580px] text-[16px] font-medium leading-[1.65] text-[#fffaf2]/85 drop-shadow-[0_8px_24px_rgba(0,0,0,0.4)]">
+              Aurora is the identity, credit, and bond layer for Bitcoin-backed
+              lending markets built with Sundial on Cardano, secured with 2K.
+            </p>
+            <div className="mt-7 flex flex-wrap items-center gap-3">
+              <PrimaryButton href="#stack">Explore the Stack</PrimaryButton>
+              <SecondaryButton href="#footer-cta" tone="dark">
+                Request Access
+              </SecondaryButton>
+            </div>
+            <EcosystemStrip />
           </div>
-          <EcosystemStrip />
         </div>
 
         <HeroInfrastructureRow />
@@ -474,8 +476,8 @@ function EcosystemStrip() {
   ];
 
   return (
-    <div className="mt-10 max-w-[720px] rounded-[8px] border border-white/12 bg-[#020711]/38 px-4 py-4 shadow-[0_18px_60px_rgba(0,0,0,0.24)] backdrop-blur-xl">
-      <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.18em] text-[#fffaf2]/46">
+    <div className="mt-7 max-w-[720px] rounded-[8px] border border-white/12 bg-[#020711]/38 px-4 py-3.5 shadow-[0_18px_60px_rgba(0,0,0,0.24)] backdrop-blur-xl">
+      <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.18em] text-[#fffaf2]/46">
         Trusted Ecosystem
       </p>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
@@ -506,26 +508,40 @@ function EcosystemStrip() {
 
 function HeroInfrastructureRow() {
   const items = [
-    { icon: Coins, title: "Bitcoin Collateral" },
-    { icon: BadgeCheck, title: "Verified Participants" },
-    { icon: BarChart3, title: "Credit Inputs" },
-    { icon: FileCheck2, title: "Tokenized Loans" },
-    { icon: ShieldCheck, title: "2K-Ready Compliance" },
+    { icon: Coins, title: "Bitcoin Collateral", color: "#f6b84b" },
+    { icon: BadgeCheck, title: "Verified Participants", color: "#36f5c5" },
+    { icon: BarChart3, title: "Credit Inputs", color: "#72d0ff" },
+    { icon: FileCheck2, title: "Tokenized Loans", color: "#b690ff" },
+    { icon: ShieldCheck, title: "2K-Ready Compliance", color: "#ffcc73" },
   ];
 
   return (
-    <div className="mt-12 flex flex-wrap items-center gap-2.5 lg:mt-16">
-      {items.map((item) => (
-        <div
-          key={item.title}
-          className="group flex items-center gap-2.5 rounded-full border border-white/14 bg-[#020711]/55 px-4 py-2.5 text-[11px] font-bold uppercase tracking-[0.16em] text-[#fffaf2]/82 shadow-[0_12px_36px_rgba(0,0,0,0.32)] backdrop-blur-xl transition duration-200 hover:border-[#ffcc73]/45 hover:bg-[#020711]/72 hover:text-[#fffaf2]"
-        >
-          <span className="flex h-6 w-6 items-center justify-center rounded-full border border-[#f6b84b]/35 bg-[#f6b84b]/10 transition duration-200 group-hover:border-[#f6b84b]/60 group-hover:bg-[#f6b84b]/18">
-            <item.icon className="h-3.5 w-3.5 text-[#f6b84b]" strokeWidth={1.6} />
-          </span>
-          {item.title}
-        </div>
-      ))}
+    <div className="mt-12 lg:mt-16">
+      <div className="grid grid-cols-2 gap-y-8 sm:grid-cols-3 lg:grid-cols-5 lg:gap-y-0 lg:divide-x lg:divide-white/10">
+        {items.map((item) => (
+          <div
+            key={item.title}
+            className="group flex flex-col items-center gap-3.5 px-4 text-center transition duration-200"
+          >
+            <span
+              className="relative flex h-[68px] w-[68px] items-center justify-center rounded-full border-[1.5px] bg-[#020711]/55 backdrop-blur-xl transition duration-300 group-hover:scale-[1.04]"
+              style={{
+                borderColor: `${item.color}80`,
+                boxShadow: `0 0 28px ${item.color}33, inset 0 0 18px ${item.color}14`,
+              }}
+            >
+              <item.icon
+                className="h-7 w-7"
+                style={{ color: item.color }}
+                strokeWidth={1.55}
+              />
+            </span>
+            <h3 className="text-[11px] font-bold uppercase leading-tight tracking-[0.18em] text-[#fffaf2]/82">
+              {item.title}
+            </h3>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

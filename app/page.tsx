@@ -327,58 +327,51 @@ function Hero() {
   return (
     <section
       id="top"
-      className="relative isolate min-h-screen overflow-hidden bg-[#020711] text-[#fffaf2]"
+      className="relative isolate flex min-h-screen flex-col overflow-hidden bg-[#020711] text-[#fffaf2]"
     >
       <HeroAtmosphere />
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-[1320px] flex-col justify-center px-5 pb-12 pt-28 sm:px-8 lg:px-12 lg:pb-16 lg:pt-32">
-        <div className="grid items-center gap-10 lg:grid-cols-[0.92fr_0.78fr]">
-          <div className="max-w-[760px]">
-            <div className="inline-flex rounded-full border border-[#ffcc73]/28 bg-[#020711]/38 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-[#ffcc73] shadow-[0_12px_44px_rgba(0,0,0,0.28)] backdrop-blur-xl">
-              A layered credit stack for Bitcoin
-            </div>
-            <h1 className="mt-8 text-[43px] font-normal leading-[0.98] text-[#fffaf2] drop-shadow-[0_14px_42px_rgba(0,0,0,0.48)] sm:text-[64px] lg:text-[82px]">
-              <span className="block">Building</span>
+      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-[1320px] flex-1 flex-col justify-between px-5 pb-10 pt-32 sm:px-8 lg:px-12 lg:pb-14 lg:pt-40">
+        <div className="max-w-[860px] flex-1 flex flex-col justify-center">
+          <div className="inline-flex w-fit items-center gap-2.5 rounded-full border border-[#ffcc73]/30 bg-[#020711]/45 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-[#ffcc73] shadow-[0_12px_44px_rgba(0,0,0,0.32)] backdrop-blur-xl">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#ffcc73] shadow-[0_0_12px_rgba(255,204,115,0.9)]" />
+            A layered credit stack for Bitcoin
+          </div>
+          <h1 className="mt-10 text-[48px] font-normal leading-[1.02] tracking-[-0.02em] text-[#fffaf2] drop-shadow-[0_14px_42px_rgba(0,0,0,0.55)] sm:text-[72px] lg:text-[92px]">
+            <span className="block">Building</span>
+            <span
+              className="block bg-clip-text text-transparent"
+              style={{
+                backgroundImage:
+                  "linear-gradient(135deg, #f6b84b 0%, #ffcc73 52%, #d99a2b 100%)",
+              }}
+            >
+              on-chain
+            </span>
+            <span className="block">credit markets</span>
+            <span className="block">
+              for{" "}
               <span
-                className="block bg-clip-text text-transparent"
+                className="bg-clip-text text-transparent"
                 style={{
                   backgroundImage:
                     "linear-gradient(135deg, #f6b84b 0%, #ffcc73 52%, #d99a2b 100%)",
                 }}
               >
-                on-chain
+                Bitcoin.
               </span>
-              <span className="block">credit markets</span>
-              <span className="block">
-                for{" "}
-                <span
-                  className="bg-clip-text text-transparent"
-                  style={{
-                    backgroundImage:
-                    "linear-gradient(135deg, #f6b84b 0%, #ffcc73 52%, #d99a2b 100%)",
-                  }}
-                >
-                  Bitcoin.
-                </span>
-              </span>
-            </h1>
-            <p className="mt-8 max-w-[640px] text-[17px] font-medium leading-8 text-[#fffaf2]/88 drop-shadow-[0_8px_24px_rgba(0,0,0,0.36)]">
-              Aurora is the identity, credit, and capital markets layer for
-              Bitcoin-backed lending infrastructure built with Sundial on
-              Cardano.
-            </p>
-            <p className="mt-4 max-w-[600px] text-[15px] leading-7 text-[#fffaf2]/70">
-              Verified participants. Smarter underwriting. Tokenized credit.
-            </p>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <PrimaryButton href="#stack">Explore Stack</PrimaryButton>
-              <SecondaryButton href="#footer-cta" tone="dark">
-                Request Access
-              </SecondaryButton>
-            </div>
-            <EcosystemStrip />
+            </span>
+          </h1>
+          <p className="mt-10 max-w-[600px] text-[17px] font-medium leading-[1.7] text-[#fffaf2]/85 drop-shadow-[0_8px_24px_rgba(0,0,0,0.4)]">
+            Aurora is the identity, credit, and bond layer for Bitcoin-backed
+            lending markets built with Sundial on Cardano, secured with 2K.
+          </p>
+          <div className="mt-10 flex flex-wrap items-center gap-3">
+            <PrimaryButton href="#stack">Explore the Stack</PrimaryButton>
+            <SecondaryButton href="#footer-cta" tone="dark">
+              Request Access
+            </SecondaryButton>
           </div>
-
-          <HeroMarketPanel />
+          <EcosystemStrip />
         </div>
 
         <HeroInfrastructureRow />
@@ -394,7 +387,7 @@ function HeroAtmosphere() {
       className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
     >
       <Image
-        src="/brand/hero-re.jpg"
+        src="/brand/hero-ls.png"
         alt=""
         fill
         priority
@@ -453,77 +446,14 @@ function HeroAtmosphere() {
         />
       </svg>
       {/* Faint grid texture (very low opacity) */}
-      <div
+      {/* <div
         className="absolute inset-0 opacity-[0.055]"
         style={{
           backgroundImage:
             "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
           backgroundSize: "44px 44px",
         }}
-      />
-    </div>
-  );
-}
-
-function HeroMarketPanel() {
-  const flow = [
-    { icon: Coins, title: "Bitcoin collateral", note: "BTC-backed lending" },
-    { icon: BadgeCheck, title: "Verified access", note: "KYC / KYB proofs" },
-    { icon: Filter, title: "Sundown discovery", note: "Policy-aware markets" },
-    { icon: FileCheck2, title: "Tokenized issuance", note: "CIP-113 instruments" },
-  ];
-
-  return (
-    <div className="relative hidden lg:block">
-      <div className="absolute inset-0 translate-x-5 translate-y-5 rounded-[8px] border border-[#36f5c5]/18 bg-[#36f5c5]/5 blur-sm" />
-      <div
-        className="relative rounded-[8px] border border-white/14 bg-[#06131f]/78 p-5 shadow-[0_28px_120px_rgba(0,0,0,0.46)] backdrop-blur-2xl"
-      >
-        <div className="flex items-center justify-between border-b border-white/10 pb-4">
-          <div>
-            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#72ffe0]">
-              Market object
-            </p>
-            <h2 className="mt-2 text-[22px] font-semibold text-[#fffaf2]">
-              UTXO-based credit request
-            </h2>
-          </div>
-          <div className="rounded-full border border-[#f6b84b]/34 px-3 py-1 text-[11px] font-bold uppercase text-[#ffcc73]">
-            Cardano
-          </div>
-        </div>
-        <div className="mt-5 space-y-3">
-          {flow.map((item, index) => (
-            <div
-              key={item.title}
-              className="grid grid-cols-[44px_1fr_auto] items-center gap-4 rounded-[6px] border border-white/10 bg-white/[0.045] px-4 py-3"
-            >
-              <div className="flex h-11 w-11 items-center justify-center rounded-full border border-[#f6b84b]/32 bg-[#f6b84b]/8">
-                <item.icon className="h-5 w-5 text-[#f6b84b]" strokeWidth={1.45} />
-              </div>
-              <div>
-                <p className="text-[14px] font-semibold text-[#fffaf2]">
-                  {item.title}
-                </p>
-                <p className="mt-1 text-[12px] text-[#fffaf2]/52">{item.note}</p>
-              </div>
-              <span className="text-[11px] font-semibold text-[#fffaf2]/38">
-                0{index + 1}
-              </span>
-            </div>
-          ))}
-        </div>
-        <div className="mt-5 rounded-[6px] border border-[#72ffe0]/20 bg-[#72ffe0]/8 p-4">
-          <p className="text-[12px] font-bold uppercase tracking-[0.16em] text-[#72ffe0]">
-            Relationship clarity
-          </p>
-          <p className="mt-2 text-[14px] leading-6 text-[#fffaf2]/78">
-            Sundial supplies Bitcoin liquidity. Sundown exposes market
-            discovery. Aurora provides identity, credit, discovery, and
-            issuance infrastructure.
-          </p>
-        </div>
-      </div>
+      /> */}
     </div>
   );
 }
@@ -576,47 +506,24 @@ function EcosystemStrip() {
 
 function HeroInfrastructureRow() {
   const items = [
-    {
-      icon: Coins,
-      title: "Bitcoin Collateral",
-      subtitle: "BTC-backed lending markets",
-    },
-    {
-      icon: BadgeCheck,
-      title: "Verified Participants",
-      subtitle: "KYC / KYB through verifiable credentials",
-    },
-    {
-      icon: BarChart3,
-      title: "Credit Inputs",
-      subtitle: "Privacy-preserving borrower signals",
-    },
-    {
-      icon: Filter,
-      title: "Loan Discovery",
-      subtitle: "Filterable credit opportunities",
-    },
-    {
-      icon: FileCheck2,
-      title: "Tokenized Instruments",
-      subtitle: "Programmable credit and bond issuance",
-    },
+    { icon: Coins, title: "Bitcoin Collateral" },
+    { icon: BadgeCheck, title: "Verified Participants" },
+    { icon: BarChart3, title: "Credit Inputs" },
+    { icon: FileCheck2, title: "Tokenized Loans" },
+    { icon: ShieldCheck, title: "2K-Ready Compliance" },
   ];
 
   return (
-    <div className="mt-10 grid gap-px overflow-hidden rounded-[8px] border border-white/12 bg-white/12 shadow-[0_24px_90px_rgba(0,0,0,0.28)] backdrop-blur-2xl sm:grid-cols-2 lg:grid-cols-5">
+    <div className="mt-12 flex flex-wrap items-center gap-2.5 lg:mt-16">
       {items.map((item) => (
         <div
           key={item.title}
-          className="bg-[#020711]/64 p-5 transition duration-200 hover:bg-[#06131f]/82"
+          className="group flex items-center gap-2.5 rounded-full border border-white/14 bg-[#020711]/55 px-4 py-2.5 text-[11px] font-bold uppercase tracking-[0.16em] text-[#fffaf2]/82 shadow-[0_12px_36px_rgba(0,0,0,0.32)] backdrop-blur-xl transition duration-200 hover:border-[#ffcc73]/45 hover:bg-[#020711]/72 hover:text-[#fffaf2]"
         >
-          <item.icon className="h-6 w-6 text-[#f6b84b]" strokeWidth={1.45} />
-          <h3 className="mt-4 text-[14px] font-semibold text-[#fffaf2]">
-            {item.title}
-          </h3>
-          <p className="mt-2 text-[12px] leading-5 text-[#fffaf2]/58">
-            {item.subtitle}
-          </p>
+          <span className="flex h-6 w-6 items-center justify-center rounded-full border border-[#f6b84b]/35 bg-[#f6b84b]/10 transition duration-200 group-hover:border-[#f6b84b]/60 group-hover:bg-[#f6b84b]/18">
+            <item.icon className="h-3.5 w-3.5 text-[#f6b84b]" strokeWidth={1.6} />
+          </span>
+          {item.title}
         </div>
       ))}
     </div>

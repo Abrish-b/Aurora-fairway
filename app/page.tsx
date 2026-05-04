@@ -1,5 +1,6 @@
 import type { ComponentType, ReactNode } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   ArrowRight,
   BadgeCheck,
@@ -93,7 +94,7 @@ const stackLayers: StackLayer[] = [
     ],
     ctas: ["Explore Markets", "Learn More"],
     ctaLinks: ["#partnership", "#docs"],
-    logo: "/brand/sundial.png",
+    logo: "/brand/download.webp",
     logoAlt: "Sundial logo",
     featured: true,
   },
@@ -388,14 +389,16 @@ function HeroAtmosphere() {
       aria-hidden="true"
       className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
     >
-      <Image
-        src="/brand/hero-ls.png"
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover object-center opacity-100"
-      />
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        className="absolute inset-0 h-full w-full object-cover object-center opacity-100"
+      >
+        <source src="/brand/hero.mp4" type="video/mp4" />
+      </video>
       <div className="absolute inset-0 bg-gradient-to-r from-[#020711]/92 via-[#020711]/58 to-[#020711]/10" />
       <div className="absolute inset-0 bg-gradient-to-b from-[#020711]/50 via-[#020711]/12 to-[#020711]/82" />
       {/* Soft golden sunrise glow upper-right */}
@@ -468,7 +471,7 @@ function EcosystemStrip() {
     label: string;
   }[] = [
     { logo: "/brand/fairway-logo.png", alt: "Fairway logo", label: "Fairway" },
-    { logo: "/brand/sundial.png", alt: "Sundial logo", label: "Sundial" },
+    { logo: "/brand/download.webp", alt: "Sundial logo", label: "Sundial" },
     { logo: "/brand/cardano.png", alt: "Cardano logo", label: "Cardano" },
     { logo: "/brand/midnight.png", alt: "Midnight logo", label: "Midnight" },
     { logo: "/brand/veridian.png", alt: "Veridian logo", label: "Veridian" },
@@ -714,7 +717,7 @@ function LayeredCredit() {
     },
     {
       icon: Filter,
-      logo: "/brand/sundial.png",
+      logo: "/brand/download.webp",
       logoAlt: "Sundial logo",
       title: "Sundown",
       copy: "Fairway and Sundial market layer for discoverable and filterable on-chain loans.",
@@ -1340,7 +1343,7 @@ function SundialPartnership() {
                 title="Sundial"
                 bullets={sundialBullets}
                 icon={Sun}
-                logo="/brand/sundial.png"
+                logo="/brand/download.webp"
                 logoAlt="Sundial logo"
               />
               <PartnerColumn
@@ -1468,7 +1471,7 @@ function BuiltWithSundialPanel() {
               <span className="inline-flex items-center gap-3">
                 <span className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-full bg-[#f97316]">
                   <Image
-                    src="/brand/sundial.png"
+                    src="/brand/download.webp"
                     alt="Sundial logo"
                     width={30}
                     height={30}
@@ -1535,7 +1538,7 @@ function SundialOrbitVisual() {
       <div className="relative flex items-center gap-6">
         <PartnerLogoDisk label="Aurora" logo="/brand/aurora-logo-sky.png" />
         <span className="text-[24px] text-[#fffaf2]/72">x</span>
-        <PartnerLogoDisk label="Sundial" logo="/brand/sundial.png" sundial />
+        <PartnerLogoDisk label="Sundial" logo="/brand/download.webp" sundial />
       </div>
     </div>
   );
@@ -1777,7 +1780,13 @@ function Footer() {
         </div>
         <FooterCol
           title="Products"
-          links={["Polaris Wallet", "Aamu Aurora", "Sundown", "Solstice Aurora", "Docs"]}
+          links={[
+            "Polaris Wallet",
+            "Aamu Aurora",
+            { label: "Sundown", href: "/sundown" },
+            "Solstice Aurora",
+            "Docs",
+          ]}
         />
         <FooterCol
           title="Company"
@@ -1796,23 +1805,47 @@ function Footer() {
   );
 }
 
-function FooterCol({ title, links }: { title: string; links: string[] }) {
+function FooterCol({
+  title,
+  links,
+}: {
+  title: string;
+  links: (string | { label: string; href: string })[];
+}) {
+  const className =
+    "text-[14px] text-[#17202b]/70 transition hover:text-[#d99a2b]";
   return (
     <div className="md:col-span-2">
       <h3 className="text-[12px] font-semibold uppercase text-[#17202b]/48">
         {title}
       </h3>
       <ul className="mt-5 space-y-3">
-        {links.map((link) => (
-          <li key={link}>
-            <a
-              href="#"
-              className="text-[14px] text-[#17202b]/70 transition hover:text-[#d99a2b]"
-            >
-              {link}
-            </a>
-          </li>
-        ))}
+        {links.map((link) => {
+          if (typeof link === "string") {
+            return (
+              <li key={link}>
+                <a href="#" className={className}>
+                  {link}
+                </a>
+              </li>
+            );
+          }
+          const isInternal =
+            link.href.startsWith("/") && !link.href.startsWith("//");
+          return (
+            <li key={link.label}>
+              {isInternal ? (
+                <Link href={link.href} className={className}>
+                  {link.label}
+                </Link>
+              ) : (
+                <a href={link.href} className={className}>
+                  {link.label}
+                </a>
+              )}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

@@ -27,6 +27,7 @@ html, body {
 }
 
 html {
+  scroll-behavior: smooth;
   scroll-padding-top: 104px;
 }
 
@@ -170,6 +171,10 @@ body {
 
 .sundown-marquee {
   animation: sundownMarquee 38s linear infinite;
+}
+
+.sundown-marquee:hover {
+  animation-play-state: paused;
 }
 
 /* Traveling dash for SVG flow lines */

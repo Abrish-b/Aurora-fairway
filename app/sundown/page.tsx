@@ -5,7 +5,6 @@ import InteractiveFilters from "./_components/InteractiveFilters";
 import FlowDiagram from "./_components/FlowDiagram";
 import {
   ArrowRight,
-  ArrowDown,
   BadgeCheck,
   Blocks,
   Braces,
@@ -14,7 +13,6 @@ import {
   CircleDot,
   Coins,
   Database,
-  FileCheck2,
   FileText,
   Filter,
   Fingerprint,
@@ -51,7 +49,6 @@ type IconType = ComponentType<{
 
 const GOLD = "#C89B3C";
 const GOLD_HOVER = "#B8892F";
-const GOLD_SOFT = "#f6b84b";
 const GOLD_LIGHT = "#ffd98a";
 const GRAY_BODY = "#6F6F6F";
 const INK = "#0B1620";
@@ -288,12 +285,42 @@ function Hero() {
               </span>
             ))}
           </div>
+
+          <HeroSignalTicker />
         </div>
 
         {/* Right column - Hero dashboard mockup */}
         <HeroMockup />
       </div>
     </section>
+  );
+}
+
+function HeroSignalTicker() {
+  const signals = [
+    "412 indexed loan requests",
+    "Veridian issuer checks",
+    "KYC-ZK proof metadata",
+    "EU jurisdiction filters",
+    "Lender-defined rules",
+    "Base contracts unchanged",
+  ];
+
+  return (
+    <div className="mt-7 max-w-[620px] overflow-hidden rounded-[8px] border border-white/12 bg-white/[0.045] py-3 shadow-[0_16px_50px_rgba(0,0,0,0.22)] backdrop-blur-xl">
+      <p className="sr-only">Market signals: {signals.join(", ")}</p>
+      <div aria-hidden="true" className="sundown-marquee flex w-max gap-2 px-3">
+        {[...signals, ...signals].map((signal, index) => (
+          <span
+            key={`${signal}-${index}`}
+            className="inline-flex items-center gap-2 rounded-full border border-[#ffcc73]/18 bg-[#020711]/42 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-[#fffaf2]/76"
+          >
+            <span className="h-1.5 w-1.5 rounded-full bg-[#36f5c5] shadow-[0_0_10px_rgba(54,245,197,0.72)]" />
+            {signal}
+          </span>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -966,9 +993,9 @@ function Boundaries() {
       {/* Pull quote callout */}
       <div className="mt-8 rounded-[10px] border border-[#C89B3C]/35 bg-white p-6 shadow-[0_14px_44px_rgba(200,155,60,0.10)] sm:p-8">
         <p className="font-serif text-[24px] leading-[1.3] text-[#101823] sm:text-[28px]">
-          <span style={{ color: GOLD }}>"</span>Proofs ride beside the
+          <span style={{ color: GOLD }}>&ldquo;</span>Proofs ride beside the
           transaction. They do not rewrite the lending protocol.
-          <span style={{ color: GOLD }}>"</span>
+          <span style={{ color: GOLD }}>&rdquo;</span>
         </p>
       </div>
     </Section>
@@ -1070,120 +1097,6 @@ function LenderFiltering() {
   );
 }
 
-function _LenderFilteringStaticArchive() {
-  const filters: { label: string; value: string; icon: IconType; active?: boolean }[] = [
-    { label: "Verified only", value: "On", icon: ShieldCheck, active: true },
-  ];
-  type Row = { id: string; amt: string; coll: string; apr: string; ltv: string; dur: string; status: string };
-  const rows: Row[] = [];
-
-  return (
-    <Section id="filtering-archive" tone="bone">
-      <div className="mt-12 overflow-hidden rounded-[14px] border border-[#1B384C]/14 bg-white shadow-[0_22px_70px_rgba(33,42,50,0.07)]">
-        {/* Toolbar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#1B384C]/10 bg-[#fffdf7] px-5 py-3">
-          <div className="flex items-center gap-2">
-            <SlidersHorizontal className="h-4 w-4" strokeWidth={1.7} style={{ color: GOLD }} />
-            <span className="text-[12px] font-bold uppercase tracking-[0.16em] text-[#101823]">
-              Lender Console
-            </span>
-          </div>
-          <div className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#101823]/60">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#2AAE9B]/10 px-2 py-0.5" style={{ color: "#2AAE9B" }}>
-              <span className="h-1.5 w-1.5 rounded-full bg-[#2AAE9B]" />
-              Indexer healthy
-            </span>
-            <span>412 verified loans</span>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr]">
-          {/* Filter rail */}
-          <aside className="border-b border-[#1B384C]/10 bg-[#f8f3eb] p-5 lg:border-b-0 lg:border-r">
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: GRAY_BODY }}>
-              Filters
-            </p>
-            <div className="mt-4 space-y-2">
-              {filters.map((f) => (
-                <div
-                  key={f.label}
-                  className={[
-                    "flex items-center justify-between rounded-[6px] border px-3 py-2",
-                    f.active
-                      ? "border-[#C89B3C]/45 bg-[#fff3d8]"
-                      : "border-[#1B384C]/10 bg-white",
-                  ].join(" ")}
-                >
-                  <div className="flex items-center gap-2">
-                    <f.icon className="h-3.5 w-3.5" strokeWidth={1.7} style={{ color: f.active ? GOLD : "#1B384C" }} />
-                    <span className="text-[12px] font-semibold text-[#101823]">{f.label}</span>
-                  </div>
-                  <span className="text-[11px] font-medium" style={{ color: f.active ? GOLD_HOVER : GRAY_BODY }}>
-                    {f.value}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </aside>
-
-          {/* Results */}
-          <div className="p-5">
-            <div className="flex items-center justify-between">
-              <p className="text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: GRAY_BODY }}>
-                Verified results
-              </p>
-              <span className="text-[11px] font-semibold text-[#101823]/56">
-                Showing 3 of 412
-              </span>
-            </div>
-
-            <div className="mt-4 hidden grid-cols-[80px_1fr_1fr_1fr_1fr_1fr_120px] gap-2 px-3 text-[10px] font-bold uppercase tracking-[0.16em] lg:grid" style={{ color: GRAY_BODY }}>
-              <span>Request</span>
-              <span>Amount</span>
-              <span>Collateral</span>
-              <span>APR</span>
-              <span>LTV</span>
-              <span>Duration</span>
-              <span className="text-right">Eligibility</span>
-            </div>
-
-            <ul className="mt-2 space-y-2">
-              {rows.map((r) => (
-                <li
-                  key={r.id}
-                  className="grid grid-cols-2 gap-x-3 gap-y-2 rounded-[8px] border border-[#1B384C]/10 bg-white p-3 transition hover:border-[#C89B3C]/40 hover:bg-[#fffdf7] lg:grid-cols-[80px_1fr_1fr_1fr_1fr_1fr_120px] lg:items-center"
-                >
-                  <span className="text-[12px] font-bold tracking-[0.06em]" style={{ color: GOLD_HOVER }}>{r.id}</span>
-                  <Cell label="Amount">{r.amt}</Cell>
-                  <Cell label="Collateral">{r.coll}</Cell>
-                  <Cell label="APR">{r.apr}</Cell>
-                  <Cell label="LTV">{r.ltv}</Cell>
-                  <Cell label="Duration">{r.dur}</Cell>
-                  <span className="inline-flex w-fit items-center gap-1 justify-self-start rounded-full bg-[#2AAE9B]/12 px-2 py-1 text-[10px] font-bold uppercase tracking-[0.14em] lg:justify-self-end" style={{ color: "#2AAE9B" }}>
-                    <BadgeCheck className="h-3 w-3" strokeWidth={2} />
-                    {r.status}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </Section>
-  );
-}
-
-function Cell({ label, children }: { label: string; children: ReactNode }) {
-  return (
-    <div className="flex flex-col">
-      <span className="text-[9px] font-bold uppercase tracking-[0.16em] lg:hidden" style={{ color: GRAY_BODY }}>
-        {label}
-      </span>
-      <span className="text-[13px] font-medium text-[#101823]">{children}</span>
-    </div>
-  );
-}
-
 /* ---------------------------------------------------------------- */
 /* Borrower experience                                               */
 /* ---------------------------------------------------------------- */
@@ -1221,7 +1134,7 @@ function BorrowerExperience() {
           <ul className="mt-5 space-y-3 text-[14px] leading-6 text-[#101823]">
             <li className="flex items-start gap-2">
               <CircleCheck className="mt-0.5 h-4 w-4 flex-none" strokeWidth={2} style={{ color: "#2AAE9B" }} />
-              Selective disclosure - reveal only what's needed.
+              Selective disclosure - reveal only what&apos;s needed.
             </li>
             <li className="flex items-start gap-2">
               <CircleCheck className="mt-0.5 h-4 w-4 flex-none" strokeWidth={2} style={{ color: "#2AAE9B" }} />
@@ -1229,7 +1142,7 @@ function BorrowerExperience() {
             </li>
             <li className="flex items-start gap-2">
               <CircleCheck className="mt-0.5 h-4 w-4 flex-none" strokeWidth={2} style={{ color: "#2AAE9B" }} />
-              No raw documents stored on Sundown's side.
+              No raw documents stored on Sundown&apos;s side.
             </li>
           </ul>
         </div>
@@ -1539,7 +1452,7 @@ function FAQ() {
             Quick answers about <em className="italic">scope</em>.
           </h2>
           <p className="mt-4 max-w-[420px] text-[14px] leading-7" style={{ color: GRAY_BODY }}>
-            Sundown's value is in what it does <em>and</em> what it doesn't.
+            Sundown&apos;s value is in what it does <em>and</em> what it doesn&apos;t.
             These are the questions partners ask first.
           </p>
         </div>

@@ -93,7 +93,7 @@ const stackLayers: StackLayer[] = [
       "Built on Cardano extended UTXO, metadata support, and deterministic execution",
     ],
     ctas: ["Explore Markets", "Learn More"],
-    ctaLinks: ["#partnership", "#docs"],
+    ctaLinks: ["/sundown", "#docs"],
     logo: "/brand/download.webp",
     logoAlt: "Sundial logo",
     featured: true,
@@ -1093,22 +1093,37 @@ function StackCard({ layer }: { layer: StackLayer }) {
         </div>
 
         <div className="mt-7 flex flex-wrap gap-3">
-          {layer.ctas.map((cta, index) => (
-            <a
-              key={cta}
-              href={layer.ctaLinks[index] ?? "#docs"}
-              target={layer.ctaLinks[index]?.startsWith("http") ? "_blank" : undefined}
-              rel={layer.ctaLinks[index]?.startsWith("http") ? "noreferrer" : undefined}
-              className={[
+          {layer.ctas.map((cta, index) => {
+            const href = layer.ctaLinks[index] ?? "#docs";
+            const isExternal = href.startsWith("http");
+            const isInternalRoute = href.startsWith("/") && !href.startsWith("//");
+            const className = [
                 "inline-flex min-h-10 items-center justify-center rounded-full px-4 text-[11px] font-bold uppercase transition duration-200",
                 index === 0
                   ? "border border-[#d99a2b]/42 bg-[#101823] text-[#ffcc73] hover:bg-[#17202b]"
                   : "border border-[#1b384c]/14 bg-white text-[#101823] hover:border-[#d99a2b]/44",
-              ].join(" ")}
-            >
-              {cta}
-            </a>
-          ))}
+              ].join(" ");
+
+            if (isInternalRoute) {
+              return (
+                <Link key={cta} href={href} className={className}>
+                  {cta}
+                </Link>
+              );
+            }
+
+            return (
+              <a
+                key={cta}
+                href={href}
+                target={isExternal ? "_blank" : undefined}
+                rel={isExternal ? "noreferrer" : undefined}
+                className={className}
+              >
+                {cta}
+              </a>
+            );
+          })}
         </div>
       </div>
     </article>

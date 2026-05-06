@@ -81,17 +81,20 @@ export default function ExpandableStackCard({ layer }: { layer: StackLayerData }
           {layer.short}
         </p>
 
-        <span
-          className="mt-5 inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-[0.18em]"
-          style={{ color: GOLD_HOVER }}
-        >
-          <Plus
-            className="h-3 w-3 transition duration-200 group-open:rotate-45"
-            strokeWidth={2}
-          />
-          <span className="group-open:hidden">Learn more</span>
-          <span className="hidden group-open:inline">Less</span>
-        </span>
+        <div className="mt-5 flex flex-wrap items-center gap-2">
+          <span
+            className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] transition group-hover:bg-[#fff3d8]"
+            style={{ color: GOLD_HOVER }}
+          >
+            <Plus
+              className="h-3 w-3 transition duration-200 group-open:rotate-45"
+              strokeWidth={2}
+            />
+            <span className="group-open:hidden">Learn more</span>
+            <span className="hidden group-open:inline">Less</span>
+          </span>
+          {layer.cta && <StackCTA cta={layer.cta} />}
+        </div>
       </summary>
 
       <div className="mt-4 border-t border-[#1B384C]/10 pt-4">
@@ -110,7 +113,6 @@ export default function ExpandableStackCard({ layer }: { layer: StackLayerData }
             ))}
           </ul>
         )}
-        {layer.cta && <StackCTA cta={layer.cta} />}
       </div>
     </details>
   );
@@ -119,7 +121,7 @@ export default function ExpandableStackCard({ layer }: { layer: StackLayerData }
 function StackCTA({ cta }: { cta: { label: string; href: string } }) {
   const isExternal = /^https?:\/\//.test(cta.href);
   const className =
-    "mt-4 inline-flex items-center gap-1.5 rounded-full border border-[#C89B3C]/45 bg-white px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-[#101823] transition hover:border-[#C89B3C] hover:bg-[#fff8e8]";
+    "inline-flex items-center gap-1.5 rounded-full bg-gradient-to-b from-[#ffe3a4] via-[#ffc95a] to-[#d99a2b] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-[#130b02] shadow-[0_6px_18px_rgba(246,184,75,0.22)] transition hover:-translate-y-0.5 hover:from-[#fff0c9] hover:to-[#f6b84b]";
   if (isExternal) {
     return (
       <a
@@ -129,14 +131,14 @@ function StackCTA({ cta }: { cta: { label: string; href: string } }) {
         className={className}
       >
         {cta.label}
-        <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.8} />
+        <ArrowRight className="h-3 w-3" strokeWidth={2} />
       </a>
     );
   }
   return (
     <Link href={cta.href} className={className}>
       {cta.label}
-      <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.8} />
+      <ArrowRight className="h-3 w-3" strokeWidth={2} />
     </Link>
   );
 }

@@ -19,7 +19,7 @@ import WhyCardanoCards from "./_components/WhyCardanoCards";
 import ExpandableStackCard, {
   type StackLayerData,
 } from "./_components/ExpandableStackCard";
-import AuroraStackDiagram from "./_components/AuroraStackDiagram";
+import LayerHarmony from "./_components/LayerHarmony";
 
 import AccordionFAQ from "@/components/aurora/AccordionFAQ";
 import TrustLogoWall from "@/components/aurora/TrustLogoWall";
@@ -42,7 +42,8 @@ export default function AuroraPage() {
         />
         <MarketOpportunity />
         <AuroraStackSection />
-        <HowItWorksSection />
+        <LayerHarmonySection />
+        {/* <HowItWorksSection /> */}
         <PartnershipSection />
         <WhyCardanoSection />
         <BuiltByFairwayCard tone="bone" />
@@ -68,7 +69,7 @@ export default function AuroraPage() {
 function Nav() {
   const links = [
     { href: "#stack", label: "Stack" },
-    { href: "#how", label: "How it works" },
+    { href: "#harmony", label: "How it works" },
     { href: "#partnership", label: "Partnership" },
     { href: "#cardano", label: "Cardano" },
     { href: "#faq", label: "FAQ" },
@@ -79,17 +80,26 @@ function Nav() {
       <div className="mx-auto flex w-full max-w-[1320px] items-center justify-between rounded-[8px] border border-white/12 bg-[#020711]/58 px-4 py-3 shadow-[0_18px_70px_rgba(0,0,0,0.28)] backdrop-blur-2xl sm:px-5">
         <Link
           href="#top"
-          className="inline-flex items-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffcc73]"
+          aria-label="Aurora"
+          className="inline-flex items-center gap-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffcc73]"
         >
+          <Image
+            src="/brand/aurora-logo-modified.png"
+            alt=""
+            width={32}
+            height={32}
+            className="h-7 w-7 object-contain"
+            priority
+          />
           <span
-            aria-label="Aurora"
-            className="flex items-center bg-clip-text font-serif text-[21px] font-normal leading-none tracking-[0.24em] text-transparent"
+            aria-hidden
+            className="bg-clip-text font-serif text-[21px] font-bold leading-none tracking-[0.24em] text-transparent"
             style={{
               backgroundImage:
                 "linear-gradient(135deg, #C88A2D 0%, #E6B766 50%, #8A5A1F 100%)",
             }}
           >
-            AURORA
+            URORA
           </span>
         </Link>
 
@@ -222,11 +232,6 @@ type InfraPillar = {
 function HeroInfrastructureRow() {
   const items: InfraPillar[] = [
     {
-      title: "Bitcoin Collateral",
-      logo: "/brand/bitcoin-modified.png",
-      color: "#f6b84b",
-    },
-    {
       title: "Verified Participants",
       product: "Polaris",
       logo: "/brand/polaris-modified.png",
@@ -245,7 +250,7 @@ function HeroInfrastructureRow() {
       color: "#b690ff",
     },
     {
-      title: "2K-Ready Compliance",
+      title: "ZK-Ready Compliance",
       product: "Sundown",
       logo: "/brand/sundown-modified.png",
       color: "#ffcc73",
@@ -254,7 +259,7 @@ function HeroInfrastructureRow() {
 
   return (
     <div className="mt-12 lg:mt-16">
-      <div className="grid grid-cols-2 gap-y-10 sm:grid-cols-3 lg:grid-cols-5 lg:gap-y-0 lg:divide-x lg:divide-white/10">
+      <div className="grid grid-cols-2 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-y-0 lg:divide-x lg:divide-white/10">
         {items.map((item) => (
           <PillarTile key={item.title} pillar={item} />
         ))}
@@ -489,15 +494,39 @@ function AuroraStackSection() {
         copy="Four layers, one orchestration surface. Each layer ships independently and composes into one institutional workflow."
       />
 
-      <div className="mt-12 grid gap-8 lg:grid-cols-[1fr_1.5fr] lg:items-start">
-        <AuroraStackDiagram />
-        <div className="grid gap-4 sm:grid-cols-2">
-          {stackLayers.map((layer) => (
-            <ExpandableStackCard key={layer.number} layer={layer} />
-          ))}
-        </div>
+      <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {stackLayers.map((layer) => (
+          <ExpandableStackCard key={layer.number} layer={layer} />
+        ))}
       </div>
     </Section>
+  );
+}
+
+/* ---------------------------------------------------------------- */
+/* Layer Harmony - product choreography                              */
+/* ---------------------------------------------------------------- */
+
+function LayerHarmonySection() {
+  return (
+    <section
+      id="harmony"
+      className="relative px-5 py-16 sm:px-8 lg:px-12 lg:py-20"
+      style={{
+        background: "linear-gradient(180deg, #FFFCF7 0%, #FFF9EF 100%)",
+      }}
+    >
+      <div className="mx-auto max-w-[1180px]">
+        <SectionHeader
+          eyebrow="System harmony"
+          title="One credit flow. Four coordinated layers."
+          copy="Aurora is not four separate products placed side by side. Each layer produces a signal the next layer can use — identity, credit context, market intent, and issuance logic — creating a coordinated flow for Bitcoin-backed credit markets."
+        />
+        <div className="mt-8">
+          <LayerHarmony />
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -738,7 +767,7 @@ function Footer() {
           title="Aurora"
           links={[
             { label: "Stack", href: "#stack" },
-            { label: "How it works", href: "#how" },
+            { label: "How it works", href: "#harmony" },
             { label: "Partnership", href: "#partnership" },
             { label: "Why Cardano", href: "#cardano" },
             { label: "FAQ", href: "#faq" },

@@ -102,19 +102,28 @@ function Nav() {
       <div className="mx-auto flex w-full max-w-[1320px] items-center justify-between rounded-[8px] border border-white/12 bg-[#020711]/58 px-4 py-3 shadow-[0_18px_70px_rgba(0,0,0,0.28)] backdrop-blur-2xl sm:px-5">
         <Link
           href="/"
-          className="inline-flex items-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffcc73]"
+          aria-label="Aurora Sundown"
+          className="inline-flex items-center gap-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffcc73]"
         >
+          <Image
+            src="/brand/aurora-logo-modified.png"
+            alt=""
+            width={32}
+            height={32}
+            className="h-7 w-7 object-contain"
+            priority
+          />
           <span
-            aria-label="Aurora"
-            className="flex items-center bg-clip-text font-serif text-[21px] font-normal leading-none tracking-[0.24em] text-transparent"
+            aria-hidden
+            className="bg-clip-text font-serif text-[21px] font-bold leading-none tracking-[0.24em] text-transparent"
             style={{
               backgroundImage:
                 "linear-gradient(135deg, #C88A2D 0%, #E6B766 50%, #8A5A1F 100%)",
             }}
           >
-            AURORA
+            URORA
           </span>
-          <span className="ml-3 hidden border-l border-[#ffcc73]/30 pl-3 text-[10px] font-bold uppercase tracking-[0.22em] text-[#ffcc73]/82 sm:inline">
+          <span className="ml-1 hidden border-l border-[#ffcc73]/30 pl-3 text-[10px] font-bold uppercase tracking-[0.22em] text-[#ffcc73]/82 sm:inline">
             / Sundown
           </span>
         </Link>
@@ -181,142 +190,97 @@ function Hero() {
   return (
     <section
       id="top"
-      className="relative isolate overflow-hidden bg-[#020711] pb-24 pt-32 text-[#fffaf2] sm:pt-36 lg:pb-28 lg:pt-40"
+      className="relative isolate flex min-h-screen flex-col overflow-hidden bg-[#020711] text-[#fffaf2]"
     >
       <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
-        <div
-          className="absolute -top-40 right-[-10%] h-[720px] w-[860px] rounded-full opacity-50 blur-3xl"
-          style={{
-            background:
-              "radial-gradient(circle at center, rgba(230,183,102,0.55) 0%, rgba(255,213,138,0.18) 40%, transparent 72%)",
-          }}
+        <Image
+          src="/brand/sundown-hero.png"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
         />
-        <div
-          className="absolute -bottom-40 left-[-12%] h-[640px] w-[760px] rounded-full opacity-32 blur-3xl"
-          style={{
-            background:
-              "radial-gradient(circle at center, rgba(27,56,76,0.32) 0%, rgba(42,174,155,0.10) 38%, transparent 72%)",
-          }}
-        />
-        <div
-          className="absolute inset-0 opacity-[0.06]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
-            backgroundSize: "56px 56px",
-          }}
-        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#020711]/92 via-[#020711]/58 to-[#020711]/10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#020711]/40 via-transparent to-[#020711]/82" />
       </div>
 
-      <div className="relative z-10 mx-auto grid w-full max-w-[1320px] grid-cols-1 items-center gap-12 px-5 sm:px-8 lg:grid-cols-[1.1fr_0.95fr] lg:gap-14 lg:px-12">
-        <div>
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#ffcc73]/30 bg-[#020711]/45 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#ffcc73] backdrop-blur-xl">
-            <span className="h-1 w-1 rounded-full bg-[#ffcc73] shadow-[0_0_8px_rgba(255,204,115,0.9)]" />
-            Aurora Stack / Sundown
-          </div>
+      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-[1320px] flex-1 flex-col px-5 pb-14 pt-32 sm:px-8 lg:px-12 lg:pb-20 lg:pt-36">
+        <div className="flex flex-1 flex-col justify-center">
+          <div className="max-w-[680px]">
+            <div className="inline-flex w-fit items-center gap-1.5 rounded-full border border-[#ffcc73]/30 bg-[#020711]/45 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-[#ffcc73] backdrop-blur-xl">
+              <span className="h-1 w-1 rounded-full bg-[#ffcc73] shadow-[0_0_8px_rgba(255,204,115,0.9)]" />
+              Aurora Stack / Sundown
+            </div>
 
-          <h1 className="mt-7 max-w-[640px] font-serif text-[40px] font-normal leading-[1.04] tracking-[-0.02em] text-[#fffaf2] drop-shadow-[0_14px_42px_rgba(0,0,0,0.55)] sm:text-[54px] lg:text-[62px]">
-            <span className="block">Sundown brings</span>
-            <span
-              className="block bg-clip-text text-transparent"
-              style={{
-                backgroundImage:
-                  "linear-gradient(135deg, #f6b84b 0%, #ffcc73 52%, #d99a2b 100%)",
-              }}
-            >
-              verified discovery
-            </span>
-            <span className="block">to P2P credit markets.</span>
-          </h1>
-
-          <p className="mt-6 max-w-[540px] text-[16px] leading-[1.7] text-[#fffaf2]/80">
-            Built with Sundial, Sundown adds identity proofs, compliance
-            indexing, and lender-side filtering to Cardano P2P lending
-            infrastructure.
-          </p>
-
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            <a
-              href="#architecture"
-              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-gradient-to-b from-[#ffe3a4] via-[#ffc95a] to-[#d99a2b] px-7 text-[13px] font-bold uppercase text-[#130b02] shadow-[0_20px_70px_rgba(246,184,75,0.24)] transition duration-200 hover:-translate-y-0.5 hover:from-[#fff0c9] hover:to-[#f6b84b]"
-            >
-              View Architecture
-              <ArrowRight className="h-4 w-4" strokeWidth={1.8} />
-            </a>
-            <a
-              href="#pilot"
-              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-[#f6b84b]/62 bg-[#020711]/34 px-7 text-[13px] font-bold uppercase text-[#ffcc73] transition duration-200 hover:border-[#ffcc73] hover:bg-[#f6b84b]/10"
-            >
-              Explore Pilot
-              <ArrowRight className="h-4 w-4" strokeWidth={1.8} />
-            </a>
-          </div>
-
-          <div className="mt-9 flex flex-wrap gap-2">
-            {chips.map((chip) => (
+            <h1 className="mt-7 font-serif text-[40px] font-normal leading-[1.04] tracking-[-0.02em] text-[#fffaf2] drop-shadow-[0_14px_42px_rgba(0,0,0,0.6)] sm:text-[54px] lg:text-[62px]">
+              <span className="block">Sundown brings</span>
               <span
-                key={chip.label}
-                className="inline-flex items-center gap-1.5 rounded-full border border-white/14 bg-white/5 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#fffaf2]/82 backdrop-blur"
+                className="block bg-clip-text text-transparent"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(135deg, #f6b84b 0%, #ffcc73 52%, #d99a2b 100%)",
+                }}
               >
-                <chip.icon
-                  className="h-3.5 w-3.5"
-                  strokeWidth={1.6}
-                  style={{ color: "#ffd98a" }}
-                />
-                {chip.label}
+                verified discovery
               </span>
+              <span className="block">to P2P credit markets.</span>
+            </h1>
+
+            <p className="mt-6 max-w-[540px] text-[16px] leading-[1.7] text-[#fffaf2]/85 drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)]">
+              Built with Sundial, Sundown adds identity proofs, compliance
+              indexing, and lender-side filtering to Cardano P2P lending
+              infrastructure.
+            </p>
+
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <a
+                href="#architecture"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-gradient-to-b from-[#ffe3a4] via-[#ffc95a] to-[#d99a2b] px-7 text-[13px] font-bold uppercase text-[#130b02] shadow-[0_20px_70px_rgba(246,184,75,0.24)] transition duration-200 hover:-translate-y-0.5 hover:from-[#fff0c9] hover:to-[#f6b84b]"
+              >
+                View Architecture
+                <ArrowRight className="h-4 w-4" strokeWidth={1.8} />
+              </a>
+              <a
+                href="#pilot"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-[#f6b84b]/62 bg-[#020711]/40 px-7 text-[13px] font-bold uppercase text-[#ffcc73] backdrop-blur transition duration-200 hover:border-[#ffcc73] hover:bg-[#f6b84b]/10"
+              >
+                Explore Pilot
+                <ArrowRight className="h-4 w-4" strokeWidth={1.8} />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-12 lg:mt-16">
+          <div className="grid grid-cols-1 gap-y-8 sm:grid-cols-3 lg:gap-y-0 lg:divide-x lg:divide-white/10">
+            {chips.map((chip) => (
+              <div
+                key={chip.label}
+                className="flex flex-col items-center gap-3 px-4 text-center"
+              >
+                <span
+                  className="relative flex h-[60px] w-[60px] items-center justify-center rounded-full border border-[#ffcc73]/45 bg-[#020711]/60 backdrop-blur-xl"
+                  style={{
+                    boxShadow:
+                      "0 0 24px rgba(255,204,115,0.22), inset 0 0 16px rgba(255,204,115,0.10)",
+                  }}
+                >
+                  <chip.icon
+                    className="h-5 w-5"
+                    strokeWidth={1.65}
+                    style={{ color: "#ffcc73" }}
+                  />
+                </span>
+                <p className="text-[12px] font-semibold uppercase leading-tight tracking-[0.18em] text-[#fffaf2]/88">
+                  {chip.label}
+                </p>
+              </div>
             ))}
           </div>
         </div>
-
-        <HeroVisual />
       </div>
     </section>
-  );
-}
-
-function HeroVisual() {
-  return (
-    <div className="relative">
-      <div className="absolute -inset-6 rounded-[16px] bg-gradient-to-br from-[#f6b84b]/12 via-transparent to-[#36f5c5]/8 blur-2xl" />
-      <div className="relative overflow-hidden rounded-[12px] border border-white/14 bg-gradient-to-b from-[#0a1421]/92 to-[#020711]/96 p-5 shadow-[0_30px_90px_rgba(0,0,0,0.55)] backdrop-blur-xl">
-        <div className="flex items-center justify-between border-b border-white/8 pb-3">
-          <div className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-[#ffcc73]" />
-            <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#ffcc73]">
-              Verified market view
-            </p>
-          </div>
-          <p className="text-[10px] font-mono text-white/50">live</p>
-        </div>
-
-        <ul className="mt-4 space-y-2">
-          {[
-            { id: "lr_8a32f1", v: "₳ 24,500", t: "90d", j: "EU", k: "KYC" },
-            { id: "lr_4f12da", v: "₳ 80,000", t: "180d", j: "EU", k: "KYC" },
-            { id: "lr_2b39e1", v: "₳ 45,000", t: "120d", j: "EU", k: "ACC" },
-          ].map((row) => (
-            <li
-              key={row.id}
-              className="flex items-center justify-between rounded-[8px] border border-white/8 bg-white/[0.04] px-3 py-2.5 text-[12px]"
-            >
-              <span className="font-mono text-white/55">{row.id}</span>
-              <span className="font-semibold text-white">{row.v}</span>
-              <span className="text-white/65">{row.t}</span>
-              <span className="rounded-full border border-[#ffcc73]/40 bg-[#ffcc73]/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[#ffcc73]">
-                {row.k} · {row.j}
-              </span>
-            </li>
-          ))}
-        </ul>
-
-        <div className="mt-4 grid grid-cols-3 gap-2 border-t border-white/8 pt-3 text-[10px] uppercase tracking-[0.16em] text-white/55">
-          <span>Issuer · Veridian</span>
-          <span>Indexer · Fairway</span>
-          <span>Filter · EU only</span>
-        </div>
-      </div>
-    </div>
   );
 }
 

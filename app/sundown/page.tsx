@@ -60,14 +60,14 @@ export default function SundownPage() {
         <CoreFlow />
         <Architecture />
         <LenderFiltering />
-        <Pilot />
+        {/* <Pilot /> */}
         <TrustLogoWall
           tone="white"
           eyebrow="Ecosystem"
           title="Built alongside Cardano-native partners."
           copy="Sundown ships as a Fairway × Sundial collaboration, integrating with Cardano, Midnight, and Veridian-aligned credentials."
         />
-        <BuiltByFairwayCard tone="bone" />
+        {/* <BuiltByFairwayCard tone="bone" /> */}
         <AccordionFAQ
           tone="light"
           eyebrow="FAQ"

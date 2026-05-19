@@ -107,7 +107,7 @@ export default function TrustLogoWall({
               className="mt-4 text-[14px] leading-7"
               style={{ color: GRAY_BODY }}
             >
-              {copy}
+              {/* {copy} */}
             </p>
           )}
         </div>
@@ -118,7 +118,7 @@ export default function TrustLogoWall({
               className="text-[10px] font-bold uppercase tracking-[0.24em]"
               style={{ color: GRAY_BODY }}
             >
-              {partnersLabel}
+              {/* {partnersLabel} */}
             </p>
             <div className="mt-5 grid grid-cols-2 items-center gap-x-8 gap-y-6 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8">
               {partners.map((logo) => (

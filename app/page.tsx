@@ -4,11 +4,9 @@ import Link from "next/link";
 import {
   ArrowRight,
   BarChart3,
-  Coins,
   FileCheck2,
   Filter,
   Menu,
-  ShieldCheck,
   WalletCards,
   type LucideIcon,
 } from "lucide-react";
@@ -16,7 +14,7 @@ import {
 import HowItWorksFlow from "./_components/HowItWorksFlow";
 import PartnershipVisual from "./_components/PartnershipVisual";
 import WhyCardanoCards from "./_components/WhyCardanoCards";
-import ExpandableStackCard, {
+import StackLayerCard, {
   type StackLayerData,
 } from "./_components/ExpandableStackCard";
 import LayerHarmony from "./_components/LayerHarmony";
@@ -44,7 +42,6 @@ export default function AuroraPage() {
         <AuroraStackSection />
         <LayerHarmonySection />
         {/* <HowItWorksSection /> */}
-        <PartnershipSection />
         <WhyCardanoSection />
         <BuiltByFairwayCard tone="bone" />
         <AccordionFAQ
@@ -70,7 +67,7 @@ function Nav() {
   const links = [
     { href: "#stack", label: "Stack" },
     { href: "#harmony", label: "How it works" },
-    { href: "#partnership", label: "Partnership" },
+    { href: "/sundown#partnership", label: "Sundown" },
     { href: "#cardano", label: "Cardano" },
     { href: "#faq", label: "FAQ" },
   ];
@@ -84,23 +81,13 @@ function Nav() {
           className="inline-flex items-center gap-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffcc73]"
         >
           <Image
-            src="/brand/aurora-logo-modified.png"
+            src="/brand/aurora-nav.png"
             alt=""
-            width={32}
-            height={32}
-            className="h-7 w-7 object-contain"
+            width={944}
+            height={137}
+            className="h-7 w-auto object-contain sm:h-8"
             priority
           />
-          <span
-            aria-hidden
-            className="bg-clip-text font-serif text-[21px] font-bold leading-none tracking-[0.24em] text-transparent"
-            style={{
-              backgroundImage:
-                "linear-gradient(135deg, #C88A2D 0%, #E6B766 50%, #8A5A1F 100%)",
-            }}
-          >
-            URORA
-          </span>
         </Link>
 
         <nav className="hidden items-center gap-1 text-[12px] font-semibold uppercase text-[#fffaf2]/72 lg:flex">
@@ -215,7 +202,6 @@ function Hero() {
           </div>
         </div>
 
-        <HeroInfrastructureRow />
       </div>
     </section>
   );
@@ -451,6 +437,7 @@ const stackLayers: StackLayerData[] = [
     icon: BarChart3,
     logo: "/brand/aamu-modified.png",
     logoAlt: "Aamu logo",
+    cta: { label: "Explore Layer", href: "#harmony" },
   },
   {
     number: "03",
@@ -496,7 +483,7 @@ function AuroraStackSection() {
 
       <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {stackLayers.map((layer) => (
-          <ExpandableStackCard key={layer.number} layer={layer} />
+          <StackLayerCard key={layer.number} layer={layer} />
         ))}
       </div>
     </Section>
@@ -768,7 +755,7 @@ function Footer() {
           links={[
             { label: "Stack", href: "#stack" },
             { label: "How it works", href: "#harmony" },
-            { label: "Partnership", href: "#partnership" },
+            { label: "Sundown", href: "/sundown#partnership" },
             { label: "Why Cardano", href: "#cardano" },
             { label: "FAQ", href: "#faq" },
           ]}

@@ -8,6 +8,7 @@ import FlowDiagram from "./_components/FlowDiagram";
 import ArchitectureTabs from "./_components/ArchitectureTabs";
 import LenderFilteringMockup from "./_components/LenderFilteringMockup";
 import PilotTimelineCollapse from "./_components/PilotTimelineCollapse";
+import PartnershipVisual from "../_components/PartnershipVisual";
 
 import AccordionFAQ from "@/components/aurora/AccordionFAQ";
 import TrustLogoWall from "@/components/aurora/TrustLogoWall";
@@ -54,6 +55,7 @@ export default function SundownPage() {
       <Nav />
       <main>
         <Hero />
+        <PartnershipSection />
         <WhatItIs />
         <CoreFlow />
         <Architecture />
@@ -90,9 +92,8 @@ export default function SundownPage() {
 
 function Nav() {
   const links = [
-    { href: "/#stack", label: "Stack" },
-    { href: "/#partnership", label: "Partnerships" },
-    { href: "/#how", label: "How It Works" },
+    { href: "/#stack", label: "Aurora Stack" },
+    { href: "#partnership", label: "Partnership" },
     { href: "#architecture", label: "Architecture" },
     { href: "#pilot", label: "Pilot" },
   ];
@@ -106,23 +107,13 @@ function Nav() {
           className="inline-flex items-center gap-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffcc73]"
         >
           <Image
-            src="/brand/aurora-logo-modified.png"
+            src="/brand/aurora-nav.png"
             alt=""
-            width={32}
-            height={32}
-            className="h-7 w-7 object-contain"
+            width={944}
+            height={137}
+            className="h-7 w-auto object-contain sm:h-8"
             priority
           />
-          <span
-            aria-hidden
-            className="bg-clip-text font-serif text-[21px] font-bold leading-none tracking-[0.24em] text-transparent"
-            style={{
-              backgroundImage:
-                "linear-gradient(135deg, #C88A2D 0%, #E6B766 50%, #8A5A1F 100%)",
-            }}
-          >
-            URORA
-          </span>
           <span className="ml-1 hidden border-l border-[#ffcc73]/30 pl-3 text-[10px] font-bold uppercase tracking-[0.22em] text-[#ffcc73]/82 sm:inline">
             / Sundown
           </span>
@@ -281,6 +272,41 @@ function Hero() {
         </div>
       </div>
     </section>
+  );
+}
+
+/* ---------------------------------------------------------------- */
+/* Partnership - Built with Sundial                                  */
+/* ---------------------------------------------------------------- */
+
+function PartnershipSection() {
+  return (
+    <Section id="partnership" tone="paper">
+      <SectionHeader
+        eyebrow="Partnership"
+        title="Built with Sundial."
+        copy="Sundown is Aurora's Fairway x Sundial layer for discoverable, filterable on-chain loans."
+      />
+      <div className="mt-10">
+        <PartnershipVisual />
+      </div>
+      <div className="mt-6 flex flex-wrap items-center gap-3">
+        <a
+          href="#architecture"
+          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-gradient-to-b from-[#ffe3a4] via-[#ffc95a] to-[#d99a2b] px-7 text-[13px] font-bold uppercase text-[#130b02] shadow-[0_18px_50px_rgba(246,184,75,0.22)] transition hover:-translate-y-0.5 hover:from-[#fff0c9] hover:to-[#f6b84b]"
+        >
+          View Architecture
+          <ArrowRight className="h-4 w-4" strokeWidth={1.8} />
+        </a>
+        <Link
+          href="/#stack"
+          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-[#C89B3C]/45 bg-white px-7 text-[13px] font-bold uppercase text-[#101823] transition hover:-translate-y-0.5 hover:border-[#C89B3C] hover:bg-[#fff8e8]"
+        >
+          Explore Aurora Stack
+          <ArrowRight className="h-4 w-4" strokeWidth={1.8} />
+        </Link>
+      </div>
+    </Section>
   );
 }
 
@@ -672,6 +698,7 @@ function Footer() {
         <FooterCol
           title="Sundown"
           links={[
+            { label: "Partnership", href: "#partnership" },
             { label: "What it is", href: "#what-it-is" },
             { label: "Architecture", href: "#architecture" },
             { label: "Filtering", href: "#filtering" },

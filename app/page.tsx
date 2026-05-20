@@ -171,7 +171,7 @@ function Hero() {
               Not a Bitcoin L2 · A modular credit-market stack
             </div>
 
-            <h1 className="mt-7 text-[40px] font-normal leading-[1.02] tracking-[-0.02em] text-[#fffaf2] drop-shadow-[0_14px_42px_rgba(0,0,0,0.55)] sm:text-[56px] lg:text-[68px]">
+            <h1 className="mt-7 font-serif text-[40px] font-normal leading-[1.02] tracking-[-0.02em] text-[#fffaf2] drop-shadow-[0_14px_42px_rgba(0,0,0,0.55)] sm:text-[56px] lg:text-[68px]">
               <span className="block">Building on-chain</span>
               <span
                 className="block bg-clip-text text-transparent"

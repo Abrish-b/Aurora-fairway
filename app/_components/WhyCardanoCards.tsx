@@ -1,7 +1,8 @@
 import { Blocks, CircleCheck, Coins, FileText, Plus, type LucideIcon } from "lucide-react";
 
+const GOLD = "#C89B3C";
+const GOLD_HOVER = "#B8892F";
 const GRAY_BODY = "#6F6F6F";
-const TEAL = "#0e7c71";
 
 type Card = {
   icon: LucideIcon;
@@ -44,16 +45,38 @@ const CARDS: Card[] = [
 export default function WhyCardanoCards() {
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-      {CARDS.map((card) => {
+      {CARDS.map((card, i) => {
         const Icon = card.icon;
         return (
           <details
             key={card.title}
-            className="group rounded-[10px] border border-[#1B384C]/14 bg-white p-6 shadow-[0_14px_44px_rgba(33,42,50,0.05)] transition hover:-translate-y-0.5 hover:border-[#36f5c5]/42 [&_summary::-webkit-details-marker]:hidden"
+            className="group relative overflow-hidden rounded-[12px] border border-[#1B384C]/12 bg-white p-6 shadow-[0_10px_36px_rgba(33,42,50,0.05)] transition hover:-translate-y-0.5 hover:border-[#C89B3C]/45 [&_summary::-webkit-details-marker]:hidden"
           >
+            <span
+              aria-hidden
+              className="absolute inset-x-0 top-0 h-[2px]"
+              style={{
+                background: `linear-gradient(90deg, transparent 0%, ${GOLD} 30%, ${GOLD_HOVER} 70%, transparent 100%)`,
+              }}
+            />
             <summary className="cursor-pointer list-none">
-              <div className="flex h-12 w-12 items-center justify-center rounded-[6px] border border-[#36f5c5]/26 bg-[#36f5c5]/10">
-                <Icon className="h-6 w-6" strokeWidth={1.5} style={{ color: TEAL }} />
+              <div className="flex items-start justify-between">
+                <span
+                  className="font-serif text-[14px] tracking-[0.06em]"
+                  style={{ color: GOLD }}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span
+                  className="flex h-10 w-10 items-center justify-center rounded-full"
+                  style={{ background: "rgba(200,155,60,0.10)" }}
+                >
+                  <Icon
+                    className="h-5 w-5"
+                    strokeWidth={1.55}
+                    style={{ color: GOLD }}
+                  />
+                </span>
               </div>
               <h3 className="mt-6 text-[18px] font-semibold leading-6 text-[#101823]">
                 {card.title}
@@ -66,7 +89,7 @@ export default function WhyCardanoCards() {
               </p>
               <span
                 className="mt-4 inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-[0.18em]"
-                style={{ color: TEAL }}
+                style={{ color: GOLD_HOVER }}
               >
                 <Plus
                   className="h-3 w-3 transition duration-200 group-open:rotate-45"

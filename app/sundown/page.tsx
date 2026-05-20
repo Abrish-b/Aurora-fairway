@@ -55,17 +55,27 @@ export default function SundownPage() {
       <Nav />
       <main>
         <Hero />
+         <TrustLogoWall
+          tone="white"
+          eyebrow="Ecosystem"
+          title="Built alongside Cardano-native partners."
+          copy="Sundown ships as a Fairway × Sundial collaboration, integrating with Cardano, Midnight, and Veridian-aligned credentials."
+          backers={[]}
+        />
         <PartnershipSection />
         <WhatItIs />
         <CoreFlow />
         <Architecture />
         <LenderFiltering />
         {/* <Pilot /> */}
+       
         <TrustLogoWall
+          id="backers"
           tone="white"
-          eyebrow="Ecosystem"
-          title="Built alongside Cardano-native partners."
-          copy="Sundown ships as a Fairway × Sundial collaboration, integrating with Cardano, Midnight, and Veridian-aligned credentials."
+          eyebrow="Backed by"
+          title="Backed by ecosystem programs and grants."
+          copy=""
+          partners={[]}
         />
         {/* <BuiltByFairwayCard tone="bone" /> */}
         <AccordionFAQ
@@ -94,8 +104,9 @@ function Nav() {
   const links = [
     { href: "/#stack", label: "Aurora Stack" },
     { href: "#partnership", label: "Partnership" },
+    { href: "#what-it-is", label: "What it is" },
     { href: "#architecture", label: "Architecture" },
-    { href: "#pilot", label: "Pilot" },
+    { href: "#faq", label: "FAQ" },
   ];
 
   return (

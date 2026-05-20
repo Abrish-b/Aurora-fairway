@@ -7,6 +7,10 @@ import {
   FileCheck2,
   Filter,
   Menu,
+  ScanLine,
+  Search,
+  SlidersHorizontal,
+  Sun,
   WalletCards,
   type LucideIcon,
 } from "lucide-react";
@@ -37,13 +41,22 @@ export default function AuroraPage() {
           eyebrow="Trusted ecosystem"
           title="Built alongside the right partners."
           copy="Aurora is developed in collaboration with Cardano-native infrastructure teams and supported by leading European programs."
+          backers={[]}
         />
         <MarketOpportunity />
         <AuroraStackSection />
         <LayerHarmonySection />
         {/* <HowItWorksSection /> */}
         <WhyCardanoSection />
-        <BuiltByFairwayCard tone="bone" />
+        <TrustLogoWall
+          id="backers"
+          tone="white"
+          eyebrow="Backed by"
+          title="Backed by ecosystem programs and grants."
+          copy=""
+          partners={[]}
+        />
+        {/* <BuiltByFairwayCard tone="bone" /> */}
         <AccordionFAQ
           tone="light"
           eyebrow="FAQ"
@@ -66,9 +79,9 @@ export default function AuroraPage() {
 function Nav() {
   const links = [
     { href: "#stack", label: "Stack" },
-    { href: "#harmony", label: "How it works" },
-    { href: "/sundown#partnership", label: "Sundown" },
+    { href: "#harmony", label: "Harmony" },
     { href: "#cardano", label: "Cardano" },
+    { href: "/sundown", label: "Sundown" },
     { href: "#faq", label: "FAQ" },
   ];
 
@@ -422,7 +435,7 @@ const stackLayers: StackLayerData[] = [
       "Polaris Wallet enables participants to prove eligibility without exposing raw data. Reusable across the stack and partner integrations.",
     bullets: ["SSI credentials", "KYC / KYB", "Reusable onboarding"],
     icon: WalletCards,
-    logo: "/brand/polaris-modified.png",
+    logo: "/brand/polaris.jpg",
     logoAlt: "Polaris logo",
     cta: { label: "Open Wallet", href: "https://wallet.fairway.global" },
   },
@@ -435,7 +448,7 @@ const stackLayers: StackLayerData[] = [
       "Aamu Score turns off-chain financial data into proof-based credit signals. Underwriters get the inputs they need without raw records.",
     bullets: ["ZK-TLS", "Credit signals", "Private inputs"],
     icon: BarChart3,
-    logo: "/brand/aamu-modified.png",
+    logo: "/brand/aamu.jpg",
     logoAlt: "Aamu logo",
     cta: { label: "Explore Layer", href: "#harmony" },
   },
@@ -452,8 +465,8 @@ const stackLayers: StackLayerData[] = [
       "Lender filtering",
     ],
     icon: Filter,
-    logo: "/brand/sundown-modified.png",
-    logoAlt: "Sundial logo",
+    logo: "/brand/sundown.png",
+    logoAlt: "Sundown logo",
     cta: { label: "Explore Sundown", href: "/sundown" },
     featured: true,
   },
@@ -466,13 +479,101 @@ const stackLayers: StackLayerData[] = [
       "Programmable tokens carry transfer rules, identity gating, and policy directly. Aurora provides infrastructure, not the license.",
     bullets: ["CIP-113", "Tokenized bonds", "Transfer restrictions"],
     icon: FileCheck2,
-    logo: "/brand/solstice-modified.png",
-    logoAlt: "CIP-113 logo",
+    logo: "/brand/solstice.png",
+    logoAlt: "Solstice logo",
     cta: { label: "Open Solstice", href: "https://solstice.fairway.global/" },
   },
 ];
 
+const sundownInside = [
+  {
+    icon: Search,
+    title: "Discovery layer",
+    copy: "Surfaces compatible loan opportunities for verified participation.",
+  },
+  {
+    icon: ScanLine,
+    title: "Compliance-aware indexer",
+    copy: "Verifies proof envelopes, issuer authority, and expirations off-chain.",
+  },
+  {
+    icon: SlidersHorizontal,
+    title: "Lender policies",
+    copy: "Filter accepted proofs, issuers, jurisdictions, and risk bands.",
+  },
+];
+
+function SundownExtra() {
+  return (
+    <div className="mt-6 space-y-4">
+      <div className="inline-flex items-center gap-2 rounded-full border border-[#C89B3C]/35 bg-white/70 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.18em] backdrop-blur-sm">
+        <Sun className="h-3 w-3" strokeWidth={1.85} style={{ color: "#C89B3C" }} />
+        <span className="text-[#101823]/72">Built with</span>
+        <span style={{ color: "#B8892F" }}>Sundial</span>
+        <span className="text-[#101823]/30">·</span>
+        <span className="text-[#101823]/55">Fairway × Sundial layer</span>
+      </div>
+
+      <div className="flex items-center gap-3 pt-1">
+        <span
+          className="text-[10px] font-bold uppercase tracking-[0.22em]"
+          style={{ color: "#B8892F" }}
+        >
+          Inside Sundown
+        </span>
+        <span
+          aria-hidden
+          className="h-px flex-1"
+          style={{
+            background:
+              "linear-gradient(90deg, rgba(200,155,60,0.45) 0%, rgba(200,155,60,0.12) 60%, transparent 100%)",
+          }}
+        />
+      </div>
+
+      <ul className="space-y-3">
+        {sundownInside.map(({ icon: Icon, title, copy }) => (
+          <li key={title} className="flex items-start gap-3">
+            <span
+              className="mt-[2px] flex h-7 w-7 flex-none items-center justify-center rounded-full border bg-white/65 backdrop-blur-sm"
+              style={{ borderColor: "rgba(200,155,60,0.35)" }}
+            >
+              <Icon
+                className="h-3.5 w-3.5"
+                strokeWidth={1.75}
+                style={{ color: "#B8892F" }}
+              />
+            </span>
+            <div className="min-w-0">
+              <p className="text-[12px] font-semibold leading-tight text-[#101823]">
+                {title}
+              </p>
+              <p
+                className="mt-0.5 text-[11px] leading-snug"
+                style={{ color: GRAY_BODY }}
+              >
+                {copy}
+              </p>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 pt-2 text-[10px] font-bold uppercase tracking-[0.16em] text-[#101823]/55">
+        <span>Index</span>
+        <ArrowRight className="h-3 w-3" strokeWidth={2} style={{ color: "#C89B3C" }} />
+        <span>Verify</span>
+        <ArrowRight className="h-3 w-3" strokeWidth={2} style={{ color: "#C89B3C" }} />
+        <span>Filter</span>
+        <ArrowRight className="h-3 w-3" strokeWidth={2} style={{ color: "#C89B3C" }} />
+        <span style={{ color: "#B8892F" }}>Match</span>
+      </div>
+    </div>
+  );
+}
+
 function AuroraStackSection() {
+  const [polaris, aamu, sundown, solstice] = stackLayers;
   return (
     <Section id="stack" tone="light">
       <SectionHeader
@@ -481,10 +582,43 @@ function AuroraStackSection() {
         copy="Four layers, one orchestration surface. Each layer ships independently and composes into one institutional workflow."
       />
 
-      <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {stackLayers.map((layer) => (
-          <StackLayerCard key={layer.number} layer={layer} />
-        ))}
+      <div className="mt-12 grid auto-rows-[minmax(180px,auto)] grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-12">
+        <StackLayerCard
+          layer={{
+            ...polaris,
+            tone: "cream",
+            blob: true,
+            heroLogo: true,
+            className: "lg:col-span-4",
+          }}
+        />
+        <StackLayerCard
+          layer={{
+            ...aamu,
+            tone: "dark",
+            heroLogo: true,
+            className: "lg:col-span-4",
+          }}
+        />
+        <StackLayerCard
+          layer={{
+            ...sundown,
+            blob: true,
+            heroLogo: true,
+            extra: <SundownExtra />,
+            className:
+              "lg:col-span-4 lg:row-span-2 min-h-[420px] lg:min-h-[640px]",
+          }}
+        />
+        <StackLayerCard
+          layer={{
+            ...solstice,
+            tone: "dark",
+            blob: true,
+            heroLogo: true,
+            className: "lg:col-span-8",
+          }}
+        />
       </div>
     </Section>
   );

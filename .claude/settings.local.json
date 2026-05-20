@@ -2,7 +2,16 @@
   "permissions": {
     "allow": [
       "Bash(npx tsc *)",
-      "Bash(npx eslint *)"
+      "Bash(npx eslint *)",
+      "Bash(grep -iE \"^\\(handshake|landmark|leaf|scan-search|sprout|shopping-bag|trending-up|wrench|briefcase|building-2|file-check|chevron-down|circle-check|check-circle|globe|shield|truck|users|sun|building\\)\\\\.mjs$\")",
+      "Skill(ui-ux-pro-max)",
+      "Skill(ui-ux-pro-max:*)",
+      "Bash(python3 .claude/skills/ui-ux-pro-max/scripts/search.py \"institutional fintech infrastructure landing page emerging markets calm hopeful warm\" --design-system -p \"Maleda\")",
+      "Bash(where python *)",
+      "Bash(py --version)",
+      "Bash(py .claude/skills/ui-ux-pro-max/scripts/search.py \"institutional fintech infrastructure landing page emerging markets calm hopeful warm\" --design-system -p \"Maleda\" -f markdown)",
+      "Bash(py .claude/skills/ui-ux-pro-max/scripts/search.py \"scroll animation parallax interactive 3d webgl institutional\" --domain ux -n 8)",
+      "Bash(py .claude/skills/ui-ux-pro-max/scripts/search.py \"minimal institutional editorial serif\" --domain typography -n 4)"
     ]
   }
 }

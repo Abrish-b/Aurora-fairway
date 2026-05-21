@@ -14,7 +14,7 @@ type Node = {
   cy: number;
 };
 
-const GOLD = "#C8923D";
+const GREEN = "#1F3D2F";
 
 const nodes: Node[] = [
   { key: "public", label: "Public Stakeholders", copy: "Advance financial inclusion, SME growth, and economic development.", icon: Landmark, cx: 110, cy: 200 },
@@ -48,9 +48,9 @@ export default function EcosystemGraph() {
         >
           <defs>
             <radialGradient id="maleda-glow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor={GOLD} stopOpacity="0.45" />
-              <stop offset="60%" stopColor={GOLD} stopOpacity="0.10" />
-              <stop offset="100%" stopColor={GOLD} stopOpacity="0" />
+              <stop offset="0%" stopColor={GREEN} stopOpacity="0.45" />
+              <stop offset="60%" stopColor={GREEN} stopOpacity="0.10" />
+              <stop offset="100%" stopColor={GREEN} stopOpacity="0" />
             </radialGradient>
           </defs>
 
@@ -69,7 +69,7 @@ export default function EcosystemGraph() {
                   y1={a.cy}
                   x2={b.cx}
                   y2={b.cy}
-                  stroke={highlighted ? GOLD : "#cbd5e1"}
+                  stroke={highlighted ? GREEN : "#cbd5e1"}
                   strokeWidth={highlighted ? 1.4 : 1}
                   opacity={highlighted ? 0.9 : 0.55}
                 />
@@ -78,7 +78,7 @@ export default function EcosystemGraph() {
                   y1={a.cy}
                   x2={b.cx}
                   y2={b.cy}
-                  stroke={GOLD}
+                  stroke={GREEN}
                   strokeWidth={1.4}
                   strokeDasharray="4 9"
                   opacity={highlighted ? 0.9 : 0.55}
@@ -108,7 +108,7 @@ export default function EcosystemGraph() {
                   <circle
                     r={42}
                     fill="none"
-                    stroke={GOLD}
+                    stroke={GREEN}
                     strokeWidth={1}
                     opacity={0.7}
                     className="maleda-graph-pulse"
@@ -117,7 +117,7 @@ export default function EcosystemGraph() {
                 <circle
                   r={isCenter ? 38 : 32}
                   fill={isCenter ? "#0A0A0A" : "#ffffff"}
-                  stroke={isActive || isCenter ? GOLD : "#e5e7eb"}
+                  stroke={isActive || isCenter ? GREEN : "#e5e7eb"}
                   strokeWidth={isActive ? 1.5 : 1}
                 />
                 <foreignObject
@@ -131,7 +131,7 @@ export default function EcosystemGraph() {
                     style={{
                       width: 24,
                       height: 24,
-                      color: GOLD,
+                      color: GREEN,
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -164,9 +164,9 @@ export default function EcosystemGraph() {
         <div className="flex items-center gap-3">
           <span
             className="flex h-10 w-10 items-center justify-center rounded-lg"
-            style={{ background: "rgba(200,146,61,0.10)" }}
+            style={{ background: "rgba(31,61,47,0.10)" }}
           >
-            <activeNode.icon className="h-5 w-5" strokeWidth={1.6} style={{ color: GOLD }} />
+            <activeNode.icon className="h-5 w-5" strokeWidth={1.6} style={{ color: GREEN }} />
           </span>
           <h3 className="text-[18px] font-semibold text-neutral-900">
             {activeNode.label}

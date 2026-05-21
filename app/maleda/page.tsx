@@ -1,34 +1,27 @@
 import Link from "next/link";
-import {
-  ArrowRight,
-  Banknote,
-  BarChart3,
-  Briefcase,
-  Building2,
-  ChevronDown,
-  FileCheck2,
-  Globe,
-  Handshake,
-  Leaf,
-  Shield,
-  ShoppingBag,
-  Sprout,
-  Sun,
-  TrendingUp,
-  Truck,
-  Users,
-  Wrench,
-  type LucideIcon,
-} from "lucide-react";
+import { ArrowRight, ArrowUpRight, ChevronDown, Minus } from "lucide-react";
 
 import AnimatedHeading from "./_components/AnimatedHeading";
-import CountUp from "./_components/CountUp";
-import EcosystemGraph from "./_components/EcosystemGraph";
+import CapitalBridgeMap from "./_components/CapitalBridgeMap";
 import FadeIn from "./_components/FadeIn";
 import InView from "./_components/InView";
-import StepsFlow from "./_components/StepsFlow";
+import InfrastructurePillars from "./_components/InfrastructurePillars";
+import LenderCapacityConsole from "./_components/LenderCapacityConsole";
+import PartnershipFlow from "./_components/PartnershipFlow";
+import ProblemGapDiagram from "./_components/ProblemGapDiagram";
+import ProductiveFinanceWheel from "./_components/ProductiveFinanceWheel";
+import PublicValueDashboard from "./_components/PublicValueDashboard";
 
-const GOLD = "#C8923D";
+/* Dark minimal palette */
+const BG = "#0A1612";
+const IVORY = "#F2EDDF";
+const IVORY_DIM = "rgba(242,237,223,0.64)";
+const IVORY_MUTED = "rgba(242,237,223,0.42)";
+const DIVIDER = "rgba(242,237,223,0.10)";
+const GOLD = "#D6A84F";
+
+const HERO_VIDEO =
+  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260507_155500_808e6fdd-761f-4acd-b3be-cb7e6e700def.mp4";
 
 const navLinks = [
   { href: "#problem", label: "Problem" },
@@ -40,32 +33,33 @@ const navLinks = [
 
 export default function MaledaPage() {
   return (
-    <div className="relative min-h-screen bg-white text-neutral-900">
+    <div style={{ background: BG, color: IVORY_DIM }}>
       <Hero />
       <ProblemSection />
       <EcosystemSection />
       <HowItWorksSection />
       <PillarsSection />
+      <LenderBenefitsSection />
       <UseCasesSection />
       <WhyNowSection />
       <PublicValueSection />
       <TrustSection />
       <FinalCTASection />
-      <AdvancedNote />
       <Footer />
     </div>
   );
 }
 
 /* ----------------------------------------------------------------------- */
-/* Hero — simplified                                                       */
+/* Hero — full-screen video + minimal copy                                 */
 /* ----------------------------------------------------------------------- */
 
 function Hero() {
   return (
     <section
       id="top"
-      className="relative isolate flex min-h-screen w-full flex-col overflow-hidden bg-black text-white"
+      className="relative isolate flex min-h-[100dvh] w-full flex-col overflow-hidden"
+      style={{ background: BG }}
     >
       <video
         autoPlay
@@ -73,49 +67,65 @@ function Hero() {
         muted
         playsInline
         className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover"
-        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260403_050628_c4e32401-fab4-4a27-b7a8-6e9291cd5959.mp4"
+        src={HERO_VIDEO}
+      />
+      {/* Soft vignettes — keep video raw but ensure text legibility */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(10,22,18,0.30) 0%, transparent 28%, transparent 55%, rgba(10,22,18,0.55) 88%, rgba(10,22,18,0.85) 100%)",
+        }}
       />
 
       <Navbar />
 
-      <div className="relative z-10 mx-auto mt-auto flex w-full max-w-[1320px] flex-col gap-12 px-6 pb-16 md:px-12 lg:px-16 lg:pb-24">
+      <div className="relative z-10 mx-auto mt-auto flex w-full max-w-[1400px] flex-col gap-10 px-6 pb-20 md:px-10 lg:px-14 lg:pb-24">
         <div className="max-w-[820px]">
           <FadeIn delay={80} duration={600}>
-            <span className="liquid-glass inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.22em] text-white/85">
-              <span
-                className="h-1.5 w-1.5 rounded-full"
-                style={{ background: GOLD, boxShadow: `0 0 12px ${GOLD}` }}
-              />
-              Aurora · Ethiopia & emerging markets
+            <span
+              className="inline-flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.22em]"
+              style={{ color: IVORY_DIM }}
+            >
+              <span aria-hidden className="h-px w-8" style={{ background: GOLD }} />
+              Morning sun · Ethiopia & emerging markets
             </span>
           </FadeIn>
 
           <AnimatedHeading
             text={"Expand access to\nproductive business finance."}
-            className="font-display mt-7 text-[44px] font-light leading-[1.02] tracking-tight text-white drop-shadow-[0_8px_30px_rgba(0,0,0,0.4)] sm:text-[60px] lg:text-[76px]"
+            className="mt-7 text-[44px] font-medium leading-[1.02] tracking-[-0.025em] sm:text-[60px] lg:text-[76px]"
           />
 
-          <FadeIn delay={1200} duration={700} className="mt-7 max-w-[620px]">
-            <p className="text-[15px] font-light leading-[1.7] text-white/85 sm:text-[17px]">
+          <FadeIn delay={1200} duration={700} className="mt-8 max-w-[55ch]">
+            <p className="text-[15px] font-light leading-[1.7] sm:text-[17px]" style={{ color: "rgba(242,237,223,0.78)" }}>
               Trusted local-currency finance for productive businesses,
               delivered through regulated lenders.
             </p>
           </FadeIn>
 
-          <FadeIn delay={1450} duration={700} className="mt-9">
-            <div className="flex flex-wrap items-center gap-3">
+          <FadeIn delay={1450} duration={700} className="mt-10">
+            <div className="flex flex-wrap items-center gap-6">
               <a
                 href="#cta"
-                className="inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-lg bg-white px-6 text-[13px] font-medium text-black transition hover:bg-white/90"
+                className="inline-flex h-12 cursor-pointer items-center justify-center gap-2 px-6 text-[13px] font-semibold tracking-tight transition active:scale-[0.98] hover:brightness-110"
+                style={{ background: GOLD, color: BG }}
               >
                 Partner with Maleda
-                <ArrowRight className="h-4 w-4" strokeWidth={1.6} />
+                <ArrowRight className="h-4 w-4" strokeWidth={1.7} />
               </a>
               <a
                 href="#how-it-works"
-                className="liquid-glass inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-lg px-6 text-[13px] font-medium text-white transition hover:bg-black/50"
+                className="inline-flex h-12 cursor-pointer items-center gap-2 text-[13px] font-medium transition"
+                style={{
+                  color: IVORY,
+                  borderBottom: `1px solid ${IVORY}`,
+                  paddingBottom: 2,
+                }}
               >
                 See how it works
+                <ArrowRight className="h-4 w-4" strokeWidth={1.7} />
               </a>
             </div>
           </FadeIn>
@@ -128,25 +138,25 @@ function Hero() {
 function Navbar() {
   return (
     <header className="relative z-30 pt-6">
-      <div className="mx-auto w-full max-w-[1320px] px-6 md:px-12 lg:px-16">
-        <div className="liquid-glass flex items-center justify-between rounded-xl px-4 py-2">
-          <Link
-            href="#top"
-            className="flex items-center gap-3 text-white"
-            aria-label="Maleda home"
-          >
-            <span className="text-2xl font-semibold tracking-tight">MALEDA</span>
-            <span className="hidden text-[10px] font-medium uppercase tracking-[0.22em] text-white/55 sm:inline">
+      <div className="mx-auto w-full max-w-[1400px] px-6 md:px-10 lg:px-14">
+        <div
+          className="flex items-center justify-between border-b py-4"
+          style={{ borderColor: "rgba(242,237,223,0.16)" }}
+        >
+          <Link href="#top" className="flex items-center gap-3" aria-label="Maleda home" style={{ color: IVORY }}>
+            <span className="text-xl font-semibold tracking-tight">MALEDA</span>
+            <span className="hidden text-[10px] font-medium uppercase tracking-[0.22em] sm:inline" style={{ color: IVORY_MUTED }}>
               by Fairway
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-1 md:flex">
+          <nav className="hidden items-center gap-7 md:flex">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="rounded-md px-3 py-2 text-[13px] font-medium text-white/75 transition hover:text-white"
+                className="text-[12px] font-medium uppercase tracking-[0.16em] transition-colors duration-200"
+                style={{ color: IVORY_DIM }}
               >
                 {link.label}
               </a>
@@ -155,9 +165,15 @@ function Navbar() {
 
           <a
             href="#cta"
-            className="rounded-lg bg-white px-6 py-2 text-[13px] font-medium text-black transition hover:bg-white/90"
+            className="inline-flex items-center gap-2 text-[12px] font-medium uppercase tracking-[0.16em] transition"
+            style={{
+              color: GOLD,
+              borderBottom: `1px solid ${GOLD}`,
+              paddingBottom: 2,
+            }}
           >
             Partner with Maleda
+            <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={1.7} />
           </a>
         </div>
       </div>
@@ -166,405 +182,361 @@ function Navbar() {
 }
 
 /* ----------------------------------------------------------------------- */
-/* Section 1 — The Problem                                                 */
+/* Shared minimal section primitive                                        */
+/* ----------------------------------------------------------------------- */
+
+function Section({
+  id,
+  num,
+  eyebrow,
+  title,
+  intro,
+  children,
+}: {
+  id: string;
+  num: string;
+  eyebrow: string;
+  title: React.ReactNode;
+  intro?: React.ReactNode;
+  children: React.ReactNode;
+}) {
+  return (
+    <section
+      id={id}
+      className="relative px-6 py-28 md:px-10 lg:px-14 lg:py-36"
+      style={{ borderTop: `1px solid ${DIVIDER}` }}
+    >
+      <div className="relative mx-auto max-w-[1400px]">
+        <InView className="grid gap-10 lg:grid-cols-[260px_1fr] lg:gap-16">
+          <div className="lg:sticky lg:top-24 lg:self-start">
+            <p className="font-mono text-[10px] font-medium uppercase tracking-[0.22em]" style={{ color: GOLD }}>
+              {num}
+            </p>
+            <p className="mt-3 text-[10px] font-medium uppercase tracking-[0.22em]" style={{ color: IVORY_MUTED }}>
+              {eyebrow}
+            </p>
+          </div>
+
+          <div>
+            <h2
+              className="text-[32px] font-medium leading-[1.04] tracking-[-0.025em] sm:text-[44px] lg:text-[52px]"
+              style={{ color: IVORY, textWrap: "balance" }}
+            >
+              {title}
+            </h2>
+            {intro && (
+              <div
+                className="mt-6 text-[15px] font-light leading-[1.7]"
+                style={{ color: IVORY_DIM, maxWidth: "60ch" }}
+              >
+                {intro}
+              </div>
+            )}
+            {children}
+          </div>
+        </InView>
+      </div>
+    </section>
+  );
+}
+
+/* ----------------------------------------------------------------------- */
+/* Problem                                                                 */
 /* ----------------------------------------------------------------------- */
 
 function ProblemSection() {
-  const cards: { icon: LucideIcon; title: string; copy: string }[] = [
-    { icon: Briefcase, title: "Businesses need finance", copy: "Many productive businesses are ready to grow but cannot access affordable credit." },
-    { icon: Building2, title: "Lenders need better infrastructure", copy: "Banks and financial institutions need trusted tools to verify, coordinate, and serve more borrowers safely." },
-    { icon: Banknote, title: "Capital needs confidence", copy: "Development partners and global capital providers need transparent, compliant pathways into productive local finance." },
-  ];
-
   return (
-    <Section id="problem" eyebrow="The challenge" title="Credit demand exists. Access does not.">
-      <InView className="mx-auto mt-6 max-w-[760px] text-center">
-        <p className="text-[15px] font-light leading-[1.75] text-neutral-600">
-          Across Ethiopia and emerging markets, productive businesses need
-          working capital to grow. Many SMEs, women-led enterprises, farmers,
-          traders, and exporters remain underfinanced because credit
-          infrastructure is fragmented, costly, or difficult to scale.
-        </p>
-      </InView>
-
-      <div className="mt-14 grid gap-5 md:grid-cols-3">
-        {cards.map(({ icon: Icon, title, copy }, i) => (
-          <InView key={title} delay={i * 90}>
-            <article className="group relative h-full overflow-hidden rounded-2xl border border-neutral-200 bg-white p-7 transition duration-300 hover:-translate-y-0.5 hover:border-neutral-300 hover:shadow-[0_18px_60px_rgba(0,0,0,0.06)]">
-              <span
-                aria-hidden
-                className="pointer-events-none absolute inset-x-0 -top-px h-px origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"
-                style={{ background: `linear-gradient(90deg, transparent, ${GOLD}, transparent)` }}
-              />
-              <span
-                className="flex h-11 w-11 items-center justify-center rounded-lg transition-transform duration-500 group-hover:rotate-[18deg]"
-                style={{ background: "rgba(200,146,61,0.08)" }}
-              >
-                <Icon className="h-5 w-5" strokeWidth={1.6} style={{ color: GOLD }} />
-              </span>
-              <h3 className="mt-6 text-[18px] font-semibold leading-tight text-neutral-900">{title}</h3>
-              <p className="mt-3 text-[14px] font-light leading-[1.7] text-neutral-600">{copy}</p>
-            </article>
-          </InView>
-        ))}
-      </div>
+    <Section
+      id="problem"
+      num="01"
+      eyebrow="The challenge"
+      title={
+        <>
+          Credit demand exists.{" "}
+          <span style={{ color: GOLD }}>Access does not.</span>
+        </>
+      }
+      intro="Productive businesses are underfinanced — not for lack of opportunity, but because credit infrastructure is fragmented. Maleda connects the two sides."
+    >
+      <ProblemGapDiagram />
     </Section>
   );
 }
 
 /* ----------------------------------------------------------------------- */
-/* Section 2 — Trusted Ecosystem                                           */
+/* Ecosystem                                                               */
 /* ----------------------------------------------------------------------- */
 
 function EcosystemSection() {
   return (
     <Section
       id="ecosystem"
+      num="02"
       eyebrow="A trusted ecosystem"
-      title="A trusted ecosystem for productive lending."
-      tone="muted"
+      title={
+        <>
+          A trusted ecosystem{" "}
+          <span style={{ color: GOLD }}>for productive lending.</span>
+        </>
+      }
+      intro="Maleda connects the institutions required to expand credit safely."
     >
-      <InView className="mx-auto mt-6 max-w-[680px] text-center">
-        <p className="text-[15px] font-light leading-[1.75] text-neutral-600">
-          Maleda connects the institutions required to expand credit safely.
-        </p>
-      </InView>
+      <div className="mt-16">
+        <CapitalBridgeMap />
+      </div>
 
-      <EcosystemGraph />
+      <ul className="mt-20 divide-y" style={{ borderColor: DIVIDER }}>
+        {[
+          { role: "Businesses", copy: "Receive financing through trusted local lenders." },
+          { role: "Financial Institutions", copy: "Originate and service loans locally." },
+          { role: "Maleda", copy: "Identity, compliance, and capital coordination.", highlight: true },
+          { role: "Capital Partners", copy: "Structured participation in productive lending." },
+          { role: "Public Stakeholders", copy: "Advance inclusion and economic development." },
+        ].map((c, i) => (
+          <li
+            key={c.role}
+            className="grid grid-cols-[40px_180px_1fr] items-baseline gap-6 border-t py-5 first:border-t-0"
+            style={{ borderColor: DIVIDER }}
+          >
+            <span className="font-mono text-[10px] font-medium uppercase tracking-[0.22em]" style={{ color: IVORY_MUTED }}>
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <h3
+              className="text-[16px] font-medium tracking-tight"
+              style={{ color: c.highlight ? GOLD : IVORY }}
+            >
+              {c.role}
+            </h3>
+            <p className="text-[13.5px] font-light leading-[1.7]" style={{ color: IVORY_DIM }}>
+              {c.copy}
+            </p>
+          </li>
+        ))}
+      </ul>
     </Section>
   );
 }
 
 /* ----------------------------------------------------------------------- */
-/* Section 3 — How It Works                                                */
+/* How It Works                                                            */
 /* ----------------------------------------------------------------------- */
 
 function HowItWorksSection() {
   return (
     <Section
       id="how-it-works"
+      num="03"
       eyebrow="How it works"
-      title="Built for partnership with local institutions."
+      title={
+        <>
+          Built for partnership{" "}
+          <span style={{ color: GOLD }}>with local institutions.</span>
+        </>
+      }
+      intro="Maleda is not a lender. Local institutions own origination, underwriting, and servicing."
     >
-      <div className="mx-auto mt-8 max-w-[760px] space-y-5 text-center">
-        <InView delay={60}>
-          <p className="rounded-xl border border-neutral-200 bg-white px-5 py-3 text-[14px] font-medium text-neutral-900">
-            Maleda is not a lender. Maleda strengthens regulated lenders.
-          </p>
-        </InView>
-        <InView delay={140}>
-          <p className="text-[15px] font-light leading-[1.75] text-neutral-600">
-            Local institutions continue to own the borrower relationship.
-            Maleda provides infrastructure that helps them verify participants,
-            coordinate capital, and expand responsible lending.
-          </p>
-        </InView>
-        <InView delay={220}>
-          <p
-            className="rounded-xl border px-5 py-4 text-[14px] font-medium text-neutral-900"
-            style={{
-              background: "rgba(200,146,61,0.07)",
-              borderColor: "rgba(200,146,61,0.30)",
-            }}
-          >
-            Borrowers receive financing in local currency. Never cryptocurrency.
-          </p>
-        </InView>
-      </div>
+      <p
+        className="mt-10 border-l pl-5 text-[14px] font-medium leading-snug tracking-tight"
+        style={{ borderColor: GOLD, color: IVORY }}
+      >
+        Borrowers receive financing in local currency.{" "}
+        <span style={{ color: GOLD }}>Never cryptocurrency.</span>
+      </p>
 
-      <StepsFlow />
+      <PartnershipFlow />
     </Section>
   );
 }
 
 /* ----------------------------------------------------------------------- */
-/* Section 4 — Infrastructure Pillars                                      */
+/* Infrastructure Pillars                                                  */
 /* ----------------------------------------------------------------------- */
 
 function PillarsSection() {
-  const pillars: { icon: LucideIcon; title: string; copy: string }[] = [
-    { icon: Shield, title: "Identity & Verification", copy: "Trusted borrower, institution, and participant validation." },
-    { icon: FileCheck2, title: "Compliance Infrastructure", copy: "KYC, screening, eligibility, and participation controls." },
-    { icon: Handshake, title: "Capital Coordination", copy: "Infrastructure connecting local credit demand with trusted funding partners." },
-    { icon: BarChart3, title: "Reporting & Transparency", copy: "Better visibility for partners, institutions, and stakeholders." },
-  ];
-
   return (
     <Section
       id="pillars"
+      num="04"
       eyebrow="Infrastructure pillars"
-      title="Infrastructure for trusted credit expansion."
+      title={
+        <>
+          Infrastructure for{" "}
+          <span style={{ color: GOLD }}>trusted credit expansion.</span>
+        </>
+      }
+      intro="Four operational layers for responsible credit growth."
     >
-      <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-        {pillars.map(({ icon: Icon, title, copy }, i) => (
-          <InView key={title} delay={i * 90}>
-            <article className="group relative h-full cursor-default overflow-hidden rounded-2xl border border-neutral-200 bg-white p-7 transition duration-300 hover:-translate-y-0.5 hover:border-neutral-300">
-              {/* Sun-ray decoration that rotates on hover */}
-              <span
-                aria-hidden
-                className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 opacity-30 transition-transform duration-700 group-hover:rotate-[60deg] group-hover:opacity-60"
-              >
-                <SunRaysSvg color={GOLD} />
-              </span>
-              <span
-                className="relative flex h-11 w-11 items-center justify-center rounded-lg"
-                style={{ background: "rgba(200,146,61,0.08)" }}
-              >
-                <Icon className="h-5 w-5" strokeWidth={1.6} style={{ color: GOLD }} />
-              </span>
-              <h3 className="relative mt-5 text-[16px] font-semibold leading-tight text-neutral-900">
-                {title}
-              </h3>
-              <p className="relative mt-2 text-[13px] font-light leading-[1.7] text-neutral-600">
-                {copy}
-              </p>
-            </article>
-          </InView>
-        ))}
-      </div>
+      <InfrastructurePillars />
     </Section>
   );
 }
 
-function SunRaysSvg({ color }: { color: string }) {
+/* ----------------------------------------------------------------------- */
+/* Lender Benefits                                                         */
+/* ----------------------------------------------------------------------- */
+
+function LenderBenefitsSection() {
   return (
-    <svg viewBox="0 0 100 100" className="h-full w-full">
-      <g fill="none" stroke={color} strokeWidth={1} strokeLinecap="round">
-        <circle cx="50" cy="50" r="14" />
-        {Array.from({ length: 12 }).map((_, i) => {
-          const a = (i * Math.PI * 2) / 12;
-          const x1 = 50 + Math.cos(a) * 20;
-          const y1 = 50 + Math.sin(a) * 20;
-          const x2 = 50 + Math.cos(a) * 36;
-          const y2 = 50 + Math.sin(a) * 36;
-          return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} />;
-        })}
-      </g>
-    </svg>
+    <Section
+      id="lender-benefits"
+      num="05"
+      eyebrow="For regulated lenders"
+      title={
+        <>
+          New capital{" "}
+          <span style={{ color: GOLD }}>for local lending growth.</span>
+        </>
+      }
+      intro="Built to strengthen the institutions already serving borrowers."
+    >
+      <LenderCapacityConsole />
+    </Section>
   );
 }
 
 /* ----------------------------------------------------------------------- */
-/* Section 5 — Use Cases                                                   */
+/* Use Cases                                                               */
 /* ----------------------------------------------------------------------- */
 
 function UseCasesSection() {
-  const cases: { icon: LucideIcon; title: string; copy: string }[] = [
-    { icon: Briefcase, title: "SME working capital", copy: "Short-term financing to keep productive businesses operating." },
-    { icon: Users, title: "Women-led businesses", copy: "Targeted support for women entrepreneurs across sectors." },
-    { icon: Sprout, title: "Agricultural finance", copy: "Seasonal credit for farmers, cooperatives, and agribusiness." },
-    { icon: Truck, title: "Trade finance", copy: "Working capital for importers, exporters, and distributors." },
-    { icon: Wrench, title: "Equipment financing", copy: "Capital for machinery, tooling, and productive assets." },
-    { icon: TrendingUp, title: "Growth lending", copy: "Expansion capital for businesses ready to scale." },
-    { icon: Globe, title: "Export businesses", copy: "Pre-shipment and post-shipment financing for exporters." },
-    { icon: ShoppingBag, title: "Supplier financing", copy: "Liquidity for suppliers along productive value chains." },
-  ];
-
   return (
     <Section
       id="use-cases"
+      num="06"
       eyebrow="Use cases"
-      title="Financing real economic growth."
-      tone="muted"
+      title={
+        <>
+          Financing <span style={{ color: GOLD }}>real economic growth.</span>
+        </>
+      }
+      intro="Productive sectors served by Maleda-enabled lending."
     >
-      <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {cases.map(({ icon: Icon, title, copy }, i) => (
-          <InView key={title} delay={i * 60}>
-            <article className="group relative h-full overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 transition duration-300 hover:-translate-y-0.5 hover:border-neutral-300">
-              <span
-                aria-hidden
-                className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                style={{
-                  background:
-                    "radial-gradient(120% 100% at 0% 100%, rgba(200,146,61,0.10) 0%, transparent 55%)",
-                }}
-              />
-              <Icon
-                className="relative h-5 w-5 transition-transform duration-500 group-hover:scale-110"
-                strokeWidth={1.5}
-                style={{ color: GOLD }}
-              />
-              <h3 className="relative mt-4 text-[15px] font-semibold leading-tight text-neutral-900">
-                {title}
-              </h3>
-              <p className="relative mt-2 text-[12.5px] font-light leading-[1.6] text-neutral-600">
-                {copy}
-              </p>
-            </article>
-          </InView>
-        ))}
-      </div>
+      <ProductiveFinanceWheel />
     </Section>
   );
 }
 
 /* ----------------------------------------------------------------------- */
-/* Section 6 — Why Now (with animated stats)                               */
+/* Why Now                                                                 */
 /* ----------------------------------------------------------------------- */
 
 function WhyNowSection() {
-  const cards: { icon: LucideIcon; title: string; copy: string }[] = [
-    { icon: TrendingUp, title: "Business demand is growing", copy: "Productive businesses in emerging markets need affordable credit to scale operations and create jobs." },
-    { icon: Building2, title: "Local lenders need scalable infrastructure", copy: "Banks and MFIs are looking for trusted tools to expand responsible lending without rebuilding rails." },
-    { icon: Banknote, title: "Capital partners need trusted channels", copy: "Development institutions and global capital want transparent, compliant pathways into productive finance." },
-  ];
-
-  return (
-    <Section id="why-now" eyebrow="Why now" title="New capital. Real economic demand.">
-      <InView className="mx-auto mt-6 max-w-[760px] text-center">
-        <p className="text-[15px] font-light leading-[1.75] text-neutral-600">
-          Global capital infrastructure has evolved. Emerging market businesses
-          still need affordable, productive credit. Maleda helps connect the
-          two through regulated local institutions and trusted market
-          infrastructure.
-        </p>
-      </InView>
-
-      {/* Animated stat strip */}
-      <div className="mt-12 grid gap-5 rounded-2xl border border-neutral-200 bg-white p-8 sm:grid-cols-3">
-        <StatTile to={70} suffix="%" label="of African SMEs report credit gaps" />
-        <StatTile to={331} suffix="B" prefix="$" label="estimated SME credit gap, sub-Saharan Africa" />
-        <StatTile to={2030} label="UN SDG target for inclusive finance" />
-      </div>
-
-      <div className="mt-12 grid gap-5 md:grid-cols-3">
-        {cards.map(({ icon: Icon, title, copy }, i) => (
-          <InView key={title} delay={i * 90}>
-            <article className="h-full rounded-2xl border border-neutral-200 bg-white p-7">
-              <Icon className="h-5 w-5" strokeWidth={1.5} style={{ color: GOLD }} />
-              <h3 className="mt-5 text-[17px] font-semibold leading-tight text-neutral-900">{title}</h3>
-              <p className="mt-3 text-[13.5px] font-light leading-[1.7] text-neutral-600">{copy}</p>
-            </article>
-          </InView>
-        ))}
-      </div>
-
-      <p className="mt-6 text-center text-[11px] font-light text-neutral-500">
-        Stats illustrative. Sources: IFC SME Finance Forum, UN SDG framework.
-      </p>
-    </Section>
-  );
-}
-
-function StatTile({
-  to,
-  prefix,
-  suffix,
-  label,
-}: {
-  to: number;
-  prefix?: string;
-  suffix?: string;
-  label: string;
-}) {
-  return (
-    <div className="text-center">
-      <p
-        className="font-display text-[42px] font-medium leading-none tracking-tight sm:text-[56px]"
-        style={{ color: GOLD }}
-      >
-        <CountUp to={to} prefix={prefix} suffix={suffix} duration={1600} />
-      </p>
-      <p className="mt-3 text-[12px] font-light leading-relaxed text-neutral-600">{label}</p>
-    </div>
-  );
-}
-
-/* ----------------------------------------------------------------------- */
-/* Section 7 — Government & Public Value                                   */
-/* ----------------------------------------------------------------------- */
-
-function PublicValueSection() {
-  const cards: { icon: LucideIcon; title: string }[] = [
-    { icon: Users, title: "Financial inclusion" },
-    { icon: Briefcase, title: "SME growth" },
-    { icon: Leaf, title: "Agricultural productivity" },
-    { icon: Sun, title: "Women-led enterprise support" },
-    { icon: Globe, title: "Trade and export growth" },
-    { icon: TrendingUp, title: "Job creation" },
+  const cards = [
+    { title: "Business demand is growing", copy: "Emerging market businesses need affordable credit to scale and create jobs." },
+    { title: "Lenders need scalable infrastructure", copy: "Banks and MFIs need tools to expand responsible lending." },
+    { title: "Capital partners need trusted channels", copy: "Global capital wants compliant pathways into productive finance." },
   ];
 
   return (
     <Section
-      id="public-value"
-      eyebrow="Public value"
-      title="Designed for national development priorities."
-      tone="muted"
+      id="why-now"
+      num="07"
+      eyebrow="Why now"
+      title={
+        <>
+          Global capital.{" "}
+          <span style={{ color: GOLD }}>Local opportunity.</span>
+        </>
+      }
+      intro="New global liquidity. Growing emerging-market demand. Maleda connects them safely."
     >
-      <InView className="mx-auto mt-6 max-w-[760px] text-center">
-        <p className="text-[15px] font-light leading-[1.75] text-neutral-600">
-          Maleda can support financial inclusion, SME growth, agriculture,
-          women-led enterprises, job creation, and more transparent credit
-          markets.
-        </p>
-      </InView>
-
-      <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {cards.map(({ icon: Icon, title }, i) => (
-          <InView key={title} delay={i * 70}>
-            <article className="group flex items-center gap-4 rounded-2xl border border-neutral-200 bg-white p-6 transition duration-300 hover:border-neutral-300 hover:shadow-[0_18px_60px_rgba(0,0,0,0.05)]">
-              <span
-                className="flex h-11 w-11 items-center justify-center rounded-lg transition-transform duration-500 group-hover:rotate-[18deg]"
-                style={{ background: "rgba(200,146,61,0.08)" }}
-              >
-                <Icon className="h-5 w-5" strokeWidth={1.6} style={{ color: GOLD }} />
-              </span>
-              <h3 className="text-[15px] font-semibold leading-tight text-neutral-900">
-                {title}
-              </h3>
-            </article>
-          </InView>
+      <div className="mt-16 grid gap-px sm:grid-cols-3" style={{ background: DIVIDER }}>
+        {cards.map((c, i) => (
+          <article
+            key={c.title}
+            className="flex flex-col gap-4 p-8"
+            style={{ background: BG }}
+          >
+            <span className="font-mono text-[10px] font-medium uppercase tracking-[0.22em]" style={{ color: GOLD }}>
+              {String(i + 1).padStart(2, "0")} / 03
+            </span>
+            <h3 className="text-[18px] font-medium leading-snug tracking-tight" style={{ color: IVORY }}>
+              {c.title}
+            </h3>
+            <p className="text-[13.5px] font-light leading-[1.7]" style={{ color: IVORY_DIM, maxWidth: "44ch" }}>
+              {c.copy}
+            </p>
+          </article>
         ))}
       </div>
-
-      <p className="mx-auto mt-10 max-w-[720px] text-center text-[12px] font-light leading-relaxed text-neutral-500">
-        Maleda is designed to support national priorities through partnership
-        with regulated local institutions. Inclusion in this list does not
-        imply endorsement by any government body or regulator.
-      </p>
     </Section>
   );
 }
 
 /* ----------------------------------------------------------------------- */
-/* Section 8 — Trust / FAQ                                                 */
+/* Public Value                                                            */
+/* ----------------------------------------------------------------------- */
+
+function PublicValueSection() {
+  return (
+    <Section
+      id="public-value"
+      num="08"
+      eyebrow="Public value"
+      title={
+        <>
+          Designed to support{" "}
+          <span style={{ color: GOLD }}>national development.</span>
+        </>
+      }
+      intro="Financial inclusion, SME growth, agriculture, job creation."
+    >
+      <PublicValueDashboard />
+    </Section>
+  );
+}
+
+/* ----------------------------------------------------------------------- */
+/* Trust / FAQ                                                             */
 /* ----------------------------------------------------------------------- */
 
 function TrustSection() {
   const items = [
-    { q: "Do borrowers receive cryptocurrency?", a: "No. Financing is delivered through regulated local lending channels in local currency. Borrowers do not need to touch cryptocurrency." },
-    { q: "Is Maleda a lender?", a: "No. Maleda is infrastructure. Regulated local financial institutions originate and service loans." },
-    { q: "Does Maleda replace local banks?", a: "No. Maleda is designed to strengthen local financial institutions, not displace them." },
-    { q: "Who can partner with Maleda?", a: "Banks, MFIs, fintechs, development institutions, capital partners, and public stakeholders exploring productive business finance." },
-    { q: "How does Maleda support compliance?", a: "Maleda supports identity, screening, eligibility, and participation controls so partners can operate through trusted processes." },
-    { q: "Is this only for Ethiopia?", a: "Maleda is designed for Ethiopia first, with a model that can apply to other emerging markets." },
+    { q: "Do borrowers receive cryptocurrency?", a: "No. Financing is delivered through regulated local lending channels in applicable local currencies." },
+    { q: "Is Maleda a lender?", a: "No. Local regulated financial institutions originate, underwrite, and service loans." },
+    { q: "Does Maleda replace local financial institutions?", a: "No. Maleda strengthens regulated lenders by expanding access to capital infrastructure." },
+    { q: "Who provides the loan capital?", a: "Structured participation from global capital partners through compliant institutional pathways." },
+    { q: "Who manages the borrower relationship?", a: "The local regulated financial institution — including underwriting, servicing, and compliance." },
+    { q: "How does Maleda support public priorities?", a: "Designed to support financial inclusion, SME growth, agriculture, trade, women-led enterprises, and job creation." },
   ];
 
   return (
-    <Section id="trust" eyebrow="Trust" title="Designed for institutional trust.">
-      <div className="mx-auto mt-10 max-w-[820px] divide-y divide-neutral-200 overflow-hidden rounded-2xl border border-neutral-200 bg-white">
+    <Section
+      id="trust"
+      num="09"
+      eyebrow="Trust"
+      title={
+        <>
+          Designed for{" "}
+          <span style={{ color: GOLD }}>institutional trust.</span>
+        </>
+      }
+    >
+      <div className="mt-16 divide-y" style={{ borderColor: DIVIDER }}>
         {items.map((item, i) => (
-          <InView key={item.q} delay={i * 50}>
-            <details className="group px-6 py-5 transition-colors duration-300 hover:bg-neutral-50/60 [&_summary::-webkit-details-marker]:hidden">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4">
-                <span className="text-[15px] font-medium text-neutral-900">
-                  {item.q}
+          <details
+            key={item.q}
+            className="group border-t [&_summary::-webkit-details-marker]:hidden"
+            style={{ borderColor: DIVIDER }}
+          >
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6" style={{ color: IVORY }}>
+              <span className="flex items-baseline gap-4">
+                <span className="font-mono text-[10px] font-medium uppercase tracking-[0.22em]" style={{ color: IVORY_MUTED }}>
+                  {String(i + 1).padStart(2, "0")}
                 </span>
-                <span
-                  className="flex h-7 w-7 flex-none items-center justify-center rounded-full border border-neutral-200 transition-colors duration-300 group-open:border-transparent"
-                  style={{ background: "transparent" }}
-                >
-                  <ChevronDown
-                    className="h-4 w-4 text-neutral-500 transition-transform duration-300 group-open:rotate-180"
-                    strokeWidth={1.6}
-                  />
-                </span>
-              </summary>
-              <p className="mt-3 text-[13.5px] font-light leading-[1.7] text-neutral-600">
+                <span className="text-[15px] font-medium tracking-tight">{item.q}</span>
+              </span>
+              <span aria-hidden className="flex h-6 w-6 flex-none items-center justify-center transition-transform duration-300 group-open:rotate-90">
+                <Minus className="h-4 w-4 group-open:hidden" strokeWidth={1.6} style={{ color: GOLD }} />
+                <ChevronDown className="hidden h-4 w-4 -rotate-90 group-open:block" strokeWidth={1.6} style={{ color: GOLD }} />
+              </span>
+            </summary>
+            <div className="pb-6 pl-[58px]">
+              <p className="max-w-[58ch] text-[14px] font-light leading-[1.75]" style={{ color: IVORY_DIM }}>
                 {item.a}
               </p>
-            </details>
-          </InView>
+            </div>
+          </details>
         ))}
       </div>
     </Section>
@@ -572,95 +544,62 @@ function TrustSection() {
 }
 
 /* ----------------------------------------------------------------------- */
-/* Section 9 — Final CTA                                                   */
+/* Final CTA                                                               */
 /* ----------------------------------------------------------------------- */
 
 function FinalCTASection() {
   return (
     <section
       id="cta"
-      data-maleda-sun
-      className="relative isolate overflow-hidden bg-neutral-950 px-6 py-24 text-white md:px-12 lg:px-16 lg:py-32"
+      className="relative isolate overflow-hidden px-6 py-32 md:px-10 lg:px-14 lg:py-40"
+      style={{ borderTop: `1px solid ${DIVIDER}` }}
     >
-      {/* Animated horizon */}
-      <span
+      <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-1/2 h-px"
+        className="pointer-events-none absolute inset-0 -z-10"
         style={{
           background:
-            "linear-gradient(90deg, transparent 0%, rgba(200,146,61,0.5) 50%, transparent 100%)",
+            "radial-gradient(50% 50% at 50% 30%, rgba(214,168,79,0.10) 0%, transparent 70%)",
         }}
       />
-      <span
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 opacity-70"
-        style={{
-          background:
-            "radial-gradient(60% 50% at 50% 60%, rgba(200,146,61,0.25) 0%, transparent 60%), radial-gradient(50% 40% at 50% 100%, rgba(200,146,61,0.18) 0%, transparent 60%)",
-        }}
-      />
-
-      <InView className="mx-auto max-w-[820px] text-center">
-        <p
-          className="text-[11px] font-medium uppercase tracking-[0.22em]"
-          style={{ color: GOLD }}
-        >
+      <InView className="relative mx-auto max-w-[760px] text-center">
+        <p className="text-[11px] font-medium uppercase tracking-[0.22em]" style={{ color: GOLD }}>
           Get in touch
         </p>
-        <h2 className="font-display mt-4 text-[36px] font-light leading-[1.05] tracking-tight sm:text-[48px] lg:text-[60px]">
-          Expand access to productive credit.
+        <h2
+          className="mt-6 text-[36px] font-medium leading-[1.04] tracking-[-0.025em] sm:text-[52px] lg:text-[64px]"
+          style={{ color: IVORY, textWrap: "balance" }}
+        >
+          Expand access to{" "}
+          <span style={{ color: GOLD }}>productive credit.</span>
         </h2>
-        <p className="mt-6 text-[15px] font-light leading-[1.75] text-white/70">
-          Whether you are a financial institution, capital partner, or public
-          stakeholder, Maleda helps build more efficient and trusted credit
-          markets.
+        <p className="mx-auto mt-6 max-w-[52ch] text-[15px] font-light leading-[1.7]" style={{ color: IVORY_DIM }}>
+          Whether lender, capital partner, or public stakeholder — Maleda helps
+          build stronger credit markets.
         </p>
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+        <div className="mt-12 flex flex-wrap items-center justify-center gap-6">
           <a
             href="mailto:hello@fairway.global?subject=Maleda%20partnership"
-            className="inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-lg bg-white px-6 text-[13px] font-medium text-black transition hover:bg-white/90"
+            className="inline-flex h-12 cursor-pointer items-center justify-center gap-2 px-7 text-[13px] font-semibold tracking-tight transition active:scale-[0.98] hover:brightness-110"
+            style={{ background: GOLD, color: BG }}
           >
             Start a conversation
-            <ArrowRight className="h-4 w-4" strokeWidth={1.6} />
+            <ArrowRight className="h-4 w-4" strokeWidth={1.7} />
           </a>
           <a
             href="mailto:hello@fairway.global?subject=Maleda%20partner"
-            className="inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-lg border border-white/20 px-6 text-[13px] font-medium text-white transition hover:border-white/40 hover:bg-white/5"
+            className="inline-flex h-12 cursor-pointer items-center gap-2 text-[13px] font-medium transition"
+            style={{
+              color: IVORY,
+              borderBottom: `1px solid ${IVORY}`,
+              paddingBottom: 2,
+            }}
           >
             Partner with Maleda
+            <ArrowUpRight className="h-4 w-4" strokeWidth={1.7} />
           </a>
         </div>
       </InView>
-    </section>
-  );
-}
-
-/* ----------------------------------------------------------------------- */
-/* Advanced infrastructure note (collapsed)                                */
-/* ----------------------------------------------------------------------- */
-
-function AdvancedNote() {
-  return (
-    <section className="bg-white px-6 py-14 md:px-12 lg:px-16">
-      <details className="group mx-auto max-w-[820px] rounded-2xl border border-neutral-200 bg-neutral-50 px-6 py-5 transition-colors duration-300 hover:bg-neutral-100/60 [&_summary::-webkit-details-marker]:hidden">
-        <summary className="flex cursor-pointer list-none items-center justify-between gap-4">
-          <span className="text-[13px] font-medium uppercase tracking-[0.18em] text-neutral-700">
-            Advanced infrastructure note
-          </span>
-          <ChevronDown
-            className="h-4 w-4 text-neutral-500 transition-transform duration-300 group-open:rotate-180"
-            strokeWidth={1.6}
-          />
-        </summary>
-        <p className="mt-4 text-[13px] font-light leading-[1.75] text-neutral-600">
-          Maleda can use modern digital asset infrastructure behind the scenes
-          to coordinate capital and reporting, while keeping the borrower
-          experience local-currency and institution-led. Borrowers and local
-          partners do not need to interact with digital assets directly —
-          settlement and disbursement happen through regulated banking
-          channels.
-        </p>
-      </details>
     </section>
   );
 }
@@ -679,23 +618,27 @@ function Footer() {
   ];
 
   return (
-    <footer className="relative z-10 border-t border-neutral-200 bg-white px-6 py-14 md:px-12 lg:px-16">
-      <div className="mx-auto max-w-[1320px]">
-        <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
-          <div className="max-w-[420px]">
-            <p className="font-display text-2xl font-semibold tracking-tight text-neutral-900">
+    <footer
+      className="relative z-10 px-6 py-14 md:px-10 lg:px-14"
+      style={{ borderTop: `1px solid ${DIVIDER}` }}
+    >
+      <div className="mx-auto max-w-[1400px]">
+        <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-start">
+          <div className="max-w-[440px]">
+            <p className="text-xl font-semibold tracking-tight" style={{ color: IVORY }}>
               MALEDA
             </p>
-            <p className="mt-3 text-[13.5px] font-light leading-[1.7] text-neutral-600">
+            <p className="mt-3 text-[13px] font-light leading-[1.65]" style={{ color: IVORY_DIM }}>
               Morning-sun infrastructure for productive business finance.
             </p>
-            <p className="mt-6 text-[12px] font-light text-neutral-500">
+            <p className="mt-6 text-[11px] font-light" style={{ color: IVORY_MUTED }}>
               Built by{" "}
               <a
                 href="https://www.fairway.global"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-medium text-neutral-900 underline-offset-4 hover:underline"
+                className="underline-offset-4 hover:underline"
+                style={{ color: GOLD }}
               >
                 Fairway
               </a>
@@ -708,7 +651,8 @@ function Footer() {
               <a
                 key={l.href}
                 href={l.href}
-                className="text-[13px] font-medium text-neutral-700 transition hover:text-neutral-900"
+                className="text-[12px] font-medium uppercase tracking-[0.16em] transition-colors duration-200"
+                style={{ color: IVORY_DIM }}
               >
                 {l.label}
               </a>
@@ -716,53 +660,12 @@ function Footer() {
           </nav>
         </div>
 
-        <p className="mt-12 text-[11px] font-light text-neutral-400">
-          © {new Date().getFullYear()} Fairway. Maleda is infrastructure for
-          regulated lenders. Maleda is not a lender, bank, or deposit-taking
-          institution.
+        <p className="mt-14 text-[11px] font-light leading-relaxed" style={{ color: IVORY_MUTED }}>
+          &copy; {new Date().getFullYear()} Fairway. Maleda is infrastructure
+          for regulated lenders — not a lender, bank, or deposit-taking
+          institution. Inclusion of any priority does not imply endorsement.
         </p>
       </div>
     </footer>
-  );
-}
-
-/* ----------------------------------------------------------------------- */
-/* Shared primitives                                                       */
-/* ----------------------------------------------------------------------- */
-
-function Section({
-  id,
-  eyebrow,
-  title,
-  tone = "white",
-  children,
-}: {
-  id: string;
-  eyebrow: string;
-  title: string;
-  tone?: "white" | "muted";
-  children: React.ReactNode;
-}) {
-  const bg = tone === "muted" ? "bg-neutral-50" : "bg-white";
-  return (
-    <section
-      id={id}
-      className={`relative z-10 px-6 py-24 md:px-12 lg:px-16 lg:py-28 ${bg}`}
-    >
-      <div className="mx-auto max-w-[1180px]">
-        <InView className="mx-auto max-w-[760px] text-center">
-          <p
-            className="text-[11px] font-medium uppercase tracking-[0.22em]"
-            style={{ color: GOLD }}
-          >
-            {eyebrow}
-          </p>
-          <h2 className="font-display mt-3 text-[28px] font-light leading-[1.08] tracking-tight text-neutral-900 sm:text-[40px] lg:text-[46px]">
-            {title}
-          </h2>
-        </InView>
-        {children}
-      </div>
-    </section>
   );
 }

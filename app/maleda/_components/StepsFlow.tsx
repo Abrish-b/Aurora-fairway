@@ -10,7 +10,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-const GOLD = "#C8923D";
+const GREEN = "#1F3D2F";
 
 type Step = {
   icon: LucideIcon;
@@ -94,8 +94,8 @@ export default function StepsFlow() {
         className="absolute left-0 top-[44px] hidden h-px md:block"
         style={{
           width: `${progress * 100}%`,
-          background: `linear-gradient(90deg, ${GOLD} 0%, rgba(200,146,61,0.45) 100%)`,
-          boxShadow: `0 0 10px ${GOLD}66`,
+          background: `linear-gradient(90deg, ${GREEN} 0%, rgba(31,61,47,0.45) 100%)`,
+          boxShadow: `0 0 10px ${GREEN}66`,
           transition: "width 120ms linear",
         }}
       />
@@ -108,9 +108,9 @@ export default function StepsFlow() {
             key={s.title}
             className="relative rounded-2xl border bg-white p-6 transition-colors duration-300"
             style={{
-              borderColor: filled ? GOLD : "#e5e7eb",
+              borderColor: filled ? GREEN : "#e5e7eb",
               boxShadow: filled
-                ? "0 18px 60px rgba(200,146,61,0.08)"
+                ? "0 18px 60px rgba(31,61,47,0.08)"
                 : "0 10px 30px rgba(0,0,0,0.02)",
             }}
           >
@@ -118,7 +118,7 @@ export default function StepsFlow() {
               <span
                 className="flex h-9 w-9 items-center justify-center rounded-full text-[12px] font-semibold transition-colors duration-300"
                 style={{
-                  background: filled ? GOLD : "#f5f5f5",
+                  background: filled ? GREEN : "#f5f5f5",
                   color: filled ? "#ffffff" : "#737373",
                 }}
               >
@@ -127,7 +127,7 @@ export default function StepsFlow() {
               <Icon
                 className="h-5 w-5 transition-colors duration-300"
                 strokeWidth={1.5}
-                style={{ color: filled ? GOLD : "#a3a3a3" }}
+                style={{ color: filled ? GREEN : "#a3a3a3" }}
               />
             </div>
             <h3 className="mt-5 text-[14px] font-semibold leading-snug text-neutral-900">

@@ -11,7 +11,12 @@
       "Bash(py --version)",
       "Bash(py .claude/skills/ui-ux-pro-max/scripts/search.py \"institutional fintech infrastructure landing page emerging markets calm hopeful warm\" --design-system -p \"Maleda\" -f markdown)",
       "Bash(py .claude/skills/ui-ux-pro-max/scripts/search.py \"scroll animation parallax interactive 3d webgl institutional\" --domain ux -n 8)",
-      "Bash(py .claude/skills/ui-ux-pro-max/scripts/search.py \"minimal institutional editorial serif\" --domain typography -n 4)"
+      "Bash(py .claude/skills/ui-ux-pro-max/scripts/search.py \"minimal institutional editorial serif\" --domain typography -n 4)",
+      "Bash(ls .claude/skills/ 2>&1; echo \"---\"; ls ~/.claude/skills/ 2>&1 | head -30)",
+      "Read(//c/Users/abris.ABRISH/.claude/**)",
+      "Bash(echo \"--- Project skills \\(.claude/skills\\) ---\"; ls -la .claude/skills/ 2>&1 *)",
+      "Read(//c/Users/abris.ABRISH/OneDrive/.claude/**)",
+      "Read(//c/Users/abris.ABRISH/**)"
     ]
   }
 }

@@ -1,21 +1,13 @@
 import type { ReactNode } from "react";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Geist } from "next/font/google";
 
-import SunStage from "./_components/SunStage";
 import ScrollProgress from "./_components/ScrollProgress";
 
-const inter = Inter({
+const geist = Geist({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
   display: "swap",
   variable: "--font-maleda-sans",
-});
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  display: "swap",
-  variable: "--font-maleda-display",
 });
 
 export const metadata = {
@@ -27,11 +19,14 @@ export const metadata = {
 export default function MaledaLayout({ children }: { children: ReactNode }) {
   return (
     <div
-      className={`${inter.variable} ${playfair.variable} relative bg-white text-neutral-900 antialiased`}
-      style={{ fontFamily: "var(--font-maleda-sans), sans-serif" }}
+      className={`${geist.variable} relative antialiased`}
+      style={{
+        fontFamily: "var(--font-maleda-sans), Geist, system-ui, sans-serif",
+        background: "#0A1612",
+        color: "rgba(242,237,223,0.78)",
+      }}
     >
       <ScrollProgress />
-      <SunStage />
       {children}
     </div>
   );

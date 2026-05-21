@@ -213,10 +213,12 @@ body {
   animation: sundownLivePulse 2.4s ease-out infinite;
 }
 
-/* Maleda — editorial display utility (scoped via the layout's font variables) */
+/* Maleda — display heading utility (sans-serif, scoped via layout variable) */
 .font-display {
-  font-family: var(--font-maleda-display), Georgia, serif;
+  font-family: var(--font-maleda-sans), Inter, system-ui, sans-serif;
   font-feature-settings: "ss01", "kern";
+  letter-spacing: -0.025em;
+  font-weight: 500;
 }
 
 /* Maleda — liquid-glass surface */

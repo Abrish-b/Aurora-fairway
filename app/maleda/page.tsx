@@ -52,8 +52,6 @@ const CONTENT = {
       eyebrow: "Aurora · Ethiopia",
       headline: "Access global digital capital\nfor productive lending.",
       sub: "Structured capital access for lending institutions.",
-      support:
-        "Aurora helps regulated lenders connect productive local credit opportunities with structured international capital participation while keeping lending operations under local institutional control.",
       ctaPrimary: "Partner with Aurora",
       ctaSecondary: "See how it works",
       chips: [
@@ -69,11 +67,6 @@ const CONTENT = {
       title: "Global capital exists. ",
       titleGold: "Productive lenders remain constrained.",
       sub: "Aurora connects productive lenders with structured international capital participation.",
-      copy: [
-        "Many lending institutions have strong local borrower relationships and understand their markets, but access to scalable funding channels can be slow, fragmented, or difficult to structure.",
-        "At the same time, global capital is seeking trusted ways to participate in productive lending.",
-        "Aurora connects the two through compliant, structured capital access infrastructure.",
-      ],
       split: {
         leftEyebrow: "Local productive lenders",
         leftTitle: "Originate, underwrite, service",
@@ -89,10 +82,6 @@ const CONTENT = {
       eyebrow: "Why speed matters",
       title: "Short-duration lending should not depend ",
       titleGold: "on slow facility negotiations.",
-      copy: [
-        "Many SME, trade, agriculture, and working-capital loans are time-sensitive. When capital access takes too long, productive lending opportunities can be missed.",
-        "Aurora helps create faster, repeatable participation pathways so lenders can respond to business demand more efficiently.",
-      ],
       visual: {
         slowEyebrow: "Traditional path",
         slowLabel: "Bilateral facility negotiation",
@@ -109,28 +98,6 @@ const CONTENT = {
       title: "Fairway connects lenders with ",
       titleGold: "digital capital infrastructure.",
       sub: "Lenders continue lending. Fairway provides the capital access infrastructure.",
-      cards: [
-        {
-          title: "Lending Institutions",
-          copy: "Originate, underwrite, service, and collect locally.",
-        },
-        {
-          title: "Fairway / Aurora",
-          copy: "Provides structured capital access, compliance-aware infrastructure, and coordination rails.",
-        },
-        {
-          title: "Capital Partners",
-          copy: "Participate in productive lending through structured institutional pathways.",
-        },
-        {
-          title: "Public Stakeholders",
-          copy: "Support financial inclusion, SME growth, agriculture, trade, and job creation.",
-        },
-        {
-          title: "Borrowers",
-          copy: "Receive financing through local regulated lenders.",
-        },
-      ],
       map: {
         capital:   { label: "Capital Partners",     copy: "Participate in productive lending through structured institutional pathways." },
         aurora:    { label: "Fairway / Aurora",     copy: "Structured capital access, compliance-aware infrastructure, coordination rails." },
@@ -148,24 +115,12 @@ const CONTENT = {
       title: "Four steps. ",
       titleGold: "Institutions stay in control.",
       steps: [
-        {
-          title: "Lender approves opportunity",
-          copy: "The lending institution identifies and approves a productive lending opportunity.",
-        },
-        {
-          title: "Structured participation request created",
-          copy: "Aurora helps package the opportunity into a structured participation request.",
-        },
-        {
-          title: "Eligible capital participates",
-          copy: "Capital partners participate through compliant institutional pathways.",
-        },
-        {
-          title: "Local lending continues",
-          copy: "The lender continues borrower relationship management, servicing, and collections.",
-        },
+        { title: "Lender approves opportunity", copy: "" },
+        { title: "Structured participation request", copy: "" },
+        { title: "Eligible capital participates", copy: "" },
+        { title: "Local lending continues", copy: "" },
       ],
-      footer: "From local approval to local servicing — capital moves, the relationship stays.",
+      footer: "Capital moves. The relationship stays.",
     },
     control: {
       num: "05",
@@ -173,8 +128,6 @@ const CONTENT = {
       title: "Institutions remain ",
       titleGold: "in control.",
       sub: "Underwriting, borrower relationships, servicing, and collections remain with the lender.",
-      copy: "Aurora does not replace the lender's role. The local institution remains responsible for borrower assessment, loan origination, customer relationship management, repayment monitoring, and regulatory obligations.",
-      copy2: "Aurora supports the capital access layer around the lender.",
       visual: {
         lenderTitle: "Inside lender control",
         lenderItems: [
@@ -200,7 +153,6 @@ const CONTENT = {
       title: "Private borrower records ",
       titleGold: "stay with the lender.",
       sub: "Aurora coordinates structured funding participation without exposing borrower files.",
-      copy: "Sensitive borrower documents, identity records, agreements, and financial files remain under the custody of the regulated lending institution. Aurora only coordinates structured participation records, verification references, policy status, and transaction metadata needed for institutional funding.",
       visual: {
         leftTitle: "Private Borrower Records",
         leftEyebrow: "Lender custody",
@@ -246,13 +198,13 @@ const CONTENT = {
         statementTitle: "No borrower personal documents are publicly stored.",
         statementSub: "Only structured participation records and verification references are digitally coordinated.",
         pillars: [
-          { title: "Privacy by design", copy: "Sensitive borrower data remains private and institution-controlled." },
-          { title: "Verification confirmation", copy: "Proofs confirm authenticity without exposing source documents." },
-          { title: "Auditability", copy: "Structured records support review, reporting, and oversight." },
-          { title: "Transaction integrity", copy: "Digital records help preserve consistency and accountability." },
-          { title: "Compliance", copy: "Built for institutional standards and governance." },
+          { title: "Privacy by design", copy: "Institution-controlled." },
+          { title: "Verification confirmation", copy: "Proofs without source files." },
+          { title: "Auditability", copy: "Records support review." },
+          { title: "Transaction integrity", copy: "Consistency and accountability." },
+          { title: "Compliance", copy: "Built for institutional governance." },
         ],
-        closing: "Private borrower information remains with the regulated lending institution. Aurora coordinates funding participation without exposing sensitive borrower records.",
+        closing: "Borrower information stays with the lender. Aurora coordinates funding participation around it.",
       },
     },
     trust: {
@@ -262,22 +214,10 @@ const CONTENT = {
       titleGold: "institutional trust.",
       sub: "Verification, auditability, policy controls, and structured governance.",
       pillars: [
-        {
-          title: "Verification",
-          copy: "Participants and opportunities can be checked through defined processes.",
-        },
-        {
-          title: "Auditability",
-          copy: "Participation flows can be recorded and reviewed.",
-        },
-        {
-          title: "Policy Controls",
-          copy: "Eligibility, participation, and reporting rules can be configured.",
-        },
-        {
-          title: "Structured Governance",
-          copy: "Institutions can operate within defined responsibilities and oversight boundaries.",
-        },
+        { title: "Verification", copy: "Defined processes confirm participants and opportunities." },
+        { title: "Auditability", copy: "Flows are recorded and reviewable." },
+        { title: "Policy Controls", copy: "Eligibility and reporting rules are configurable." },
+        { title: "Structured Governance", copy: "Defined responsibilities and oversight." },
       ],
     },
     tech: {
@@ -286,22 +226,21 @@ const CONTENT = {
       title: "Modern digital ",
       titleGold: "financial infrastructure.",
       sub: "Secure digital rails operating behind the scenes — not a borrower-facing crypto product.",
-      copy: "Aurora can use modern digital financial infrastructure to coordinate capital participation, reporting, and settlement processes. For borrowers and local institutions, the experience remains institution-led and local-currency based.",
       visual: {
-        frontTitle: "Front stage — what borrowers and lenders see",
+        frontTitle: "Front stage",
         frontItems: [
-          { label: "Local lender", copy: "The regulated institution remains the customer-facing lender." },
-          { label: "Borrower experience", copy: "Borrowers interact with a familiar local institution, not a crypto product." },
-          { label: "Local-currency loan", copy: "Loans are originated and serviced in local currency." },
+          { label: "Local lender", copy: "Regulated, customer-facing." },
+          { label: "Borrower experience", copy: "Familiar institution. No crypto." },
+          { label: "Local-currency loan", copy: "Originated and serviced locally." },
         ],
-        backTitle: "Back stage — Aurora capital infrastructure",
+        backTitle: "Back stage",
         backItems: [
-          { label: "Structured participation", copy: "Capital participation is packaged and coordinated programmatically." },
-          { label: "Compliance controls", copy: "Eligibility and policy rules are enforced before participation." },
-          { label: "Digital capital coordination", copy: "Modern rails move capital between participants efficiently." },
-          { label: "Reporting rails", copy: "Standardised reporting for supervisors and capital partners." },
+          { label: "Structured participation", copy: "Packaged and coordinated." },
+          { label: "Compliance controls", copy: "Rules enforced pre-participation." },
+          { label: "Digital coordination", copy: "Modern rails move capital." },
+          { label: "Reporting rails", copy: "Standardised reporting." },
         ],
-        separator: "Institution-led front stage · capital rails behind the scenes",
+        separator: "Institution-led front · capital rails behind",
       },
     },
     cta: {
@@ -309,12 +248,11 @@ const CONTENT = {
       title: "Toward broader ",
       titleGold: "capital access.",
       sub: "A repeatable operating model for productive lending participation.",
-      copy: "Aurora helps lending institutions build a more efficient pathway between local credit demand and global capital participation.",
       ctaPrimary: "Partner with Aurora",
       ctaSecondary: "Start a conversation",
     },
     footer: {
-      tagline: "Structured capital access infrastructure for productive lending institutions.",
+      tagline: "Capital access infrastructure for productive lending institutions.",
       builtBy: "Built by",
       links: {
         problem: "The opportunity",
@@ -324,7 +262,7 @@ const CONTENT = {
         contact: "Contact",
       },
       legal:
-        "Aurora is capital access infrastructure for regulated lending institutions — not a bank, microfinance institution, or deposit-taking institution. Borrowers do not interact with crypto.",
+        "Aurora is infrastructure for regulated lenders — not a bank or deposit-taking institution. Borrowers do not interact with crypto.",
     },
   },
 
@@ -342,8 +280,6 @@ const CONTENT = {
       eyebrow: "ማለዳ · ኢትዮጵያ",
       headline: "ለምርታማ ብድር\nዓለም አቀፍ ዲጂታል ካፒታል መዳረሻ።",
       sub: "ለብድር ተቋማት የተዋቀረ የካፒታል መዳረሻ።",
-      support:
-        "ማለዳ የተፈቀዱ ብድር ተቋማት ምርታማ የአካባቢ የብድር እድሎችን ከተዋቀረ ዓለም አቀፍ የካፒታል ተሳትፎ ጋር እንዲያገናኙ ይረዳል። የብድር አሰራር ግን በአካባቢ ተቋማት ቁጥጥር ስር ይቆያል።",
       ctaPrimary: "ከማለዳ ጋር ይተባበሩ",
       ctaSecondary: "እንዴት እንደሚሰራ ይመልከቱ",
       chips: [
@@ -359,11 +295,6 @@ const CONTENT = {
       title: "ዓለም አቀፍ ካፒታል አለ። ",
       titleGold: "ምርታማ ብድር ተቋማት ግን እገዳዎች ያጋጥማቸዋል።",
       sub: "ማለዳ ምርታማ ብድር ተቋማትን ከተዋቀረ ዓለም አቀፍ የካፒታል ተሳትፎ ጋር ያገናኛል።",
-      copy: [
-        "ብዙ የብድር ተቋማት ጠንካራ የአካባቢ ተበዳሪ ግንኙነቶች እና የገበያቸውን ጥልቅ ግንዛቤ አላቸው፤ ነገር ግን ሊስፋፉ የሚችሉ የፈንድ መዳረሻ መንገዶች በቀስ የሚሄዱ፣ የተበታተኑ ወይም ለመዋቀር አስቸጋሪ ሊሆኑ ይችላሉ።",
-        "በተመሳሳይ ጊዜ፣ ዓለም አቀፍ ካፒታል ምርታማ ብድር ላይ ለመሳተፍ የታመኑ መንገዶችን ይፈልጋል።",
-        "ማለዳ ሁለቱን በኮምፕላይየንት እና የተዋቀረ የካፒታል መዳረሻ መሠረተ ልማት ያገናኛል።",
-      ],
       split: {
         leftEyebrow: "የአካባቢ ምርታማ ብድር ተቋማት",
         leftTitle: "ብድር ማመንጨት፣ መገምገም፣ ማስተናገድ",
@@ -379,10 +310,6 @@ const CONTENT = {
       eyebrow: "ፍጥነት ለምን ያስፈልጋል",
       title: "አጭር ጊዜ የሚወስዱ ብድሮች ",
       titleGold: "በቀስ የሚሄዱ የፋሲሊቲ ድርድሮች ላይ መመስረት የለባቸውም።",
-      copy: [
-        "ብዙ SME፣ የንግድ፣ የግብርና እና የስራ ካፒታል ብድሮች ጊዜ-ስሱ ናቸው። የካፒታል መዳረሻ ሲዘገይ ምርታማ የብድር እድሎች ሊጠፉ ይችላሉ።",
-        "ማለዳ ፈጣን እና ተደጋጋሚ የተሳትፎ መንገዶችን እንዲፈጠር ይረዳል፤ ይህም ብድር ተቋማት ለንግድ ፍላጎት በፍጥነት ምላሽ እንዲሰጡ ያስችላል።",
-      ],
       visual: {
         slowEyebrow: "የተለመደ መንገድ",
         slowLabel: "የሁለትዮሽ የፋሲሊቲ ድርድር",
@@ -399,28 +326,6 @@ const CONTENT = {
       title: "ፌርዌይ ብድር ተቋማትን ",
       titleGold: "ከዲጂታል ካፒታል መሠረተ ልማት ጋር ያገናኛል።",
       sub: "ብድር ተቋማት ብድር መስጠታቸውን ይቀጥላሉ። ፌርዌይ የካፒታል መዳረሻ መሠረተ ልማትን ይሰጣል።",
-      cards: [
-        {
-          title: "ብድር ተቋማት",
-          copy: "በአካባቢ ብድር ያመነጫሉ፣ ይገመግማሉ፣ ያስተናግዳሉ እና ይሰበስባሉ።",
-        },
-        {
-          title: "ፌርዌይ / ማለዳ",
-          copy: "የተዋቀረ የካፒታል መዳረሻ፣ ኮምፕላያንስን የሚያገናዝብ መሠረተ ልማት እና የማቀናበሪያ መንገዶችን ይሰጣል።",
-        },
-        {
-          title: "የካፒታል አጋሮች",
-          copy: "በተዋቀሩ ተቋማዊ መንገዶች ምርታማ ብድር ላይ ይሳተፋሉ።",
-        },
-        {
-          title: "ሕዝባዊ ባለድርሻዎች",
-          copy: "የፋይናንስ ተደራሽነትን፣ የSME እድገትን፣ ግብርናን፣ ንግድን እና የስራ ፈጠራን ይደግፋሉ።",
-        },
-        {
-          title: "ተበዳሪዎች",
-          copy: "ብድር በአካባቢ ተፈቅደው በሚሰሩ ብድር ተቋማት በኩል ይቀበላሉ።",
-        },
-      ],
       map: {
         capital:   { label: "የካፒታል አጋሮች",   copy: "በተዋቀሩ ተቋማዊ መንገዶች ምርታማ ብድር ላይ ይሳተፋሉ።" },
         aurora:    { label: "ፌርዌይ / ማለዳ",   copy: "የተዋቀረ የካፒታል መዳረሻ፣ ኮምፕላያንስን የሚያገናዝብ መሠረተ ልማት እና የማቀናበሪያ መንገዶች።" },
@@ -438,24 +343,12 @@ const CONTENT = {
       title: "አራት ደረጃዎች። ",
       titleGold: "ተቋማት ቁጥጥርን ይይዛሉ።",
       steps: [
-        {
-          title: "ብድር ተቋሙ የብድር እድሉን ያጸድቃል",
-          copy: "የብድር ተቋሙ ምርታማ የብድር እድልን ይለያል እና ያጸድቃል።",
-        },
-        {
-          title: "የተዋቀረ የተሳትፎ ጥያቄ ይፈጠራል",
-          copy: "ማለዳ እድሉን ወደ የተዋቀረ የተሳትፎ ጥያቄ ለመቅረጽ ይረዳል።",
-        },
-        {
-          title: "ብቁ ካፒታል ይሳተፋል",
-          copy: "የካፒታል አጋሮች በኮምፕላይየንት ተቋማዊ መንገዶች በኩል ይሳተፋሉ።",
-        },
-        {
-          title: "የአካባቢ ብድር መስጠት ይቀጥላል",
-          copy: "ብድር ተቋሙ የተበዳሪ ግንኙነት፣ አገልግሎት እና ክፍያ መሰብሰብን ይቀጥላል።",
-        },
+        { title: "ብድር ተቋሙ ያጸድቃል", copy: "" },
+        { title: "የተዋቀረ የተሳትፎ ጥያቄ", copy: "" },
+        { title: "ብቁ ካፒታል ይሳተፋል", copy: "" },
+        { title: "የአካባቢ ብድር ይቀጥላል", copy: "" },
       ],
-      footer: "ከአካባቢ ማጽደቅ እስከ አካባቢ አገልግሎት — ካፒታል ይንቀሳቀሳል፣ ግንኙነቱ ግን ይቆያል።",
+      footer: "ካፒታል ይንቀሳቀሳል። ግንኙነቱ ይቆያል።",
     },
     control: {
       num: "05",
@@ -463,8 +356,6 @@ const CONTENT = {
       title: "ተቋማት ",
       titleGold: "ቁጥጥርን ይይዛሉ።",
       sub: "የብድር ግምገማ፣ የተበዳሪ ግንኙነት፣ አገልግሎት እና ክፍያ መሰብሰብ በብድር ተቋሙ ይቆያል።",
-      copy: "ማለዳ የብድር ተቋሙን ሚና አይተካም። የአካባቢ ተቋሙ ለተበዳሪ ግምገማ፣ ለብድር ማመንጨት፣ ለደንበኛ ግንኙነት አስተዳደር፣ ለክፍያ ክትትል እና ለቁጥጥር ግዴታዎች ኃላፊነቱን ይይዛል።",
-      copy2: "ማለዳ በብድር ተቋሙ ዙሪያ ያለውን የካፒታል መዳረሻ ሽፋን ይደግፋል።",
       visual: {
         lenderTitle: "በብድር ተቋሙ ቁጥጥር ውስጥ",
         lenderItems: [
@@ -490,7 +381,6 @@ const CONTENT = {
       title: "የተበዳሪ የግል መረጃ ",
       titleGold: "በብድር ተቋሙ ይቆያል።",
       sub: "ማለዳ የተዋቀረ የፈንድ ተሳትፎን ያቀናብራል፤ የተበዳሪ ፋይሎችን ግን አያጋልጥም።",
-      copy: "የተበዳሪ ሰነዶች፣ የማንነት መረጃ፣ የብድር ስምምነቶች እና የፋይናንስ ፋይሎች በተፈቀደው ብድር ተቋም ውስጥ ይቆያሉ። ማለዳ ለተቋማዊ ፈንድ ተሳትፎ የሚያስፈልጉ የተዋቀሩ የተሳትፎ መዝገቦችን፣ የማረጋገጫ ማጣቀሻዎችን፣ የፖሊሲ ሁኔታን እና የዲጂታል መዝገብ መረጃን ብቻ ያቀናብራል።",
       visual: {
         leftTitle: "የተበዳሪ የግል መዝገቦች",
         leftEyebrow: "በብድር ተቋሙ ይያዛል",
@@ -536,13 +426,13 @@ const CONTENT = {
         statementTitle: "የተበዳሪ የግል ሰነዶች በሕዝብ ፊት አይቀመጡም።",
         statementSub: "የተዋቀሩ የተሳትፎ መዝገቦች እና የማረጋገጫ ማጣቀሻዎች ብቻ በዲጂታል ይቀናበራሉ።",
         pillars: [
-          { title: "በንድፍ ደረጃ የግላዊነት ጥበቃ", copy: "ስሱ የተበዳሪ መረጃ ግላዊ እና በተቋም ቁጥጥር ስር ይቆያል።" },
-          { title: "የማረጋገጫ ማረጋገጥ", copy: "ማስረጃዎች ጥሬ ሰነዶችን ሳያጋልጡ ትክክለኛነትን ያረጋግጣሉ።" },
-          { title: "ለኦዲት የሚመች", copy: "የተዋቀሩ መዝገቦች ግምገማን፣ ሪፖርትን እና ቁጥጥርን ይደግፋሉ።" },
-          { title: "የመዝገብ ታማኝነት", copy: "ዲጂታል መዝገቦች ወጥነትን እና ኃላፊነትን ለማስጠበቅ ይረዳሉ።" },
-          { title: "ኮምፕላያንስ", copy: "ለተቋማዊ ደረጃዎች እና አስተዳደር የተዘጋጀ።" },
+          { title: "በንድፍ ግላዊነት", copy: "በተቋም ቁጥጥር ስር።" },
+          { title: "የማረጋገጫ ማረጋገጥ", copy: "ሰነዶችን ሳያጋልጡ።" },
+          { title: "ለኦዲት የሚመች", copy: "መዝገቦች ለግምገማ።" },
+          { title: "የመዝገብ ታማኝነት", copy: "ወጥነት እና ኃላፊነት።" },
+          { title: "ኮምፕላያንስ", copy: "ለተቋማዊ አስተዳደር።" },
         ],
-        closing: "የተበዳሪ የግል መረጃ በተፈቀደው ብድር ተቋም ውስጥ ይቆያል። ማለዳ ስሱ የተበዳሪ መዝገቦችን ሳያጋልጥ የፈንድ ተሳትፎን ያቀናብራል።",
+        closing: "የተበዳሪ መረጃ በብድር ተቋሙ ይቆያል። ማለዳ ዙሪያውን የፈንድ ተሳትፎን ያቀናብራል።",
       },
     },
     trust: {
@@ -552,22 +442,10 @@ const CONTENT = {
       titleGold: "መተማመን የተገነባ።",
       sub: "ማረጋገጫ፣ ኦዲት መደረግ የሚችል አሰራር፣ የፖሊሲ ቁጥጥር እና የተዋቀረ አስተዳደር።",
       pillars: [
-        {
-          title: "ማረጋገጫ",
-          copy: "ተሳታፊዎች እና እድሎች በተወሰነ አሰራር ሊረጋገጡ ይችላሉ።",
-        },
-        {
-          title: "ኦዲት መደረግ የሚችል አሰራር",
-          copy: "የተሳትፎ ፍሰቶች ሊመዘገቡ እና ሊገመገሙ ይችላሉ።",
-        },
-        {
-          title: "የፖሊሲ ቁጥጥሮች",
-          copy: "የብቁነት፣ የተሳትፎ እና የሪፖርት ህጎች ሊዋቀሩ ይችላሉ።",
-        },
-        {
-          title: "የተዋቀረ አስተዳደር",
-          copy: "ተቋማት በተወሰኑ ኃላፊነቶች እና የቁጥጥር ድንበሮች ውስጥ መስራት ይችላሉ።",
-        },
+        { title: "ማረጋገጫ", copy: "ተሳታፊዎች እና እድሎች ይረጋገጣሉ።" },
+        { title: "ኦዲት የሚደረግ", copy: "ፍሰቶች ይመዘገባሉ እና ይገመገማሉ።" },
+        { title: "የፖሊሲ ቁጥጥሮች", copy: "ህጎች ሊዋቀሩ ይችላሉ።" },
+        { title: "የተዋቀረ አስተዳደር", copy: "የተወሰኑ ኃላፊነቶች እና ቁጥጥር።" },
       ],
     },
     tech: {
@@ -576,22 +454,21 @@ const CONTENT = {
       title: "ዘመናዊ ዲጂታል ",
       titleGold: "የፋይናንስ መሠረተ ልማት።",
       sub: "ከጀርባ የሚሰሩ ደህንነታቸው የተጠበቀ ዲጂታል መንገዶች — ለተበዳሪዎች የሚታይ የክሪፕቶ ምርት አይደለም።",
-      copy: "ማለዳ ዘመናዊ ዲጂታል የፋይናንስ መሠረተ ልማትን በመጠቀም የካፒታል ተሳትፎን፣ ሪፖርት እና ሰትልመንት ሂደቶችን ማቀናበር ይችላል። ለተበዳሪዎች እና ለአካባቢ ተቋማት ግን ተሞክሮው በተቋም መሪነት እና በአካባቢ ገንዘብ ላይ የተመሰረተ ሆኖ ይቆያል።",
       visual: {
-        frontTitle: "የፊት መድረክ — ተበዳሪዎች እና ብድር ተቋማት የሚያዩት",
+        frontTitle: "የፊት መድረክ",
         frontItems: [
-          { label: "የአካባቢ ብድር ተቋም", copy: "የተፈቀደው ተቋም የደንበኛ ግንኙነት ዋና ተቋም ሆኖ ይቆያል።" },
-          { label: "የተበዳሪ ተሞክሮ", copy: "ተበዳሪዎች ከታወቀ የአካባቢ ተቋም ጋር ይገናኛሉ፣ ከክሪፕቶ ምርት አይደለም።" },
-          { label: "በአካባቢ ገንዘብ ብድር", copy: "ብድር በአካባቢ ገንዘብ ይመነጫል እና ይስተናገዳል።" },
+          { label: "የአካባቢ ብድር ተቋም", copy: "የተፈቀደ፣ የደንበኛ ግንኙነት ያለው።" },
+          { label: "የተበዳሪ ተሞክሮ", copy: "የታወቀ ተቋም። ክሪፕቶ የለም።" },
+          { label: "በአካባቢ ገንዘብ ብድር", copy: "በአካባቢ ይመነጫል እና ይስተናገዳል።" },
         ],
-        backTitle: "የጀርባ መድረክ — የማለዳ የካፒታል መሠረተ ልማት",
+        backTitle: "የጀርባ መድረክ",
         backItems: [
-          { label: "የተዋቀረ ተሳትፎ", copy: "የካፒታል ተሳትፎ በፕሮግራም ይዋቀራል እና ይቀናበራል።" },
-          { label: "የኮምፕላያንስ ቁጥጥሮች", copy: "የብቁነት እና የፖሊሲ ህጎች ከተሳትፎ በፊት ይተገበራሉ።" },
-          { label: "የዲጂታል ካፒታል ማቀናበር", copy: "ዘመናዊ መንገዶች በተሳታፊዎች መካከል ካፒታልን በብቃት ያንቀሳቅሳሉ።" },
-          { label: "የሪፖርት መንገዶች", copy: "ለቆጣጣሪዎች እና ለካፒታል አጋሮች መደበኛ ሪፖርት።" },
+          { label: "የተዋቀረ ተሳትፎ", copy: "ይዋቀራል እና ይቀናበራል።" },
+          { label: "የኮምፕላያንስ ቁጥጥሮች", copy: "ህጎች ቅድሚያ ይተገበራሉ።" },
+          { label: "የዲጂታል ማቀናበር", copy: "ዘመናዊ መንገዶች።" },
+          { label: "የሪፖርት መንገዶች", copy: "መደበኛ ሪፖርት።" },
         ],
-        separator: "በተቋም መሪነት የፊት መድረክ · ከጀርባ ያለ የካፒታል መሠረተ ልማት",
+        separator: "በተቋም መሪነት የፊት · ከጀርባ የካፒታል መሠረተ ልማት",
       },
     },
     cta: {
@@ -599,12 +476,11 @@ const CONTENT = {
       title: "ወደ ሰፊ ",
       titleGold: "የካፒታል መዳረሻ።",
       sub: "ለምርታማ ብድር ተሳትፎ ተደጋጋሚ የሆነ የአሰራር ሞዴል።",
-      copy: "ማለዳ የብድር ተቋማት በአካባቢ የብድር ፍላጎት እና በዓለም አቀፍ ካፒታል ተሳትፎ መካከል የበለጠ ቀልጣፋ መንገድ እንዲገነቡ ይረዳል።",
       ctaPrimary: "ከማለዳ ጋር ይተባበሩ",
       ctaSecondary: "ውይይት ይጀምሩ",
     },
     footer: {
-      tagline: "ለምርታማ ብድር ተቋማት የተዋቀረ የካፒታል መዳረሻ መሠረተ ልማት።",
+      tagline: "ለምርታማ ብድር ተቋማት የካፒታል መዳረሻ መሠረተ ልማት።",
       builtBy: "የተገነባው በ",
       links: {
         problem: "እድሉ",
@@ -614,7 +490,7 @@ const CONTENT = {
         contact: "ግንኙነት",
       },
       legal:
-        "ማለዳ ለተፈቀዱ የብድር ተቋማት የተዘጋጀ የካፒታል መዳረሻ መሠረተ ልማት ነው — ባንክ፣ ማይክሮ ፋይናንስ ተቋም ወይም ተቀማጭ የሚቀበል ተቋም አይደለም። ተበዳሪዎች ከክሪፕቶ ጋር አይገናኙም።",
+        "ማለዳ ለተፈቀዱ ብድር ተቋማት መሠረተ ልማት ነው — ባንክ ወይም ተቀማጭ የሚቀበል ተቋም አይደለም። ተበዳሪዎች ከክሪፕቶ ጋር አይገናኙም።",
     },
   },
 };
@@ -720,12 +596,6 @@ function Hero({
               style={{ color: IVORY }}
             >
               {t.hero.sub}
-            </p>
-          </FadeIn>
-
-          <FadeIn delay={1300} duration={700} className="mt-5 max-w-[64ch]">
-            <p className="text-[13.5px] font-light leading-[1.75]" style={{ color: "rgba(242,237,223,0.72)" }}>
-              {t.hero.support}
             </p>
           </FadeIn>
 
@@ -982,13 +852,6 @@ function ProblemSection({ t }: { t: T }) {
       title={t.problem.title}
       titleGold={t.problem.titleGold}
       sub={t.problem.sub}
-      intro={
-        <div className="space-y-5">
-          {t.problem.copy.map((p, i) => (
-            <p key={i}>{p}</p>
-          ))}
-        </div>
-      }
     >
       <ProblemSplitVisual labels={t.problem.split} />
     </Section>
@@ -1007,13 +870,6 @@ function SpeedSection({ t }: { t: T }) {
       eyebrow={t.speed.eyebrow}
       title={t.speed.title}
       titleGold={t.speed.titleGold}
-      intro={
-        <div className="space-y-5">
-          {t.speed.copy.map((p, i) => (
-            <p key={i}>{p}</p>
-          ))}
-        </div>
-      }
     >
       <SpeedComparisonVisual labels={t.speed.visual} />
     </Section>
@@ -1035,22 +891,6 @@ function EcosystemSection({ t }: { t: T }) {
       sub={t.ecosystem.sub}
     >
       <LenderEcosystemMap labels={t.ecosystem.map} />
-
-      <div className="mt-16 grid gap-px sm:grid-cols-2 lg:grid-cols-3" style={{ background: DIVIDER }}>
-        {t.ecosystem.cards.map((c, i) => (
-          <article key={c.title} className="flex flex-col gap-3 p-7" style={{ background: BG }}>
-            <span className="font-mono text-[10px] font-medium uppercase tracking-[0.22em]" style={{ color: GOLD }}>
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <h3 className="text-[17px] font-medium leading-snug tracking-tight" style={{ color: IVORY }}>
-              {c.title}
-            </h3>
-            <p className="text-[13px] font-light leading-[1.7]" style={{ color: IVORY_DIM, maxWidth: "44ch" }}>
-              {c.copy}
-            </p>
-          </article>
-        ))}
-      </div>
     </Section>
   );
 }
@@ -1086,12 +926,6 @@ function ControlSection({ t }: { t: T }) {
       title={t.control.title}
       titleGold={t.control.titleGold}
       sub={t.control.sub}
-      intro={
-        <div className="space-y-5">
-          <p>{t.control.copy}</p>
-          <p>{t.control.copy2}</p>
-        </div>
-      }
     >
       <ControlBoundaryDiagram labels={t.control.visual} />
     </Section>
@@ -1111,7 +945,6 @@ function PrivacySection({ t }: { t: T }) {
       title={t.privacy.title}
       titleGold={t.privacy.titleGold}
       sub={t.privacy.sub}
-      intro={<p>{t.privacy.copy}</p>}
     >
       <PrivateRecordsVisual labels={t.privacy.visual} />
     </Section>
@@ -1150,7 +983,6 @@ function TechnologySection({ t }: { t: T }) {
       title={t.tech.title}
       titleGold={t.tech.titleGold}
       sub={t.tech.sub}
-      intro={<p>{t.tech.copy}</p>}
     >
       <BehindTheScenesInfra labels={t.tech.visual} />
     </Section>
@@ -1189,9 +1021,6 @@ function FinalCTASection({ t }: { t: T }) {
         </h2>
         <p className="mx-auto mt-5 max-w-[58ch] text-[15px] font-light leading-[1.55] tracking-tight" style={{ color: IVORY }}>
           {t.cta.sub}
-        </p>
-        <p className="mx-auto mt-5 max-w-[58ch] text-[14px] font-light leading-[1.75]" style={{ color: IVORY_DIM }}>
-          {t.cta.copy}
         </p>
         <div className="mt-12 flex flex-wrap items-center justify-center gap-6">
           <a

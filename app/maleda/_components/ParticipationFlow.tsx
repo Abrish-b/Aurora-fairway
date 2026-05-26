@@ -37,9 +37,11 @@ export default function ParticipationFlow({ steps, footer }: { steps: Step[]; fo
             <h3 className="text-[16px] font-medium leading-snug tracking-tight" style={{ color: IVORY }}>
               {s.title}
             </h3>
-            <p className="text-[13px] font-light leading-[1.7]" style={{ color: IVORY_DIM }}>
-              {s.copy}
-            </p>
+            {s.copy && (
+              <p className="text-[13px] font-light leading-[1.7]" style={{ color: IVORY_DIM }}>
+                {s.copy}
+              </p>
+            )}
             {!last && (
               <span
                 aria-hidden

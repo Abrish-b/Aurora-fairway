@@ -22,7 +22,8 @@
       "Bash(./node_modules/.bin/next lint *)",
       "Bash(./node_modules/.bin/eslint app/maleda --no-warn-ignored)",
       "Bash(./node_modules/.bin/eslint app/maleda/page.tsx app/maleda/layout.tsx app/maleda/_components/SpeedComparisonVisual.tsx app/maleda/_components/LenderEcosystemMap.tsx app/maleda/_components/ParticipationFlow.tsx app/maleda/_components/ControlBoundaryDiagram.tsx app/maleda/_components/DataBoundaryVisual.tsx app/maleda/_components/InstitutionalTrustFramework.tsx app/maleda/_components/BehindTheScenesInfra.tsx app/maleda/_components/ProblemSplitVisual.tsx)",
-      "Bash(./node_modules/.bin/eslint app/maleda/page.tsx app/maleda/_components/PrivateRecordsVisual.tsx)"
+      "Bash(./node_modules/.bin/eslint app/maleda/page.tsx app/maleda/_components/PrivateRecordsVisual.tsx)",
+      "Bash(./node_modules/.bin/eslint app/maleda/page.tsx app/maleda/_components/ParticipationFlow.tsx)"
     ]
   }
 }

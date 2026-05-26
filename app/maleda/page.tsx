@@ -1,16 +1,12 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 import { ArrowRight, ArrowUpRight, ChevronDown, Minus } from "lucide-react";
 
 import AnimatedHeading from "./_components/AnimatedHeading";
-import CapitalBridgeMap from "./_components/CapitalBridgeMap";
 import FadeIn from "./_components/FadeIn";
 import InView from "./_components/InView";
-import InfrastructurePillars from "./_components/InfrastructurePillars";
-import LenderCapacityConsole from "./_components/LenderCapacityConsole";
-import PartnershipFlow from "./_components/PartnershipFlow";
-import ProblemGapDiagram from "./_components/ProblemGapDiagram";
-import ProductiveFinanceWheel from "./_components/ProductiveFinanceWheel";
-import PublicValueDashboard from "./_components/PublicValueDashboard";
 
 /* Dark minimal palette */
 const BG = "#0A1612";
@@ -23,38 +19,411 @@ const GOLD = "#D6A84F";
 const HERO_VIDEO =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260507_155500_808e6fdd-761f-4acd-b3be-cb7e6e700def.mp4";
 
-const navLinks = [
-  { href: "#problem", label: "Problem" },
-  { href: "#ecosystem", label: "Ecosystem" },
-  { href: "#how-it-works", label: "How It Works" },
-  { href: "#use-cases", label: "Use Cases" },
-  { href: "#trust", label: "Trust" },
-];
+type Lang = "en" | "am";
+
+/* ----------------------------------------------------------------------- */
+/* Bilingual content object                                                */
+/* ----------------------------------------------------------------------- */
+
+const CONTENT = {
+  en: {
+    nav: {
+      problem: "Problem",
+      what: "What Maleda Does",
+      how: "How It Works",
+      use: "Use Cases",
+      tech: "Technology Leap",
+      trust: "Trust",
+      partner: "Partner with Maleda",
+    },
+    hero: {
+      eyebrow: "Morning sun · Ethiopia",
+      headline: "A new morning for\nbusiness lending\nin Ethiopia.",
+      sub: "Maleda helps regulated financial institutions expand local-currency lending to SMEs, farmers, traders, women-led businesses, and growing enterprises.",
+      support: "Verified borrowers. Trusted lenders. Productive credit. No borrower crypto exposure.",
+      ctaPrimary: "Partner with Maleda",
+      ctaSecondary: "See how it works",
+      chips: [
+        "Local-currency lending",
+        "Regulated institution model",
+        "Compliance-first",
+        "Built for Ethiopia's productive economy",
+      ],
+    },
+    problem: {
+      num: "01",
+      eyebrow: "The challenge",
+      title: "Credit demand exists. ",
+      titleGold: "Access does not.",
+      copy: [
+        "Across Ethiopia, many productive businesses are ready to grow but cannot access affordable finance.",
+        "SMEs, farmers, traders, exporters, and women-led businesses often face limited credit because lending infrastructure is fragmented and funding channels are difficult to scale.",
+        "At the same time, regulated lenders need better ways to access capital, verify borrowers, manage risk, and serve more businesses responsibly.",
+      ],
+      bold: "Maleda connects this gap.",
+    },
+    what: {
+      num: "02",
+      eyebrow: "What Maleda does",
+      title: "A lending platform ",
+      titleGold: "built around local institutions.",
+      copy: "Maleda gives regulated lenders the infrastructure to expand productive business lending without losing local control.",
+      colA: {
+        label: "Local institutions continue to",
+        items: [
+          "Originate loans",
+          "Underwrite borrowers",
+          "Serve customers",
+          "Manage repayment",
+          "Meet regulatory obligations",
+        ],
+      },
+      colB: {
+        label: "Maleda supports them with",
+        items: [
+          "Borrower verification",
+          "Compliance workflows",
+          "Capital coordination",
+          "Reporting tools",
+          "Institutional funding access",
+        ],
+      },
+    },
+    how: {
+      num: "03",
+      eyebrow: "How it works",
+      title: "Simple for borrowers. ",
+      titleGold: "Powerful for institutions.",
+      callout: "Borrowers receive financing in local currency. Never cryptocurrency.",
+      steps: [
+        {
+          title: "A regulated lender joins Maleda",
+          copy: "The local institution remains the main customer-facing lender.",
+        },
+        {
+          title: "Businesses are verified locally",
+          copy: "Borrower identity, eligibility, and business information are checked through trusted channels.",
+        },
+        {
+          title: "Loans are originated in local currency",
+          copy: "Borrowers receive financing from the local institution, not from a crypto app.",
+        },
+        {
+          title: "Capital partners participate",
+          copy: "Trusted funding partners support loan portfolios through structured institutional pathways.",
+        },
+        {
+          title: "Growth sectors receive finance",
+          copy: "Credit reaches SMEs, agriculture, trade, equipment, and women-led businesses.",
+        },
+      ],
+    },
+    use: {
+      num: "04",
+      eyebrow: "Use cases",
+      title: "Built for Ethiopia's ",
+      titleGold: "productive economy.",
+      cards: [
+        { title: "SME working capital", copy: "Finance inventory, operations, and expansion." },
+        { title: "Agricultural finance", copy: "Support farmers, cooperatives, processors, and agri-supply chains." },
+        { title: "Trade finance", copy: "Help importers, exporters, and local traders access working capital." },
+        { title: "Women-led businesses", copy: "Expand access to finance for women entrepreneurs." },
+        { title: "Equipment financing", copy: "Enable businesses to acquire machinery, vehicles, and productive assets." },
+        { title: "Export and manufacturing growth", copy: "Support enterprises that generate jobs and foreign exchange." },
+      ],
+    },
+    tech: {
+      num: "05",
+      eyebrow: "Technology leap",
+      title: "A technology leap ",
+      titleGold: "for Ethiopia's credit market.",
+      copy: "Maleda can help Ethiopia move from fragmented business lending to a more connected, transparent, and scalable credit system.",
+      pillars: [
+        {
+          label: "For financial institutions",
+          copy: "Better tools to serve more qualified businesses.",
+        },
+        {
+          label: "For public stakeholders",
+          copy: "Stronger support for SME growth, agriculture, trade, and job creation.",
+        },
+        {
+          label: "For businesses",
+          copy: "Better access to finance through trusted local channels.",
+        },
+      ],
+    },
+    trust: {
+      num: "06",
+      eyebrow: "Trust",
+      title: "Designed for ",
+      titleGold: "institutional trust.",
+      items: [
+        {
+          q: "Do borrowers receive cryptocurrency?",
+          a: "No. Borrowers receive financing in local currency through regulated local institutions.",
+        },
+        {
+          q: "Is Maleda a lender?",
+          a: "Maleda is a lending platform for institutions, but it does not lend directly to the public. Licensed financial institutions originate, underwrite, and service the loans.",
+        },
+        {
+          q: "Does Maleda replace banks or MFIs?",
+          a: "No. Maleda is designed to strengthen regulated lenders, not replace them.",
+        },
+        {
+          q: "Who provides the capital?",
+          a: "Maleda helps connect local lending demand with trusted capital partners through structured institutional channels.",
+        },
+        {
+          q: "Who manages the customer relationship?",
+          a: "The local regulated financial institution manages the borrower relationship.",
+        },
+        {
+          q: "Why is this important for Ethiopia?",
+          a: "It can help expand productive credit for SMEs, agriculture, trade, women-led businesses, and job-creating enterprises.",
+        },
+      ],
+    },
+    cta: {
+      eyebrow: "Get in touch",
+      title: "Partner with Maleda ",
+      titleGold: "to expand productive credit.",
+      copy: "Whether you are a bank, microfinance institution, capital partner, or public stakeholder, Maleda helps build stronger and more scalable credit markets for Ethiopia's productive economy.",
+      button: "Start a conversation",
+    },
+    footer: {
+      tagline: "A lending platform for Ethiopia's productive economy.",
+      builtBy: "Built by",
+      links: { problem: "Problem", what: "What Maleda Does", how: "How It Works", use: "Use Cases", contact: "Contact" },
+      legal:
+        "Maleda is infrastructure for regulated lenders — not a bank, microfinance institution, or deposit-taking institution.",
+    },
+  },
+
+  am: {
+    nav: {
+      problem: "ችግር",
+      what: "ማለዳ ምን ይሰራል",
+      how: "እንዴት እንደሚሰራ",
+      use: "የአጠቃቀም ምሳሌዎች",
+      tech: "የቴክኖሎጂ እርምጃ",
+      trust: "እምነት",
+      partner: "ከማለዳ ጋር ይተባበሩ",
+    },
+    hero: {
+      eyebrow: "ማለዳ · ኢትዮጵያ",
+      headline: "ለኢትዮጵያ የንግድ ብድር\nአዲስ ማለዳ።",
+      sub: "ማለዳ የተፈቀዱ የፋይናንስ ተቋማት ለSME፣ ለገበሬዎች፣ ለነጋዴዎች፣ ለሴቶች የሚመሩ ንግዶች እና ለሚያድጉ ድርጅቶች በአካባቢ ገንዘብ ብድር እንዲያስፋፉ ይረዳል።",
+      support: "የተረጋገጡ ተበዳሪዎች። የታመኑ ተቋማት። ምርታማ ብድር። ለተበዳሪዎች የክሪፕቶ ግንኙነት የለም።",
+      ctaPrimary: "ከማለዳ ጋር ይተባበሩ",
+      ctaSecondary: "እንዴት እንደሚሰራ ይመልከቱ",
+      chips: [
+        "በአካባቢ ገንዘብ ብድር",
+        "በተፈቀዱ ተቋማት የሚሰራ",
+        "ኮምፕላያንስ ቅድሚያ",
+        "ለኢትዮጵያ ምርታማ ኢኮኖሚ የተዘጋጀ",
+      ],
+    },
+    problem: {
+      num: "01",
+      eyebrow: "ችግሩ",
+      title: "የብድር ፍላጎት አለ። ",
+      titleGold: "መዳረሻው ግን ውስን ነው።",
+      copy: [
+        "በኢትዮጵያ ብዙ ምርታማ ንግዶች ለማደግ ዝግጁ ናቸው፤ ነገር ግን ተመጣጣኝ የፋይናንስ መዳረሻ የላቸውም።",
+        "SME፣ ገበሬዎች፣ ነጋዴዎች፣ ላኪዎች እና ሴቶች የሚመሩ ንግዶች ብዙ ጊዜ የብድር መዳረሻ ውስንነት ያጋጥማቸዋል። ምክንያቱ የእድል እጥረት ሳይሆን የብድር መሠረተ ልማት መበታተን ነው።",
+        "በተመሳሳይ ጊዜ፣ የተፈቀዱ የፋይናንስ ተቋማት ካፒታል ለማግኘት፣ ተበዳሪዎችን ለማረጋገጥ፣ አደጋን ለመቆጣጠር እና ብዙ ንግዶችን በኃላፊነት ለማገልገል የተሻለ መንገድ ይፈልጋሉ።",
+      ],
+      bold: "ማለዳ ይህንን ክፍተት ያገናኛል።",
+    },
+    what: {
+      num: "02",
+      eyebrow: "ማለዳ ምን ይሰራል",
+      title: "በአካባቢ ተቋማት ዙሪያ ",
+      titleGold: "የተገነባ የብድር መድረክ።",
+      copy: "ማለዳ የተፈቀዱ የፋይናንስ ተቋማት የምርታማ ንግድ ብድርን እንዲያስፋፉ የሚያግዝ መሠረተ ልማት ይሰጣል። ይህም የአካባቢ ቁጥጥርን አይቀንስም።",
+      colA: {
+        label: "የአካባቢ ተቋማት ይቀጥላሉ",
+        items: [
+          "ብድር ማመንጨት",
+          "ተበዳሪዎችን መገምገም",
+          "ደንበኞችን ማገልገል",
+          "የብድር ክፍያን መከታተል",
+          "የህግ እና የቁጥጥር ግዴታዎችን መፈጸም",
+        ],
+      },
+      colB: {
+        label: "ማለዳ የሚደግፍበት",
+        items: [
+          "የተበዳሪ ማረጋገጫ",
+          "የኮምፕላያንስ ሂደቶች",
+          "የካፒታል ማቀናበሪያ",
+          "የሪፖርት መሳሪያዎች",
+          "የተቋማዊ ፈንድ መዳረሻ",
+        ],
+      },
+    },
+    how: {
+      num: "03",
+      eyebrow: "እንዴት እንደሚሰራ",
+      title: "ለተበዳሪዎች ቀላል። ",
+      titleGold: "ለተቋማት ኃይለኛ።",
+      callout: "ተበዳሪዎች ብድሩን በአካባቢ ገንዘብ ይቀበላሉ። በፍፁም ክሪፕቶ አይደለም።",
+      steps: [
+        {
+          title: "የተፈቀደ የፋይናንስ ተቋም ከማለዳ ጋር ይተባበራል",
+          copy: "የአካባቢ ተቋሙ የደንበኛ ግንኙነት ዋና ተቋም ሆኖ ይቆያል።",
+        },
+        {
+          title: "ንግዶች በአካባቢ ታማኝ መንገዶች ይረጋገጣሉ",
+          copy: "የተበዳሪው ማንነት፣ ብቁነት እና የንግድ መረጃ ይመረመራል።",
+        },
+        {
+          title: "ብድር በአካባቢ ገንዘብ ይሰጣል",
+          copy: "ተበዳሪው ብድር የሚቀበለው ከአካባቢ ተቋም ነው፤ ከክሪፕቶ መተግበሪያ አይደለም።",
+        },
+        {
+          title: "የካፒታል አጋሮች ይሳተፋሉ",
+          copy: "የታመኑ ፈንድ አጋሮች በተዋቀሩ ተቋማዊ መንገዶች የብድር ፖርትፎሊዮዎችን ይደግፋሉ።",
+        },
+        {
+          title: "ምርታማ ዘርፎች ፋይናንስ ያገኛሉ",
+          copy: "ብድር ለSME፣ ለግብርና፣ ለንግድ፣ ለመሣሪያ ፋይናንስ እና ለሴቶች የሚመሩ ንግዶች ይደርሳል።",
+        },
+      ],
+    },
+    use: {
+      num: "04",
+      eyebrow: "የአጠቃቀም ምሳሌዎች",
+      title: "ለኢትዮጵያ ",
+      titleGold: "ምርታማ ኢኮኖሚ የተዘጋጀ።",
+      cards: [
+        { title: "የSME የስራ ካፒታል", copy: "ለእቃ ግዢ፣ ለስራ እንቅስቃሴ እና ለማስፋፋት ፋይናንስ።" },
+        { title: "የግብርና ፋይናንስ", copy: "ለገበሬዎች፣ ለኅብረት ስራ ማህበራት፣ ለማቀነባበሪያዎች እና ለግብርና አቅርቦት ሰንሰለቶች ድጋፍ።" },
+        { title: "የንግድ ፋይናንስ", copy: "ላኪዎች፣ አስመጪዎች እና የአካባቢ ነጋዴዎች የስራ ካፒታል እንዲያገኙ ይረዳል።" },
+        { title: "ሴቶች የሚመሩ ንግዶች", copy: "ለሴት ኢንተርፕረነሮች የፋይናንስ መዳረሻን ያስፋፋል።" },
+        { title: "የመሣሪያ ፋይናንስ", copy: "ንግዶች ማሽነሪ፣ ተሽከርካሪ እና ምርታማ ንብረት እንዲገዙ ይረዳል።" },
+        { title: "የላኪነት እና የማምረቻ እድገት", copy: "ስራ የሚፈጥሩ እና የውጭ ምንዛሬ የሚያመጡ ድርጅቶችን ይደግፋል።" },
+      ],
+    },
+    tech: {
+      num: "05",
+      eyebrow: "የቴክኖሎጂ እርምጃ",
+      title: "ለኢትዮጵያ የብድር ገበያ ",
+      titleGold: "የቴክኖሎጂ እርምጃ።",
+      copy: "ማለዳ ኢትዮጵያ ከተበታተነ የንግድ ብድር ስርዓት ወደ የተገናኘ፣ ግልጽ እና ለማስፋፋት የሚችል የብድር ስርዓት እንድትሸጋገር ሊረዳ ይችላል።",
+      pillars: [
+        {
+          label: "ለፋይናንስ ተቋማት",
+          copy: "ብዙ ብቁ ንግዶችን ለማገልገል የተሻሉ መሳሪያዎች።",
+        },
+        {
+          label: "ለሕዝባዊ ባለድርሻዎች",
+          copy: "የSME እድገትን፣ ግብርናን፣ ንግድን እና የስራ ፈጠራን የሚደግፍ መሠረት።",
+        },
+        {
+          label: "ለንግዶች",
+          copy: "በታመኑ የአካባቢ ተቋማት በኩል የተሻለ የፋይናንስ መዳረሻ።",
+        },
+      ],
+    },
+    trust: {
+      num: "06",
+      eyebrow: "እምነት",
+      title: "ለተቋማዊ እምነት ",
+      titleGold: "የተዘጋጀ።",
+      items: [
+        {
+          q: "ተበዳሪዎች ክሪፕቶ ይቀበላሉ?",
+          a: "አይ። ተበዳሪዎች ብድር የሚቀበሉት በአካባቢ ገንዘብ ነው፤ በተፈቀዱ የአካባቢ ተቋማት በኩል።",
+        },
+        {
+          q: "ማለዳ ብድር ይሰጣል?",
+          a: "ማለዳ ለተቋማት የተዘጋጀ የብድር መድረክ ነው፤ ግን በቀጥታ ለሕዝብ ብድር አይሰጥም። የተፈቀዱ የፋይናንስ ተቋማት ብድሩን ያመነጫሉ፣ ተበዳሪውን ይገመግማሉ እና አገልግሎቱን ይቆጣጠራሉ።",
+        },
+        {
+          q: "ማለዳ ባንኮችን ወይም ማይክሮ ፋይናንስን ይተካል?",
+          a: "አይ። ማለዳ የተፈቀዱ የፋይናንስ ተቋማትን ለማጠናከር የተዘጋጀ ነው፣ ለመተካት አይደለም።",
+        },
+        {
+          q: "ካፒታሉን ማን ያቀርባል?",
+          a: "ማለዳ የአካባቢ የብድር ፍላጎትን ከታመኑ የካፒታል አጋሮች ጋር በተዋቀሩ ተቋማዊ መንገዶች ለማገናኘት ይረዳል።",
+        },
+        {
+          q: "የደንበኛ ግንኙነትን ማን ይቆጣጠራል?",
+          a: "የአካባቢ የተፈቀደ የፋይናንስ ተቋም የተበዳሪውን ግንኙነት ይቆጣጠራል።",
+        },
+        {
+          q: "ይህ ለኢትዮጵያ ለምን አስፈላጊ ነው?",
+          a: "ለSME፣ ለግብርና፣ ለንግድ፣ ለሴቶች የሚመሩ ንግዶች እና ለስራ ፈጠራ ድርጅቶች ምርታማ ብድር ለማስፋፋት ሊረዳ ይችላል።",
+        },
+      ],
+    },
+    cta: {
+      eyebrow: "እኛን ያግኙን",
+      title: "ምርታማ ብድርን ለማስፋፋት ",
+      titleGold: "ከማለዳ ጋር ይተባበሩ።",
+      copy: "ባንክ፣ ማይክሮ ፋይናንስ ተቋም፣ የካፒታል አጋር ወይም ሕዝባዊ ባለድርሻ ከሆኑ፣ ማለዳ ለኢትዮጵያ ምርታማ ኢኮኖሚ ጠንካራ እና ሊስፋፋ የሚችል የብድር ገበያ ለመገንባት ይረዳል።",
+      button: "ውይይት ይጀምሩ",
+    },
+    footer: {
+      tagline: "ለኢትዮጵያ ምርታማ ኢኮኖሚ የተዘጋጀ የብድር መድረክ።",
+      builtBy: "የተገነባው በ",
+      links: { problem: "ችግር", what: "ማለዳ ምን ይሰራል", how: "እንዴት እንደሚሰራ", use: "የአጠቃቀም ምሳሌዎች", contact: "ግንኙነት" },
+      legal:
+        "ማለዳ ለተፈቀዱ የፋይናንስ ተቋማት የተዘጋጀ መሠረተ ልማት ነው — ባንክ፣ ማይክሮ ፋይናንስ ተቋም ወይም ተቀማጭ የሚቀበል ተቋም አይደለም።",
+    },
+  },
+};
+
+/* ----------------------------------------------------------------------- */
+/* Page                                                                    */
+/* ----------------------------------------------------------------------- */
 
 export default function MaledaPage() {
+  const [lang, setLang] = useState<Lang>("en");
+  const t = CONTENT[lang];
+
+  // Apply language-aware typography to the entire page subtree.
+  const fontVar =
+    lang === "am" ? "var(--font-maleda-am), 'Noto Sans Ethiopic', sans-serif" : "var(--font-maleda-en), Inter, system-ui, sans-serif";
+  const lineHeightClass = lang === "am" ? "[&_p]:leading-[1.9] [&_li]:leading-[1.9]" : "";
+
   return (
-    <div style={{ background: BG, color: IVORY_DIM }}>
-      <Hero />
-      <ProblemSection />
-      <EcosystemSection />
-      <HowItWorksSection />
-      <PillarsSection />
-      <LenderBenefitsSection />
-      <UseCasesSection />
-      <WhyNowSection />
-      <PublicValueSection />
-      <TrustSection />
-      <FinalCTASection />
-      <Footer />
+    <div
+      lang={lang}
+      className={lineHeightClass}
+      style={{ background: BG, color: IVORY_DIM, fontFamily: fontVar }}
+    >
+      <Hero lang={lang} setLang={setLang} t={t} />
+      <ProblemSection t={t} />
+      <WhatMaledaDoes t={t} />
+      <HowItWorksSection t={t} />
+      <UseCasesSection t={t} />
+      <TechnologyLeapSection t={t} />
+      <TrustSection t={t} />
+      <FinalCTASection t={t} />
+      <Footer lang={lang} t={t} />
     </div>
   );
 }
 
+type T = (typeof CONTENT)["en"];
+
 /* ----------------------------------------------------------------------- */
-/* Hero — full-screen video + minimal copy                                 */
+/* Hero + Navbar                                                           */
 /* ----------------------------------------------------------------------- */
 
-function Hero() {
+function Hero({
+  lang,
+  setLang,
+  t,
+}: {
+  lang: Lang;
+  setLang: (l: Lang) => void;
+  t: T;
+}) {
   return (
     <section
       id="top"
@@ -69,7 +438,6 @@ function Hero() {
         className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover"
         src={HERO_VIDEO}
       />
-      {/* Soft vignettes — keep video raw but ensure text legibility */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10"
@@ -79,7 +447,7 @@ function Hero() {
         }}
       />
 
-      <Navbar />
+      <Navbar lang={lang} setLang={setLang} t={t} />
 
       <div className="relative z-10 mx-auto mt-auto flex w-full max-w-[1400px] flex-col gap-10 px-6 pb-20 md:px-10 lg:px-14 lg:pb-24">
         <div className="max-w-[820px]">
@@ -89,30 +457,41 @@ function Hero() {
               style={{ color: IVORY_DIM }}
             >
               <span aria-hidden className="h-px w-8" style={{ background: GOLD }} />
-              Morning sun · Ethiopia & emerging markets
+              {t.hero.eyebrow}
             </span>
           </FadeIn>
 
           <AnimatedHeading
-            text={"Expand access to\nproductive business finance."}
-            className="mt-7 text-[44px] font-medium leading-[1.02] tracking-[-0.025em] sm:text-[60px] lg:text-[76px]"
+            key={lang} // re-trigger animation on language switch
+            text={t.hero.headline}
+            className={`mt-7 text-[40px] font-medium leading-[1.06] tracking-[-0.025em] sm:text-[56px] ${
+              lang === "am" ? "lg:text-[64px]" : "lg:text-[72px]"
+            }`}
           />
 
-          <FadeIn delay={1200} duration={700} className="mt-8 max-w-[55ch]">
-            <p className="text-[15px] font-light leading-[1.7] sm:text-[17px]" style={{ color: "rgba(242,237,223,0.78)" }}>
-              Trusted local-currency finance for productive businesses,
-              delivered through regulated lenders.
+          <FadeIn delay={1100} duration={700} className="mt-8 max-w-[58ch]">
+            <p
+              className="text-[15px] font-light leading-[1.7] sm:text-[17px]"
+              style={{ color: "rgba(242,237,223,0.80)" }}
+            >
+              {t.hero.sub}
             </p>
           </FadeIn>
 
-          <FadeIn delay={1450} duration={700} className="mt-10">
+          <FadeIn delay={1300} duration={700} className="mt-4 max-w-[58ch]">
+            <p className="text-[12px] font-light leading-[1.7]" style={{ color: IVORY_MUTED }}>
+              {t.hero.support}
+            </p>
+          </FadeIn>
+
+          <FadeIn delay={1500} duration={700} className="mt-10">
             <div className="flex flex-wrap items-center gap-6">
               <a
                 href="#cta"
                 className="inline-flex h-12 cursor-pointer items-center justify-center gap-2 px-6 text-[13px] font-semibold tracking-tight transition active:scale-[0.98] hover:brightness-110"
                 style={{ background: GOLD, color: BG }}
               >
-                Partner with Maleda
+                {t.hero.ctaPrimary}
                 <ArrowRight className="h-4 w-4" strokeWidth={1.7} />
               </a>
               <a
@@ -124,9 +503,23 @@ function Hero() {
                   paddingBottom: 2,
                 }}
               >
-                See how it works
+                {t.hero.ctaSecondary}
                 <ArrowRight className="h-4 w-4" strokeWidth={1.7} />
               </a>
+            </div>
+          </FadeIn>
+
+          <FadeIn delay={1750} duration={700} className="mt-12 max-w-[760px]">
+            <div className="grid grid-cols-2 gap-x-6 gap-y-2 sm:grid-cols-4">
+              {t.hero.chips.map((c) => (
+                <span
+                  key={c}
+                  className="border-t pt-3 text-[11px] font-medium leading-snug"
+                  style={{ borderColor: "rgba(242,237,223,0.18)", color: "rgba(242,237,223,0.78)" }}
+                >
+                  {c}
+                </span>
+              ))}
             </div>
           </FadeIn>
         </div>
@@ -135,7 +528,23 @@ function Hero() {
   );
 }
 
-function Navbar() {
+function Navbar({
+  lang,
+  setLang,
+  t,
+}: {
+  lang: Lang;
+  setLang: (l: Lang) => void;
+  t: T;
+}) {
+  const links = [
+    { href: "#problem", label: t.nav.problem },
+    { href: "#what", label: t.nav.what },
+    { href: "#how-it-works", label: t.nav.how },
+    { href: "#use-cases", label: t.nav.use },
+    { href: "#trust", label: t.nav.trust },
+  ];
+
   return (
     <header className="relative z-30 pt-6">
       <div className="mx-auto w-full max-w-[1400px] px-6 md:px-10 lg:px-14">
@@ -150,8 +559,8 @@ function Navbar() {
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-7 md:flex">
-            {navLinks.map((link) => (
+          <nav className="hidden items-center gap-7 lg:flex">
+            {links.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
@@ -163,26 +572,72 @@ function Navbar() {
             ))}
           </nav>
 
-          <a
-            href="#cta"
-            className="inline-flex items-center gap-2 text-[12px] font-medium uppercase tracking-[0.16em] transition"
-            style={{
-              color: GOLD,
-              borderBottom: `1px solid ${GOLD}`,
-              paddingBottom: 2,
-            }}
-          >
-            Partner with Maleda
-            <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={1.7} />
-          </a>
+          <div className="flex items-center gap-6">
+            <LangToggle lang={lang} setLang={setLang} />
+            <a
+              href="#cta"
+              className="hidden items-center gap-2 text-[12px] font-medium uppercase tracking-[0.16em] transition sm:inline-flex"
+              style={{
+                color: GOLD,
+                borderBottom: `1px solid ${GOLD}`,
+                paddingBottom: 2,
+              }}
+            >
+              {t.nav.partner}
+              <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={1.7} />
+            </a>
+          </div>
         </div>
       </div>
     </header>
   );
 }
 
+function LangToggle({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
+  return (
+    <div
+      role="group"
+      aria-label="Language selector"
+      className="inline-flex items-center text-[12px] font-medium uppercase tracking-[0.16em]"
+    >
+      <button
+        type="button"
+        onClick={() => setLang("en")}
+        aria-pressed={lang === "en"}
+        aria-label="Switch to English"
+        className="cursor-pointer transition-colors duration-200"
+        style={{
+          color: lang === "en" ? GOLD : IVORY_DIM,
+          borderBottom: lang === "en" ? `1px solid ${GOLD}` : "1px solid transparent",
+          paddingBottom: 2,
+        }}
+      >
+        EN
+      </button>
+      <span aria-hidden className="mx-2" style={{ color: IVORY_MUTED }}>
+        |
+      </span>
+      <button
+        type="button"
+        onClick={() => setLang("am")}
+        aria-pressed={lang === "am"}
+        aria-label="ወደ አማርኛ ቀይር"
+        className="cursor-pointer transition-colors duration-200"
+        style={{
+          color: lang === "am" ? GOLD : IVORY_DIM,
+          borderBottom: lang === "am" ? `1px solid ${GOLD}` : "1px solid transparent",
+          paddingBottom: 2,
+          fontFamily: "var(--font-maleda-am), 'Noto Sans Ethiopic', sans-serif",
+        }}
+      >
+        አማ
+      </button>
+    </div>
+  );
+}
+
 /* ----------------------------------------------------------------------- */
-/* Shared minimal section primitive                                        */
+/* Section primitive                                                        */
 /* ----------------------------------------------------------------------- */
 
 function Section({
@@ -190,15 +645,17 @@ function Section({
   num,
   eyebrow,
   title,
+  titleGold,
   intro,
   children,
 }: {
   id: string;
   num: string;
   eyebrow: string;
-  title: React.ReactNode;
+  title: string;
+  titleGold: string;
   intro?: React.ReactNode;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }) {
   return (
     <section
@@ -219,16 +676,14 @@ function Section({
 
           <div>
             <h2
-              className="text-[32px] font-medium leading-[1.04] tracking-[-0.025em] sm:text-[44px] lg:text-[52px]"
+              className="text-[30px] font-medium leading-[1.06] tracking-[-0.025em] sm:text-[42px] lg:text-[50px]"
               style={{ color: IVORY, textWrap: "balance" }}
             >
               {title}
+              <span style={{ color: GOLD }}>{titleGold}</span>
             </h2>
             {intro && (
-              <div
-                className="mt-6 text-[15px] font-light leading-[1.7]"
-                style={{ color: IVORY_DIM, maxWidth: "60ch" }}
-              >
+              <div className="mt-6 text-[15px] font-light leading-[1.75]" style={{ color: IVORY_DIM, maxWidth: "60ch" }}>
                 {intro}
               </div>
             )}
@@ -244,76 +699,80 @@ function Section({
 /* Problem                                                                 */
 /* ----------------------------------------------------------------------- */
 
-function ProblemSection() {
+function ProblemSection({ t }: { t: T }) {
   return (
     <Section
       id="problem"
-      num="01"
-      eyebrow="The challenge"
-      title={
-        <>
-          Credit demand exists.{" "}
-          <span style={{ color: GOLD }}>Access does not.</span>
-        </>
-      }
-      intro="Productive businesses are underfinanced — not for lack of opportunity, but because credit infrastructure is fragmented. Maleda connects the two sides."
+      num={t.problem.num}
+      eyebrow={t.problem.eyebrow}
+      title={t.problem.title}
+      titleGold={t.problem.titleGold}
     >
-      <ProblemGapDiagram />
+      <div className="mt-8 space-y-5">
+        {t.problem.copy.map((p, i) => (
+          <p key={i} className="text-[15px] font-light leading-[1.75]" style={{ color: IVORY_DIM, maxWidth: "62ch" }}>
+            {p}
+          </p>
+        ))}
+      </div>
+      <p
+        className="mt-10 border-l pl-5 text-[20px] font-medium leading-snug tracking-tight sm:text-[26px]"
+        style={{ borderColor: GOLD, color: IVORY }}
+      >
+        {t.problem.bold}
+      </p>
     </Section>
   );
 }
 
 /* ----------------------------------------------------------------------- */
-/* Ecosystem                                                               */
+/* What Maleda Does                                                        */
 /* ----------------------------------------------------------------------- */
 
-function EcosystemSection() {
+function WhatMaledaDoes({ t }: { t: T }) {
   return (
     <Section
-      id="ecosystem"
-      num="02"
-      eyebrow="A trusted ecosystem"
-      title={
-        <>
-          A trusted ecosystem{" "}
-          <span style={{ color: GOLD }}>for productive lending.</span>
-        </>
-      }
-      intro="Maleda connects the institutions required to expand credit safely."
+      id="what"
+      num={t.what.num}
+      eyebrow={t.what.eyebrow}
+      title={t.what.title}
+      titleGold={t.what.titleGold}
+      intro={<p>{t.what.copy}</p>}
     >
-      <div className="mt-16">
-        <CapitalBridgeMap />
+      <div className="mt-16 grid gap-10 md:grid-cols-2 md:gap-16">
+        <DualList label={t.what.colA.label} items={t.what.colA.items} />
+        <DualList label={t.what.colB.label} items={t.what.colB.items} accent />
       </div>
+    </Section>
+  );
+}
 
-      <ul className="mt-20 divide-y" style={{ borderColor: DIVIDER }}>
-        {[
-          { role: "Businesses", copy: "Receive financing through trusted local lenders." },
-          { role: "Financial Institutions", copy: "Originate and service loans locally." },
-          { role: "Maleda", copy: "Identity, compliance, and capital coordination.", highlight: true },
-          { role: "Capital Partners", copy: "Structured participation in productive lending." },
-          { role: "Public Stakeholders", copy: "Advance inclusion and economic development." },
-        ].map((c, i) => (
+function DualList({ label, items, accent = false }: { label: string; items: readonly string[]; accent?: boolean }) {
+  return (
+    <div>
+      <p
+        className="text-[10px] font-medium uppercase tracking-[0.22em]"
+        style={{ color: accent ? GOLD : IVORY_MUTED }}
+      >
+        {label}
+      </p>
+      <ul className="mt-5 divide-y" style={{ borderColor: DIVIDER }}>
+        {items.map((item, i) => (
           <li
-            key={c.role}
-            className="grid grid-cols-[40px_180px_1fr] items-baseline gap-6 border-t py-5 first:border-t-0"
+            key={item}
+            className="grid grid-cols-[42px_1fr] items-baseline gap-3 border-t py-4 first:border-t-0"
             style={{ borderColor: DIVIDER }}
           >
             <span className="font-mono text-[10px] font-medium uppercase tracking-[0.22em]" style={{ color: IVORY_MUTED }}>
               {String(i + 1).padStart(2, "0")}
             </span>
-            <h3
-              className="text-[16px] font-medium tracking-tight"
-              style={{ color: c.highlight ? GOLD : IVORY }}
-            >
-              {c.role}
-            </h3>
-            <p className="text-[13.5px] font-light leading-[1.7]" style={{ color: IVORY_DIM }}>
-              {c.copy}
-            </p>
+            <span className="text-[15px] font-medium leading-snug tracking-tight" style={{ color: IVORY }}>
+              {item}
+            </span>
           </li>
         ))}
       </ul>
-    </Section>
+    </div>
   );
 }
 
@@ -321,75 +780,49 @@ function EcosystemSection() {
 /* How It Works                                                            */
 /* ----------------------------------------------------------------------- */
 
-function HowItWorksSection() {
+function HowItWorksSection({ t }: { t: T }) {
   return (
     <Section
       id="how-it-works"
-      num="03"
-      eyebrow="How it works"
-      title={
-        <>
-          Built for partnership{" "}
-          <span style={{ color: GOLD }}>with local institutions.</span>
-        </>
-      }
-      intro="Maleda is not a lender. Local institutions own origination, underwriting, and servicing."
+      num={t.how.num}
+      eyebrow={t.how.eyebrow}
+      title={t.how.title}
+      titleGold={t.how.titleGold}
     >
       <p
         className="mt-10 border-l pl-5 text-[14px] font-medium leading-snug tracking-tight"
         style={{ borderColor: GOLD, color: IVORY }}
       >
-        Borrowers receive financing in local currency.{" "}
-        <span style={{ color: GOLD }}>Never cryptocurrency.</span>
+        {t.how.callout}
       </p>
 
-      <PartnershipFlow />
-    </Section>
-  );
-}
-
-/* ----------------------------------------------------------------------- */
-/* Infrastructure Pillars                                                  */
-/* ----------------------------------------------------------------------- */
-
-function PillarsSection() {
-  return (
-    <Section
-      id="pillars"
-      num="04"
-      eyebrow="Infrastructure pillars"
-      title={
-        <>
-          Infrastructure for{" "}
-          <span style={{ color: GOLD }}>trusted credit expansion.</span>
-        </>
-      }
-      intro="Four operational layers for responsible credit growth."
-    >
-      <InfrastructurePillars />
-    </Section>
-  );
-}
-
-/* ----------------------------------------------------------------------- */
-/* Lender Benefits                                                         */
-/* ----------------------------------------------------------------------- */
-
-function LenderBenefitsSection() {
-  return (
-    <Section
-      id="lender-benefits"
-      num="05"
-      eyebrow="For regulated lenders"
-      title={
-        <>
-          New capital{" "}
-          <span style={{ color: GOLD }}>for local lending growth.</span>
-        </>
-      }
-      intro="Built to strengthen the institutions already serving borrowers."
-    >
-      <LenderCapacityConsole />
+      <ol className="relative mt-16">
+        <div
+          aria-hidden
+          className="absolute left-[14px] top-0 bottom-0 w-px"
+          style={{ background: "rgba(242,237,223,0.10)" }}
+        />
+        {t.how.steps.map((s, i) => (
+          <li key={i} className="relative pl-12 pb-10 last:pb-0">
+            <span
+              aria-hidden
+              className="absolute left-[8px] top-1 h-[13px] w-[13px] rounded-full"
+              style={{ background: GOLD, border: `1px solid ${GOLD}` }}
+            />
+            <div className="flex items-baseline gap-3">
+              <span className="font-mono text-[10px] font-medium uppercase tracking-[0.22em]" style={{ color: GOLD }}>
+                {String(i + 1).padStart(2, "0")}
+              </span>
+            </div>
+            <h3 className="mt-3 text-[18px] font-medium leading-snug tracking-tight" style={{ color: IVORY }}>
+              {s.title}
+            </h3>
+            <p className="mt-2 max-w-[58ch] text-[14px] font-light leading-[1.7]" style={{ color: IVORY_DIM }}>
+              {s.copy}
+            </p>
+          </li>
+        ))}
+      </ol>
     </Section>
   );
 }
@@ -398,57 +831,20 @@ function LenderBenefitsSection() {
 /* Use Cases                                                               */
 /* ----------------------------------------------------------------------- */
 
-function UseCasesSection() {
+function UseCasesSection({ t }: { t: T }) {
   return (
     <Section
       id="use-cases"
-      num="06"
-      eyebrow="Use cases"
-      title={
-        <>
-          Financing <span style={{ color: GOLD }}>real economic growth.</span>
-        </>
-      }
-      intro="Productive sectors served by Maleda-enabled lending."
+      num={t.use.num}
+      eyebrow={t.use.eyebrow}
+      title={t.use.title}
+      titleGold={t.use.titleGold}
     >
-      <ProductiveFinanceWheel />
-    </Section>
-  );
-}
-
-/* ----------------------------------------------------------------------- */
-/* Why Now                                                                 */
-/* ----------------------------------------------------------------------- */
-
-function WhyNowSection() {
-  const cards = [
-    { title: "Business demand is growing", copy: "Emerging market businesses need affordable credit to scale and create jobs." },
-    { title: "Lenders need scalable infrastructure", copy: "Banks and MFIs need tools to expand responsible lending." },
-    { title: "Capital partners need trusted channels", copy: "Global capital wants compliant pathways into productive finance." },
-  ];
-
-  return (
-    <Section
-      id="why-now"
-      num="07"
-      eyebrow="Why now"
-      title={
-        <>
-          Global capital.{" "}
-          <span style={{ color: GOLD }}>Local opportunity.</span>
-        </>
-      }
-      intro="New global liquidity. Growing emerging-market demand. Maleda connects them safely."
-    >
-      <div className="mt-16 grid gap-px sm:grid-cols-3" style={{ background: DIVIDER }}>
-        {cards.map((c, i) => (
-          <article
-            key={c.title}
-            className="flex flex-col gap-4 p-8"
-            style={{ background: BG }}
-          >
+      <div className="mt-16 grid gap-px sm:grid-cols-2 lg:grid-cols-3" style={{ background: DIVIDER }}>
+        {t.use.cards.map((c, i) => (
+          <article key={c.title} className="flex flex-col gap-4 p-8" style={{ background: BG }}>
             <span className="font-mono text-[10px] font-medium uppercase tracking-[0.22em]" style={{ color: GOLD }}>
-              {String(i + 1).padStart(2, "0")} / 03
+              {String(i + 1).padStart(2, "0")} / 06
             </span>
             <h3 className="text-[18px] font-medium leading-snug tracking-tight" style={{ color: IVORY }}>
               {c.title}
@@ -464,24 +860,40 @@ function WhyNowSection() {
 }
 
 /* ----------------------------------------------------------------------- */
-/* Public Value                                                            */
+/* Technology Leap                                                         */
 /* ----------------------------------------------------------------------- */
 
-function PublicValueSection() {
+function TechnologyLeapSection({ t }: { t: T }) {
   return (
     <Section
-      id="public-value"
-      num="08"
-      eyebrow="Public value"
-      title={
-        <>
-          Designed to support{" "}
-          <span style={{ color: GOLD }}>national development.</span>
-        </>
-      }
-      intro="Financial inclusion, SME growth, agriculture, job creation."
+      id="tech"
+      num={t.tech.num}
+      eyebrow={t.tech.eyebrow}
+      title={t.tech.title}
+      titleGold={t.tech.titleGold}
+      intro={<p>{t.tech.copy}</p>}
     >
-      <PublicValueDashboard />
+      <ul className="mt-16 divide-y" style={{ borderColor: DIVIDER }}>
+        {t.tech.pillars.map((p, i) => (
+          <li
+            key={p.label}
+            className="grid grid-cols-1 gap-3 border-t py-7 first:border-t-0 sm:grid-cols-[280px_1fr] sm:gap-10"
+            style={{ borderColor: DIVIDER }}
+          >
+            <div className="flex items-baseline gap-3">
+              <span className="font-mono text-[10px] font-medium uppercase tracking-[0.22em]" style={{ color: GOLD }}>
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className="text-[15px] font-medium leading-snug tracking-tight" style={{ color: IVORY }}>
+                {p.label}
+              </h3>
+            </div>
+            <p className="text-[14px] font-light leading-[1.75]" style={{ color: IVORY_DIM, maxWidth: "58ch" }}>
+              {p.copy}
+            </p>
+          </li>
+        ))}
+      </ul>
     </Section>
   );
 }
@@ -490,30 +902,17 @@ function PublicValueSection() {
 /* Trust / FAQ                                                             */
 /* ----------------------------------------------------------------------- */
 
-function TrustSection() {
-  const items = [
-    { q: "Do borrowers receive cryptocurrency?", a: "No. Financing is delivered through regulated local lending channels in applicable local currencies." },
-    { q: "Is Maleda a lender?", a: "No. Local regulated financial institutions originate, underwrite, and service loans." },
-    { q: "Does Maleda replace local financial institutions?", a: "No. Maleda strengthens regulated lenders by expanding access to capital infrastructure." },
-    { q: "Who provides the loan capital?", a: "Structured participation from global capital partners through compliant institutional pathways." },
-    { q: "Who manages the borrower relationship?", a: "The local regulated financial institution — including underwriting, servicing, and compliance." },
-    { q: "How does Maleda support public priorities?", a: "Designed to support financial inclusion, SME growth, agriculture, trade, women-led enterprises, and job creation." },
-  ];
-
+function TrustSection({ t }: { t: T }) {
   return (
     <Section
       id="trust"
-      num="09"
-      eyebrow="Trust"
-      title={
-        <>
-          Designed for{" "}
-          <span style={{ color: GOLD }}>institutional trust.</span>
-        </>
-      }
+      num={t.trust.num}
+      eyebrow={t.trust.eyebrow}
+      title={t.trust.title}
+      titleGold={t.trust.titleGold}
     >
-      <div className="mt-16 divide-y" style={{ borderColor: DIVIDER }}>
-        {items.map((item, i) => (
+      <div className="mt-16">
+        {t.trust.items.map((item, i) => (
           <details
             key={item.q}
             className="group border-t [&_summary::-webkit-details-marker]:hidden"
@@ -547,7 +946,7 @@ function TrustSection() {
 /* Final CTA                                                               */
 /* ----------------------------------------------------------------------- */
 
-function FinalCTASection() {
+function FinalCTASection({ t }: { t: T }) {
   return (
     <section
       id="cta"
@@ -562,20 +961,19 @@ function FinalCTASection() {
             "radial-gradient(50% 50% at 50% 30%, rgba(214,168,79,0.10) 0%, transparent 70%)",
         }}
       />
-      <InView className="relative mx-auto max-w-[760px] text-center">
+      <InView className="relative mx-auto max-w-[820px] text-center">
         <p className="text-[11px] font-medium uppercase tracking-[0.22em]" style={{ color: GOLD }}>
-          Get in touch
+          {t.cta.eyebrow}
         </p>
         <h2
-          className="mt-6 text-[36px] font-medium leading-[1.04] tracking-[-0.025em] sm:text-[52px] lg:text-[64px]"
+          className="mt-6 text-[34px] font-medium leading-[1.06] tracking-[-0.025em] sm:text-[48px] lg:text-[58px]"
           style={{ color: IVORY, textWrap: "balance" }}
         >
-          Expand access to{" "}
-          <span style={{ color: GOLD }}>productive credit.</span>
+          {t.cta.title}
+          <span style={{ color: GOLD }}>{t.cta.titleGold}</span>
         </h2>
-        <p className="mx-auto mt-6 max-w-[52ch] text-[15px] font-light leading-[1.7]" style={{ color: IVORY_DIM }}>
-          Whether lender, capital partner, or public stakeholder — Maleda helps
-          build stronger credit markets.
+        <p className="mx-auto mt-6 max-w-[58ch] text-[15px] font-light leading-[1.75]" style={{ color: IVORY_DIM }}>
+          {t.cta.copy}
         </p>
         <div className="mt-12 flex flex-wrap items-center justify-center gap-6">
           <a
@@ -583,20 +981,8 @@ function FinalCTASection() {
             className="inline-flex h-12 cursor-pointer items-center justify-center gap-2 px-7 text-[13px] font-semibold tracking-tight transition active:scale-[0.98] hover:brightness-110"
             style={{ background: GOLD, color: BG }}
           >
-            Start a conversation
+            {t.cta.button}
             <ArrowRight className="h-4 w-4" strokeWidth={1.7} />
-          </a>
-          <a
-            href="mailto:hello@fairway.global?subject=Maleda%20partner"
-            className="inline-flex h-12 cursor-pointer items-center gap-2 text-[13px] font-medium transition"
-            style={{
-              color: IVORY,
-              borderBottom: `1px solid ${IVORY}`,
-              paddingBottom: 2,
-            }}
-          >
-            Partner with Maleda
-            <ArrowUpRight className="h-4 w-4" strokeWidth={1.7} />
           </a>
         </div>
       </InView>
@@ -608,13 +994,13 @@ function FinalCTASection() {
 /* Footer                                                                  */
 /* ----------------------------------------------------------------------- */
 
-function Footer() {
+function Footer({ lang, t }: { lang: Lang; t: T }) {
   const footerLinks = [
-    { href: "#problem", label: "Problem" },
-    { href: "#ecosystem", label: "Ecosystem" },
-    { href: "#how-it-works", label: "How It Works" },
-    { href: "#use-cases", label: "Use Cases" },
-    { href: "#cta", label: "Contact" },
+    { href: "#problem", label: t.footer.links.problem },
+    { href: "#what", label: t.footer.links.what },
+    { href: "#how-it-works", label: t.footer.links.how },
+    { href: "#use-cases", label: t.footer.links.use },
+    { href: "#cta", label: t.footer.links.contact },
   ];
 
   return (
@@ -624,15 +1010,15 @@ function Footer() {
     >
       <div className="mx-auto max-w-[1400px]">
         <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-start">
-          <div className="max-w-[440px]">
+          <div className="max-w-[460px]">
             <p className="text-xl font-semibold tracking-tight" style={{ color: IVORY }}>
               MALEDA
             </p>
             <p className="mt-3 text-[13px] font-light leading-[1.65]" style={{ color: IVORY_DIM }}>
-              Morning-sun infrastructure for productive business finance.
+              {t.footer.tagline}
             </p>
             <p className="mt-6 text-[11px] font-light" style={{ color: IVORY_MUTED }}>
-              Built by{" "}
+              {t.footer.builtBy}{" "}
               <a
                 href="https://www.fairway.global"
                 target="_blank"
@@ -661,9 +1047,7 @@ function Footer() {
         </div>
 
         <p className="mt-14 text-[11px] font-light leading-relaxed" style={{ color: IVORY_MUTED }}>
-          &copy; {new Date().getFullYear()} Fairway. Maleda is infrastructure
-          for regulated lenders — not a lender, bank, or deposit-taking
-          institution. Inclusion of any priority does not imply endorsement.
+          &copy; {new Date().getFullYear()} Fairway. {t.footer.legal}
         </p>
       </div>
     </footer>

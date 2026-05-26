@@ -1,27 +1,34 @@
 import type { ReactNode } from "react";
-import { Geist } from "next/font/google";
+import { Inter, Noto_Sans_Ethiopic } from "next/font/google";
 
 import ScrollProgress from "./_components/ScrollProgress";
 
-const geist = Geist({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
-  variable: "--font-maleda-sans",
+  variable: "--font-maleda-en",
+});
+
+const ethiopic = Noto_Sans_Ethiopic({
+  subsets: ["ethiopic"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-maleda-am",
 });
 
 export const metadata = {
-  title: "Maleda — Morning-sun infrastructure for productive business finance",
+  title: "Maleda — A new morning for business lending in Ethiopia",
   description:
-    "Maleda helps regulated financial institutions deliver trusted local-currency financing to SMEs, traders, farmers, women-led enterprises, and growing businesses.",
+    "Maleda is a lending platform for regulated financial institutions, expanding local-currency credit for Ethiopia's productive economy.",
 };
 
 export default function MaledaLayout({ children }: { children: ReactNode }) {
   return (
     <div
-      className={`${geist.variable} relative antialiased`}
+      className={`${inter.variable} ${ethiopic.variable} relative antialiased`}
       style={{
-        fontFamily: "var(--font-maleda-sans), Geist, system-ui, sans-serif",
+        fontFamily: "var(--font-maleda-en), Inter, system-ui, sans-serif",
         background: "#0A1612",
         color: "rgba(242,237,223,0.78)",
       }}

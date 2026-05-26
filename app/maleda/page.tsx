@@ -2,13 +2,21 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { ArrowRight, ArrowUpRight, ChevronDown, Minus } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 import AnimatedHeading from "./_components/AnimatedHeading";
 import FadeIn from "./_components/FadeIn";
 import InView from "./_components/InView";
+import ProblemSplitVisual from "./_components/ProblemSplitVisual";
+import SpeedComparisonVisual from "./_components/SpeedComparisonVisual";
+import LenderEcosystemMap from "./_components/LenderEcosystemMap";
+import ParticipationFlow from "./_components/ParticipationFlow";
+import ControlBoundaryDiagram from "./_components/ControlBoundaryDiagram";
+import PrivateRecordsVisual from "./_components/PrivateRecordsVisual";
+import InstitutionalTrustFramework from "./_components/InstitutionalTrustFramework";
+import BehindTheScenesInfra from "./_components/BehindTheScenesInfra";
 
-/* Dark minimal palette */
+/* Dark institutional palette */
 const BG = "#0A1612";
 const IVORY = "#F2EDDF";
 const IVORY_DIM = "rgba(242,237,223,0.64)";
@@ -19,7 +27,11 @@ const GOLD = "#D6A84F";
 const HERO_VIDEO =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260507_155500_808e6fdd-761f-4acd-b3be-cb7e6e700def.mp4";
 
+const CALENDLY = "https://calendly.com/heikki-fairway/fairway-demo?month=2026-05";
+
 type Lang = "en" | "am";
+
+const BRAND = { en: "AURORA", am: "ማለዳ" } as const;
 
 /* ----------------------------------------------------------------------- */
 /* Bilingual content object                                                */
@@ -28,351 +40,581 @@ type Lang = "en" | "am";
 const CONTENT = {
   en: {
     nav: {
-      problem: "Problem",
-      what: "What Maleda Does",
-      how: "How It Works",
-      use: "Use Cases",
-      tech: "Technology Leap",
+      problem: "The opportunity",
+      speed: "Why speed",
+      ecosystem: "Ecosystem",
+      how: "How it works",
+      control: "Control",
       trust: "Trust",
-      partner: "Partner with Maleda",
+      partner: "Partner with Aurora",
     },
     hero: {
-      eyebrow: "Morning sun · Ethiopia",
-      headline: "A new morning for\nbusiness lending\nin Ethiopia.",
-      sub: "Maleda helps regulated financial institutions expand local-currency lending to SMEs, farmers, traders, women-led businesses, and growing enterprises.",
-      support: "Verified borrowers. Trusted lenders. Productive credit. No borrower crypto exposure.",
-      ctaPrimary: "Partner with Maleda",
+      eyebrow: "Aurora · Ethiopia",
+      headline: "Access global digital capital\nfor productive lending.",
+      sub: "Structured capital access for lending institutions.",
+      support:
+        "Aurora helps regulated lenders connect productive local credit opportunities with structured international capital participation while keeping lending operations under local institutional control.",
+      ctaPrimary: "Partner with Aurora",
       ctaSecondary: "See how it works",
       chips: [
-        "Local-currency lending",
-        "Regulated institution model",
-        "Compliance-first",
-        "Built for Ethiopia's productive economy",
+        "Institutions remain the lender",
+        "Faster capital access",
+        "Structured participation",
+        "Compliance-aware infrastructure",
       ],
     },
     problem: {
       num: "01",
-      eyebrow: "The challenge",
-      title: "Credit demand exists. ",
-      titleGold: "Access does not.",
+      eyebrow: "The opportunity",
+      title: "Global capital exists. ",
+      titleGold: "Productive lenders remain constrained.",
+      sub: "Aurora connects productive lenders with structured international capital participation.",
       copy: [
-        "Across Ethiopia, many productive businesses are ready to grow but cannot access affordable finance.",
-        "SMEs, farmers, traders, exporters, and women-led businesses often face limited credit because lending infrastructure is fragmented and funding channels are difficult to scale.",
-        "At the same time, regulated lenders need better ways to access capital, verify borrowers, manage risk, and serve more businesses responsibly.",
+        "Many lending institutions have strong local borrower relationships and understand their markets, but access to scalable funding channels can be slow, fragmented, or difficult to structure.",
+        "At the same time, global capital is seeking trusted ways to participate in productive lending.",
+        "Aurora connects the two through compliant, structured capital access infrastructure.",
       ],
-      bold: "Maleda connects this gap.",
-    },
-    what: {
-      num: "02",
-      eyebrow: "What Maleda does",
-      title: "A lending platform ",
-      titleGold: "built around local institutions.",
-      copy: "Maleda gives regulated lenders the infrastructure to expand productive business lending without losing local control.",
-      colA: {
-        label: "Local institutions continue to",
-        items: [
-          "Originate loans",
-          "Underwrite borrowers",
-          "Serve customers",
-          "Manage repayment",
-          "Meet regulatory obligations",
-        ],
+      split: {
+        leftEyebrow: "Local productive lenders",
+        leftTitle: "Originate, underwrite, service",
+        leftChips: ["Banks", "MFIs", "Regulated lenders"],
+        middleLabel: "Aurora infrastructure",
+        rightEyebrow: "Global digital capital",
+        rightTitle: "Structured participation",
+        rightChips: ["DFIs", "Institutional capital", "Capital partners"],
       },
-      colB: {
-        label: "Maleda supports them with",
-        items: [
-          "Borrower verification",
-          "Compliance workflows",
-          "Capital coordination",
-          "Reporting tools",
-          "Institutional funding access",
-        ],
+    },
+    speed: {
+      num: "02",
+      eyebrow: "Why speed matters",
+      title: "Short-duration lending should not depend ",
+      titleGold: "on slow facility negotiations.",
+      copy: [
+        "Many SME, trade, agriculture, and working-capital loans are time-sensitive. When capital access takes too long, productive lending opportunities can be missed.",
+        "Aurora helps create faster, repeatable participation pathways so lenders can respond to business demand more efficiently.",
+      ],
+      visual: {
+        slowEyebrow: "Traditional path",
+        slowLabel: "Bilateral facility negotiation",
+        slowSteps: ["Term sheet", "Diligence", "Legal drafting", "Disbursement"],
+        fastEyebrow: "Aurora path",
+        fastLabel: "Structured participation flow",
+        fastSteps: ["Opportunity", "Participation", "Capital", "Lending continues"],
+        footnote: "Repeatable pathways replace one-off facility processes — without changing who underwrites or services the loan.",
+      },
+    },
+    ecosystem: {
+      num: "03",
+      eyebrow: "Ecosystem",
+      title: "Fairway connects lenders with ",
+      titleGold: "digital capital infrastructure.",
+      sub: "Lenders continue lending. Fairway provides the capital access infrastructure.",
+      cards: [
+        {
+          title: "Lending Institutions",
+          copy: "Originate, underwrite, service, and collect locally.",
+        },
+        {
+          title: "Fairway / Aurora",
+          copy: "Provides structured capital access, compliance-aware infrastructure, and coordination rails.",
+        },
+        {
+          title: "Capital Partners",
+          copy: "Participate in productive lending through structured institutional pathways.",
+        },
+        {
+          title: "Public Stakeholders",
+          copy: "Support financial inclusion, SME growth, agriculture, trade, and job creation.",
+        },
+        {
+          title: "Borrowers",
+          copy: "Receive financing through local regulated lenders.",
+        },
+      ],
+      map: {
+        capital:   { label: "Capital Partners",     copy: "Participate in productive lending through structured institutional pathways." },
+        aurora:    { label: "Fairway / Aurora",     copy: "Structured capital access, compliance-aware infrastructure, coordination rails." },
+        lender:    { label: "Lending Institutions", copy: "Originate, underwrite, service, and collect locally. The central operational actor." },
+        borrowers: { label: "Borrowers",            copy: "Receive financing through their regulated local lender, in local currency." },
+        public:    { label: "Public Stakeholders",  copy: "Provide oversight and support financial inclusion, SME growth, and job creation." },
+        hint: "Hover or focus any node to see its role",
+        flowLabel: "Capital flow",
+        oversightLabel: "Oversight & support",
       },
     },
     how: {
-      num: "03",
+      num: "04",
       eyebrow: "How it works",
-      title: "Simple for borrowers. ",
-      titleGold: "Powerful for institutions.",
-      callout: "Borrowers receive financing in local currency. Never cryptocurrency.",
+      title: "Four steps. ",
+      titleGold: "Institutions stay in control.",
       steps: [
         {
-          title: "A regulated lender joins Maleda",
-          copy: "The local institution remains the main customer-facing lender.",
+          title: "Lender approves opportunity",
+          copy: "The lending institution identifies and approves a productive lending opportunity.",
         },
         {
-          title: "Businesses are verified locally",
-          copy: "Borrower identity, eligibility, and business information are checked through trusted channels.",
+          title: "Structured participation request created",
+          copy: "Aurora helps package the opportunity into a structured participation request.",
         },
         {
-          title: "Loans are originated in local currency",
-          copy: "Borrowers receive financing from the local institution, not from a crypto app.",
+          title: "Eligible capital participates",
+          copy: "Capital partners participate through compliant institutional pathways.",
         },
         {
-          title: "Capital partners participate",
-          copy: "Trusted funding partners support loan portfolios through structured institutional pathways.",
-        },
-        {
-          title: "Growth sectors receive finance",
-          copy: "Credit reaches SMEs, agriculture, trade, equipment, and women-led businesses.",
+          title: "Local lending continues",
+          copy: "The lender continues borrower relationship management, servicing, and collections.",
         },
       ],
+      footer: "From local approval to local servicing — capital moves, the relationship stays.",
     },
-    use: {
-      num: "04",
-      eyebrow: "Use cases",
-      title: "Built for Ethiopia's ",
-      titleGold: "productive economy.",
-      cards: [
-        { title: "SME working capital", copy: "Finance inventory, operations, and expansion." },
-        { title: "Agricultural finance", copy: "Support farmers, cooperatives, processors, and agri-supply chains." },
-        { title: "Trade finance", copy: "Help importers, exporters, and local traders access working capital." },
-        { title: "Women-led businesses", copy: "Expand access to finance for women entrepreneurs." },
-        { title: "Equipment financing", copy: "Enable businesses to acquire machinery, vehicles, and productive assets." },
-        { title: "Export and manufacturing growth", copy: "Support enterprises that generate jobs and foreign exchange." },
+    control: {
+      num: "05",
+      eyebrow: "Control",
+      title: "Institutions remain ",
+      titleGold: "in control.",
+      sub: "Underwriting, borrower relationships, servicing, and collections remain with the lender.",
+      copy: "Aurora does not replace the lender's role. The local institution remains responsible for borrower assessment, loan origination, customer relationship management, repayment monitoring, and regulatory obligations.",
+      copy2: "Aurora supports the capital access layer around the lender.",
+      visual: {
+        lenderTitle: "Inside lender control",
+        lenderItems: [
+          "Underwriting",
+          "Borrower relationship",
+          "Servicing",
+          "Collections",
+          "Compliance responsibility",
+        ],
+        auroraTitle: "Aurora support layer",
+        auroraItems: [
+          "Structured capital access",
+          "Participation coordination",
+          "Reporting infrastructure",
+          "Policy controls",
+        ],
+        divider: "Boundary",
+      },
+    },
+    privacy: {
+      num: "06",
+      eyebrow: "Privacy",
+      title: "Private borrower records ",
+      titleGold: "stay with the lender.",
+      sub: "Aurora coordinates structured funding participation without exposing borrower files.",
+      copy: "Sensitive borrower documents, identity records, agreements, and financial files remain under the custody of the regulated lending institution. Aurora only coordinates structured participation records, verification references, policy status, and transaction metadata needed for institutional funding.",
+      visual: {
+        leftTitle: "Private Borrower Records",
+        leftEyebrow: "Lender custody",
+        leftBadge: "Maintained securely by the lending institution",
+        leftItems: [
+          "Borrower full name",
+          "National ID number",
+          "Business registration",
+          "Contact details",
+          "Address",
+          "Employment / business information",
+          "Signed loan agreement",
+          "Supporting financial records",
+          "Internal credit assessment",
+          "Compliance review records",
+        ],
+        connectorTitle: "Verification converted into proof references",
+        connectorCopy: "Verification can be confirmed without exposing raw borrower documents.",
+        rightTitle: "Digital Funding Participation Record",
+        rightEyebrow: "Aurora · Ledger entry",
+        rightRecord: [
+          { label: "Transaction ID", value: "TX-2026-AUR-00481" },
+          { label: "Funding amount", value: "USD 250,000" },
+          { label: "Duration", value: "180 days" },
+          { label: "Repayment schedule", value: "Monthly · 6 installments" },
+          { label: "Verification proof", value: "vfp:a1b2···9c4d" },
+          { label: "Agreement proof", value: "agp:c3d4···7e8f" },
+          { label: "Institution authorization", value: "Bank · Approved" },
+          { label: "Participation conditions", value: "Tier-1 eligible" },
+          { label: "Status", value: "Active" },
+          { label: "Metadata hash", value: "0x8f3c···d92a" },
+        ],
+        validationTitle: "Proof validation",
+        validation: [
+          { label: "Verification", value: "Confirmed" },
+          { label: "Agreement", value: "Confirmed" },
+          { label: "Policy status", value: "Compliant" },
+          { label: "Privacy mode", value: "Protected" },
+        ],
+        stateLabel: "Transaction state",
+        states: ["Created", "Verified", "Funded", "Active"],
+        activeState: 3,
+        statementTitle: "No borrower personal documents are publicly stored.",
+        statementSub: "Only structured participation records and verification references are digitally coordinated.",
+        pillars: [
+          { title: "Privacy by design", copy: "Sensitive borrower data remains private and institution-controlled." },
+          { title: "Verification confirmation", copy: "Proofs confirm authenticity without exposing source documents." },
+          { title: "Auditability", copy: "Structured records support review, reporting, and oversight." },
+          { title: "Transaction integrity", copy: "Digital records help preserve consistency and accountability." },
+          { title: "Compliance", copy: "Built for institutional standards and governance." },
+        ],
+        closing: "Private borrower information remains with the regulated lending institution. Aurora coordinates funding participation without exposing sensitive borrower records.",
+      },
+    },
+    trust: {
+      num: "07",
+      eyebrow: "Trust",
+      title: "Built for ",
+      titleGold: "institutional trust.",
+      sub: "Verification, auditability, policy controls, and structured governance.",
+      pillars: [
+        {
+          title: "Verification",
+          copy: "Participants and opportunities can be checked through defined processes.",
+        },
+        {
+          title: "Auditability",
+          copy: "Participation flows can be recorded and reviewed.",
+        },
+        {
+          title: "Policy Controls",
+          copy: "Eligibility, participation, and reporting rules can be configured.",
+        },
+        {
+          title: "Structured Governance",
+          copy: "Institutions can operate within defined responsibilities and oversight boundaries.",
+        },
       ],
     },
     tech: {
-      num: "05",
-      eyebrow: "Technology leap",
-      title: "A technology leap ",
-      titleGold: "for Ethiopia's credit market.",
-      copy: "Maleda can help Ethiopia move from fragmented business lending to a more connected, transparent, and scalable credit system.",
-      pillars: [
-        {
-          label: "For financial institutions",
-          copy: "Better tools to serve more qualified businesses.",
-        },
-        {
-          label: "For public stakeholders",
-          copy: "Stronger support for SME growth, agriculture, trade, and job creation.",
-        },
-        {
-          label: "For businesses",
-          copy: "Better access to finance through trusted local channels.",
-        },
-      ],
-    },
-    trust: {
-      num: "06",
-      eyebrow: "Trust",
-      title: "Designed for ",
-      titleGold: "institutional trust.",
-      items: [
-        {
-          q: "Do borrowers receive cryptocurrency?",
-          a: "No. Borrowers receive financing in local currency through regulated local institutions.",
-        },
-        {
-          q: "Is Maleda a lender?",
-          a: "Maleda is a lending platform for institutions, but it does not lend directly to the public. Licensed financial institutions originate, underwrite, and service the loans.",
-        },
-        {
-          q: "Does Maleda replace banks or MFIs?",
-          a: "No. Maleda is designed to strengthen regulated lenders, not replace them.",
-        },
-        {
-          q: "Who provides the capital?",
-          a: "Maleda helps connect local lending demand with trusted capital partners through structured institutional channels.",
-        },
-        {
-          q: "Who manages the customer relationship?",
-          a: "The local regulated financial institution manages the borrower relationship.",
-        },
-        {
-          q: "Why is this important for Ethiopia?",
-          a: "It can help expand productive credit for SMEs, agriculture, trade, women-led businesses, and job-creating enterprises.",
-        },
-      ],
+      num: "08",
+      eyebrow: "Infrastructure",
+      title: "Modern digital ",
+      titleGold: "financial infrastructure.",
+      sub: "Secure digital rails operating behind the scenes — not a borrower-facing crypto product.",
+      copy: "Aurora can use modern digital financial infrastructure to coordinate capital participation, reporting, and settlement processes. For borrowers and local institutions, the experience remains institution-led and local-currency based.",
+      visual: {
+        frontTitle: "Front stage — what borrowers and lenders see",
+        frontItems: [
+          { label: "Local lender", copy: "The regulated institution remains the customer-facing lender." },
+          { label: "Borrower experience", copy: "Borrowers interact with a familiar local institution, not a crypto product." },
+          { label: "Local-currency loan", copy: "Loans are originated and serviced in local currency." },
+        ],
+        backTitle: "Back stage — Aurora capital infrastructure",
+        backItems: [
+          { label: "Structured participation", copy: "Capital participation is packaged and coordinated programmatically." },
+          { label: "Compliance controls", copy: "Eligibility and policy rules are enforced before participation." },
+          { label: "Digital capital coordination", copy: "Modern rails move capital between participants efficiently." },
+          { label: "Reporting rails", copy: "Standardised reporting for supervisors and capital partners." },
+        ],
+        separator: "Institution-led front stage · capital rails behind the scenes",
+      },
     },
     cta: {
       eyebrow: "Get in touch",
-      title: "Partner with Maleda ",
-      titleGold: "to expand productive credit.",
-      copy: "Whether you are a bank, microfinance institution, capital partner, or public stakeholder, Maleda helps build stronger and more scalable credit markets for Ethiopia's productive economy.",
-      button: "Start a conversation",
+      title: "Toward broader ",
+      titleGold: "capital access.",
+      sub: "A repeatable operating model for productive lending participation.",
+      copy: "Aurora helps lending institutions build a more efficient pathway between local credit demand and global capital participation.",
+      ctaPrimary: "Partner with Aurora",
+      ctaSecondary: "Start a conversation",
     },
     footer: {
-      tagline: "A lending platform for Ethiopia's productive economy.",
+      tagline: "Structured capital access infrastructure for productive lending institutions.",
       builtBy: "Built by",
-      links: { problem: "Problem", what: "What Maleda Does", how: "How It Works", use: "Use Cases", contact: "Contact" },
+      links: {
+        problem: "The opportunity",
+        ecosystem: "Ecosystem",
+        how: "How it works",
+        trust: "Trust",
+        contact: "Contact",
+      },
       legal:
-        "Maleda is infrastructure for regulated lenders — not a bank, microfinance institution, or deposit-taking institution.",
+        "Aurora is capital access infrastructure for regulated lending institutions — not a bank, microfinance institution, or deposit-taking institution. Borrowers do not interact with crypto.",
     },
   },
 
   am: {
     nav: {
-      problem: "ችግር",
-      what: "ማለዳ ምን ይሰራል",
-      how: "እንዴት እንደሚሰራ",
-      use: "የአጠቃቀም ምሳሌዎች",
-      tech: "የቴክኖሎጂ እርምጃ",
+      problem: "እድሉ",
+      speed: "ለምን ፍጥነት",
+      ecosystem: "ኢኮሲስተም",
+      how: "እንዴት ይሰራል",
+      control: "ቁጥጥር",
       trust: "እምነት",
       partner: "ከማለዳ ጋር ይተባበሩ",
     },
     hero: {
       eyebrow: "ማለዳ · ኢትዮጵያ",
-      headline: "ለኢትዮጵያ የንግድ ብድር\nአዲስ ማለዳ።",
-      sub: "ማለዳ የተፈቀዱ የፋይናንስ ተቋማት ለSME፣ ለገበሬዎች፣ ለነጋዴዎች፣ ለሴቶች የሚመሩ ንግዶች እና ለሚያድጉ ድርጅቶች በአካባቢ ገንዘብ ብድር እንዲያስፋፉ ይረዳል።",
-      support: "የተረጋገጡ ተበዳሪዎች። የታመኑ ተቋማት። ምርታማ ብድር። ለተበዳሪዎች የክሪፕቶ ግንኙነት የለም።",
+      headline: "ለምርታማ ብድር\nዓለም አቀፍ ዲጂታል ካፒታል መዳረሻ።",
+      sub: "ለብድር ተቋማት የተዋቀረ የካፒታል መዳረሻ።",
+      support:
+        "ማለዳ የተፈቀዱ ብድር ተቋማት ምርታማ የአካባቢ የብድር እድሎችን ከተዋቀረ ዓለም አቀፍ የካፒታል ተሳትፎ ጋር እንዲያገናኙ ይረዳል። የብድር አሰራር ግን በአካባቢ ተቋማት ቁጥጥር ስር ይቆያል።",
       ctaPrimary: "ከማለዳ ጋር ይተባበሩ",
       ctaSecondary: "እንዴት እንደሚሰራ ይመልከቱ",
       chips: [
-        "በአካባቢ ገንዘብ ብድር",
-        "በተፈቀዱ ተቋማት የሚሰራ",
-        "ኮምፕላያንስ ቅድሚያ",
-        "ለኢትዮጵያ ምርታማ ኢኮኖሚ የተዘጋጀ",
+        "ተቋማት ብድር ሰጪ ሆነው ይቆያሉ",
+        "ፈጣን የካፒታል መዳረሻ",
+        "የተዋቀረ ተሳትፎ",
+        "ኮምፕላያንስን የሚያገናዝብ መሠረተ ልማት",
       ],
     },
     problem: {
       num: "01",
-      eyebrow: "ችግሩ",
-      title: "የብድር ፍላጎት አለ። ",
-      titleGold: "መዳረሻው ግን ውስን ነው።",
+      eyebrow: "እድሉ",
+      title: "ዓለም አቀፍ ካፒታል አለ። ",
+      titleGold: "ምርታማ ብድር ተቋማት ግን እገዳዎች ያጋጥማቸዋል።",
+      sub: "ማለዳ ምርታማ ብድር ተቋማትን ከተዋቀረ ዓለም አቀፍ የካፒታል ተሳትፎ ጋር ያገናኛል።",
       copy: [
-        "በኢትዮጵያ ብዙ ምርታማ ንግዶች ለማደግ ዝግጁ ናቸው፤ ነገር ግን ተመጣጣኝ የፋይናንስ መዳረሻ የላቸውም።",
-        "SME፣ ገበሬዎች፣ ነጋዴዎች፣ ላኪዎች እና ሴቶች የሚመሩ ንግዶች ብዙ ጊዜ የብድር መዳረሻ ውስንነት ያጋጥማቸዋል። ምክንያቱ የእድል እጥረት ሳይሆን የብድር መሠረተ ልማት መበታተን ነው።",
-        "በተመሳሳይ ጊዜ፣ የተፈቀዱ የፋይናንስ ተቋማት ካፒታል ለማግኘት፣ ተበዳሪዎችን ለማረጋገጥ፣ አደጋን ለመቆጣጠር እና ብዙ ንግዶችን በኃላፊነት ለማገልገል የተሻለ መንገድ ይፈልጋሉ።",
+        "ብዙ የብድር ተቋማት ጠንካራ የአካባቢ ተበዳሪ ግንኙነቶች እና የገበያቸውን ጥልቅ ግንዛቤ አላቸው፤ ነገር ግን ሊስፋፉ የሚችሉ የፈንድ መዳረሻ መንገዶች በቀስ የሚሄዱ፣ የተበታተኑ ወይም ለመዋቀር አስቸጋሪ ሊሆኑ ይችላሉ።",
+        "በተመሳሳይ ጊዜ፣ ዓለም አቀፍ ካፒታል ምርታማ ብድር ላይ ለመሳተፍ የታመኑ መንገዶችን ይፈልጋል።",
+        "ማለዳ ሁለቱን በኮምፕላይየንት እና የተዋቀረ የካፒታል መዳረሻ መሠረተ ልማት ያገናኛል።",
       ],
-      bold: "ማለዳ ይህንን ክፍተት ያገናኛል።",
-    },
-    what: {
-      num: "02",
-      eyebrow: "ማለዳ ምን ይሰራል",
-      title: "በአካባቢ ተቋማት ዙሪያ ",
-      titleGold: "የተገነባ የብድር መድረክ።",
-      copy: "ማለዳ የተፈቀዱ የፋይናንስ ተቋማት የምርታማ ንግድ ብድርን እንዲያስፋፉ የሚያግዝ መሠረተ ልማት ይሰጣል። ይህም የአካባቢ ቁጥጥርን አይቀንስም።",
-      colA: {
-        label: "የአካባቢ ተቋማት ይቀጥላሉ",
-        items: [
-          "ብድር ማመንጨት",
-          "ተበዳሪዎችን መገምገም",
-          "ደንበኞችን ማገልገል",
-          "የብድር ክፍያን መከታተል",
-          "የህግ እና የቁጥጥር ግዴታዎችን መፈጸም",
-        ],
+      split: {
+        leftEyebrow: "የአካባቢ ምርታማ ብድር ተቋማት",
+        leftTitle: "ብድር ማመንጨት፣ መገምገም፣ ማስተናገድ",
+        leftChips: ["ባንኮች", "ማይክሮ ፋይናንስ", "የተፈቀዱ ብድር ተቋማት"],
+        middleLabel: "ማለዳ መሠረተ ልማት",
+        rightEyebrow: "ዓለም አቀፍ ዲጂታል ካፒታል",
+        rightTitle: "የተዋቀረ ተሳትፎ",
+        rightChips: ["DFIs", "ተቋማዊ ካፒታል", "የካፒታል አጋሮች"],
       },
-      colB: {
-        label: "ማለዳ የሚደግፍበት",
-        items: [
-          "የተበዳሪ ማረጋገጫ",
-          "የኮምፕላያንስ ሂደቶች",
-          "የካፒታል ማቀናበሪያ",
-          "የሪፖርት መሳሪያዎች",
-          "የተቋማዊ ፈንድ መዳረሻ",
-        ],
+    },
+    speed: {
+      num: "02",
+      eyebrow: "ፍጥነት ለምን ያስፈልጋል",
+      title: "አጭር ጊዜ የሚወስዱ ብድሮች ",
+      titleGold: "በቀስ የሚሄዱ የፋሲሊቲ ድርድሮች ላይ መመስረት የለባቸውም።",
+      copy: [
+        "ብዙ SME፣ የንግድ፣ የግብርና እና የስራ ካፒታል ብድሮች ጊዜ-ስሱ ናቸው። የካፒታል መዳረሻ ሲዘገይ ምርታማ የብድር እድሎች ሊጠፉ ይችላሉ።",
+        "ማለዳ ፈጣን እና ተደጋጋሚ የተሳትፎ መንገዶችን እንዲፈጠር ይረዳል፤ ይህም ብድር ተቋማት ለንግድ ፍላጎት በፍጥነት ምላሽ እንዲሰጡ ያስችላል።",
+      ],
+      visual: {
+        slowEyebrow: "የተለመደ መንገድ",
+        slowLabel: "የሁለትዮሽ የፋሲሊቲ ድርድር",
+        slowSteps: ["የውል ሰነድ", "ዲሊጀንስ", "የህግ ሰነድ", "ስርጭት"],
+        fastEyebrow: "የማለዳ መንገድ",
+        fastLabel: "የተዋቀረ የተሳትፎ ፍሰት",
+        fastSteps: ["እድል", "ተሳትፎ", "ካፒታል", "ብድር መስጠት ይቀጥላል"],
+        footnote: "ተደጋጋሚ መንገዶች የአንድ ጊዜ የፋሲሊቲ ሂደቶችን ይተካሉ — የሚገመግመው ወይም የሚያስተዳድረው ግን አይቀየርም።",
+      },
+    },
+    ecosystem: {
+      num: "03",
+      eyebrow: "ኢኮሲስተም",
+      title: "ፌርዌይ ብድር ተቋማትን ",
+      titleGold: "ከዲጂታል ካፒታል መሠረተ ልማት ጋር ያገናኛል።",
+      sub: "ብድር ተቋማት ብድር መስጠታቸውን ይቀጥላሉ። ፌርዌይ የካፒታል መዳረሻ መሠረተ ልማትን ይሰጣል።",
+      cards: [
+        {
+          title: "ብድር ተቋማት",
+          copy: "በአካባቢ ብድር ያመነጫሉ፣ ይገመግማሉ፣ ያስተናግዳሉ እና ይሰበስባሉ።",
+        },
+        {
+          title: "ፌርዌይ / ማለዳ",
+          copy: "የተዋቀረ የካፒታል መዳረሻ፣ ኮምፕላያንስን የሚያገናዝብ መሠረተ ልማት እና የማቀናበሪያ መንገዶችን ይሰጣል።",
+        },
+        {
+          title: "የካፒታል አጋሮች",
+          copy: "በተዋቀሩ ተቋማዊ መንገዶች ምርታማ ብድር ላይ ይሳተፋሉ።",
+        },
+        {
+          title: "ሕዝባዊ ባለድርሻዎች",
+          copy: "የፋይናንስ ተደራሽነትን፣ የSME እድገትን፣ ግብርናን፣ ንግድን እና የስራ ፈጠራን ይደግፋሉ።",
+        },
+        {
+          title: "ተበዳሪዎች",
+          copy: "ብድር በአካባቢ ተፈቅደው በሚሰሩ ብድር ተቋማት በኩል ይቀበላሉ።",
+        },
+      ],
+      map: {
+        capital:   { label: "የካፒታል አጋሮች",   copy: "በተዋቀሩ ተቋማዊ መንገዶች ምርታማ ብድር ላይ ይሳተፋሉ።" },
+        aurora:    { label: "ፌርዌይ / ማለዳ",   copy: "የተዋቀረ የካፒታል መዳረሻ፣ ኮምፕላያንስን የሚያገናዝብ መሠረተ ልማት እና የማቀናበሪያ መንገዶች።" },
+        lender:    { label: "ብድር ተቋማት",     copy: "በአካባቢ ብድር ያመነጫሉ፣ ይገመግማሉ፣ ያስተናግዳሉ እና ይሰበስባሉ። ዋናው ኦፕሬሽናል ተዋናይ።" },
+        borrowers: { label: "ተበዳሪዎች",       copy: "በተፈቀዱ የአካባቢ ብድር ተቋማት በኩል በአካባቢ ገንዘብ ብድር ይቀበላሉ።" },
+        public:    { label: "ሕዝባዊ ባለድርሻዎች", copy: "ቁጥጥር ይሰጣሉ እና የፋይናንስ ተደራሽነትን፣ የSME እድገትን እና የስራ ፈጠራን ይደግፋሉ።" },
+        hint: "ሚናውን ለመመልከት በማንኛውም ኖድ ላይ ይጠቁሙ",
+        flowLabel: "የካፒታል ፍሰት",
+        oversightLabel: "ቁጥጥር እና ድጋፍ",
       },
     },
     how: {
-      num: "03",
-      eyebrow: "እንዴት እንደሚሰራ",
-      title: "ለተበዳሪዎች ቀላል። ",
-      titleGold: "ለተቋማት ኃይለኛ።",
-      callout: "ተበዳሪዎች ብድሩን በአካባቢ ገንዘብ ይቀበላሉ። በፍፁም ክሪፕቶ አይደለም።",
+      num: "04",
+      eyebrow: "እንዴት ይሰራል",
+      title: "አራት ደረጃዎች። ",
+      titleGold: "ተቋማት ቁጥጥርን ይይዛሉ።",
       steps: [
         {
-          title: "የተፈቀደ የፋይናንስ ተቋም ከማለዳ ጋር ይተባበራል",
-          copy: "የአካባቢ ተቋሙ የደንበኛ ግንኙነት ዋና ተቋም ሆኖ ይቆያል።",
+          title: "ብድር ተቋሙ የብድር እድሉን ያጸድቃል",
+          copy: "የብድር ተቋሙ ምርታማ የብድር እድልን ይለያል እና ያጸድቃል።",
         },
         {
-          title: "ንግዶች በአካባቢ ታማኝ መንገዶች ይረጋገጣሉ",
-          copy: "የተበዳሪው ማንነት፣ ብቁነት እና የንግድ መረጃ ይመረመራል።",
+          title: "የተዋቀረ የተሳትፎ ጥያቄ ይፈጠራል",
+          copy: "ማለዳ እድሉን ወደ የተዋቀረ የተሳትፎ ጥያቄ ለመቅረጽ ይረዳል።",
         },
         {
-          title: "ብድር በአካባቢ ገንዘብ ይሰጣል",
-          copy: "ተበዳሪው ብድር የሚቀበለው ከአካባቢ ተቋም ነው፤ ከክሪፕቶ መተግበሪያ አይደለም።",
+          title: "ብቁ ካፒታል ይሳተፋል",
+          copy: "የካፒታል አጋሮች በኮምፕላይየንት ተቋማዊ መንገዶች በኩል ይሳተፋሉ።",
         },
         {
-          title: "የካፒታል አጋሮች ይሳተፋሉ",
-          copy: "የታመኑ ፈንድ አጋሮች በተዋቀሩ ተቋማዊ መንገዶች የብድር ፖርትፎሊዮዎችን ይደግፋሉ።",
-        },
-        {
-          title: "ምርታማ ዘርፎች ፋይናንስ ያገኛሉ",
-          copy: "ብድር ለSME፣ ለግብርና፣ ለንግድ፣ ለመሣሪያ ፋይናንስ እና ለሴቶች የሚመሩ ንግዶች ይደርሳል።",
+          title: "የአካባቢ ብድር መስጠት ይቀጥላል",
+          copy: "ብድር ተቋሙ የተበዳሪ ግንኙነት፣ አገልግሎት እና ክፍያ መሰብሰብን ይቀጥላል።",
         },
       ],
+      footer: "ከአካባቢ ማጽደቅ እስከ አካባቢ አገልግሎት — ካፒታል ይንቀሳቀሳል፣ ግንኙነቱ ግን ይቆያል።",
     },
-    use: {
-      num: "04",
-      eyebrow: "የአጠቃቀም ምሳሌዎች",
-      title: "ለኢትዮጵያ ",
-      titleGold: "ምርታማ ኢኮኖሚ የተዘጋጀ።",
-      cards: [
-        { title: "የSME የስራ ካፒታል", copy: "ለእቃ ግዢ፣ ለስራ እንቅስቃሴ እና ለማስፋፋት ፋይናንስ።" },
-        { title: "የግብርና ፋይናንስ", copy: "ለገበሬዎች፣ ለኅብረት ስራ ማህበራት፣ ለማቀነባበሪያዎች እና ለግብርና አቅርቦት ሰንሰለቶች ድጋፍ።" },
-        { title: "የንግድ ፋይናንስ", copy: "ላኪዎች፣ አስመጪዎች እና የአካባቢ ነጋዴዎች የስራ ካፒታል እንዲያገኙ ይረዳል።" },
-        { title: "ሴቶች የሚመሩ ንግዶች", copy: "ለሴት ኢንተርፕረነሮች የፋይናንስ መዳረሻን ያስፋፋል።" },
-        { title: "የመሣሪያ ፋይናንስ", copy: "ንግዶች ማሽነሪ፣ ተሽከርካሪ እና ምርታማ ንብረት እንዲገዙ ይረዳል።" },
-        { title: "የላኪነት እና የማምረቻ እድገት", copy: "ስራ የሚፈጥሩ እና የውጭ ምንዛሬ የሚያመጡ ድርጅቶችን ይደግፋል።" },
+    control: {
+      num: "05",
+      eyebrow: "ቁጥጥር",
+      title: "ተቋማት ",
+      titleGold: "ቁጥጥርን ይይዛሉ።",
+      sub: "የብድር ግምገማ፣ የተበዳሪ ግንኙነት፣ አገልግሎት እና ክፍያ መሰብሰብ በብድር ተቋሙ ይቆያል።",
+      copy: "ማለዳ የብድር ተቋሙን ሚና አይተካም። የአካባቢ ተቋሙ ለተበዳሪ ግምገማ፣ ለብድር ማመንጨት፣ ለደንበኛ ግንኙነት አስተዳደር፣ ለክፍያ ክትትል እና ለቁጥጥር ግዴታዎች ኃላፊነቱን ይይዛል።",
+      copy2: "ማለዳ በብድር ተቋሙ ዙሪያ ያለውን የካፒታል መዳረሻ ሽፋን ይደግፋል።",
+      visual: {
+        lenderTitle: "በብድር ተቋሙ ቁጥጥር ውስጥ",
+        lenderItems: [
+          "የብድር ግምገማ",
+          "የተበዳሪ ግንኙነት",
+          "አገልግሎት",
+          "ክፍያ መሰብሰብ",
+          "የኮምፕላያንስ ኃላፊነት",
+        ],
+        auroraTitle: "የማለዳ ድጋፍ ሽፋን",
+        auroraItems: [
+          "የተዋቀረ የካፒታል መዳረሻ",
+          "የተሳትፎ ማቀናበር",
+          "የሪፖርት መሠረተ ልማት",
+          "የፖሊሲ ቁጥጥሮች",
+        ],
+        divider: "ድንበር",
+      },
+    },
+    privacy: {
+      num: "06",
+      eyebrow: "ግላዊነት",
+      title: "የተበዳሪ የግል መረጃ ",
+      titleGold: "በብድር ተቋሙ ይቆያል።",
+      sub: "ማለዳ የተዋቀረ የፈንድ ተሳትፎን ያቀናብራል፤ የተበዳሪ ፋይሎችን ግን አያጋልጥም።",
+      copy: "የተበዳሪ ሰነዶች፣ የማንነት መረጃ፣ የብድር ስምምነቶች እና የፋይናንስ ፋይሎች በተፈቀደው ብድር ተቋም ውስጥ ይቆያሉ። ማለዳ ለተቋማዊ ፈንድ ተሳትፎ የሚያስፈልጉ የተዋቀሩ የተሳትፎ መዝገቦችን፣ የማረጋገጫ ማጣቀሻዎችን፣ የፖሊሲ ሁኔታን እና የዲጂታል መዝገብ መረጃን ብቻ ያቀናብራል።",
+      visual: {
+        leftTitle: "የተበዳሪ የግል መዝገቦች",
+        leftEyebrow: "በብድር ተቋሙ ይያዛል",
+        leftBadge: "በብድር ተቋሙ በደህንነት ይያዛል",
+        leftItems: [
+          "የተበዳሪ ሙሉ ስም",
+          "ብሔራዊ መታወቂያ ቁጥር",
+          "የንግድ ምዝገባ",
+          "የመገናኛ መረጃ",
+          "አድራሻ",
+          "የስራ / የንግድ መረጃ",
+          "የተፈረመ የብድር ስምምነት",
+          "ደጋፊ የፋይናንስ መዝገቦች",
+          "ውስጣዊ የብድር ግምገማ",
+          "የኮምፕላያንስ ግምገማ መዝገቦች",
+        ],
+        connectorTitle: "ማረጋገጫ ወደ የማስረጃ ማጣቀሻዎች ይቀየራል",
+        connectorCopy: "ማረጋገጫ የተበዳሪ ጥሬ ሰነዶችን ሳያጋልጥ ሊረጋገጥ ይችላል።",
+        rightTitle: "የዲጂታል ፈንድ ተሳትፎ መዝገብ",
+        rightEyebrow: "ማለዳ · የመዝገብ ግቤት",
+        rightRecord: [
+          { label: "የግብይት መለያ", value: "TX-2026-AUR-00481" },
+          { label: "የፈንድ መጠን", value: "USD 250,000" },
+          { label: "ቆይታ", value: "180 ቀናት" },
+          { label: "የክፍያ መርሐግብር", value: "ወርሃዊ · 6 ክፍያዎች" },
+          { label: "የማረጋገጫ ማስረጃ", value: "vfp:a1b2···9c4d" },
+          { label: "የስምምነት ማስረጃ", value: "agp:c3d4···7e8f" },
+          { label: "የተቋም ፈቃድ", value: "ባንክ · ጸድቋል" },
+          { label: "የተሳትፎ ሁኔታዎች", value: "ደረጃ-1 ብቁ" },
+          { label: "ሁኔታ", value: "ንቁ" },
+          { label: "ሜታዳታ ሃሽ", value: "0x8f3c···d92a" },
+        ],
+        validationTitle: "የማስረጃ ማረጋገጫ",
+        validation: [
+          { label: "ማረጋገጫ", value: "ተረጋግጧል" },
+          { label: "ስምምነት", value: "ተረጋግጧል" },
+          { label: "የፖሊሲ ሁኔታ", value: "ኮምፕላያንት" },
+          { label: "የግላዊነት ሁነታ", value: "የተጠበቀ" },
+        ],
+        stateLabel: "የግብይት ሁኔታ",
+        states: ["ተፈጥሯል", "ተረጋግጧል", "ተደግፏል", "ንቁ"],
+        activeState: 3,
+        statementTitle: "የተበዳሪ የግል ሰነዶች በሕዝብ ፊት አይቀመጡም።",
+        statementSub: "የተዋቀሩ የተሳትፎ መዝገቦች እና የማረጋገጫ ማጣቀሻዎች ብቻ በዲጂታል ይቀናበራሉ።",
+        pillars: [
+          { title: "በንድፍ ደረጃ የግላዊነት ጥበቃ", copy: "ስሱ የተበዳሪ መረጃ ግላዊ እና በተቋም ቁጥጥር ስር ይቆያል።" },
+          { title: "የማረጋገጫ ማረጋገጥ", copy: "ማስረጃዎች ጥሬ ሰነዶችን ሳያጋልጡ ትክክለኛነትን ያረጋግጣሉ።" },
+          { title: "ለኦዲት የሚመች", copy: "የተዋቀሩ መዝገቦች ግምገማን፣ ሪፖርትን እና ቁጥጥርን ይደግፋሉ።" },
+          { title: "የመዝገብ ታማኝነት", copy: "ዲጂታል መዝገቦች ወጥነትን እና ኃላፊነትን ለማስጠበቅ ይረዳሉ።" },
+          { title: "ኮምፕላያንስ", copy: "ለተቋማዊ ደረጃዎች እና አስተዳደር የተዘጋጀ።" },
+        ],
+        closing: "የተበዳሪ የግል መረጃ በተፈቀደው ብድር ተቋም ውስጥ ይቆያል። ማለዳ ስሱ የተበዳሪ መዝገቦችን ሳያጋልጥ የፈንድ ተሳትፎን ያቀናብራል።",
+      },
+    },
+    trust: {
+      num: "07",
+      eyebrow: "እምነት",
+      title: "ለተቋማዊ ",
+      titleGold: "መተማመን የተገነባ።",
+      sub: "ማረጋገጫ፣ ኦዲት መደረግ የሚችል አሰራር፣ የፖሊሲ ቁጥጥር እና የተዋቀረ አስተዳደር።",
+      pillars: [
+        {
+          title: "ማረጋገጫ",
+          copy: "ተሳታፊዎች እና እድሎች በተወሰነ አሰራር ሊረጋገጡ ይችላሉ።",
+        },
+        {
+          title: "ኦዲት መደረግ የሚችል አሰራር",
+          copy: "የተሳትፎ ፍሰቶች ሊመዘገቡ እና ሊገመገሙ ይችላሉ።",
+        },
+        {
+          title: "የፖሊሲ ቁጥጥሮች",
+          copy: "የብቁነት፣ የተሳትፎ እና የሪፖርት ህጎች ሊዋቀሩ ይችላሉ።",
+        },
+        {
+          title: "የተዋቀረ አስተዳደር",
+          copy: "ተቋማት በተወሰኑ ኃላፊነቶች እና የቁጥጥር ድንበሮች ውስጥ መስራት ይችላሉ።",
+        },
       ],
     },
     tech: {
-      num: "05",
-      eyebrow: "የቴክኖሎጂ እርምጃ",
-      title: "ለኢትዮጵያ የብድር ገበያ ",
-      titleGold: "የቴክኖሎጂ እርምጃ።",
-      copy: "ማለዳ ኢትዮጵያ ከተበታተነ የንግድ ብድር ስርዓት ወደ የተገናኘ፣ ግልጽ እና ለማስፋፋት የሚችል የብድር ስርዓት እንድትሸጋገር ሊረዳ ይችላል።",
-      pillars: [
-        {
-          label: "ለፋይናንስ ተቋማት",
-          copy: "ብዙ ብቁ ንግዶችን ለማገልገል የተሻሉ መሳሪያዎች።",
-        },
-        {
-          label: "ለሕዝባዊ ባለድርሻዎች",
-          copy: "የSME እድገትን፣ ግብርናን፣ ንግድን እና የስራ ፈጠራን የሚደግፍ መሠረት።",
-        },
-        {
-          label: "ለንግዶች",
-          copy: "በታመኑ የአካባቢ ተቋማት በኩል የተሻለ የፋይናንስ መዳረሻ።",
-        },
-      ],
-    },
-    trust: {
-      num: "06",
-      eyebrow: "እምነት",
-      title: "ለተቋማዊ እምነት ",
-      titleGold: "የተዘጋጀ።",
-      items: [
-        {
-          q: "ተበዳሪዎች ክሪፕቶ ይቀበላሉ?",
-          a: "አይ። ተበዳሪዎች ብድር የሚቀበሉት በአካባቢ ገንዘብ ነው፤ በተፈቀዱ የአካባቢ ተቋማት በኩል።",
-        },
-        {
-          q: "ማለዳ ብድር ይሰጣል?",
-          a: "ማለዳ ለተቋማት የተዘጋጀ የብድር መድረክ ነው፤ ግን በቀጥታ ለሕዝብ ብድር አይሰጥም። የተፈቀዱ የፋይናንስ ተቋማት ብድሩን ያመነጫሉ፣ ተበዳሪውን ይገመግማሉ እና አገልግሎቱን ይቆጣጠራሉ።",
-        },
-        {
-          q: "ማለዳ ባንኮችን ወይም ማይክሮ ፋይናንስን ይተካል?",
-          a: "አይ። ማለዳ የተፈቀዱ የፋይናንስ ተቋማትን ለማጠናከር የተዘጋጀ ነው፣ ለመተካት አይደለም።",
-        },
-        {
-          q: "ካፒታሉን ማን ያቀርባል?",
-          a: "ማለዳ የአካባቢ የብድር ፍላጎትን ከታመኑ የካፒታል አጋሮች ጋር በተዋቀሩ ተቋማዊ መንገዶች ለማገናኘት ይረዳል።",
-        },
-        {
-          q: "የደንበኛ ግንኙነትን ማን ይቆጣጠራል?",
-          a: "የአካባቢ የተፈቀደ የፋይናንስ ተቋም የተበዳሪውን ግንኙነት ይቆጣጠራል።",
-        },
-        {
-          q: "ይህ ለኢትዮጵያ ለምን አስፈላጊ ነው?",
-          a: "ለSME፣ ለግብርና፣ ለንግድ፣ ለሴቶች የሚመሩ ንግዶች እና ለስራ ፈጠራ ድርጅቶች ምርታማ ብድር ለማስፋፋት ሊረዳ ይችላል።",
-        },
-      ],
+      num: "08",
+      eyebrow: "መሠረተ ልማት",
+      title: "ዘመናዊ ዲጂታል ",
+      titleGold: "የፋይናንስ መሠረተ ልማት።",
+      sub: "ከጀርባ የሚሰሩ ደህንነታቸው የተጠበቀ ዲጂታል መንገዶች — ለተበዳሪዎች የሚታይ የክሪፕቶ ምርት አይደለም።",
+      copy: "ማለዳ ዘመናዊ ዲጂታል የፋይናንስ መሠረተ ልማትን በመጠቀም የካፒታል ተሳትፎን፣ ሪፖርት እና ሰትልመንት ሂደቶችን ማቀናበር ይችላል። ለተበዳሪዎች እና ለአካባቢ ተቋማት ግን ተሞክሮው በተቋም መሪነት እና በአካባቢ ገንዘብ ላይ የተመሰረተ ሆኖ ይቆያል።",
+      visual: {
+        frontTitle: "የፊት መድረክ — ተበዳሪዎች እና ብድር ተቋማት የሚያዩት",
+        frontItems: [
+          { label: "የአካባቢ ብድር ተቋም", copy: "የተፈቀደው ተቋም የደንበኛ ግንኙነት ዋና ተቋም ሆኖ ይቆያል።" },
+          { label: "የተበዳሪ ተሞክሮ", copy: "ተበዳሪዎች ከታወቀ የአካባቢ ተቋም ጋር ይገናኛሉ፣ ከክሪፕቶ ምርት አይደለም።" },
+          { label: "በአካባቢ ገንዘብ ብድር", copy: "ብድር በአካባቢ ገንዘብ ይመነጫል እና ይስተናገዳል።" },
+        ],
+        backTitle: "የጀርባ መድረክ — የማለዳ የካፒታል መሠረተ ልማት",
+        backItems: [
+          { label: "የተዋቀረ ተሳትፎ", copy: "የካፒታል ተሳትፎ በፕሮግራም ይዋቀራል እና ይቀናበራል።" },
+          { label: "የኮምፕላያንስ ቁጥጥሮች", copy: "የብቁነት እና የፖሊሲ ህጎች ከተሳትፎ በፊት ይተገበራሉ።" },
+          { label: "የዲጂታል ካፒታል ማቀናበር", copy: "ዘመናዊ መንገዶች በተሳታፊዎች መካከል ካፒታልን በብቃት ያንቀሳቅሳሉ።" },
+          { label: "የሪፖርት መንገዶች", copy: "ለቆጣጣሪዎች እና ለካፒታል አጋሮች መደበኛ ሪፖርት።" },
+        ],
+        separator: "በተቋም መሪነት የፊት መድረክ · ከጀርባ ያለ የካፒታል መሠረተ ልማት",
+      },
     },
     cta: {
       eyebrow: "እኛን ያግኙን",
-      title: "ምርታማ ብድርን ለማስፋፋት ",
-      titleGold: "ከማለዳ ጋር ይተባበሩ።",
-      copy: "ባንክ፣ ማይክሮ ፋይናንስ ተቋም፣ የካፒታል አጋር ወይም ሕዝባዊ ባለድርሻ ከሆኑ፣ ማለዳ ለኢትዮጵያ ምርታማ ኢኮኖሚ ጠንካራ እና ሊስፋፋ የሚችል የብድር ገበያ ለመገንባት ይረዳል።",
-      button: "ውይይት ይጀምሩ",
+      title: "ወደ ሰፊ ",
+      titleGold: "የካፒታል መዳረሻ።",
+      sub: "ለምርታማ ብድር ተሳትፎ ተደጋጋሚ የሆነ የአሰራር ሞዴል።",
+      copy: "ማለዳ የብድር ተቋማት በአካባቢ የብድር ፍላጎት እና በዓለም አቀፍ ካፒታል ተሳትፎ መካከል የበለጠ ቀልጣፋ መንገድ እንዲገነቡ ይረዳል።",
+      ctaPrimary: "ከማለዳ ጋር ይተባበሩ",
+      ctaSecondary: "ውይይት ይጀምሩ",
     },
     footer: {
-      tagline: "ለኢትዮጵያ ምርታማ ኢኮኖሚ የተዘጋጀ የብድር መድረክ።",
+      tagline: "ለምርታማ ብድር ተቋማት የተዋቀረ የካፒታል መዳረሻ መሠረተ ልማት።",
       builtBy: "የተገነባው በ",
-      links: { problem: "ችግር", what: "ማለዳ ምን ይሰራል", how: "እንዴት እንደሚሰራ", use: "የአጠቃቀም ምሳሌዎች", contact: "ግንኙነት" },
+      links: {
+        problem: "እድሉ",
+        ecosystem: "ኢኮሲስተም",
+        how: "እንዴት ይሰራል",
+        trust: "እምነት",
+        contact: "ግንኙነት",
+      },
       legal:
-        "ማለዳ ለተፈቀዱ የፋይናንስ ተቋማት የተዘጋጀ መሠረተ ልማት ነው — ባንክ፣ ማይክሮ ፋይናንስ ተቋም ወይም ተቀማጭ የሚቀበል ተቋም አይደለም።",
+        "ማለዳ ለተፈቀዱ የብድር ተቋማት የተዘጋጀ የካፒታል መዳረሻ መሠረተ ልማት ነው — ባንክ፣ ማይክሮ ፋይናንስ ተቋም ወይም ተቀማጭ የሚቀበል ተቋም አይደለም። ተበዳሪዎች ከክሪፕቶ ጋር አይገናኙም።",
     },
   },
 };
@@ -385,9 +627,10 @@ export default function MaledaPage() {
   const [lang, setLang] = useState<Lang>("en");
   const t = CONTENT[lang];
 
-  // Apply language-aware typography to the entire page subtree.
   const fontVar =
-    lang === "am" ? "var(--font-maleda-am), 'Noto Sans Ethiopic', sans-serif" : "var(--font-maleda-en), Inter, system-ui, sans-serif";
+    lang === "am"
+      ? "var(--font-maleda-am), 'Noto Sans Ethiopic', sans-serif"
+      : "var(--font-maleda-en), Inter, system-ui, sans-serif";
   const lineHeightClass = lang === "am" ? "[&_p]:leading-[1.9] [&_li]:leading-[1.9]" : "";
 
   return (
@@ -398,11 +641,13 @@ export default function MaledaPage() {
     >
       <Hero lang={lang} setLang={setLang} t={t} />
       <ProblemSection t={t} />
-      <WhatMaledaDoes t={t} />
+      <SpeedSection t={t} />
+      <EcosystemSection t={t} />
       <HowItWorksSection t={t} />
-      <UseCasesSection t={t} />
-      <TechnologyLeapSection t={t} />
+      <ControlSection t={t} />
+      <PrivacySection t={t} />
       <TrustSection t={t} />
+      <TechnologySection t={t} />
       <FinalCTASection t={t} />
       <Footer lang={lang} t={t} />
     </div>
@@ -450,7 +695,7 @@ function Hero({
       <Navbar lang={lang} setLang={setLang} t={t} />
 
       <div className="relative z-10 mx-auto mt-auto flex w-full max-w-[1400px] flex-col gap-10 px-6 pb-20 md:px-10 lg:px-14 lg:pb-24">
-        <div className="max-w-[820px]">
+        <div className="max-w-[860px]">
           <FadeIn delay={80} duration={600}>
             <span
               className="inline-flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.22em]"
@@ -462,24 +707,24 @@ function Hero({
           </FadeIn>
 
           <AnimatedHeading
-            key={lang} // re-trigger animation on language switch
+            key={lang}
             text={t.hero.headline}
-            className={`mt-7 text-[40px] font-medium leading-[1.06] tracking-[-0.025em] sm:text-[56px] ${
-              lang === "am" ? "lg:text-[64px]" : "lg:text-[72px]"
+            className={`mt-7 text-[36px] font-medium leading-[1.06] tracking-[-0.025em] sm:text-[52px] ${
+              lang === "am" ? "lg:text-[60px]" : "lg:text-[68px]"
             }`}
           />
 
-          <FadeIn delay={1100} duration={700} className="mt-8 max-w-[58ch]">
+          <FadeIn delay={1100} duration={700} className="mt-8 max-w-[60ch]">
             <p
-              className="text-[15px] font-light leading-[1.7] sm:text-[17px]"
-              style={{ color: "rgba(242,237,223,0.80)" }}
+              className="text-[16px] font-light leading-[1.55] tracking-tight sm:text-[18px]"
+              style={{ color: IVORY }}
             >
               {t.hero.sub}
             </p>
           </FadeIn>
 
-          <FadeIn delay={1300} duration={700} className="mt-4 max-w-[58ch]">
-            <p className="text-[12px] font-light leading-[1.7]" style={{ color: IVORY_MUTED }}>
+          <FadeIn delay={1300} duration={700} className="mt-5 max-w-[64ch]">
+            <p className="text-[13.5px] font-light leading-[1.75]" style={{ color: "rgba(242,237,223,0.72)" }}>
               {t.hero.support}
             </p>
           </FadeIn>
@@ -487,21 +732,19 @@ function Hero({
           <FadeIn delay={1500} duration={700} className="mt-10">
             <div className="flex flex-wrap items-center gap-6">
               <a
-                href="#cta"
+                href={CALENDLY}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex h-12 cursor-pointer items-center justify-center gap-2 px-6 text-[13px] font-semibold tracking-tight transition active:scale-[0.98] hover:brightness-110"
                 style={{ background: GOLD, color: BG }}
               >
                 {t.hero.ctaPrimary}
-                <ArrowRight className="h-4 w-4" strokeWidth={1.7} />
+                <ArrowUpRight className="h-4 w-4" strokeWidth={1.7} />
               </a>
               <a
                 href="#how-it-works"
                 className="inline-flex h-12 cursor-pointer items-center gap-2 text-[13px] font-medium transition"
-                style={{
-                  color: IVORY,
-                  borderBottom: `1px solid ${IVORY}`,
-                  paddingBottom: 2,
-                }}
+                style={{ color: IVORY, borderBottom: `1px solid ${IVORY}`, paddingBottom: 2 }}
               >
                 {t.hero.ctaSecondary}
                 <ArrowRight className="h-4 w-4" strokeWidth={1.7} />
@@ -509,13 +752,13 @@ function Hero({
             </div>
           </FadeIn>
 
-          <FadeIn delay={1750} duration={700} className="mt-12 max-w-[760px]">
-            <div className="grid grid-cols-2 gap-x-6 gap-y-2 sm:grid-cols-4">
+          <FadeIn delay={1750} duration={700} className="mt-12 max-w-[820px]">
+            <div className="grid grid-cols-2 gap-x-5 gap-y-3 sm:grid-cols-4">
               {t.hero.chips.map((c) => (
                 <span
                   key={c}
-                  className="border-t pt-3 text-[11px] font-medium leading-snug"
-                  style={{ borderColor: "rgba(242,237,223,0.18)", color: "rgba(242,237,223,0.78)" }}
+                  className="border-t pt-3 text-[11.5px] font-medium leading-snug"
+                  style={{ borderColor: GOLD, color: IVORY }}
                 >
                   {c}
                 </span>
@@ -539,9 +782,10 @@ function Navbar({
 }) {
   const links = [
     { href: "#problem", label: t.nav.problem },
-    { href: "#what", label: t.nav.what },
+    { href: "#speed", label: t.nav.speed },
+    { href: "#ecosystem", label: t.nav.ecosystem },
     { href: "#how-it-works", label: t.nav.how },
-    { href: "#use-cases", label: t.nav.use },
+    { href: "#control", label: t.nav.control },
     { href: "#trust", label: t.nav.trust },
   ];
 
@@ -552,14 +796,31 @@ function Navbar({
           className="flex items-center justify-between border-b py-4"
           style={{ borderColor: "rgba(242,237,223,0.16)" }}
         >
-          <Link href="#top" className="flex items-center gap-3" aria-label="Maleda home" style={{ color: IVORY }}>
-            <span className="text-xl font-semibold tracking-tight">MALEDA</span>
-            <span className="hidden text-[10px] font-medium uppercase tracking-[0.22em] sm:inline" style={{ color: IVORY_MUTED }}>
+          <Link
+            href="#top"
+            className="flex items-center gap-3"
+            aria-label={lang === "am" ? "ማለዳ home" : "Aurora home"}
+            style={{ color: IVORY }}
+          >
+            <span
+              className={`font-semibold tracking-tight ${lang === "am" ? "text-2xl" : "text-xl"}`}
+              style={
+                lang === "am"
+                  ? { fontFamily: "var(--font-maleda-am), 'Noto Sans Ethiopic', sans-serif" }
+                  : undefined
+              }
+            >
+              {BRAND[lang]}
+            </span>
+            <span
+              className="hidden text-[10px] font-medium uppercase tracking-[0.22em] sm:inline"
+              style={{ color: IVORY_MUTED }}
+            >
               by Fairway
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-7 lg:flex">
+          <nav className="hidden items-center gap-6 lg:flex">
             {links.map((link) => (
               <a
                 key={link.href}
@@ -575,13 +836,11 @@ function Navbar({
           <div className="flex items-center gap-6">
             <LangToggle lang={lang} setLang={setLang} />
             <a
-              href="#cta"
+              href={CALENDLY}
+              target="_blank"
+              rel="noopener noreferrer"
               className="hidden items-center gap-2 text-[12px] font-medium uppercase tracking-[0.16em] transition sm:inline-flex"
-              style={{
-                color: GOLD,
-                borderBottom: `1px solid ${GOLD}`,
-                paddingBottom: 2,
-              }}
+              style={{ color: GOLD, borderBottom: `1px solid ${GOLD}`, paddingBottom: 2 }}
             >
               {t.nav.partner}
               <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={1.7} />
@@ -637,7 +896,7 @@ function LangToggle({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void 
 }
 
 /* ----------------------------------------------------------------------- */
-/* Section primitive                                                        */
+/* Section primitive                                                       */
 /* ----------------------------------------------------------------------- */
 
 function Section({
@@ -646,22 +905,26 @@ function Section({
   eyebrow,
   title,
   titleGold,
+  sub,
   intro,
   children,
+  background,
 }: {
   id: string;
   num: string;
   eyebrow: string;
   title: string;
   titleGold: string;
+  sub?: string;
   intro?: React.ReactNode;
   children?: React.ReactNode;
+  background?: string;
 }) {
   return (
     <section
       id={id}
       className="relative px-6 py-28 md:px-10 lg:px-14 lg:py-36"
-      style={{ borderTop: `1px solid ${DIVIDER}` }}
+      style={{ borderTop: `1px solid ${DIVIDER}`, background: background ?? "transparent" }}
     >
       <div className="relative mx-auto max-w-[1400px]">
         <InView className="grid gap-10 lg:grid-cols-[260px_1fr] lg:gap-16">
@@ -676,14 +939,25 @@ function Section({
 
           <div>
             <h2
-              className="text-[30px] font-medium leading-[1.06] tracking-[-0.025em] sm:text-[42px] lg:text-[50px]"
+              className="text-[28px] font-medium leading-[1.06] tracking-[-0.025em] sm:text-[40px] lg:text-[48px]"
               style={{ color: IVORY, textWrap: "balance" }}
             >
               {title}
               <span style={{ color: GOLD }}>{titleGold}</span>
             </h2>
+            {sub && (
+              <p
+                className="mt-5 text-[16px] font-light leading-[1.55] tracking-tight"
+                style={{ color: IVORY, maxWidth: "60ch" }}
+              >
+                {sub}
+              </p>
+            )}
             {intro && (
-              <div className="mt-6 text-[15px] font-light leading-[1.75]" style={{ color: IVORY_DIM, maxWidth: "60ch" }}>
+              <div
+                className="mt-6 text-[14.5px] font-light leading-[1.75]"
+                style={{ color: IVORY_DIM, maxWidth: "62ch" }}
+              >
                 {intro}
               </div>
             )}
@@ -696,7 +970,7 @@ function Section({
 }
 
 /* ----------------------------------------------------------------------- */
-/* Problem                                                                 */
+/* Problem                                                                  */
 /* ----------------------------------------------------------------------- */
 
 function ProblemSection({ t }: { t: T }) {
@@ -707,77 +981,82 @@ function ProblemSection({ t }: { t: T }) {
       eyebrow={t.problem.eyebrow}
       title={t.problem.title}
       titleGold={t.problem.titleGold}
+      sub={t.problem.sub}
+      intro={
+        <div className="space-y-5">
+          {t.problem.copy.map((p, i) => (
+            <p key={i}>{p}</p>
+          ))}
+        </div>
+      }
     >
-      <div className="mt-8 space-y-5">
-        {t.problem.copy.map((p, i) => (
-          <p key={i} className="text-[15px] font-light leading-[1.75]" style={{ color: IVORY_DIM, maxWidth: "62ch" }}>
-            {p}
-          </p>
-        ))}
-      </div>
-      <p
-        className="mt-10 border-l pl-5 text-[20px] font-medium leading-snug tracking-tight sm:text-[26px]"
-        style={{ borderColor: GOLD, color: IVORY }}
-      >
-        {t.problem.bold}
-      </p>
+      <ProblemSplitVisual labels={t.problem.split} />
     </Section>
   );
 }
 
 /* ----------------------------------------------------------------------- */
-/* What Maleda Does                                                        */
+/* Speed                                                                    */
 /* ----------------------------------------------------------------------- */
 
-function WhatMaledaDoes({ t }: { t: T }) {
+function SpeedSection({ t }: { t: T }) {
   return (
     <Section
-      id="what"
-      num={t.what.num}
-      eyebrow={t.what.eyebrow}
-      title={t.what.title}
-      titleGold={t.what.titleGold}
-      intro={<p>{t.what.copy}</p>}
+      id="speed"
+      num={t.speed.num}
+      eyebrow={t.speed.eyebrow}
+      title={t.speed.title}
+      titleGold={t.speed.titleGold}
+      intro={
+        <div className="space-y-5">
+          {t.speed.copy.map((p, i) => (
+            <p key={i}>{p}</p>
+          ))}
+        </div>
+      }
     >
-      <div className="mt-16 grid gap-10 md:grid-cols-2 md:gap-16">
-        <DualList label={t.what.colA.label} items={t.what.colA.items} />
-        <DualList label={t.what.colB.label} items={t.what.colB.items} accent />
+      <SpeedComparisonVisual labels={t.speed.visual} />
+    </Section>
+  );
+}
+
+/* ----------------------------------------------------------------------- */
+/* Ecosystem                                                                */
+/* ----------------------------------------------------------------------- */
+
+function EcosystemSection({ t }: { t: T }) {
+  return (
+    <Section
+      id="ecosystem"
+      num={t.ecosystem.num}
+      eyebrow={t.ecosystem.eyebrow}
+      title={t.ecosystem.title}
+      titleGold={t.ecosystem.titleGold}
+      sub={t.ecosystem.sub}
+    >
+      <LenderEcosystemMap labels={t.ecosystem.map} />
+
+      <div className="mt-16 grid gap-px sm:grid-cols-2 lg:grid-cols-3" style={{ background: DIVIDER }}>
+        {t.ecosystem.cards.map((c, i) => (
+          <article key={c.title} className="flex flex-col gap-3 p-7" style={{ background: BG }}>
+            <span className="font-mono text-[10px] font-medium uppercase tracking-[0.22em]" style={{ color: GOLD }}>
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <h3 className="text-[17px] font-medium leading-snug tracking-tight" style={{ color: IVORY }}>
+              {c.title}
+            </h3>
+            <p className="text-[13px] font-light leading-[1.7]" style={{ color: IVORY_DIM, maxWidth: "44ch" }}>
+              {c.copy}
+            </p>
+          </article>
+        ))}
       </div>
     </Section>
   );
 }
 
-function DualList({ label, items, accent = false }: { label: string; items: readonly string[]; accent?: boolean }) {
-  return (
-    <div>
-      <p
-        className="text-[10px] font-medium uppercase tracking-[0.22em]"
-        style={{ color: accent ? GOLD : IVORY_MUTED }}
-      >
-        {label}
-      </p>
-      <ul className="mt-5 divide-y" style={{ borderColor: DIVIDER }}>
-        {items.map((item, i) => (
-          <li
-            key={item}
-            className="grid grid-cols-[42px_1fr] items-baseline gap-3 border-t py-4 first:border-t-0"
-            style={{ borderColor: DIVIDER }}
-          >
-            <span className="font-mono text-[10px] font-medium uppercase tracking-[0.22em]" style={{ color: IVORY_MUTED }}>
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <span className="text-[15px] font-medium leading-snug tracking-tight" style={{ color: IVORY }}>
-              {item}
-            </span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
 /* ----------------------------------------------------------------------- */
-/* How It Works                                                            */
+/* How It Works                                                             */
 /* ----------------------------------------------------------------------- */
 
 function HowItWorksSection({ t }: { t: T }) {
@@ -789,117 +1068,58 @@ function HowItWorksSection({ t }: { t: T }) {
       title={t.how.title}
       titleGold={t.how.titleGold}
     >
-      <p
-        className="mt-10 border-l pl-5 text-[14px] font-medium leading-snug tracking-tight"
-        style={{ borderColor: GOLD, color: IVORY }}
-      >
-        {t.how.callout}
-      </p>
-
-      <ol className="relative mt-16">
-        <div
-          aria-hidden
-          className="absolute left-[14px] top-0 bottom-0 w-px"
-          style={{ background: "rgba(242,237,223,0.10)" }}
-        />
-        {t.how.steps.map((s, i) => (
-          <li key={i} className="relative pl-12 pb-10 last:pb-0">
-            <span
-              aria-hidden
-              className="absolute left-[8px] top-1 h-[13px] w-[13px] rounded-full"
-              style={{ background: GOLD, border: `1px solid ${GOLD}` }}
-            />
-            <div className="flex items-baseline gap-3">
-              <span className="font-mono text-[10px] font-medium uppercase tracking-[0.22em]" style={{ color: GOLD }}>
-                {String(i + 1).padStart(2, "0")}
-              </span>
-            </div>
-            <h3 className="mt-3 text-[18px] font-medium leading-snug tracking-tight" style={{ color: IVORY }}>
-              {s.title}
-            </h3>
-            <p className="mt-2 max-w-[58ch] text-[14px] font-light leading-[1.7]" style={{ color: IVORY_DIM }}>
-              {s.copy}
-            </p>
-          </li>
-        ))}
-      </ol>
+      <ParticipationFlow steps={t.how.steps} footer={t.how.footer} />
     </Section>
   );
 }
 
 /* ----------------------------------------------------------------------- */
-/* Use Cases                                                               */
+/* Institutions remain in control                                           */
 /* ----------------------------------------------------------------------- */
 
-function UseCasesSection({ t }: { t: T }) {
+function ControlSection({ t }: { t: T }) {
   return (
     <Section
-      id="use-cases"
-      num={t.use.num}
-      eyebrow={t.use.eyebrow}
-      title={t.use.title}
-      titleGold={t.use.titleGold}
+      id="control"
+      num={t.control.num}
+      eyebrow={t.control.eyebrow}
+      title={t.control.title}
+      titleGold={t.control.titleGold}
+      sub={t.control.sub}
+      intro={
+        <div className="space-y-5">
+          <p>{t.control.copy}</p>
+          <p>{t.control.copy2}</p>
+        </div>
+      }
     >
-      <div className="mt-16 grid gap-px sm:grid-cols-2 lg:grid-cols-3" style={{ background: DIVIDER }}>
-        {t.use.cards.map((c, i) => (
-          <article key={c.title} className="flex flex-col gap-4 p-8" style={{ background: BG }}>
-            <span className="font-mono text-[10px] font-medium uppercase tracking-[0.22em]" style={{ color: GOLD }}>
-              {String(i + 1).padStart(2, "0")} / 06
-            </span>
-            <h3 className="text-[18px] font-medium leading-snug tracking-tight" style={{ color: IVORY }}>
-              {c.title}
-            </h3>
-            <p className="text-[13.5px] font-light leading-[1.7]" style={{ color: IVORY_DIM, maxWidth: "44ch" }}>
-              {c.copy}
-            </p>
-          </article>
-        ))}
-      </div>
+      <ControlBoundaryDiagram labels={t.control.visual} />
     </Section>
   );
 }
 
 /* ----------------------------------------------------------------------- */
-/* Technology Leap                                                         */
+/* Private data stays private                                               */
 /* ----------------------------------------------------------------------- */
 
-function TechnologyLeapSection({ t }: { t: T }) {
+function PrivacySection({ t }: { t: T }) {
   return (
     <Section
-      id="tech"
-      num={t.tech.num}
-      eyebrow={t.tech.eyebrow}
-      title={t.tech.title}
-      titleGold={t.tech.titleGold}
-      intro={<p>{t.tech.copy}</p>}
+      id="privacy"
+      num={t.privacy.num}
+      eyebrow={t.privacy.eyebrow}
+      title={t.privacy.title}
+      titleGold={t.privacy.titleGold}
+      sub={t.privacy.sub}
+      intro={<p>{t.privacy.copy}</p>}
     >
-      <ul className="mt-16 divide-y" style={{ borderColor: DIVIDER }}>
-        {t.tech.pillars.map((p, i) => (
-          <li
-            key={p.label}
-            className="grid grid-cols-1 gap-3 border-t py-7 first:border-t-0 sm:grid-cols-[280px_1fr] sm:gap-10"
-            style={{ borderColor: DIVIDER }}
-          >
-            <div className="flex items-baseline gap-3">
-              <span className="font-mono text-[10px] font-medium uppercase tracking-[0.22em]" style={{ color: GOLD }}>
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <h3 className="text-[15px] font-medium leading-snug tracking-tight" style={{ color: IVORY }}>
-                {p.label}
-              </h3>
-            </div>
-            <p className="text-[14px] font-light leading-[1.75]" style={{ color: IVORY_DIM, maxWidth: "58ch" }}>
-              {p.copy}
-            </p>
-          </li>
-        ))}
-      </ul>
+      <PrivateRecordsVisual labels={t.privacy.visual} />
     </Section>
   );
 }
 
 /* ----------------------------------------------------------------------- */
-/* Trust / FAQ                                                             */
+/* Trust                                                                    */
 /* ----------------------------------------------------------------------- */
 
 function TrustSection({ t }: { t: T }) {
@@ -910,40 +1130,35 @@ function TrustSection({ t }: { t: T }) {
       eyebrow={t.trust.eyebrow}
       title={t.trust.title}
       titleGold={t.trust.titleGold}
+      sub={t.trust.sub}
     >
-      <div className="mt-16">
-        {t.trust.items.map((item, i) => (
-          <details
-            key={item.q}
-            className="group border-t [&_summary::-webkit-details-marker]:hidden"
-            style={{ borderColor: DIVIDER }}
-          >
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6" style={{ color: IVORY }}>
-              <span className="flex items-baseline gap-4">
-                <span className="font-mono text-[10px] font-medium uppercase tracking-[0.22em]" style={{ color: IVORY_MUTED }}>
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span className="text-[15px] font-medium tracking-tight">{item.q}</span>
-              </span>
-              <span aria-hidden className="flex h-6 w-6 flex-none items-center justify-center transition-transform duration-300 group-open:rotate-90">
-                <Minus className="h-4 w-4 group-open:hidden" strokeWidth={1.6} style={{ color: GOLD }} />
-                <ChevronDown className="hidden h-4 w-4 -rotate-90 group-open:block" strokeWidth={1.6} style={{ color: GOLD }} />
-              </span>
-            </summary>
-            <div className="pb-6 pl-[58px]">
-              <p className="max-w-[58ch] text-[14px] font-light leading-[1.75]" style={{ color: IVORY_DIM }}>
-                {item.a}
-              </p>
-            </div>
-          </details>
-        ))}
-      </div>
+      <InstitutionalTrustFramework pillars={t.trust.pillars} />
     </Section>
   );
 }
 
 /* ----------------------------------------------------------------------- */
-/* Final CTA                                                               */
+/* Technology                                                               */
+/* ----------------------------------------------------------------------- */
+
+function TechnologySection({ t }: { t: T }) {
+  return (
+    <Section
+      id="tech"
+      num={t.tech.num}
+      eyebrow={t.tech.eyebrow}
+      title={t.tech.title}
+      titleGold={t.tech.titleGold}
+      sub={t.tech.sub}
+      intro={<p>{t.tech.copy}</p>}
+    >
+      <BehindTheScenesInfra labels={t.tech.visual} />
+    </Section>
+  );
+}
+
+/* ----------------------------------------------------------------------- */
+/* Final CTA                                                                */
 /* ----------------------------------------------------------------------- */
 
 function FinalCTASection({ t }: { t: T }) {
@@ -951,38 +1166,53 @@ function FinalCTASection({ t }: { t: T }) {
     <section
       id="cta"
       className="relative isolate overflow-hidden px-6 py-32 md:px-10 lg:px-14 lg:py-40"
-      style={{ borderTop: `1px solid ${DIVIDER}` }}
+      style={{ borderTop: `1px solid ${DIVIDER}`, background: "#0B1A14" }}
     >
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10"
         style={{
           background:
-            "radial-gradient(50% 50% at 50% 30%, rgba(214,168,79,0.10) 0%, transparent 70%)",
+            "radial-gradient(50% 50% at 50% 30%, rgba(214,168,79,0.14) 0%, transparent 70%)",
         }}
       />
-      <InView className="relative mx-auto max-w-[820px] text-center">
+      <InView className="relative mx-auto max-w-[860px] text-center">
         <p className="text-[11px] font-medium uppercase tracking-[0.22em]" style={{ color: GOLD }}>
           {t.cta.eyebrow}
         </p>
         <h2
-          className="mt-6 text-[34px] font-medium leading-[1.06] tracking-[-0.025em] sm:text-[48px] lg:text-[58px]"
+          className="mt-6 text-[32px] font-medium leading-[1.06] tracking-[-0.025em] sm:text-[46px] lg:text-[56px]"
           style={{ color: IVORY, textWrap: "balance" }}
         >
           {t.cta.title}
           <span style={{ color: GOLD }}>{t.cta.titleGold}</span>
         </h2>
-        <p className="mx-auto mt-6 max-w-[58ch] text-[15px] font-light leading-[1.75]" style={{ color: IVORY_DIM }}>
+        <p className="mx-auto mt-5 max-w-[58ch] text-[15px] font-light leading-[1.55] tracking-tight" style={{ color: IVORY }}>
+          {t.cta.sub}
+        </p>
+        <p className="mx-auto mt-5 max-w-[58ch] text-[14px] font-light leading-[1.75]" style={{ color: IVORY_DIM }}>
           {t.cta.copy}
         </p>
         <div className="mt-12 flex flex-wrap items-center justify-center gap-6">
           <a
-            href="mailto:hello@fairway.global?subject=Maleda%20partnership"
+            href={CALENDLY}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex h-12 cursor-pointer items-center justify-center gap-2 px-7 text-[13px] font-semibold tracking-tight transition active:scale-[0.98] hover:brightness-110"
             style={{ background: GOLD, color: BG }}
           >
-            {t.cta.button}
-            <ArrowRight className="h-4 w-4" strokeWidth={1.7} />
+            {t.cta.ctaPrimary}
+            <ArrowUpRight className="h-4 w-4" strokeWidth={1.7} />
+          </a>
+          <a
+            href={CALENDLY}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex h-12 cursor-pointer items-center gap-2 text-[13px] font-medium transition"
+            style={{ color: IVORY, borderBottom: `1px solid ${IVORY}`, paddingBottom: 2 }}
+          >
+            {t.cta.ctaSecondary}
+            <ArrowUpRight className="h-4 w-4" strokeWidth={1.7} />
           </a>
         </div>
       </InView>
@@ -991,16 +1221,16 @@ function FinalCTASection({ t }: { t: T }) {
 }
 
 /* ----------------------------------------------------------------------- */
-/* Footer                                                                  */
+/* Footer                                                                   */
 /* ----------------------------------------------------------------------- */
 
 function Footer({ lang, t }: { lang: Lang; t: T }) {
   const footerLinks = [
     { href: "#problem", label: t.footer.links.problem },
-    { href: "#what", label: t.footer.links.what },
+    { href: "#ecosystem", label: t.footer.links.ecosystem },
     { href: "#how-it-works", label: t.footer.links.how },
-    { href: "#use-cases", label: t.footer.links.use },
-    { href: "#cta", label: t.footer.links.contact },
+    { href: "#trust", label: t.footer.links.trust },
+    { href: CALENDLY, label: t.footer.links.contact, external: true },
   ];
 
   return (
@@ -1010,9 +1240,18 @@ function Footer({ lang, t }: { lang: Lang; t: T }) {
     >
       <div className="mx-auto max-w-[1400px]">
         <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-start">
-          <div className="max-w-[460px]">
-            <p className="text-xl font-semibold tracking-tight" style={{ color: IVORY }}>
-              MALEDA
+          <div className="max-w-[520px]">
+            <p
+              className={`font-semibold tracking-tight ${lang === "am" ? "text-2xl" : "text-xl"}`}
+              style={{
+                color: IVORY,
+                fontFamily:
+                  lang === "am"
+                    ? "var(--font-maleda-am), 'Noto Sans Ethiopic', sans-serif"
+                    : undefined,
+              }}
+            >
+              {BRAND[lang]}
             </p>
             <p className="mt-3 text-[13px] font-light leading-[1.65]" style={{ color: IVORY_DIM }}>
               {t.footer.tagline}
@@ -1037,6 +1276,8 @@ function Footer({ lang, t }: { lang: Lang; t: T }) {
               <a
                 key={l.href}
                 href={l.href}
+                target={l.external ? "_blank" : undefined}
+                rel={l.external ? "noopener noreferrer" : undefined}
                 className="text-[12px] font-medium uppercase tracking-[0.16em] transition-colors duration-200"
                 style={{ color: IVORY_DIM }}
               >
@@ -1046,7 +1287,7 @@ function Footer({ lang, t }: { lang: Lang; t: T }) {
           </nav>
         </div>
 
-        <p className="mt-14 text-[11px] font-light leading-relaxed" style={{ color: IVORY_MUTED }}>
+        <p className="mt-14 text-[11px] font-light leading-relaxed" style={{ color: IVORY_MUTED, maxWidth: "80ch" }}>
           &copy; {new Date().getFullYear()} Fairway. {t.footer.legal}
         </p>
       </div>

@@ -18,9 +18,9 @@ const ethiopic = Noto_Sans_Ethiopic({
 });
 
 export const metadata = {
-  title: "Maleda — A new morning for business lending in Ethiopia",
+  title: "Aurora — Access global digital capital for productive lending",
   description:
-    "Maleda is a lending platform for regulated financial institutions, expanding local-currency credit for Ethiopia's productive economy.",
+    "Aurora is structured capital access infrastructure for regulated lending institutions. Lenders continue lending; Aurora connects them with global digital capital participation.",
 };
 
 export default function MaledaLayout({ children }: { children: ReactNode }) {

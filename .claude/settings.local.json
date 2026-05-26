@@ -16,7 +16,13 @@
       "Read(//c/Users/abris.ABRISH/.claude/**)",
       "Bash(echo \"--- Project skills \\(.claude/skills\\) ---\"; ls -la .claude/skills/ 2>&1 *)",
       "Read(//c/Users/abris.ABRISH/OneDrive/.claude/**)",
-      "Read(//c/Users/abris.ABRISH/**)"
+      "Read(//c/Users/abris.ABRISH/**)",
+      "Bash(npx --no-install tsc --noEmit)",
+      "Bash(./node_modules/.bin/tsc --noEmit)",
+      "Bash(./node_modules/.bin/next lint *)",
+      "Bash(./node_modules/.bin/eslint app/maleda --no-warn-ignored)",
+      "Bash(./node_modules/.bin/eslint app/maleda/page.tsx app/maleda/layout.tsx app/maleda/_components/SpeedComparisonVisual.tsx app/maleda/_components/LenderEcosystemMap.tsx app/maleda/_components/ParticipationFlow.tsx app/maleda/_components/ControlBoundaryDiagram.tsx app/maleda/_components/DataBoundaryVisual.tsx app/maleda/_components/InstitutionalTrustFramework.tsx app/maleda/_components/BehindTheScenesInfra.tsx app/maleda/_components/ProblemSplitVisual.tsx)",
+      "Bash(./node_modules/.bin/eslint app/maleda/page.tsx app/maleda/_components/PrivateRecordsVisual.tsx)"
     ]
   }
 }

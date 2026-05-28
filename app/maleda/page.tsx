@@ -11,10 +11,10 @@ import ProblemSplitVisual from "./_components/ProblemSplitVisual";
 import SpeedComparisonVisual from "./_components/SpeedComparisonVisual";
 import LenderEcosystemMap from "./_components/LenderEcosystemMap";
 import ParticipationFlow from "./_components/ParticipationFlow";
-import ControlBoundaryDiagram from "./_components/ControlBoundaryDiagram";
 import PrivateRecordsVisual from "./_components/PrivateRecordsVisual";
 import InstitutionalTrustFramework from "./_components/InstitutionalTrustFramework";
 import BehindTheScenesInfra from "./_components/BehindTheScenesInfra";
+import AmbientVideo from "./_components/AmbientVideo";
 
 /* Dark institutional palette */
 const BG = "#0A1612";
@@ -26,6 +26,9 @@ const GOLD = "#D6A84F";
 
 const HERO_VIDEO =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260507_155500_808e6fdd-761f-4acd-b3be-cb7e6e700def.mp4";
+
+const CONTROL_VIDEO = "https://i.imgur.com/HcC0rmj.mp4";
+const ECONOMY_VIDEO = "https://i.imgur.com/2dnOXjR.mp4";
 
 const CALENDLY = "https://calendly.com/heikki-fairway/fairway-demo?month=2026-05";
 
@@ -128,24 +131,17 @@ const CONTENT = {
       title: "Institutions remain ",
       titleGold: "in control.",
       sub: "Underwriting, borrower relationships, servicing, and collections remain with the lender.",
-      visual: {
-        lenderTitle: "Inside lender control",
-        lenderItems: [
-          "Underwriting",
-          "Borrower relationship",
-          "Servicing",
-          "Collections",
-          "Compliance responsibility",
-        ],
-        auroraTitle: "Aurora support layer",
-        auroraItems: [
-          "Structured capital access",
-          "Participation coordination",
-          "Reporting infrastructure",
-          "Policy controls",
-        ],
-        divider: "Boundary",
-      },
+      body: [
+        "Aurora does not replace the lender's role. The local institution continues to approve opportunities, manage borrower relationships, service loans, and meet regulatory obligations.",
+        "Aurora provides the structured capital access layer around the institution.",
+      ],
+      steps: [
+        "Lender approves opportunity",
+        "Structured participation request created",
+        "Eligible capital participates",
+        "Local lending continues",
+      ],
+      trust: "Borrowers receive local-currency financing through regulated local institutions. They do not need to touch cryptocurrency.",
     },
     privacy: {
       num: "06",
@@ -242,6 +238,21 @@ const CONTENT = {
         ],
         separator: "Institution-led front · capital rails behind",
       },
+    },
+    productive: {
+      num: "09",
+      eyebrow: "Productive economy",
+      title: "Built for Ethiopia's ",
+      titleGold: "productive economy.",
+      sub: "Aurora is designed to support lending into sectors that matter: agriculture, trade, SMEs, women-led enterprises, equipment finance, and job-creating businesses.",
+      cards: [
+        "Agriculture",
+        "SME growth",
+        "Trade finance",
+        "Women-led businesses",
+        "Equipment finance",
+        "Job creation",
+      ],
     },
     cta: {
       eyebrow: "Get in touch",
@@ -356,24 +367,17 @@ const CONTENT = {
       title: "ተቋማት ",
       titleGold: "ቁጥጥርን ይይዛሉ።",
       sub: "የብድር ግምገማ፣ የተበዳሪ ግንኙነት፣ አገልግሎት እና ክፍያ መሰብሰብ በብድር ተቋሙ ይቆያል።",
-      visual: {
-        lenderTitle: "በብድር ተቋሙ ቁጥጥር ውስጥ",
-        lenderItems: [
-          "የብድር ግምገማ",
-          "የተበዳሪ ግንኙነት",
-          "አገልግሎት",
-          "ክፍያ መሰብሰብ",
-          "የኮምፕላያንስ ኃላፊነት",
-        ],
-        auroraTitle: "የማለዳ ድጋፍ ሽፋን",
-        auroraItems: [
-          "የተዋቀረ የካፒታል መዳረሻ",
-          "የተሳትፎ ማቀናበር",
-          "የሪፖርት መሠረተ ልማት",
-          "የፖሊሲ ቁጥጥሮች",
-        ],
-        divider: "ድንበር",
-      },
+      body: [
+        "ማለዳ የብድር ተቋሙን ሚና አይተካም። የአካባቢ ተቋሙ የብድር እድሎችን ማጽደቅ፣ የተበዳሪ ግንኙነትን መቆጣጠር፣ ብድሩን ማገልገል እና የቁጥጥር ግዴታዎችን መፈጸም ይቀጥላል።",
+        "ማለዳ በተቋሙ ዙሪያ የተዋቀረ የካፒታል መዳረሻ መሠረት ይሰጣል።",
+      ],
+      steps: [
+        "ብድር ተቋሙ የብድር እድሉን ያጸድቃል",
+        "የተዋቀረ የተሳትፎ ጥያቄ ይፈጠራል",
+        "ብቁ ካፒታል ይሳተፋል",
+        "የአካባቢ ብድር መስጠት ይቀጥላል",
+      ],
+      trust: "ተበዳሪዎች በተፈቀዱ የአካባቢ ተቋማት በኩል በአካባቢ ገንዘብ ብድር ያገኛሉ። ክሪፕቶ መጠቀም አያስፈልጋቸውም።",
     },
     privacy: {
       num: "06",
@@ -471,6 +475,21 @@ const CONTENT = {
         separator: "በተቋም መሪነት የፊት · ከጀርባ የካፒታል መሠረተ ልማት",
       },
     },
+    productive: {
+      num: "09",
+      eyebrow: "ምርታማ ኢኮኖሚ",
+      title: "ለኢትዮጵያ ",
+      titleGold: "ምርታማ ኢኮኖሚ የተዘጋጀ",
+      sub: "ማለዳ ለግብርና፣ ለንግድ፣ ለSME፣ ለሴቶች የሚመሩ ንግዶች፣ ለመሣሪያ ፋይናንስ እና ለስራ ፈጠራ የሚያግዙ ብድሮችን ለመደገፍ የተዘጋጀ ነው።",
+      cards: [
+        "ግብርና",
+        "የSME እድገት",
+        "የንግድ ፋይናንስ",
+        "ሴቶች የሚመሩ ንግዶች",
+        "የመሣሪያ ፋይናንስ",
+        "የስራ ፈጠራ",
+      ],
+    },
     cta: {
       eyebrow: "እኛን ያግኙን",
       title: "ወደ ሰፊ ",
@@ -524,6 +543,7 @@ export default function MaledaPage() {
       <PrivacySection t={t} />
       <TrustSection t={t} />
       <TechnologySection t={t} />
+      <ProductiveEconomySection t={t} />
       <FinalCTASection t={t} />
       <Footer lang={lang} t={t} />
     </div>
@@ -919,16 +939,91 @@ function HowItWorksSection({ t }: { t: T }) {
 
 function ControlSection({ t }: { t: T }) {
   return (
-    <Section
+    <section
       id="control"
-      num={t.control.num}
-      eyebrow={t.control.eyebrow}
-      title={t.control.title}
-      titleGold={t.control.titleGold}
-      sub={t.control.sub}
+      className="relative px-6 py-28 md:px-10 lg:px-14 lg:py-36"
+      style={{ borderTop: `1px solid ${DIVIDER}` }}
     >
-      <ControlBoundaryDiagram labels={t.control.visual} />
-    </Section>
+      <div className="relative mx-auto max-w-[1400px]">
+        <InView>
+          <div className="flex items-center gap-3">
+            <span className="font-mono text-[10px] font-medium uppercase tracking-[0.22em]" style={{ color: GOLD }}>
+              {t.control.num}
+            </span>
+            <span className="text-[10px] font-medium uppercase tracking-[0.22em]" style={{ color: IVORY_MUTED }}>
+              {t.control.eyebrow}
+            </span>
+          </div>
+
+          <div className="mt-10 grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
+            {/* Video — first on mobile, left on desktop */}
+            <div
+              className="overflow-hidden rounded-3xl transition-transform duration-500 hover:scale-[1.01]"
+              style={{
+                background: "#082820",
+                border: "1px solid rgba(214,168,79,0.35)",
+                boxShadow: "0 30px 80px rgba(0,0,0,0.35)",
+              }}
+            >
+              <AmbientVideo
+                src={CONTROL_VIDEO}
+                className="aspect-[4/3] h-full w-full object-cover"
+              />
+            </div>
+
+            {/* Title, body, steps */}
+            <div>
+              <h2
+                className="text-[28px] font-medium leading-[1.08] tracking-[-0.025em] sm:text-[38px] lg:text-[44px]"
+                style={{ color: IVORY, textWrap: "balance" }}
+              >
+                {t.control.title}
+                <span style={{ color: GOLD }}>{t.control.titleGold}</span>
+              </h2>
+              <p
+                className="mt-5 text-[15px] font-light leading-[1.55] tracking-tight"
+                style={{ color: IVORY, maxWidth: "52ch" }}
+              >
+                {t.control.sub}
+              </p>
+              <div className="mt-5 space-y-4 text-[14px] font-light leading-[1.75]" style={{ color: IVORY_DIM, maxWidth: "54ch" }}>
+                {t.control.body.map((p, i) => (
+                  <p key={i}>{p}</p>
+                ))}
+              </div>
+
+              <ol className="relative mt-8">
+                <div
+                  aria-hidden
+                  className="absolute left-[15px] top-3 bottom-3 w-px"
+                  style={{ background: "rgba(214,168,79,0.35)" }}
+                />
+                {t.control.steps.map((s, i) => (
+                  <li key={s} className="relative flex items-center gap-4 py-2.5">
+                    <span
+                      className="relative z-10 flex h-8 w-8 flex-none items-center justify-center rounded-full text-[12px] font-semibold"
+                      style={{ background: "#082820", border: `1px solid ${GOLD}`, color: GOLD }}
+                    >
+                      {i + 1}
+                    </span>
+                    <span className="text-[14px] font-medium tracking-tight" style={{ color: IVORY }}>
+                      {s}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </div>
+
+          <p
+            className="mt-12 border-l pl-5 text-[14px] font-light leading-[1.7]"
+            style={{ borderColor: GOLD, color: IVORY, maxWidth: "72ch" }}
+          >
+            {t.control.trust}
+          </p>
+        </InView>
+      </div>
+    </section>
   );
 }
 
@@ -986,6 +1081,65 @@ function TechnologySection({ t }: { t: T }) {
     >
       <BehindTheScenesInfra labels={t.tech.visual} />
     </Section>
+  );
+}
+
+/* ----------------------------------------------------------------------- */
+/* Built for Ethiopia's productive economy                                  */
+/* ----------------------------------------------------------------------- */
+
+function ProductiveEconomySection({ t }: { t: T }) {
+  return (
+    <section
+      id="productive-economy"
+      className="relative isolate flex min-h-[520px] items-center overflow-hidden px-6 py-20 md:px-10 lg:min-h-[640px] lg:px-14"
+      style={{ borderTop: `1px solid ${DIVIDER}` }}
+    >
+      <AmbientVideo src={ECONOMY_VIDEO} className="absolute inset-0 -z-20 h-full w-full object-cover" />
+      <div aria-hidden className="absolute inset-0 -z-10" style={{ background: "rgba(6,59,46,0.68)" }} />
+      <div
+        aria-hidden
+        className="absolute inset-x-0 bottom-0 -z-10 h-40"
+        style={{ background: "linear-gradient(180deg, transparent 0%, rgba(214,168,79,0.14) 100%)" }}
+      />
+
+      <div className="relative mx-auto w-full max-w-[1400px]">
+        <InView className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
+          <div>
+            <div className="flex items-center gap-3">
+              <span className="font-mono text-[10px] font-medium uppercase tracking-[0.22em]" style={{ color: GOLD }}>
+                {t.productive.num}
+              </span>
+              <span className="text-[10px] font-medium uppercase tracking-[0.22em]" style={{ color: "rgba(242,237,223,0.66)" }}>
+                {t.productive.eyebrow}
+              </span>
+            </div>
+            <h2
+              className="mt-6 text-[30px] font-medium leading-[1.06] tracking-[-0.025em] sm:text-[42px] lg:text-[50px]"
+              style={{ color: IVORY, textWrap: "balance" }}
+            >
+              {t.productive.title}
+              <span style={{ color: GOLD }}>{t.productive.titleGold}</span>
+            </h2>
+            <p className="mt-5 text-[15px] font-light leading-[1.7]" style={{ color: "rgba(242,237,223,0.86)", maxWidth: "54ch" }}>
+              {t.productive.sub}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+            {t.productive.cards.map((c) => (
+              <div
+                key={c}
+                className="flex items-center border border-[#D6A84F]/25 px-4 py-5 text-[13px] font-medium leading-snug tracking-tight transition-all duration-300 hover:border-[#D6A84F] hover:brightness-110"
+                style={{ background: "rgba(8,40,32,0.55)", color: IVORY }}
+              >
+                {c}
+              </div>
+            ))}
+          </div>
+        </InView>
+      </div>
+    </section>
   );
 }
 

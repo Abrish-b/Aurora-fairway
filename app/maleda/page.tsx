@@ -15,6 +15,8 @@ import PrivateRecordsVisual from "./_components/PrivateRecordsVisual";
 import InstitutionalTrustFramework from "./_components/InstitutionalTrustFramework";
 import BehindTheScenesInfra from "./_components/BehindTheScenesInfra";
 import AmbientVideo from "./_components/AmbientVideo";
+import GoldOrb from "./_components/GoldOrb";
+import CulturalPattern from "./_components/CulturalPattern";
 
 /* Dark institutional palette */
 const BG = "#0A1612";
@@ -156,14 +158,9 @@ const CONTENT = {
         leftItems: [
           "Borrower full name",
           "National ID number",
-          "Business registration",
-          "Contact details",
-          "Address",
-          "Employment / business information",
           "Signed loan agreement",
-          "Supporting financial records",
-          "Internal credit assessment",
-          "Compliance review records",
+          "Financial records",
+          "Credit assessment",
         ],
         connectorTitle: "Verification converted into proof references",
         connectorCopy: "Verification can be confirmed without exposing raw borrower documents.",
@@ -172,14 +169,9 @@ const CONTENT = {
         rightRecord: [
           { label: "Transaction ID", value: "TX-2026-AUR-00481" },
           { label: "Funding amount", value: "USD 250,000" },
-          { label: "Duration", value: "180 days" },
-          { label: "Repayment schedule", value: "Monthly · 6 installments" },
           { label: "Verification proof", value: "vfp:a1b2···9c4d" },
           { label: "Agreement proof", value: "agp:c3d4···7e8f" },
-          { label: "Institution authorization", value: "Bank · Approved" },
-          { label: "Participation conditions", value: "Tier-1 eligible" },
           { label: "Status", value: "Active" },
-          { label: "Metadata hash", value: "0x8f3c···d92a" },
         ],
         validationTitle: "Proof validation",
         validation: [
@@ -193,14 +185,6 @@ const CONTENT = {
         activeState: 3,
         statementTitle: "No borrower personal documents are publicly stored.",
         statementSub: "Only structured participation records and verification references are digitally coordinated.",
-        pillars: [
-          { title: "Privacy by design", copy: "Institution-controlled." },
-          { title: "Verification confirmation", copy: "Proofs without source files." },
-          { title: "Auditability", copy: "Records support review." },
-          { title: "Transaction integrity", copy: "Consistency and accountability." },
-          { title: "Compliance", copy: "Built for institutional governance." },
-        ],
-        closing: "Borrower information stays with the lender. Aurora coordinates funding participation around it.",
       },
     },
     trust: {
@@ -263,17 +247,47 @@ const CONTENT = {
       ctaSecondary: "Start a conversation",
     },
     footer: {
-      tagline: "Capital access infrastructure for productive lending institutions.",
-      builtBy: "Built by",
-      links: {
-        problem: "The opportunity",
-        ecosystem: "Ecosystem",
-        how: "How it works",
-        trust: "Trust",
-        contact: "Contact",
-      },
-      legal:
-        "Aurora is infrastructure for regulated lenders — not a bank or deposit-taking institution. Borrowers do not interact with crypto.",
+      ctaTitle: "Build stronger credit markets for productive lending.",
+      ctaSub: "Partner with Aurora to connect regulated lending institutions with structured capital access infrastructure.",
+      ctaPrimary: "Partner with Aurora",
+      ctaSecondary: "Book a Demo",
+      tagline: "Structured capital access for productive lending institutions.",
+      trust: "Institutions remain the lender. Aurora provides the capital access infrastructure.",
+      builtBy: "Built by Fairway",
+      visit: "Visit Fairway",
+      platformHeading: "Platform",
+      platformLinks: [
+        "How it works",
+        "Institutions remain in control",
+        "Private data protection",
+        "Capital access infrastructure",
+        "Institutional trust",
+      ],
+      servesHeading: "Who it serves",
+      serves: [
+        "Banks",
+        "Microfinance institutions",
+        "Productive lenders",
+        "Capital partners",
+        "Public stakeholders",
+        "Development institutions",
+      ],
+      sectorsHeading: "Productive sectors",
+      sectors: [
+        "SME lending",
+        "Agriculture",
+        "Trade finance",
+        "Equipment finance",
+        "Women-led enterprises",
+        "Job-creating businesses",
+      ],
+      trustRow: "Borrowers receive local-currency financing through regulated local institutions. Digital infrastructure operates behind the scenes.",
+      contactTitle: "Talk to Fairway",
+      contactSub: "Discuss partnership, capital access, or institutional collaboration.",
+      contactButton: "Book a Demo",
+      copyright: "© 2026 Aurora / Fairway. All rights reserved.",
+      disclaimer: "Aurora provides infrastructure for regulated institutional participation. It does not lend directly to the public and does not replace licensed financial institutions.",
+      legalLinks: ["Privacy", "Terms", "Contact"],
     },
   },
 
@@ -392,14 +406,9 @@ const CONTENT = {
         leftItems: [
           "የተበዳሪ ሙሉ ስም",
           "ብሔራዊ መታወቂያ ቁጥር",
-          "የንግድ ምዝገባ",
-          "የመገናኛ መረጃ",
-          "አድራሻ",
-          "የስራ / የንግድ መረጃ",
           "የተፈረመ የብድር ስምምነት",
-          "ደጋፊ የፋይናንስ መዝገቦች",
-          "ውስጣዊ የብድር ግምገማ",
-          "የኮምፕላያንስ ግምገማ መዝገቦች",
+          "የፋይናንስ መዝገቦች",
+          "የብድር ግምገማ",
         ],
         connectorTitle: "ማረጋገጫ ወደ የማስረጃ ማጣቀሻዎች ይቀየራል",
         connectorCopy: "ማረጋገጫ የተበዳሪ ጥሬ ሰነዶችን ሳያጋልጥ ሊረጋገጥ ይችላል።",
@@ -408,14 +417,9 @@ const CONTENT = {
         rightRecord: [
           { label: "የግብይት መለያ", value: "TX-2026-AUR-00481" },
           { label: "የፈንድ መጠን", value: "USD 250,000" },
-          { label: "ቆይታ", value: "180 ቀናት" },
-          { label: "የክፍያ መርሐግብር", value: "ወርሃዊ · 6 ክፍያዎች" },
           { label: "የማረጋገጫ ማስረጃ", value: "vfp:a1b2···9c4d" },
           { label: "የስምምነት ማስረጃ", value: "agp:c3d4···7e8f" },
-          { label: "የተቋም ፈቃድ", value: "ባንክ · ጸድቋል" },
-          { label: "የተሳትፎ ሁኔታዎች", value: "ደረጃ-1 ብቁ" },
           { label: "ሁኔታ", value: "ንቁ" },
-          { label: "ሜታዳታ ሃሽ", value: "0x8f3c···d92a" },
         ],
         validationTitle: "የማስረጃ ማረጋገጫ",
         validation: [
@@ -429,14 +433,6 @@ const CONTENT = {
         activeState: 3,
         statementTitle: "የተበዳሪ የግል ሰነዶች በሕዝብ ፊት አይቀመጡም።",
         statementSub: "የተዋቀሩ የተሳትፎ መዝገቦች እና የማረጋገጫ ማጣቀሻዎች ብቻ በዲጂታል ይቀናበራሉ።",
-        pillars: [
-          { title: "በንድፍ ግላዊነት", copy: "በተቋም ቁጥጥር ስር።" },
-          { title: "የማረጋገጫ ማረጋገጥ", copy: "ሰነዶችን ሳያጋልጡ።" },
-          { title: "ለኦዲት የሚመች", copy: "መዝገቦች ለግምገማ።" },
-          { title: "የመዝገብ ታማኝነት", copy: "ወጥነት እና ኃላፊነት።" },
-          { title: "ኮምፕላያንስ", copy: "ለተቋማዊ አስተዳደር።" },
-        ],
-        closing: "የተበዳሪ መረጃ በብድር ተቋሙ ይቆያል። ማለዳ ዙሪያውን የፈንድ ተሳትፎን ያቀናብራል።",
       },
     },
     trust: {
@@ -499,17 +495,47 @@ const CONTENT = {
       ctaSecondary: "ውይይት ይጀምሩ",
     },
     footer: {
-      tagline: "ለምርታማ ብድር ተቋማት የካፒታል መዳረሻ መሠረተ ልማት።",
-      builtBy: "የተገነባው በ",
-      links: {
-        problem: "እድሉ",
-        ecosystem: "ኢኮሲስተም",
-        how: "እንዴት ይሰራል",
-        trust: "እምነት",
-        contact: "ግንኙነት",
-      },
-      legal:
-        "ማለዳ ለተፈቀዱ ብድር ተቋማት መሠረተ ልማት ነው — ባንክ ወይም ተቀማጭ የሚቀበል ተቋም አይደለም። ተበዳሪዎች ከክሪፕቶ ጋር አይገናኙም።",
+      ctaTitle: "ለምርታማ ብድር ጠንካራ የብድር ገበያዎችን እንገንባ።",
+      ctaSub: "ከማለዳ ጋር በመተባበር የተፈቀዱ ብድር ተቋማትን ከተዋቀረ የካፒታል መዳረሻ መሠረተ ልማት ጋር ያገናኙ።",
+      ctaPrimary: "ከማለዳ ጋር ይተባበሩ",
+      ctaSecondary: "የማሳያ ጊዜ ያስይዙ",
+      tagline: "ለምርታማ ብድር ተቋማት የተዋቀረ የካፒታል መዳረሻ።",
+      trust: "ተቋማት ብድር ሰጪ ሆነው ይቆያሉ። ማለዳ የካፒታል መዳረሻ መሠረተ ልማትን ይሰጣል።",
+      builtBy: "የተገነባው በ Fairway",
+      visit: "Fairway ይጎብኙ",
+      platformHeading: "መድረክ",
+      platformLinks: [
+        "እንዴት ይሰራል",
+        "ተቋማት ቁጥጥርን ይይዛሉ",
+        "የግል መረጃ ጥበቃ",
+        "የካፒታል መዳረሻ መሠረተ ልማት",
+        "ተቋማዊ መተማመን",
+      ],
+      servesHeading: "ለማን ይጠቅማል",
+      serves: [
+        "ባንኮች",
+        "ማይክሮ ፋይናንስ ተቋማት",
+        "ምርታማ ብድር ተቋማት",
+        "የካፒታል አጋሮች",
+        "ሕዝባዊ ባለድርሻዎች",
+        "የልማት ፋይናንስ ተቋማት",
+      ],
+      sectorsHeading: "ምርታማ ዘርፎች",
+      sectors: [
+        "የSME ብድር",
+        "ግብርና",
+        "የንግድ ፋይናንስ",
+        "የመሣሪያ ፋይናንስ",
+        "ሴቶች የሚመሩ ንግዶች",
+        "ስራ የሚፈጥሩ ንግዶች",
+      ],
+      trustRow: "ተበዳሪዎች በተፈቀዱ የአካባቢ ተቋማት በኩል በአካባቢ ገንዘብ ብድር ያገኛሉ። ዲጂታል መሠረተ ልማቱ ከጀርባ ይሰራል።",
+      contactTitle: "ከFairway ጋር ይነጋገሩ",
+      contactSub: "ስለ ትብብር፣ የካፒታል መዳረሻ ወይም ተቋማዊ ትብብር ይወያዩ።",
+      contactButton: "የማሳያ ጊዜ ያስይዙ",
+      copyright: "© 2026 ማለዳ / Fairway. መብቱ በሙሉ የተጠበቀ ነው።",
+      disclaimer: "ማለዳ ለተቋማዊ ተሳትፎ መሠረተ ልማት ይሰጣል። በቀጥታ ለሕዝብ ብድር አይሰጥም፣ የተፈቀዱ የፋይናንስ ተቋማትንም አይተካም።",
+      legalLinks: ["ግላዊነት", "ውሎች", "አግኙን"],
     },
   },
 };
@@ -799,6 +825,7 @@ function Section({
   intro,
   children,
   background,
+  decoration,
 }: {
   id: string;
   num: string;
@@ -809,6 +836,7 @@ function Section({
   intro?: React.ReactNode;
   children?: React.ReactNode;
   background?: string;
+  decoration?: React.ReactNode;
 }) {
   return (
     <section
@@ -816,6 +844,11 @@ function Section({
       className="relative px-6 py-28 md:px-10 lg:px-14 lg:py-36"
       style={{ borderTop: `1px solid ${DIVIDER}`, background: background ?? "transparent" }}
     >
+      {decoration && (
+        <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+          {decoration}
+        </div>
+      )}
       <div className="relative mx-auto max-w-[1400px]">
         <InView className="grid gap-10 lg:grid-cols-[260px_1fr] lg:gap-16">
           <div className="lg:sticky lg:top-24 lg:self-start">
@@ -890,6 +923,9 @@ function SpeedSection({ t }: { t: T }) {
       eyebrow={t.speed.eyebrow}
       title={t.speed.title}
       titleGold={t.speed.titleGold}
+      decoration={
+        <GoldOrb className="absolute right-[-18%] top-1/2 h-[360px] w-[360px] -translate-y-1/2 opacity-50 lg:right-[-6%] lg:h-[640px] lg:w-[640px] lg:opacity-60" />
+      }
     >
       <SpeedComparisonVisual labels={t.speed.visual} />
     </Section>
@@ -1207,73 +1243,170 @@ function FinalCTASection({ t }: { t: T }) {
 /* Footer                                                                   */
 /* ----------------------------------------------------------------------- */
 
+/* Footer palette — stronger institutional green per spec */
+const F_BG = "#063B2E";
+const F_TEXT = "#F7F1E6";
+const F_MUTED = "rgba(247,241,230,0.68)";
+const F_GOLD = "#D6A84F";
+const F_BORDER = "rgba(214,168,79,0.22)";
+
+const FAIRWAY_URL = "https://www.fairway.global";
+const PLATFORM_HREFS = ["#how-it-works", "#control", "#privacy", "#ecosystem", "#trust"];
+const LEGAL_HREFS = ["#privacy", "#", CALENDLY];
+
 function Footer({ lang, t }: { lang: Lang; t: T }) {
-  const footerLinks = [
-    { href: "#problem", label: t.footer.links.problem },
-    { href: "#ecosystem", label: t.footer.links.ecosystem },
-    { href: "#how-it-works", label: t.footer.links.how },
-    { href: "#trust", label: t.footer.links.trust },
-    { href: CALENDLY, label: t.footer.links.contact, external: true },
-  ];
+  const f = t.footer;
+  const amFont =
+    lang === "am" ? "var(--font-maleda-am), 'Noto Sans Ethiopic', sans-serif" : undefined;
 
   return (
     <footer
-      className="relative z-10 px-6 py-14 md:px-10 lg:px-14"
-      style={{ borderTop: `1px solid ${DIVIDER}` }}
+      className="relative isolate z-10 overflow-hidden"
+      style={{ background: F_BG, color: F_TEXT, borderTop: `1px solid ${F_BORDER}` }}
+      aria-label={lang === "am" ? "የግርጌ ክፍል" : "Footer"}
     >
-      <div className="mx-auto max-w-[1400px]">
-        <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-start">
-          <div className="max-w-[520px]">
+      <CulturalPattern variant="dark" intensity={0.05} className="opacity-60" />
+
+      <div className="relative mx-auto max-w-[1400px] px-6 md:px-10 lg:px-14">
+        {/* Main grid */}
+        <div className="grid grid-cols-2 gap-x-8 gap-y-12 py-16 lg:grid-cols-[1.5fr_1fr_1fr_1fr] lg:gap-x-12">
+          {/* Brand */}
+          <div className="col-span-2 lg:col-span-1">
             <p
               className={`font-semibold tracking-tight ${lang === "am" ? "text-2xl" : "text-xl"}`}
-              style={{
-                color: IVORY,
-                fontFamily:
-                  lang === "am"
-                    ? "var(--font-maleda-am), 'Noto Sans Ethiopic', sans-serif"
-                    : undefined,
-              }}
+              style={{ color: F_TEXT, fontFamily: amFont }}
             >
               {BRAND[lang]}
             </p>
-            <p className="mt-3 text-[13px] font-light leading-[1.65]" style={{ color: IVORY_DIM }}>
-              {t.footer.tagline}
+            <p className="mt-3 max-w-[34ch] text-[13px] font-light leading-[1.65]" style={{ color: F_MUTED }}>
+              {f.tagline}
             </p>
-            <p className="mt-6 text-[11px] font-light" style={{ color: IVORY_MUTED }}>
-              {t.footer.builtBy}{" "}
+            <p
+              className="mt-5 max-w-[34ch] border-l pl-4 text-[12px] font-light leading-[1.7]"
+              style={{ color: F_MUTED, borderColor: F_GOLD }}
+            >
+              {f.trust}
+            </p>
+            <div className="mt-6">
+              <p className="text-[11px] font-medium uppercase tracking-[0.16em]" style={{ color: F_MUTED }}>
+                {f.builtBy}
+              </p>
               <a
-                href="https://www.fairway.global"
+                href={FAIRWAY_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="underline-offset-4 hover:underline"
-                style={{ color: GOLD }}
+                aria-label={f.visit}
+                className="mt-1.5 inline-flex items-center gap-1.5 text-[12px] font-medium underline-offset-4 transition hover:underline"
+                style={{ color: F_GOLD }}
               >
-                Fairway
+                {f.visit}
+                <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={1.7} />
               </a>
-              .
-            </p>
+            </div>
           </div>
 
-          <nav className="flex flex-wrap gap-x-8 gap-y-3">
-            {footerLinks.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                target={l.external ? "_blank" : undefined}
-                rel={l.external ? "noopener noreferrer" : undefined}
-                className="text-[12px] font-medium uppercase tracking-[0.16em] transition-colors duration-200"
-                style={{ color: IVORY_DIM }}
-              >
-                {l.label}
-              </a>
-            ))}
-          </nav>
+          {/* Platform */}
+          <FooterColumn heading={f.platformHeading} amFont={amFont}>
+            <ul className="space-y-2.5">
+              {f.platformLinks.map((label, i) => (
+                <li key={label}>
+                  <a
+                    href={PLATFORM_HREFS[i]}
+                    className="text-[13px] font-light leading-snug transition hover:text-[#F7F1E6]"
+                    style={{ color: F_MUTED }}
+                  >
+                    {label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </FooterColumn>
+
+          {/* Who it serves */}
+          <FooterColumn heading={f.servesHeading} amFont={amFont}>
+            <ul className="space-y-2.5">
+              {f.serves.map((item) => (
+                <FooterItem key={item}>{item}</FooterItem>
+              ))}
+            </ul>
+          </FooterColumn>
+
+          {/* Productive sectors */}
+          <FooterColumn heading={f.sectorsHeading} amFont={amFont}>
+            <ul className="space-y-2.5">
+              {f.sectors.map((item) => (
+                <FooterItem key={item}>{item}</FooterItem>
+              ))}
+            </ul>
+          </FooterColumn>
         </div>
 
-        <p className="mt-14 text-[11px] font-light leading-relaxed" style={{ color: IVORY_MUTED, maxWidth: "80ch" }}>
-          &copy; {new Date().getFullYear()} Fairway. {t.footer.legal}
-        </p>
+        <div className="h-px w-full" style={{ background: F_BORDER }} />
+
+        {/* Bottom legal row */}
+        <div className="flex flex-col gap-6 py-10 lg:flex-row lg:items-start lg:justify-between">
+          <div className="max-w-[72ch]">
+            <p className="text-[12px] font-medium" style={{ color: F_TEXT }}>
+              {f.copyright}
+            </p>
+            <p className="mt-3 text-[11px] font-light leading-[1.7]" style={{ color: F_MUTED }}>
+              {f.disclaimer}
+            </p>
+          </div>
+          <nav
+            className="flex flex-wrap gap-x-6 gap-y-2"
+            aria-label={lang === "am" ? "የሕግ አገናኞች" : "Legal links"}
+          >
+            {f.legalLinks.map((label, i) => {
+              const href = LEGAL_HREFS[i];
+              const external = href === CALENDLY;
+              return (
+                <a
+                  key={label}
+                  href={href}
+                  target={external ? "_blank" : undefined}
+                  rel={external ? "noopener noreferrer" : undefined}
+                  className="text-[12px] font-medium uppercase tracking-[0.14em] transition hover:text-[#F7F1E6]"
+                  style={{ color: F_MUTED }}
+                >
+                  {label}
+                </a>
+              );
+            })}
+          </nav>
+        </div>
       </div>
     </footer>
+  );
+}
+
+function FooterColumn({
+  heading,
+  amFont,
+  children,
+}: {
+  heading: string;
+  amFont?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div>
+      <h3
+        className="mb-5 text-[11px] font-semibold uppercase tracking-[0.18em]"
+        style={{ color: F_GOLD, fontFamily: amFont }}
+      >
+        {heading}
+      </h3>
+      {children}
+    </div>
+  );
+}
+
+function FooterItem({ children }: { children: React.ReactNode }) {
+  return (
+    <li className="flex items-baseline gap-2.5 text-[13px] font-light leading-snug" style={{ color: F_MUTED }}>
+      <span aria-hidden className="mt-1.5 inline-block h-[5px] w-[5px] flex-none" style={{ background: F_GOLD }} />
+      <span>{children}</span>
+    </li>
   );
 }

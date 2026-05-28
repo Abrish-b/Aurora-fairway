@@ -4,15 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import {
   ArrowDown,
   ArrowRight,
-  BadgeCheck,
   CheckCircle2,
   FileLock2,
   FolderLock,
   Hash,
   Lock,
-  ScrollText,
   ShieldCheck,
-  type LucideIcon,
 } from "lucide-react";
 
 const GOLD = "#D6A84F";
@@ -40,15 +37,11 @@ type Labels = {
   activeState: number;
   statementTitle: string;
   statementSub: string;
-  pillars: { title: string; copy: string }[];
-  closing: string;
 };
-
-const PILLAR_ICONS: LucideIcon[] = [Lock, BadgeCheck, ScrollText, Hash, ShieldCheck];
 
 export default function PrivateRecordsVisual({ labels }: { labels: Labels }) {
   return (
-    <div className="mt-14">
+    <div className="mt-12">
       <div className="grid gap-6 lg:grid-cols-[1fr_auto_1.15fr] lg:items-stretch">
         <PrivateCard
           title={labels.leftTitle}
@@ -70,56 +63,6 @@ export default function PrivateRecordsVisual({ labels }: { labels: Labels }) {
       </div>
 
       <StatementBanner title={labels.statementTitle} sub={labels.statementSub} />
-
-      <div
-        className="mt-10 grid gap-px sm:grid-cols-2 lg:grid-cols-5"
-        style={{ background: DIVIDER }}
-      >
-        {labels.pillars.map((p, i) => {
-          const Icon = PILLAR_ICONS[i] ?? Lock;
-          return (
-            <article
-              key={p.title}
-              className="group flex flex-col gap-3 p-6 transition-transform duration-300 hover:-translate-y-0.5"
-              style={{ background: "#0A1612" }}
-            >
-              <div className="flex items-center gap-3">
-                <span
-                  className="font-mono text-[10px] font-medium uppercase tracking-[0.22em]"
-                  style={{ color: GOLD }}
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <Icon size={16} strokeWidth={1.5} style={{ color: GOLD }} />
-              </div>
-              <h4
-                className="text-[14px] font-medium leading-snug tracking-tight"
-                style={{ color: IVORY }}
-              >
-                {p.title}
-              </h4>
-              <p
-                className="text-[12px] font-light leading-[1.7]"
-                style={{ color: IVORY_DIM }}
-              >
-                {p.copy}
-              </p>
-              <span
-                aria-hidden
-                className="mt-auto inline-block h-px transition-all duration-500 group-hover:w-10"
-                style={{ background: GOLD, width: "16px" }}
-              />
-            </article>
-          );
-        })}
-      </div>
-
-      <p
-        className="mt-10 border-l pl-5 text-[14px] font-light leading-[1.75]"
-        style={{ borderColor: GOLD, color: IVORY, maxWidth: "78ch" }}
-      >
-        {labels.closing}
-      </p>
 
       <style jsx>{`
         :global(.private-records-pulse) {

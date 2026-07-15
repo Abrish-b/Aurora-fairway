@@ -8,7 +8,7 @@ import FlowDiagram from "./_components/FlowDiagram";
 import ArchitectureTabs from "./_components/ArchitectureTabs";
 import LenderFilteringMockup from "./_components/LenderFilteringMockup";
 import PilotTimelineCollapse from "./_components/PilotTimelineCollapse";
-import PartnershipVisual from "../_components/PartnershipVisual";
+import PartnershipVisual from "../../_components/PartnershipVisual";
 
 import AccordionFAQ from "@/components/aurora/AccordionFAQ";
 import TrustLogoWall from "@/components/aurora/TrustLogoWall";

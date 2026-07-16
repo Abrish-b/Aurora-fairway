@@ -22,8 +22,8 @@ export default function EthiopianDawnSky() {
         <defs>
           <radialGradient id="dawn-haze" cx="50%" cy="58%" r="60%">
             <stop offset="0%" stopColor="#F4C57A" stopOpacity="0.55" />
-            <stop offset="40%" stopColor="#D6A84F" stopOpacity="0.16" />
-            <stop offset="100%" stopColor="#063B2E" stopOpacity="0" />
+            <stop offset="40%" stopColor="#C8F031" stopOpacity="0.16" />
+            <stop offset="100%" stopColor="#0E0E0E" stopOpacity="0" />
           </radialGradient>
           <linearGradient id="cityscape-grad" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#0B2A21" />
@@ -35,7 +35,7 @@ export default function EthiopianDawnSky() {
         <rect width="100%" height="100%" fill="url(#dawn-haze)" />
 
         {/* Subtle horizon band */}
-        <rect x="0" y="62%" width="100%" height="1" fill="rgba(214,168,79,0.45)" />
+        <rect x="0" y="62%" width="100%" height="1" fill="rgba(200,240,49,0.45)" />
       </svg>
 
       {/* Distant skyline (back layer) */}
@@ -83,7 +83,7 @@ export default function EthiopianDawnSky() {
             circle at 50% 50%,
             rgba(255, 222, 152, 0.95) 0%,
             rgba(244, 198, 122, 0.65) 32%,
-            rgba(214, 168, 79, 0.35) 55%,
+            rgba(200, 240, 49, 0.35) 55%,
             transparent 78%
           );
           border-radius: 9999px;
@@ -218,7 +218,7 @@ function Cityscape({
                     cx={b.startX + b.w / 2}
                     cy={top - 3.2}
                     r={0.25}
-                    fill="#D6A84F"
+                    fill="#C8F031"
                     className="maleda-sky-antenna-dot"
                   />
                 </>

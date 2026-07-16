@@ -34,9 +34,9 @@ export default function PartnershipVisual() {
         className="mt-6 border-t border-[#1B384C]/10 pt-4 text-[13px] leading-6"
         style={{ color: GRAY_BODY }}
       >
-        Sundown is the partnership surface where Fairway&apos;s identity layer
-        meets Sundial&apos;s lending infrastructure. Both feed Aurora&apos;s
-        broader credit stack.
+        Aurora is the partnership surface where Fairway&apos;s identity layer
+        meets Sundial&apos;s lending infrastructure. Both feed the broader
+        credit stack.
       </p>
     </div>
   );
@@ -108,7 +108,7 @@ function SundownNode() {
         className="text-[10px] font-bold uppercase tracking-[0.2em]"
         style={{ color: GOLD_HOVER }}
       >
-        Sundown
+        Aurora
       </p>
       <p className="mt-2 font-serif text-[20px] leading-tight text-[#101823]">
         Verified discovery layer.

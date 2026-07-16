@@ -10,7 +10,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-const GOLD = "#D6A84F";
+const GOLD = "#C8F031";
 const IVORY = "#F2EDDF";
 
 type Step = { icon: LucideIcon; title: string; copy: string };
@@ -84,7 +84,7 @@ export default function PartnershipFlow() {
               aria-hidden
               className="absolute left-[8px] top-1 h-[13px] w-[13px] rounded-full transition-colors duration-500"
               style={{
-                background: filled ? GOLD : "#0A1612",
+                background: filled ? GOLD : "#0A0A0A",
                 border: `1px solid ${filled ? GOLD : "rgba(242,237,223,0.30)"}`,
               }}
             />

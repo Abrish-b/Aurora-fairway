@@ -24,7 +24,7 @@ const CARDS: Card[] = [
     title: "Metadata-rich transactions",
     short: "Identity & loan data travel on-chain.",
     detail:
-      "Structured tx metadata lets Sundown attach proofs, eligibility, and indexer anchors without bloating contract logic.",
+      "Structured tx metadata lets Aurora attach proofs, eligibility, and indexer anchors without bloating contract logic.",
   },
   {
     icon: Coins,

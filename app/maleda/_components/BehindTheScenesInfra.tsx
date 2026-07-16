@@ -3,7 +3,7 @@
 import { Building2, Coins, Cpu, FileBarChart, ShieldCheck, Users } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-const GOLD = "#D6A84F";
+const GOLD = "#C8F031";
 const IVORY = "#F2EDDF";
 const IVORY_DIM = "rgba(242,237,223,0.62)";
 const IVORY_MUTED = "rgba(242,237,223,0.42)";
@@ -83,7 +83,7 @@ function Stage({
               key={it.label}
               className="flex flex-col gap-3 p-6"
               style={{
-                background: emphasised ? "rgba(214,168,79,0.03)" : "#0A1612",
+                background: emphasised ? "rgba(200,240,49,0.03)" : "#0A0A0A",
               }}
             >
               <Icon size={16} strokeWidth={1.5} style={{ color: emphasised ? GOLD : IVORY_DIM }} />

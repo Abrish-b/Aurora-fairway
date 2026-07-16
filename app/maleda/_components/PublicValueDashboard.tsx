@@ -11,7 +11,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-const GOLD = "#D6A84F";
+const GOLD = "#C8F031";
 const IVORY = "#F2EDDF";
 
 type Priority = { icon: LucideIcon; label: string; short: string };

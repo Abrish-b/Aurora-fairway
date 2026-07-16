@@ -31,25 +31,32 @@ export default function AnimatedHeading({
     <h1 className={className}>
       {lines.map((line, lineIdx) => (
         <span key={lineIdx} className="block">
-          {Array.from(line).map((ch, i) => {
-            const delay = charIndex * charDelay;
-            charIndex += 1;
-            return (
-              <span
-                key={`${lineIdx}-${i}`}
-                aria-hidden={false}
-                style={{
-                  display: "inline-block",
-                  opacity: started ? 1 : 0,
-                  transform: started ? "translateX(0)" : "translateX(-18px)",
-                  transition: `opacity ${duration}ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms, transform ${duration}ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms`,
-                  willChange: "opacity, transform",
-                }}
-              >
-                {ch === " " ? " " : ch}
+          {line.split(" ").map((word, wordIdx, words) => (
+            <span key={`${lineIdx}-w${wordIdx}`}>
+              {/* words stay intact; wrapping only happens at the spaces between them */}
+              <span style={{ display: "inline-block", whiteSpace: "nowrap" }}>
+                {Array.from(word).map((ch, i) => {
+                  const delay = charIndex * charDelay;
+                  charIndex += 1;
+                  return (
+                    <span
+                      key={`${lineIdx}-${wordIdx}-${i}`}
+                      style={{
+                        display: "inline-block",
+                        opacity: started ? 1 : 0,
+                        transform: started ? "translateX(0)" : "translateX(-18px)",
+                        transition: `opacity ${duration}ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms, transform ${duration}ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms`,
+                        willChange: "opacity, transform",
+                      }}
+                    >
+                      {ch}
+                    </span>
+                  );
+                })}
               </span>
-            );
-          })}
+              {wordIdx < words.length - 1 ? " " : null}
+            </span>
+          ))}
         </span>
       ))}
     </h1>

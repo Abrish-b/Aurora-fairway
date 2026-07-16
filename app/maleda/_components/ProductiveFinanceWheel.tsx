@@ -12,7 +12,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-const GOLD = "#D6A84F";
+const GOLD = "#C8F031";
 const IVORY = "#F2EDDF";
 
 type Sector = {
@@ -96,7 +96,7 @@ export default function ProductiveFinanceWheel() {
                 )}
                 <circle
                   r={isActive ? 18 : 14}
-                  fill={isActive ? GOLD : "#0A1612"}
+                  fill={isActive ? GOLD : "#0A0A0A"}
                   stroke={isActive ? GOLD : "rgba(242,237,223,0.25)"}
                   strokeWidth="1"
                   style={{ transition: "all 300ms ease" }}
@@ -106,7 +106,7 @@ export default function ProductiveFinanceWheel() {
                     style={{
                       width: 18,
                       height: 18,
-                      color: isActive ? "#0A1612" : "rgba(242,237,223,0.65)",
+                      color: isActive ? "#0A0A0A" : "rgba(242,237,223,0.65)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",

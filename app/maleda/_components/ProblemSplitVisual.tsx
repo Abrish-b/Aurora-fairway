@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Building2, Coins, Sun } from "lucide-react";
 
-const GOLD = "#D6A84F";
+const GOLD = "#C8F031";
 const IVORY = "#F2EDDF";
 const IVORY_DIM = "rgba(242,237,223,0.62)";
 
@@ -96,7 +96,7 @@ function Middle({ label, visible }: { label: string; visible: boolean }) {
         aria-hidden
         className="h-px w-24 lg:w-32"
         style={{
-          background: "repeating-linear-gradient(90deg, rgba(214,168,79,0.7) 0 6px, transparent 6px 12px)",
+          background: "repeating-linear-gradient(90deg, rgba(200,240,49,0.7) 0 6px, transparent 6px 12px)",
           opacity: visible ? 1 : 0.2,
           transition: "opacity 800ms ease",
         }}
@@ -105,8 +105,8 @@ function Middle({ label, visible }: { label: string; visible: boolean }) {
         className="my-3 flex h-[64px] w-[64px] items-center justify-center"
         style={{
           border: `1px solid ${GOLD}`,
-          background: "#0A1612",
-          boxShadow: visible ? `0 0 0 6px rgba(214,168,79,0.10)` : "none",
+          background: "#0A0A0A",
+          boxShadow: visible ? `0 0 0 6px rgba(200,240,49,0.10)` : "none",
           transition: "box-shadow 700ms ease",
         }}
       >
@@ -122,7 +122,7 @@ function Middle({ label, visible }: { label: string; visible: boolean }) {
         aria-hidden
         className="mt-3 h-px w-24 lg:w-32"
         style={{
-          background: "repeating-linear-gradient(90deg, rgba(214,168,79,0.7) 0 6px, transparent 6px 12px)",
+          background: "repeating-linear-gradient(90deg, rgba(200,240,49,0.7) 0 6px, transparent 6px 12px)",
           opacity: visible ? 1 : 0.2,
           transition: "opacity 800ms ease",
         }}

@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Hourglass, Zap, Repeat } from "lucide-react";
 
-const GOLD = "#D6A84F";
+const GOLD = "#C8F031";
 const IVORY = "#F2EDDF";
 const IVORY_DIM = "rgba(242,237,223,0.58)";
 const IVORY_MUTED = "rgba(242,237,223,0.40)";
@@ -98,7 +98,7 @@ function Track({
               width: run ? "100%" : "0%",
               background: slow
                 ? "rgba(242,237,223,0.30)"
-                : `linear-gradient(90deg, ${GOLD} 0%, rgba(214,168,79,0.55) 100%)`,
+                : `linear-gradient(90deg, ${GOLD} 0%, rgba(200,240,49,0.55) 100%)`,
               transition: `width ${totalDuration}ms cubic-bezier(0.22,1,0.36,1)`,
             }}
           />

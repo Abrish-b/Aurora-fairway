@@ -81,7 +81,7 @@ function Nav() {
     { href: "#stack", label: "Stack" },
     { href: "#harmony", label: "Harmony" },
     { href: "#cardano", label: "Cardano" },
-    { href: "/sundown", label: "Sundown" },
+    { href: "/aurora", label: "Proposal" },
     { href: "#faq", label: "FAQ" },
   ];
 
@@ -250,8 +250,8 @@ function HeroInfrastructureRow() {
     },
     {
       title: "ZK-Ready Compliance",
-      product: "Sundown",
-      logo: "/brand/sundown-modified.png",
+      product: "Aurora",
+      logo: "/brand/Aurora-logo-modified.png",
       color: "#ffcc73",
     },
   ];
@@ -454,20 +454,20 @@ const stackLayers: StackLayerData[] = [
   },
   {
     number: "03",
-    name: "Sundown",
+    name: "Aurora",
     role: "Discovery & filtering",
-    short: "Verified discovery for P2P credit markets.",
+    short: "Verified discovery for institutional credit markets.",
     detail:
-      "Built with Sundial. Adds identity proofs, compliance indexing, and lender-side filtering to Cardano P2P lending — without rebuilding the rails.",
+      "Built with Fallen Icarus and Sundial. Adds identity proofs, compliance indexing, and lender-side filtering to Cardano credit markets — without rebuilding the rails.",
     bullets: [
       "Identity proof metadata",
       "Compliance indexer",
       "Lender filtering",
     ],
     icon: Filter,
-    logo: "/brand/sundown.png",
-    logoAlt: "Sundown logo",
-    cta: { label: "Explore Sundown", href: "/sundown" },
+    logo: "/brand/Aurora-logo.png",
+    logoAlt: "Aurora logo",
+    cta: { label: "Explore Aurora", href: "/aurora" },
     featured: true,
   },
   {
@@ -519,7 +519,7 @@ function SundownExtra() {
           className="text-[10px] font-bold uppercase tracking-[0.22em]"
           style={{ color: "#B8892F" }}
         >
-          Inside Sundown
+          Inside Aurora
         </span>
         <span
           aria-hidden
@@ -680,17 +680,17 @@ function PartnershipSection() {
       <SectionHeader
         eyebrow="Partnership"
         title="Built with Sundial."
-        copy="Sundown is Aurora's Fairway × Sundial layer for discoverable, filterable on-chain loans."
+        copy="Aurora's Fairway × Sundial layer makes on-chain loans discoverable and filterable."
       />
       <div className="mt-10">
         <PartnershipVisual />
       </div>
       <div className="mt-6">
         <Link
-          href="/sundown"
+          href="/aurora"
           className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-[#C89B3C]/45 bg-white px-7 text-[13px] font-bold uppercase text-[#101823] transition hover:-translate-y-0.5 hover:border-[#C89B3C] hover:bg-[#fff8e8]"
         >
-          Explore Sundown
+          Explore Aurora
           <ArrowRight className="h-4 w-4" strokeWidth={1.8} />
         </Link>
       </div>
@@ -736,7 +736,7 @@ const faqItems: { q: string; a: ReactNode }[] = [
   },
   {
     q: "How does Aurora work with Sundial?",
-    a: "Sundial provides Bitcoin liquidity infrastructure. Aurora adds identity, credit inputs, discovery, and tokenized issuance. Sundown is the market layer where those capabilities become usable.",
+    a: "Sundial provides Bitcoin liquidity infrastructure. Aurora adds identity, credit inputs, discovery, and tokenized issuance — the market layer where those capabilities become usable.",
   },
   {
     q: "Why is Aurora built on Cardano?",
@@ -747,8 +747,8 @@ const faqItems: { q: string; a: ReactNode }[] = [
     a: "No. Aurora provides infrastructure. Institutions, issuers, and regulated entities use Aurora's tools within their own legal, licensing, and compliance frameworks.",
   },
   {
-    q: "What is Sundown?",
-    a: "Sundown is Aurora's verified discovery layer, built with Sundial. It adds identity proofs, compliance indexing, and lender-side filtering to Cardano P2P lending.",
+    q: "What is the Aurora proposal?",
+    a: "A Cardano Treasury proposal by Fairway, Fallen Icarus and Sundial: an open metadata standard, a verification indexer, and a Treasury-backed lending pilot with Ethiopian SACCOs.",
   },
   {
     q: "What is Solstice?",
@@ -889,17 +889,17 @@ function Footer() {
           links={[
             { label: "Stack", href: "#stack" },
             { label: "How it works", href: "#harmony" },
-            { label: "Sundown", href: "/sundown#partnership" },
+            { label: "Proposal", href: "/aurora" },
             { label: "Why Cardano", href: "#cardano" },
             { label: "FAQ", href: "#faq" },
           ]}
         />
         <FooterCol
-          title="Sundown"
+          title="Proposal"
           links={[
-            { label: "Overview", href: "/sundown" },
-            { label: "Architecture", href: "/sundown#architecture" },
-            { label: "Pilot", href: "/sundown#pilot" },
+            { label: "Overview", href: "/aurora" },
+            { label: "How it works", href: "/aurora#lifecycle" },
+            { label: "Pilot", href: "/aurora#pilot" },
           ]}
         />
         <FooterCol

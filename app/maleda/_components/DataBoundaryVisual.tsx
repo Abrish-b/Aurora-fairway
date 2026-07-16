@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Database, Lock, Send } from "lucide-react";
 
-const GOLD = "#D6A84F";
+const GOLD = "#C8F031";
 const IVORY = "#F2EDDF";
 const IVORY_DIM = "rgba(242,237,223,0.62)";
 const IVORY_MUTED = "rgba(242,237,223,0.42)";
@@ -42,7 +42,7 @@ export default function DataBoundaryVisual({ labels }: { labels: Labels }) {
         className="relative flex flex-col p-7"
         style={{
           border: `1px solid ${GOLD}`,
-          background: "rgba(214,168,79,0.04)",
+          background: "rgba(200,240,49,0.04)",
         }}
       >
         <div className="flex items-center gap-3">
@@ -78,7 +78,7 @@ export default function DataBoundaryVisual({ labels }: { labels: Labels }) {
           aria-hidden
           className="my-3 h-px w-24"
           style={{
-            background: "repeating-linear-gradient(90deg, rgba(214,168,79,0.7) 0 6px, transparent 6px 12px)",
+            background: "repeating-linear-gradient(90deg, rgba(200,240,49,0.7) 0 6px, transparent 6px 12px)",
             opacity: visible ? 1 : 0.2,
             transition: "opacity 800ms ease",
           }}

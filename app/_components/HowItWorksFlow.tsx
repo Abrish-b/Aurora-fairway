@@ -43,7 +43,7 @@ const STEPS: Step[] = [
   {
     id: "discover",
     label: "Discover",
-    product: "Sundown",
+    product: "Aurora",
     short: "Verified market view of P2P credit.",
     detail:
       "Compliance indexer surfaces filterable loan opportunities. Lenders see only what matches their policy.",

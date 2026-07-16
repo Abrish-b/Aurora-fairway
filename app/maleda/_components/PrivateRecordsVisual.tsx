@@ -12,7 +12,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 
-const GOLD = "#D6A84F";
+const GOLD = "#C8F031";
 const IVORY = "#F2EDDF";
 const IVORY_DIM = "rgba(242,237,223,0.65)";
 const IVORY_MUTED = "rgba(242,237,223,0.42)";
@@ -69,8 +69,8 @@ export default function PrivateRecordsVisual({ labels }: { labels: Labels }) {
           animation: prPulse 2.6s ease-in-out infinite;
         }
         @keyframes prPulse {
-          0%, 100% { box-shadow: 0 0 0 0 rgba(214,168,79,0.20); }
-          50%      { box-shadow: 0 0 0 10px rgba(214,168,79,0); }
+          0%, 100% { box-shadow: 0 0 0 0 rgba(200,240,49,0.20); }
+          50%      { box-shadow: 0 0 0 10px rgba(200,240,49,0); }
         }
         :global(.private-records-dash-v) {
           animation: prDashV 5s linear infinite;
@@ -130,9 +130,9 @@ function PrivateCard({
     <article
       className="relative flex flex-col p-7 transition-transform duration-300 hover:-translate-y-0.5"
       style={{
-        border: `1px solid rgba(214,168,79,0.35)`,
+        border: `1px solid rgba(200,240,49,0.35)`,
         background:
-          "linear-gradient(180deg, rgba(214,168,79,0.05) 0%, rgba(214,168,79,0.02) 100%)",
+          "linear-gradient(180deg, rgba(200,240,49,0.05) 0%, rgba(200,240,49,0.02) 100%)",
       }}
     >
       {/* Vault header */}
@@ -142,7 +142,7 @@ function PrivateCard({
             className="flex h-9 w-9 items-center justify-center private-records-pulse"
             style={{
               border: `1px solid ${GOLD}`,
-              background: "rgba(214,168,79,0.10)",
+              background: "rgba(200,240,49,0.10)",
             }}
           >
             <FolderLock size={16} strokeWidth={1.5} style={{ color: GOLD }} />
@@ -176,7 +176,7 @@ function PrivateCard({
 
       <div
         className="mt-7 flex items-center gap-2 border-t pt-4 text-[11px] font-medium leading-snug"
-        style={{ borderColor: "rgba(214,168,79,0.30)", color: GOLD }}
+        style={{ borderColor: "rgba(200,240,49,0.30)", color: GOLD }}
       >
         <ShieldCheck size={13} strokeWidth={1.6} />
         <span>{badge}</span>
@@ -196,7 +196,7 @@ function Connector({ title, copy }: { title: string; copy: string }) {
         className="private-records-dash-v hidden h-16 w-px lg:block"
         style={{
           backgroundImage:
-            "repeating-linear-gradient(180deg, rgba(214,168,79,0.7) 0 4px, transparent 4px 10px)",
+            "repeating-linear-gradient(180deg, rgba(200,240,49,0.7) 0 4px, transparent 4px 10px)",
           backgroundSize: "1px 14px",
         }}
       />
@@ -207,7 +207,7 @@ function Connector({ title, copy }: { title: string; copy: string }) {
           className="private-records-pulse flex h-12 w-12 items-center justify-center"
           style={{
             border: `1px solid ${GOLD}`,
-            background: "#0A1612",
+            background: "#0A0A0A",
           }}
         >
           <Lock size={18} strokeWidth={1.5} style={{ color: GOLD }} />
@@ -244,7 +244,7 @@ function Connector({ title, copy }: { title: string; copy: string }) {
         className="private-records-dash-v hidden h-16 w-px lg:block"
         style={{
           backgroundImage:
-            "repeating-linear-gradient(180deg, rgba(214,168,79,0.7) 0 4px, transparent 4px 10px)",
+            "repeating-linear-gradient(180deg, rgba(200,240,49,0.7) 0 4px, transparent 4px 10px)",
           backgroundSize: "1px 14px",
         }}
       />
@@ -312,7 +312,7 @@ function DigitalCard({
         <div className="flex items-center gap-3">
           <span
             className="flex h-9 w-9 items-center justify-center"
-            style={{ border: `1px solid ${DIVIDER}`, background: "#0A1612" }}
+            style={{ border: `1px solid ${DIVIDER}`, background: "#0A0A0A" }}
           >
             <Hash size={14} strokeWidth={1.5} style={{ color: GOLD }} />
           </span>
@@ -362,8 +362,8 @@ function DigitalCard({
       <div
         className="mt-6 p-4"
         style={{
-          border: `1px solid rgba(214,168,79,0.30)`,
-          background: "rgba(214,168,79,0.04)",
+          border: `1px solid rgba(200,240,49,0.30)`,
+          background: "rgba(200,240,49,0.04)",
         }}
       >
         <p
@@ -448,8 +448,8 @@ function StatementBanner({ title, sub }: { title: string; sub: string }) {
     <div
       className="mt-10 flex flex-col gap-3 p-7 sm:flex-row sm:items-center sm:gap-6"
       style={{
-        border: `1px solid rgba(214,168,79,0.30)`,
-        background: "rgba(214,168,79,0.04)",
+        border: `1px solid rgba(200,240,49,0.30)`,
+        background: "rgba(200,240,49,0.04)",
       }}
     >
       <Lock size={22} strokeWidth={1.4} style={{ color: GOLD, flex: "0 0 auto" }} />

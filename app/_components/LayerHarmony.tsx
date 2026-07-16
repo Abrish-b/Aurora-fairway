@@ -53,12 +53,12 @@ const NODES: Record<NodeId, LayerNode> = {
   },
   sundown: {
     id: "sundown",
-    title: "Sundown",
+    title: "Aurora Markets",
     line: "Turns proofs into discoverable loan markets.",
     pill: "Matched opportunity",
     labels: ["Discovery", "Filtering", "Orderbook"],
     icon: Network,
-    hover: "Sundown coordinates discovery, filtering, and matching.",
+    hover: "Aurora coordinates discovery, filtering, and matching.",
     featured: true,
     badge: "Market Core",
   },
@@ -284,7 +284,7 @@ export default function LayerHarmony() {
         />
         <CopyTile
           title="Markets become filterable"
-          copy="Sundown combines credentials, credit signals, and loan metadata into discoverable opportunities."
+          copy="Aurora combines credentials, credit signals, and loan metadata into discoverable opportunities."
         />
         <CopyTile
           title="Issuance stays controlled"

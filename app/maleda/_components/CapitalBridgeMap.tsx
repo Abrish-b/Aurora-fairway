@@ -35,7 +35,7 @@ const NODES: Node[] = [
   { id: "pub", label: "Public stakeholders", side: "global", icon: Users, copy: "Governments advancing inclusion and SME growth." },
 ];
 
-const GOLD = "#D6A84F";
+const GOLD = "#C8F031";
 const IVORY = "#F2EDDF";
 
 export default function CapitalBridgeMap() {
@@ -154,7 +154,7 @@ function CenterNode({ active, onEnter }: { active: boolean; onEnter: () => void 
       style={{
         background: "transparent",
         border: `1px solid ${GOLD}`,
-        boxShadow: active ? `0 0 0 6px rgba(214,168,79,0.12)` : "none",
+        boxShadow: active ? `0 0 0 6px rgba(200,240,49,0.12)` : "none",
       }}
     >
       <Sun size={22} strokeWidth={1.5} style={{ color: GOLD }} />

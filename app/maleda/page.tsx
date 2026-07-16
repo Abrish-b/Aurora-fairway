@@ -1,544 +1,298 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  BadgeCheck,
+  ClipboardList,
+  Eye,
+  ScanLine,
+  Sun,
+  TrendingUp,
+  UserPlus,
+} from "lucide-react";
 
 import AnimatedHeading from "./_components/AnimatedHeading";
 import FadeIn from "./_components/FadeIn";
 import InView from "./_components/InView";
-import ProblemSplitVisual from "./_components/ProblemSplitVisual";
-import SpeedComparisonVisual from "./_components/SpeedComparisonVisual";
-import LenderEcosystemMap from "./_components/LenderEcosystemMap";
-import ParticipationFlow from "./_components/ParticipationFlow";
-import PrivateRecordsVisual from "./_components/PrivateRecordsVisual";
-import InstitutionalTrustFramework from "./_components/InstitutionalTrustFramework";
-import BehindTheScenesInfra from "./_components/BehindTheScenesInfra";
-import AmbientVideo from "./_components/AmbientVideo";
 import GoldOrb from "./_components/GoldOrb";
 import CulturalPattern from "./_components/CulturalPattern";
 
-/* Dark institutional palette */
+/* Maleda palette — deep green grounding, warm gold + sunrise orange, ivory cards */
 const BG = "#0A1612";
+const PANEL = "#0D1D16";
 const IVORY = "#F2EDDF";
 const IVORY_DIM = "rgba(242,237,223,0.64)";
 const IVORY_MUTED = "rgba(242,237,223,0.42)";
 const DIVIDER = "rgba(242,237,223,0.10)";
 const GOLD = "#D6A84F";
-
-const HERO_VIDEO =
-  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260507_155500_808e6fdd-761f-4acd-b3be-cb7e6e700def.mp4";
-
-const CONTROL_VIDEO = "https://i.imgur.com/HcC0rmj.mp4";
-const ECONOMY_VIDEO = "https://i.imgur.com/2dnOXjR.mp4";
+const ORANGE = "#E07B39";
+const CARD_INK = "#122019";
+const CARD_BODY = "rgba(18,32,25,0.72)";
 
 const CALENDLY = "https://calendly.com/heikki-fairway/fairway-demo?month=2026-05";
 
+const IMG = "/maleda";
+
 type Lang = "en" | "am";
 
-const BRAND = { en: "AURORA", am: "ማለዳ" } as const;
+const BRAND = { en: "MALEDA", am: "ማለዳ" } as const;
+
+type IconType = typeof Sun;
 
 /* ----------------------------------------------------------------------- */
-/* Bilingual content object                                                */
+/* Bilingual content                                                        */
 /* ----------------------------------------------------------------------- */
 
 const CONTENT = {
   en: {
     nav: {
-      problem: "The opportunity",
-      speed: "Why speed",
+      story: "The story",
+      platform: "Platform",
+      sacco: "SACCOs",
       ecosystem: "Ecosystem",
-      how: "How it works",
-      control: "Control",
-      trust: "Trust",
-      partner: "Partner with Aurora",
+      impact: "Impact",
+      partner: "Partner with Maleda",
     },
     hero: {
-      eyebrow: "Aurora · Ethiopia",
-      headline: "Access global digital capital\nfor productive lending.",
-      sub: "Structured capital access for lending institutions.",
-      ctaPrimary: "Partner with Aurora",
-      ctaSecondary: "See how it works",
-      chips: [
-        "Institutions remain the lender",
-        "Faster capital access",
-        "Structured participation",
-        "Compliance-aware infrastructure",
+      eyebrow: "Maleda · Ethiopia",
+      headline: "A new dawn for Ethiopia's\nSME lending ecosystem.",
+      sub: "Maleda helps SACCOs and lending institutions support SMEs with trusted, local-currency financing pathways.",
+      ctaPrimary: "Partner with Maleda",
+      ctaSecondary: "Explore the ecosystem",
+      chips: ["Built for SMEs", "Built for SACCOs", "Local-currency lending", "Trusted verification"],
+      image: "Ethiopian SME shop owner at sunrise, with community business activity in the background",
+    },
+    story: {
+      num: "01",
+      eyebrow: "The story",
+      title: "Meet the businesses ",
+      titleGold: "Maleda is built for.",
+      sub: "Across Ethiopia, small businesses are ready to grow. They need trusted finance, clear processes, and strong local partners.",
+      cards: [
+        { name: "Shop Owner", need: "Needs working capital to restock inventory.", image: "Ethiopian retail shop owner behind the counter" },
+        { name: "Farmer / Agri SME", need: "Needs seasonal finance for inputs and production.", image: "Ethiopian farmer with harvested grain" },
+        { name: "Woman Entrepreneur", need: "Needs growth capital for a small business.", image: "Ethiopian woman entrepreneur packing products" },
       ],
     },
-    problem: {
-      num: "01",
-      eyebrow: "The opportunity",
-      title: "Global capital exists. ",
-      titleGold: "Productive lenders remain constrained.",
-      sub: "Aurora connects productive lenders with structured international capital participation.",
-      split: {
-        leftEyebrow: "Local productive lenders",
-        leftTitle: "Originate, underwrite, service",
-        leftChips: ["Banks", "MFIs", "Regulated lenders"],
-        middleLabel: "Aurora infrastructure",
-        rightEyebrow: "Global digital capital",
-        rightTitle: "Structured participation",
-        rightChips: ["DFIs", "Institutional capital", "Capital partners"],
-      },
-    },
-    speed: {
+    platform: {
       num: "02",
-      eyebrow: "Why speed matters",
-      title: "Short-duration lending should not depend ",
-      titleGold: "on slow facility negotiations.",
-      visual: {
-        slowEyebrow: "Traditional path",
-        slowLabel: "Bilateral facility negotiation",
-        slowSteps: ["Term sheet", "Diligence", "Legal drafting", "Disbursement"],
-        fastEyebrow: "Aurora path",
-        fastLabel: "Structured participation flow",
-        fastSteps: ["Opportunity", "Participation", "Capital", "Lending continues"],
-        footnote: "Repeatable pathways replace one-off facility processes — without changing who underwrites or services the loan.",
-      },
+      eyebrow: "Platform",
+      title: "The Maleda platform ",
+      titleGold: "at a glance.",
+      sub: "Simple tools for trust, lending, and growth.",
+      cards: [
+        { name: "Verify", copy: "Know the SME or member before lending.", tip: "Verification dashboard" },
+        { name: "Organize", copy: "Help SACCOs manage lending workflows clearly.", tip: "Lending workflow dashboard" },
+        { name: "Grow", copy: "Support more productive businesses through stronger participation.", tip: "Growth and reporting dashboard" },
+      ],
+    },
+    sacco: {
+      num: "03",
+      eyebrow: "SACCO spotlight",
+      title: "SACCOs are the ",
+      titleGold: "local trust layer.",
+      sub: "Maleda helps SACCOs serve members better without replacing their role.",
+      image: "SACCO loan officer meeting members and reviewing loan applications",
+      benefits: ["Member onboarding", "Loan workflow support", "Verification tools", "Reporting visibility"],
     },
     ecosystem: {
-      num: "03",
-      eyebrow: "Ecosystem",
-      title: "Fairway connects lenders with ",
-      titleGold: "digital capital infrastructure.",
-      sub: "Lenders continue lending. Fairway provides the capital access infrastructure.",
-      map: {
-        capital:   { label: "Capital Partners",     copy: "Participate in productive lending through structured institutional pathways." },
-        aurora:    { label: "Fairway / Aurora",     copy: "Structured capital access, compliance-aware infrastructure, coordination rails." },
-        lender:    { label: "Lending Institutions", copy: "Originate, underwrite, service, and collect locally. The central operational actor." },
-        borrowers: { label: "Borrowers",            copy: "Receive financing through their regulated local lender, in local currency." },
-        public:    { label: "Public Stakeholders",  copy: "Provide oversight and support financial inclusion, SME growth, and job creation." },
-        hint: "Hover or focus any node to see its role",
-        flowLabel: "Capital flow",
-        oversightLabel: "Oversight & support",
-      },
-    },
-    how: {
       num: "04",
-      eyebrow: "How it works",
-      title: "Four steps. ",
-      titleGold: "Institutions stay in control.",
-      steps: [
-        { title: "Lender approves opportunity", copy: "" },
-        { title: "Structured participation request", copy: "" },
-        { title: "Eligible capital participates", copy: "" },
-        { title: "Local lending continues", copy: "" },
-      ],
-      footer: "Capital moves. The relationship stays.",
+      eyebrow: "Ecosystem",
+      title: "One ecosystem. ",
+      titleGold: "Many productive businesses.",
+      sub: "Maleda connects local trust, lending workflows, and productive finance opportunities.",
+      image: "Ethiopia's SME and SACCO lending ecosystem, connected around Maleda",
     },
-    control: {
+    usecases: {
       num: "05",
-      eyebrow: "Control",
-      title: "Institutions remain ",
-      titleGold: "in control.",
-      sub: "Underwriting, borrower relationships, servicing, and collections remain with the lender.",
-      body: [
-        "Aurora does not replace the lender's role. The local institution continues to approve opportunities, manage borrower relationships, service loans, and meet regulatory obligations.",
-        "Aurora provides the structured capital access layer around the institution.",
-      ],
-      steps: [
-        "Lender approves opportunity",
-        "Structured participation request created",
-        "Eligible capital participates",
-        "Local lending continues",
-      ],
-      trust: "Borrowers receive local-currency financing through regulated local institutions. They do not need to touch cryptocurrency.",
-    },
-    privacy: {
-      num: "06",
-      eyebrow: "Privacy",
-      title: "Private borrower records ",
-      titleGold: "stay with the lender.",
-      sub: "Aurora coordinates structured funding participation without exposing borrower files.",
-      visual: {
-        leftTitle: "Private Borrower Records",
-        leftEyebrow: "Lender custody",
-        leftBadge: "Maintained securely by the lending institution",
-        leftItems: [
-          "Borrower full name",
-          "National ID number",
-          "Signed loan agreement",
-          "Financial records",
-          "Credit assessment",
-        ],
-        connectorTitle: "Verification converted into proof references",
-        connectorCopy: "Verification can be confirmed without exposing raw borrower documents.",
-        rightTitle: "Digital Funding Participation Record",
-        rightEyebrow: "Aurora · Ledger entry",
-        rightRecord: [
-          { label: "Transaction ID", value: "TX-2026-AUR-00481" },
-          { label: "Funding amount", value: "USD 250,000" },
-          { label: "Verification proof", value: "vfp:a1b2···9c4d" },
-          { label: "Agreement proof", value: "agp:c3d4···7e8f" },
-          { label: "Status", value: "Active" },
-        ],
-        validationTitle: "Proof validation",
-        validation: [
-          { label: "Verification", value: "Confirmed" },
-          { label: "Agreement", value: "Confirmed" },
-          { label: "Policy status", value: "Compliant" },
-          { label: "Privacy mode", value: "Protected" },
-        ],
-        stateLabel: "Transaction state",
-        states: ["Created", "Verified", "Funded", "Active"],
-        activeState: 3,
-        statementTitle: "No borrower personal documents are publicly stored.",
-        statementSub: "Only structured participation records and verification references are digitally coordinated.",
-      },
-    },
-    trust: {
-      num: "07",
-      eyebrow: "Trust",
-      title: "Built for ",
-      titleGold: "institutional trust.",
-      sub: "Verification, auditability, policy controls, and structured governance.",
-      pillars: [
-        { title: "Verification", copy: "Defined processes confirm participants and opportunities." },
-        { title: "Auditability", copy: "Flows are recorded and reviewable." },
-        { title: "Policy Controls", copy: "Eligibility and reporting rules are configurable." },
-        { title: "Structured Governance", copy: "Defined responsibilities and oversight." },
-      ],
-    },
-    tech: {
-      num: "08",
-      eyebrow: "Infrastructure",
-      title: "Modern digital ",
-      titleGold: "financial infrastructure.",
-      sub: "Secure digital rails operating behind the scenes — not a borrower-facing crypto product.",
-      visual: {
-        frontTitle: "Front stage",
-        frontItems: [
-          { label: "Local lender", copy: "Regulated, customer-facing." },
-          { label: "Borrower experience", copy: "Familiar institution. No crypto." },
-          { label: "Local-currency loan", copy: "Originated and serviced locally." },
-        ],
-        backTitle: "Back stage",
-        backItems: [
-          { label: "Structured participation", copy: "Packaged and coordinated." },
-          { label: "Compliance controls", copy: "Rules enforced pre-participation." },
-          { label: "Digital coordination", copy: "Modern rails move capital." },
-          { label: "Reporting rails", copy: "Standardised reporting." },
-        ],
-        separator: "Institution-led front · capital rails behind",
-      },
-    },
-    productive: {
-      num: "09",
-      eyebrow: "Productive economy",
-      title: "Built for Ethiopia's ",
-      titleGold: "productive economy.",
-      sub: "Aurora is designed to support lending into sectors that matter: agriculture, trade, SMEs, women-led enterprises, equipment finance, and job-creating businesses.",
+      eyebrow: "Use cases",
+      title: "Use cases ",
+      titleGold: "across Ethiopia.",
       cards: [
-        "Agriculture",
-        "SME growth",
-        "Trade finance",
-        "Women-led businesses",
-        "Equipment finance",
-        "Job creation",
+        { name: "SME working capital", image: "Ethiopian shop owner restocking shelves" },
+        { name: "SACCO member loans", image: "SACCO members meeting around a table" },
+        { name: "Agriculture finance", image: "Farmer tending seedlings at sunrise" },
+        { name: "Women-led enterprises", image: "Woman entrepreneur preparing baked goods" },
+        { name: "Trader finance", image: "Local market trader arranging produce" },
+        { name: "Small equipment finance", image: "Carpenter working in a small workshop" },
       ],
+    },
+    impact: {
+      num: "06",
+      eyebrow: "Impact",
+      title: "When lending works, ",
+      titleGold: "communities grow.",
+      image: "SMEs and SACCO partners meeting at sunset",
+      cards: [
+        { value: "2,400+", label: "More SMEs served" },
+        { value: "3×", label: "Faster member onboarding" },
+        { value: "92%", label: "Better lending visibility" },
+        { value: "140+", label: "Stronger SACCO operations" },
+        { value: "ETB 380M", label: "More productive finance" },
+        { value: "5,700+", label: "More local jobs supported" },
+      ],
+      disclaimer: "Illustrative outcomes. Actual results depend on partner implementation.",
     },
     cta: {
-      eyebrow: "Get in touch",
-      title: "Toward broader ",
-      titleGold: "capital access.",
-      sub: "A repeatable operating model for productive lending participation.",
-      ctaPrimary: "Partner with Aurora",
-      ctaSecondary: "Start a conversation",
+      title: "Partner with Maleda to grow productive lending.",
+      copy: "For SACCOs, lenders, SME partners, and capital partners ready to support Ethiopia's real economy.",
+      button: "Partner with Maleda",
     },
     footer: {
-      ctaTitle: "Build stronger credit markets for productive lending.",
-      ctaSub: "Partner with Aurora to connect regulated lending institutions with structured capital access infrastructure.",
-      ctaPrimary: "Partner with Aurora",
-      ctaSecondary: "Book a Demo",
       tagline: "Structured capital access for productive lending institutions.",
-      trust: "Institutions remain the lender. Aurora provides the capital access infrastructure.",
+      trust: "Institutions remain the lender. Maleda provides the capital access infrastructure.",
       builtBy: "Built by Fairway",
       visit: "Visit Fairway",
-      platformHeading: "Platform",
-      platformLinks: [
-        "How it works",
-        "Institutions remain in control",
-        "Private data protection",
-        "Capital access infrastructure",
-        "Institutional trust",
-      ],
+      platformHeading: "Explore",
+      platformLinks: ["The story", "Platform", "SACCO spotlight", "Ecosystem", "Impact"],
       servesHeading: "Who it serves",
-      serves: [
-        "Banks",
-        "Microfinance institutions",
-        "Productive lenders",
-        "Capital partners",
-        "Public stakeholders",
-        "Development institutions",
-      ],
+      serves: ["Banks", "Microfinance institutions", "SACCOs", "SMEs", "Capital partners", "SME support organizations"],
       sectorsHeading: "Productive sectors",
-      sectors: [
-        "SME lending",
-        "Agriculture",
-        "Trade finance",
-        "Equipment finance",
-        "Women-led enterprises",
-        "Job-creating businesses",
-      ],
-      trustRow: "Borrowers receive local-currency financing through regulated local institutions. Digital infrastructure operates behind the scenes.",
-      contactTitle: "Talk to Fairway",
-      contactSub: "Discuss partnership, capital access, or institutional collaboration.",
-      contactButton: "Book a Demo",
-      copyright: "© 2026 Aurora / Fairway. All rights reserved.",
-      disclaimer: "Aurora provides infrastructure for regulated institutional participation. It does not lend directly to the public and does not replace licensed financial institutions.",
+      sectors: ["SME lending", "Agriculture", "Trade finance", "Equipment finance", "Women-led enterprises", "Job-creating businesses"],
+      copyright: "© 2026 Maleda / Fairway. All rights reserved.",
+      disclaimer: "Maleda provides infrastructure for regulated institutional participation. It does not lend directly to the public and does not replace licensed financial institutions.",
       legalLinks: ["Privacy", "Terms", "Contact"],
     },
   },
 
   am: {
     nav: {
-      problem: "እድሉ",
-      speed: "ለምን ፍጥነት",
-      ecosystem: "ኢኮሲስተም",
-      how: "እንዴት ይሰራል",
-      control: "ቁጥጥር",
-      trust: "እምነት",
+      story: "ታሪኩ",
+      platform: "መድረክ",
+      sacco: "SACCOዎች",
+      ecosystem: "ስርዓቱ",
+      impact: "ተጽዕኖ",
       partner: "ከማለዳ ጋር ይተባበሩ",
     },
     hero: {
       eyebrow: "ማለዳ · ኢትዮጵያ",
-      headline: "ለምርታማ ብድር\nዓለም አቀፍ ዲጂታል ካፒታል መዳረሻ።",
-      sub: "ለብድር ተቋማት የተዋቀረ የካፒታል መዳረሻ።",
+      headline: "ለኢትዮጵያ የSME ብድር ስርዓት\nአዲስ ጎህ።",
+      sub: "ማለዳ ለSACCOዎች እና ለብድር ተቋማት SMEዎችን በታመነ እና በአካባቢ ገንዘብ ብድር መንገድ እንዲደግፉ ይረዳል።",
       ctaPrimary: "ከማለዳ ጋር ይተባበሩ",
-      ctaSecondary: "እንዴት እንደሚሰራ ይመልከቱ",
-      chips: [
-        "ተቋማት ብድር ሰጪ ሆነው ይቆያሉ",
-        "ፈጣን የካፒታል መዳረሻ",
-        "የተዋቀረ ተሳትፎ",
-        "ኮምፕላያንስን የሚያገናዝብ መሠረተ ልማት",
+      ctaSecondary: "ስርዓቱን ይመልከቱ",
+      chips: ["ለSMEዎች የተገነባ", "ለSACCOዎች የተገነባ", "በአካባቢ ገንዘብ ብድር", "የታመነ ማረጋገጫ"],
+      image: "የኢትዮጵያ የሱቅ ባለቤት በጎህ ጊዜ",
+    },
+    story: {
+      num: "01",
+      eyebrow: "ታሪኩ",
+      title: "ማለዳ የተገነባው ",
+      titleGold: "ለእነዚህ ንግዶች ነው።",
+      sub: "በኢትዮጵያ ብዙ ትንሽ ንግዶች ለማደግ ዝግጁ ናቸው። የሚያስፈልጋቸው ታማኝ ፋይናንስ፣ ግልጽ ሂደት እና ጠንካራ የአካባቢ አጋሮች ናቸው።",
+      cards: [
+        { name: "የሱቅ ባለቤት", need: "ለእቃ መሙላት የስራ ካፒታል ይፈልጋል።", image: "የኢትዮጵያ የሱቅ ባለቤት" },
+        { name: "የግብርና SME", need: "ለግብዓት እና ለምርት ወቅታዊ ፋይናንስ ይፈልጋል።", image: "የኢትዮጵያ ገበሬ ወይም የግብርና SME" },
+        { name: "ሴት ኢንተርፕረነር", need: "ንግዷን ለማሳደግ ካፒታል ይፈልጋል።", image: "የኢትዮጵያ ሴት ኢንተርፕረነር" },
       ],
     },
-    problem: {
-      num: "01",
-      eyebrow: "እድሉ",
-      title: "ዓለም አቀፍ ካፒታል አለ። ",
-      titleGold: "ምርታማ ብድር ተቋማት ግን እገዳዎች ያጋጥማቸዋል።",
-      sub: "ማለዳ ምርታማ ብድር ተቋማትን ከተዋቀረ ዓለም አቀፍ የካፒታል ተሳትፎ ጋር ያገናኛል።",
-      split: {
-        leftEyebrow: "የአካባቢ ምርታማ ብድር ተቋማት",
-        leftTitle: "ብድር ማመንጨት፣ መገምገም፣ ማስተናገድ",
-        leftChips: ["ባንኮች", "ማይክሮ ፋይናንስ", "የተፈቀዱ ብድር ተቋማት"],
-        middleLabel: "ማለዳ መሠረተ ልማት",
-        rightEyebrow: "ዓለም አቀፍ ዲጂታል ካፒታል",
-        rightTitle: "የተዋቀረ ተሳትፎ",
-        rightChips: ["DFIs", "ተቋማዊ ካፒታል", "የካፒታል አጋሮች"],
-      },
-    },
-    speed: {
+    platform: {
       num: "02",
-      eyebrow: "ፍጥነት ለምን ያስፈልጋል",
-      title: "አጭር ጊዜ የሚወስዱ ብድሮች ",
-      titleGold: "በቀስ የሚሄዱ የፋሲሊቲ ድርድሮች ላይ መመስረት የለባቸውም።",
-      visual: {
-        slowEyebrow: "የተለመደ መንገድ",
-        slowLabel: "የሁለትዮሽ የፋሲሊቲ ድርድር",
-        slowSteps: ["የውል ሰነድ", "ዲሊጀንስ", "የህግ ሰነድ", "ስርጭት"],
-        fastEyebrow: "የማለዳ መንገድ",
-        fastLabel: "የተዋቀረ የተሳትፎ ፍሰት",
-        fastSteps: ["እድል", "ተሳትፎ", "ካፒታል", "ብድር መስጠት ይቀጥላል"],
-        footnote: "ተደጋጋሚ መንገዶች የአንድ ጊዜ የፋሲሊቲ ሂደቶችን ይተካሉ — የሚገመግመው ወይም የሚያስተዳድረው ግን አይቀየርም።",
-      },
+      eyebrow: "መድረክ",
+      title: "የማለዳ መድረክ ",
+      titleGold: "በአጭር።",
+      sub: "ለመተማመን፣ ለብድር እና ለእድገት ቀላል መሳሪያዎች።",
+      cards: [
+        { name: "ማረጋገጥ", copy: "ከመበደር በፊት SMEውን ወይም አባሉን በተሻለ ይወቁ።", tip: "የማረጋገጫ ዳሽቦርድ" },
+        { name: "ማደራጀት", copy: "SACCOዎች የብድር ሂደታቸውን በግልጽ እንዲያስተዳድሩ ይረዳል።", tip: "የብድር ሂደት ዳሽቦርድ" },
+        { name: "ማሳደግ", copy: "ብዙ ምርታማ ንግዶችን በጠንካራ ተሳትፎ ይደግፋል።", tip: "የእድገት እና ሪፖርት ዳሽቦርድ" },
+      ],
+    },
+    sacco: {
+      num: "03",
+      eyebrow: "የSACCO ትኩረት",
+      title: "SACCOዎች የአካባቢ ",
+      titleGold: "መተማመኛ መሠረት ናቸው።",
+      sub: "ማለዳ የSACCOዎችን ሚና ሳይተካ አባላትን በተሻለ እንዲያገለግሉ ይረዳል።",
+      image: "የSACCO ሰራተኞች ከአባላት ጋር ሲገናኙ",
+      benefits: ["የአባላት ምዝገባ", "የብድር ሂደት ድጋፍ", "የማረጋገጫ መሳሪያዎች", "የሪፖርት ግልጽነት"],
     },
     ecosystem: {
-      num: "03",
-      eyebrow: "ኢኮሲስተም",
-      title: "ፌርዌይ ብድር ተቋማትን ",
-      titleGold: "ከዲጂታል ካፒታል መሠረተ ልማት ጋር ያገናኛል።",
-      sub: "ብድር ተቋማት ብድር መስጠታቸውን ይቀጥላሉ። ፌርዌይ የካፒታል መዳረሻ መሠረተ ልማትን ይሰጣል።",
-      map: {
-        capital:   { label: "የካፒታል አጋሮች",   copy: "በተዋቀሩ ተቋማዊ መንገዶች ምርታማ ብድር ላይ ይሳተፋሉ።" },
-        aurora:    { label: "ፌርዌይ / ማለዳ",   copy: "የተዋቀረ የካፒታል መዳረሻ፣ ኮምፕላያንስን የሚያገናዝብ መሠረተ ልማት እና የማቀናበሪያ መንገዶች።" },
-        lender:    { label: "ብድር ተቋማት",     copy: "በአካባቢ ብድር ያመነጫሉ፣ ይገመግማሉ፣ ያስተናግዳሉ እና ይሰበስባሉ። ዋናው ኦፕሬሽናል ተዋናይ።" },
-        borrowers: { label: "ተበዳሪዎች",       copy: "በተፈቀዱ የአካባቢ ብድር ተቋማት በኩል በአካባቢ ገንዘብ ብድር ይቀበላሉ።" },
-        public:    { label: "ሕዝባዊ ባለድርሻዎች", copy: "ቁጥጥር ይሰጣሉ እና የፋይናንስ ተደራሽነትን፣ የSME እድገትን እና የስራ ፈጠራን ይደግፋሉ።" },
-        hint: "ሚናውን ለመመልከት በማንኛውም ኖድ ላይ ይጠቁሙ",
-        flowLabel: "የካፒታል ፍሰት",
-        oversightLabel: "ቁጥጥር እና ድጋፍ",
-      },
-    },
-    how: {
       num: "04",
-      eyebrow: "እንዴት ይሰራል",
-      title: "አራት ደረጃዎች። ",
-      titleGold: "ተቋማት ቁጥጥርን ይይዛሉ።",
-      steps: [
-        { title: "ብድር ተቋሙ ያጸድቃል", copy: "" },
-        { title: "የተዋቀረ የተሳትፎ ጥያቄ", copy: "" },
-        { title: "ብቁ ካፒታል ይሳተፋል", copy: "" },
-        { title: "የአካባቢ ብድር ይቀጥላል", copy: "" },
-      ],
-      footer: "ካፒታል ይንቀሳቀሳል። ግንኙነቱ ይቆያል።",
+      eyebrow: "ስርዓቱ",
+      title: "አንድ ስርዓት። ",
+      titleGold: "ብዙ ምርታማ ንግዶች።",
+      sub: "ማለዳ የአካባቢ መተማመንን፣ የብድር ሂደቶችን እና ምርታማ የፋይናንስ እድሎችን ያገናኛል።",
+      image: "የኢትዮጵያ የSME እና የSACCO ብድር ስርዓት በማለዳ ዙሪያ",
     },
-    control: {
+    usecases: {
       num: "05",
-      eyebrow: "ቁጥጥር",
-      title: "ተቋማት ",
-      titleGold: "ቁጥጥርን ይይዛሉ።",
-      sub: "የብድር ግምገማ፣ የተበዳሪ ግንኙነት፣ አገልግሎት እና ክፍያ መሰብሰብ በብድር ተቋሙ ይቆያል።",
-      body: [
-        "ማለዳ የብድር ተቋሙን ሚና አይተካም። የአካባቢ ተቋሙ የብድር እድሎችን ማጽደቅ፣ የተበዳሪ ግንኙነትን መቆጣጠር፣ ብድሩን ማገልገል እና የቁጥጥር ግዴታዎችን መፈጸም ይቀጥላል።",
-        "ማለዳ በተቋሙ ዙሪያ የተዋቀረ የካፒታል መዳረሻ መሠረት ይሰጣል።",
-      ],
-      steps: [
-        "ብድር ተቋሙ የብድር እድሉን ያጸድቃል",
-        "የተዋቀረ የተሳትፎ ጥያቄ ይፈጠራል",
-        "ብቁ ካፒታል ይሳተፋል",
-        "የአካባቢ ብድር መስጠት ይቀጥላል",
-      ],
-      trust: "ተበዳሪዎች በተፈቀዱ የአካባቢ ተቋማት በኩል በአካባቢ ገንዘብ ብድር ያገኛሉ። ክሪፕቶ መጠቀም አያስፈልጋቸውም።",
-    },
-    privacy: {
-      num: "06",
-      eyebrow: "ግላዊነት",
-      title: "የተበዳሪ የግል መረጃ ",
-      titleGold: "በብድር ተቋሙ ይቆያል።",
-      sub: "ማለዳ የተዋቀረ የፈንድ ተሳትፎን ያቀናብራል፤ የተበዳሪ ፋይሎችን ግን አያጋልጥም።",
-      visual: {
-        leftTitle: "የተበዳሪ የግል መዝገቦች",
-        leftEyebrow: "በብድር ተቋሙ ይያዛል",
-        leftBadge: "በብድር ተቋሙ በደህንነት ይያዛል",
-        leftItems: [
-          "የተበዳሪ ሙሉ ስም",
-          "ብሔራዊ መታወቂያ ቁጥር",
-          "የተፈረመ የብድር ስምምነት",
-          "የፋይናንስ መዝገቦች",
-          "የብድር ግምገማ",
-        ],
-        connectorTitle: "ማረጋገጫ ወደ የማስረጃ ማጣቀሻዎች ይቀየራል",
-        connectorCopy: "ማረጋገጫ የተበዳሪ ጥሬ ሰነዶችን ሳያጋልጥ ሊረጋገጥ ይችላል።",
-        rightTitle: "የዲጂታል ፈንድ ተሳትፎ መዝገብ",
-        rightEyebrow: "ማለዳ · የመዝገብ ግቤት",
-        rightRecord: [
-          { label: "የግብይት መለያ", value: "TX-2026-AUR-00481" },
-          { label: "የፈንድ መጠን", value: "USD 250,000" },
-          { label: "የማረጋገጫ ማስረጃ", value: "vfp:a1b2···9c4d" },
-          { label: "የስምምነት ማስረጃ", value: "agp:c3d4···7e8f" },
-          { label: "ሁኔታ", value: "ንቁ" },
-        ],
-        validationTitle: "የማስረጃ ማረጋገጫ",
-        validation: [
-          { label: "ማረጋገጫ", value: "ተረጋግጧል" },
-          { label: "ስምምነት", value: "ተረጋግጧል" },
-          { label: "የፖሊሲ ሁኔታ", value: "ኮምፕላያንት" },
-          { label: "የግላዊነት ሁነታ", value: "የተጠበቀ" },
-        ],
-        stateLabel: "የግብይት ሁኔታ",
-        states: ["ተፈጥሯል", "ተረጋግጧል", "ተደግፏል", "ንቁ"],
-        activeState: 3,
-        statementTitle: "የተበዳሪ የግል ሰነዶች በሕዝብ ፊት አይቀመጡም።",
-        statementSub: "የተዋቀሩ የተሳትፎ መዝገቦች እና የማረጋገጫ ማጣቀሻዎች ብቻ በዲጂታል ይቀናበራሉ።",
-      },
-    },
-    trust: {
-      num: "07",
-      eyebrow: "እምነት",
-      title: "ለተቋማዊ ",
-      titleGold: "መተማመን የተገነባ።",
-      sub: "ማረጋገጫ፣ ኦዲት መደረግ የሚችል አሰራር፣ የፖሊሲ ቁጥጥር እና የተዋቀረ አስተዳደር።",
-      pillars: [
-        { title: "ማረጋገጫ", copy: "ተሳታፊዎች እና እድሎች ይረጋገጣሉ።" },
-        { title: "ኦዲት የሚደረግ", copy: "ፍሰቶች ይመዘገባሉ እና ይገመገማሉ።" },
-        { title: "የፖሊሲ ቁጥጥሮች", copy: "ህጎች ሊዋቀሩ ይችላሉ።" },
-        { title: "የተዋቀረ አስተዳደር", copy: "የተወሰኑ ኃላፊነቶች እና ቁጥጥር።" },
-      ],
-    },
-    tech: {
-      num: "08",
-      eyebrow: "መሠረተ ልማት",
-      title: "ዘመናዊ ዲጂታል ",
-      titleGold: "የፋይናንስ መሠረተ ልማት።",
-      sub: "ከጀርባ የሚሰሩ ደህንነታቸው የተጠበቀ ዲጂታል መንገዶች — ለተበዳሪዎች የሚታይ የክሪፕቶ ምርት አይደለም።",
-      visual: {
-        frontTitle: "የፊት መድረክ",
-        frontItems: [
-          { label: "የአካባቢ ብድር ተቋም", copy: "የተፈቀደ፣ የደንበኛ ግንኙነት ያለው።" },
-          { label: "የተበዳሪ ተሞክሮ", copy: "የታወቀ ተቋም። ክሪፕቶ የለም።" },
-          { label: "በአካባቢ ገንዘብ ብድር", copy: "በአካባቢ ይመነጫል እና ይስተናገዳል።" },
-        ],
-        backTitle: "የጀርባ መድረክ",
-        backItems: [
-          { label: "የተዋቀረ ተሳትፎ", copy: "ይዋቀራል እና ይቀናበራል።" },
-          { label: "የኮምፕላያንስ ቁጥጥሮች", copy: "ህጎች ቅድሚያ ይተገበራሉ።" },
-          { label: "የዲጂታል ማቀናበር", copy: "ዘመናዊ መንገዶች።" },
-          { label: "የሪፖርት መንገዶች", copy: "መደበኛ ሪፖርት።" },
-        ],
-        separator: "በተቋም መሪነት የፊት · ከጀርባ የካፒታል መሠረተ ልማት",
-      },
-    },
-    productive: {
-      num: "09",
-      eyebrow: "ምርታማ ኢኮኖሚ",
-      title: "ለኢትዮጵያ ",
-      titleGold: "ምርታማ ኢኮኖሚ የተዘጋጀ",
-      sub: "ማለዳ ለግብርና፣ ለንግድ፣ ለSME፣ ለሴቶች የሚመሩ ንግዶች፣ ለመሣሪያ ፋይናንስ እና ለስራ ፈጠራ የሚያግዙ ብድሮችን ለመደገፍ የተዘጋጀ ነው።",
+      eyebrow: "አጠቃቀሞች",
+      title: "በኢትዮጵያ ",
+      titleGold: "የሚሰሩ አጠቃቀሞች።",
       cards: [
-        "ግብርና",
-        "የSME እድገት",
-        "የንግድ ፋይናንስ",
-        "ሴቶች የሚመሩ ንግዶች",
-        "የመሣሪያ ፋይናንስ",
-        "የስራ ፈጠራ",
+        { name: "የSME የስራ ካፒታል", image: "የኢትዮጵያ ሱቅ ወይም ትንሽ ንግድ" },
+        { name: "የSACCO አባላት ብድር", image: "የSACCO አባላት ስብሰባ" },
+        { name: "የግብርና ፋይናንስ", image: "ገበሬ ወይም የግብርና ንግድ" },
+        { name: "ሴቶች የሚመሩ ንግዶች", image: "ሴት ኢንተርፕረነር" },
+        { name: "የነጋዴዎች ፋይናንስ", image: "የአካባቢ ገበያ ነጋዴ" },
+        { name: "የትንሽ መሣሪያ ፋይናንስ", image: "ትንሽ ማሽነሪ ወይም ወርክሾፕ" },
       ],
+    },
+    impact: {
+      num: "06",
+      eyebrow: "ተጽዕኖ",
+      title: "ብድር በትክክል ሲሰራ፣ ",
+      titleGold: "ማህበረሰቦች ያድጋሉ።",
+      image: "SMEዎች እና የSACCO አጋሮች በምሽት ብርሃን ሲገናኙ",
+      cards: [
+        { value: "2,400+", label: "ብዙ SMEዎች ይገለገላሉ" },
+        { value: "3×", label: "ፈጣን የአባላት ምዝገባ" },
+        { value: "92%", label: "የተሻለ የብድር ግልጽነት" },
+        { value: "140+", label: "ጠንካራ የSACCO አሰራር" },
+        { value: "ETB 380M", label: "ብዙ ምርታማ ፋይናንስ" },
+        { value: "5,700+", label: "ብዙ የአካባቢ ስራ ድጋፍ" },
+      ],
+      disclaimer: "ውጤቶቹ ምሳሌያዊ ናቸው። ትክክለኛ ውጤት በአጋር አፈፃፀም ላይ ይመሰረታል።",
     },
     cta: {
-      eyebrow: "እኛን ያግኙን",
-      title: "ወደ ሰፊ ",
-      titleGold: "የካፒታል መዳረሻ።",
-      sub: "ለምርታማ ብድር ተሳትፎ ተደጋጋሚ የሆነ የአሰራር ሞዴል።",
-      ctaPrimary: "ከማለዳ ጋር ይተባበሩ",
-      ctaSecondary: "ውይይት ይጀምሩ",
+      title: "ምርታማ ብድርን ለማሳደግ ከማለዳ ጋር ይተባበሩ።",
+      copy: "የኢትዮጵያን እውነተኛ ኢኮኖሚ ለመደገፍ ዝግጁ ለሆኑ SACCOዎች፣ ብድር ተቋማት፣ የSME አጋሮች እና የካፒታል አጋሮች።",
+      button: "ከማለዳ ጋር ይተባበሩ",
     },
     footer: {
-      ctaTitle: "ለምርታማ ብድር ጠንካራ የብድር ገበያዎችን እንገንባ።",
-      ctaSub: "ከማለዳ ጋር በመተባበር የተፈቀዱ ብድር ተቋማትን ከተዋቀረ የካፒታል መዳረሻ መሠረተ ልማት ጋር ያገናኙ።",
-      ctaPrimary: "ከማለዳ ጋር ይተባበሩ",
-      ctaSecondary: "የማሳያ ጊዜ ያስይዙ",
       tagline: "ለምርታማ ብድር ተቋማት የተዋቀረ የካፒታል መዳረሻ።",
       trust: "ተቋማት ብድር ሰጪ ሆነው ይቆያሉ። ማለዳ የካፒታል መዳረሻ መሠረተ ልማትን ይሰጣል።",
       builtBy: "የተገነባው በ Fairway",
       visit: "Fairway ይጎብኙ",
-      platformHeading: "መድረክ",
-      platformLinks: [
-        "እንዴት ይሰራል",
-        "ተቋማት ቁጥጥርን ይይዛሉ",
-        "የግል መረጃ ጥበቃ",
-        "የካፒታል መዳረሻ መሠረተ ልማት",
-        "ተቋማዊ መተማመን",
-      ],
+      platformHeading: "ይመልከቱ",
+      platformLinks: ["ታሪኩ", "መድረክ", "የSACCO ትኩረት", "ስርዓቱ", "ተጽዕኖ"],
       servesHeading: "ለማን ይጠቅማል",
-      serves: [
-        "ባንኮች",
-        "ማይክሮ ፋይናንስ ተቋማት",
-        "ምርታማ ብድር ተቋማት",
-        "የካፒታል አጋሮች",
-        "ሕዝባዊ ባለድርሻዎች",
-        "የልማት ፋይናንስ ተቋማት",
-      ],
+      serves: ["ባንኮች", "ማይክሮ ፋይናንስ ተቋማት", "SACCOዎች", "SMEዎች", "የካፒታል አጋሮች", "የSME ድጋፍ ድርጅቶች"],
       sectorsHeading: "ምርታማ ዘርፎች",
-      sectors: [
-        "የSME ብድር",
-        "ግብርና",
-        "የንግድ ፋይናንስ",
-        "የመሣሪያ ፋይናንስ",
-        "ሴቶች የሚመሩ ንግዶች",
-        "ስራ የሚፈጥሩ ንግዶች",
-      ],
-      trustRow: "ተበዳሪዎች በተፈቀዱ የአካባቢ ተቋማት በኩል በአካባቢ ገንዘብ ብድር ያገኛሉ። ዲጂታል መሠረተ ልማቱ ከጀርባ ይሰራል።",
-      contactTitle: "ከFairway ጋር ይነጋገሩ",
-      contactSub: "ስለ ትብብር፣ የካፒታል መዳረሻ ወይም ተቋማዊ ትብብር ይወያዩ።",
-      contactButton: "የማሳያ ጊዜ ያስይዙ",
+      sectors: ["የSME ብድር", "ግብርና", "የንግድ ፋይናንስ", "የመሣሪያ ፋይናንስ", "ሴቶች የሚመሩ ንግዶች", "የስራ ፈጠራ ንግዶች"],
       copyright: "© 2026 ማለዳ / Fairway. መብቱ በሙሉ የተጠበቀ ነው።",
       disclaimer: "ማለዳ ለተቋማዊ ተሳትፎ መሠረተ ልማት ይሰጣል። በቀጥታ ለሕዝብ ብድር አይሰጥም፣ የተፈቀዱ የፋይናንስ ተቋማትንም አይተካም።",
       legalLinks: ["ግላዊነት", "ውሎች", "አግኙን"],
     },
   },
 };
+
+type T = (typeof CONTENT)["en"];
+
+const STORY_IMAGES = [
+  `${IMG}/story-shop-owner.png`,
+  `${IMG}/story-agri-sme.png`,
+  `${IMG}/story-woman-entrepreneur.png`,
+];
+const PLATFORM_IMAGES = [
+  `${IMG}/platform-verify.png`,
+  `${IMG}/platform-organize.png`,
+  `${IMG}/platform-grow.png`,
+];
+const USECASE_IMAGES = [
+  `${IMG}/usecase-working-capital.png`,
+  `${IMG}/usecase-member-loans.png`,
+  `${IMG}/usecase-agriculture.png`,
+  `${IMG}/usecase-women-led.png`,
+  `${IMG}/usecase-trader.png`,
+  `${IMG}/usecase-equipment.png`,
+];
+const SACCO_ICONS: IconType[] = [UserPlus, ClipboardList, BadgeCheck, Eye];
+const PLATFORM_ICONS: IconType[] = [ScanLine, ClipboardList, TrendingUp];
 
 /* ----------------------------------------------------------------------- */
 /* Page                                                                    */
@@ -560,132 +314,23 @@ export default function MaledaPage() {
       className={lineHeightClass}
       style={{ background: BG, color: IVORY_DIM, fontFamily: fontVar }}
     >
-      <Hero lang={lang} setLang={setLang} t={t} />
-      <ProblemSection t={t} />
-      <SpeedSection t={t} />
+      <Navbar lang={lang} setLang={setLang} t={t} />
+      <Hero lang={lang} t={t} />
+      <StorySection t={t} />
+      <PlatformSection t={t} />
+      <SaccoSection t={t} />
       <EcosystemSection t={t} />
-      <HowItWorksSection t={t} />
-      <ControlSection t={t} />
-      <PrivacySection t={t} />
-      <TrustSection t={t} />
-      <TechnologySection t={t} />
-      <ProductiveEconomySection t={t} />
-      <FinalCTASection t={t} />
+      <UseCasesSection t={t} />
+      <ImpactSection t={t} />
+      <PartnerCTA t={t} />
       <Footer lang={lang} t={t} />
     </div>
   );
 }
 
-type T = (typeof CONTENT)["en"];
-
 /* ----------------------------------------------------------------------- */
-/* Hero + Navbar                                                           */
+/* Navbar                                                                   */
 /* ----------------------------------------------------------------------- */
-
-function Hero({
-  lang,
-  setLang,
-  t,
-}: {
-  lang: Lang;
-  setLang: (l: Lang) => void;
-  t: T;
-}) {
-  return (
-    <section
-      id="top"
-      className="relative isolate flex min-h-[100dvh] w-full flex-col overflow-hidden"
-      style={{ background: BG }}
-    >
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover"
-        src={HERO_VIDEO}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(10,22,18,0.30) 0%, transparent 28%, transparent 55%, rgba(10,22,18,0.55) 88%, rgba(10,22,18,0.85) 100%)",
-        }}
-      />
-
-      <Navbar lang={lang} setLang={setLang} t={t} />
-
-      <div className="relative z-10 mx-auto mt-auto flex w-full max-w-[1400px] flex-col gap-10 px-6 pb-20 md:px-10 lg:px-14 lg:pb-24">
-        <div className="max-w-[860px]">
-          <FadeIn delay={80} duration={600}>
-            <span
-              className="inline-flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.22em]"
-              style={{ color: IVORY_DIM }}
-            >
-              <span aria-hidden className="h-px w-8" style={{ background: GOLD }} />
-              {t.hero.eyebrow}
-            </span>
-          </FadeIn>
-
-          <AnimatedHeading
-            key={lang}
-            text={t.hero.headline}
-            className={`mt-7 text-[36px] font-medium leading-[1.06] tracking-[-0.025em] sm:text-[52px] ${
-              lang === "am" ? "lg:text-[60px]" : "lg:text-[68px]"
-            }`}
-          />
-
-          <FadeIn delay={1100} duration={700} className="mt-8 max-w-[60ch]">
-            <p
-              className="text-[16px] font-light leading-[1.55] tracking-tight sm:text-[18px]"
-              style={{ color: IVORY }}
-            >
-              {t.hero.sub}
-            </p>
-          </FadeIn>
-
-          <FadeIn delay={1500} duration={700} className="mt-10">
-            <div className="flex flex-wrap items-center gap-6">
-              <a
-                href={CALENDLY}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex h-12 cursor-pointer items-center justify-center gap-2 px-6 text-[13px] font-semibold tracking-tight transition active:scale-[0.98] hover:brightness-110"
-                style={{ background: GOLD, color: BG }}
-              >
-                {t.hero.ctaPrimary}
-                <ArrowUpRight className="h-4 w-4" strokeWidth={1.7} />
-              </a>
-              <a
-                href="#how-it-works"
-                className="inline-flex h-12 cursor-pointer items-center gap-2 text-[13px] font-medium transition"
-                style={{ color: IVORY, borderBottom: `1px solid ${IVORY}`, paddingBottom: 2 }}
-              >
-                {t.hero.ctaSecondary}
-                <ArrowRight className="h-4 w-4" strokeWidth={1.7} />
-              </a>
-            </div>
-          </FadeIn>
-
-          <FadeIn delay={1750} duration={700} className="mt-12 max-w-[820px]">
-            <div className="grid grid-cols-2 gap-x-5 gap-y-3 sm:grid-cols-4">
-              {t.hero.chips.map((c) => (
-                <span
-                  key={c}
-                  className="border-t pt-3 text-[11.5px] font-medium leading-snug"
-                  style={{ borderColor: GOLD, color: IVORY }}
-                >
-                  {c}
-                </span>
-              ))}
-            </div>
-          </FadeIn>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 function Navbar({
   lang,
@@ -697,71 +342,71 @@ function Navbar({
   t: T;
 }) {
   const links = [
-    { href: "#problem", label: t.nav.problem },
-    { href: "#speed", label: t.nav.speed },
+    { href: "#story", label: t.nav.story },
+    { href: "#platform", label: t.nav.platform },
+    { href: "#sacco", label: t.nav.sacco },
     { href: "#ecosystem", label: t.nav.ecosystem },
-    { href: "#how-it-works", label: t.nav.how },
-    { href: "#control", label: t.nav.control },
-    { href: "#trust", label: t.nav.trust },
+    { href: "#impact", label: t.nav.impact },
   ];
 
   return (
-    <header className="relative z-30 pt-6">
-      <div className="mx-auto w-full max-w-[1400px] px-6 md:px-10 lg:px-14">
-        <div
-          className="flex items-center justify-between border-b py-4"
-          style={{ borderColor: "rgba(242,237,223,0.16)" }}
+    <header
+      className="fixed inset-x-0 top-0 z-50 border-b backdrop-blur-xl"
+      style={{ borderColor: DIVIDER, background: "rgba(10,22,18,0.8)" }}
+    >
+      <div className="mx-auto flex w-full max-w-[1360px] items-center justify-between px-6 py-4 md:px-10">
+        <Link
+          href="#top"
+          className="flex items-center gap-2.5"
+          aria-label={lang === "am" ? "ማለዳ home" : "Maleda home"}
+          style={{ color: IVORY }}
         >
-          <Link
-            href="#top"
-            className="flex items-center gap-3"
-            aria-label={lang === "am" ? "ማለዳ home" : "Aurora home"}
-            style={{ color: IVORY }}
+          <span aria-hidden className="relative inline-flex h-4 w-4 overflow-hidden">
+            <span
+              className="absolute bottom-0 left-1/2 h-4 w-4 -translate-x-1/2 translate-y-1/2 rounded-full"
+              style={{ background: `linear-gradient(180deg, ${GOLD}, ${ORANGE})` }}
+            />
+          </span>
+          <span
+            className={`font-semibold tracking-tight ${lang === "am" ? "text-2xl" : "text-lg tracking-[0.14em]"}`}
+            style={
+              lang === "am"
+                ? { fontFamily: "var(--font-maleda-am), 'Noto Sans Ethiopic', sans-serif" }
+                : undefined
+            }
           >
-            <span
-              className={`font-semibold tracking-tight ${lang === "am" ? "text-2xl" : "text-xl"}`}
-              style={
-                lang === "am"
-                  ? { fontFamily: "var(--font-maleda-am), 'Noto Sans Ethiopic', sans-serif" }
-                  : undefined
-              }
-            >
-              {BRAND[lang]}
-            </span>
-            <span
-              className="hidden text-[10px] font-medium uppercase tracking-[0.22em] sm:inline"
-              style={{ color: IVORY_MUTED }}
-            >
-              by Fairway
-            </span>
-          </Link>
+            {BRAND[lang]}
+          </span>
+          <span className="hidden text-[10px] font-medium uppercase tracking-[0.22em] sm:inline" style={{ color: IVORY_MUTED }}>
+            by Fairway
+          </span>
+        </Link>
 
-          <nav className="hidden items-center gap-6 lg:flex">
-            {links.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-[12px] font-medium uppercase tracking-[0.16em] transition-colors duration-200"
-                style={{ color: IVORY_DIM }}
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-
-          <div className="flex items-center gap-6">
-            <LangToggle lang={lang} setLang={setLang} />
+        <nav className="hidden items-center gap-6 lg:flex">
+          {links.map((link) => (
             <a
-              href={CALENDLY}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden items-center gap-2 text-[12px] font-medium uppercase tracking-[0.16em] transition sm:inline-flex"
-              style={{ color: GOLD, borderBottom: `1px solid ${GOLD}`, paddingBottom: 2 }}
+              key={link.href}
+              href={link.href}
+              className="text-[12px] font-medium uppercase tracking-[0.14em] transition-colors duration-200 hover:text-[#F2EDDF]"
+              style={{ color: IVORY_DIM }}
             >
-              {t.nav.partner}
-              <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={1.7} />
+              {link.label}
             </a>
-          </div>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-4">
+          <LangToggle lang={lang} setLang={setLang} />
+          <a
+            href={CALENDLY}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden h-10 items-center gap-2 rounded-full px-5 text-[12px] font-semibold tracking-tight transition hover:brightness-110 active:scale-[0.98] sm:inline-flex"
+            style={{ background: `linear-gradient(180deg, ${GOLD}, #C08F35)`, color: "#1A1206" }}
+          >
+            {t.nav.partner}
+            <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={1.8} />
+          </a>
         </div>
       </div>
     </header>
@@ -773,35 +418,28 @@ function LangToggle({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void 
     <div
       role="group"
       aria-label="Language selector"
-      className="inline-flex items-center text-[12px] font-medium uppercase tracking-[0.16em]"
+      className="inline-flex items-center overflow-hidden rounded-full border text-[11px] font-semibold uppercase tracking-[0.12em]"
+      style={{ borderColor: "rgba(242,237,223,0.25)" }}
     >
       <button
         type="button"
         onClick={() => setLang("en")}
         aria-pressed={lang === "en"}
         aria-label="Switch to English"
-        className="cursor-pointer transition-colors duration-200"
-        style={{
-          color: lang === "en" ? GOLD : IVORY_DIM,
-          borderBottom: lang === "en" ? `1px solid ${GOLD}` : "1px solid transparent",
-          paddingBottom: 2,
-        }}
+        className="cursor-pointer px-3 py-1.5 transition-colors duration-200"
+        style={{ background: lang === "en" ? GOLD : "transparent", color: lang === "en" ? "#1A1206" : IVORY_DIM }}
       >
         EN
       </button>
-      <span aria-hidden className="mx-2" style={{ color: IVORY_MUTED }}>
-        |
-      </span>
       <button
         type="button"
         onClick={() => setLang("am")}
         aria-pressed={lang === "am"}
         aria-label="ወደ አማርኛ ቀይር"
-        className="cursor-pointer transition-colors duration-200"
+        className="cursor-pointer px-3 py-1.5 transition-colors duration-200"
         style={{
-          color: lang === "am" ? GOLD : IVORY_DIM,
-          borderBottom: lang === "am" ? `1px solid ${GOLD}` : "1px solid transparent",
-          paddingBottom: 2,
+          background: lang === "am" ? GOLD : "transparent",
+          color: lang === "am" ? "#1A1206" : IVORY_DIM,
           fontFamily: "var(--font-maleda-am), 'Noto Sans Ethiopic', sans-serif",
         }}
       >
@@ -812,7 +450,112 @@ function LangToggle({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void 
 }
 
 /* ----------------------------------------------------------------------- */
-/* Section primitive                                                       */
+/* Hero — warm sunrise, split with large hero photo                         */
+/* ----------------------------------------------------------------------- */
+
+function Hero({ lang, t }: { lang: Lang; t: T }) {
+  return (
+    <section id="top" className="relative isolate overflow-hidden" style={{ background: BG }}>
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10"
+        style={{
+          background:
+            "radial-gradient(75% 55% at 50% 108%, rgba(224,123,57,0.28) 0%, rgba(214,168,79,0.14) 42%, transparent 72%)",
+        }}
+      />
+      <GoldOrb className="absolute -right-[12%] top-[8%] -z-10 h-[420px] w-[420px] opacity-40 lg:h-[560px] lg:w-[560px]" />
+      <CulturalPattern variant="dark" intensity={0.04} className="-z-10 opacity-50" />
+
+      <div className="mx-auto grid w-full max-w-[1360px] items-center gap-12 px-6 pb-16 pt-32 md:px-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:pb-24 lg:pt-40">
+        <div>
+          <FadeIn delay={80} duration={600}>
+            <span
+              className="inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.22em]"
+              style={{ borderColor: "rgba(214,168,79,0.45)", color: GOLD, background: "rgba(10,22,18,0.5)" }}
+            >
+              <Sun className="h-3 w-3" strokeWidth={1.8} />
+              {t.hero.eyebrow}
+            </span>
+          </FadeIn>
+
+          <AnimatedHeading
+            key={lang}
+            text={t.hero.headline}
+            className={`mt-7 text-[34px] font-semibold leading-[1.08] tracking-[-0.025em] sm:text-[46px] ${
+              lang === "am" ? "lg:text-[50px]" : "lg:text-[58px]"
+            }`}
+          />
+
+          <FadeIn delay={1000} duration={700} className="mt-6 max-w-[54ch]">
+            <p className="text-[16px] font-light leading-[1.65] tracking-tight sm:text-[17px]" style={{ color: IVORY }}>
+              {t.hero.sub}
+            </p>
+          </FadeIn>
+
+          <FadeIn delay={1350} duration={700} className="mt-9">
+            <div className="flex flex-wrap items-center gap-4">
+              <a
+                href={CALENDLY}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-full px-7 text-[13px] font-semibold tracking-tight transition hover:brightness-110 active:scale-[0.98]"
+                style={{ background: `linear-gradient(180deg, ${GOLD}, #C08F35)`, color: "#1A1206" }}
+              >
+                {t.hero.ctaPrimary}
+                <ArrowUpRight className="h-4 w-4" strokeWidth={1.7} />
+              </a>
+              <a
+                href="#ecosystem"
+                className="inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-full border px-7 text-[13px] font-medium tracking-tight transition hover:bg-white/5"
+                style={{ borderColor: "rgba(242,237,223,0.3)", color: IVORY }}
+              >
+                {t.hero.ctaSecondary}
+                <ArrowRight className="h-4 w-4" strokeWidth={1.7} />
+              </a>
+            </div>
+          </FadeIn>
+
+          <FadeIn delay={1650} duration={700} className="mt-10">
+            <div className="flex flex-wrap gap-2.5">
+              {t.hero.chips.map((c) => (
+                <span
+                  key={c}
+                  className="inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-[11.5px] font-medium"
+                  style={{ borderColor: "rgba(214,168,79,0.35)", color: IVORY, background: "rgba(13,29,22,0.6)" }}
+                >
+                  <BadgeCheck className="h-3.5 w-3.5" strokeWidth={1.7} style={{ color: GOLD }} />
+                  {c}
+                </span>
+              ))}
+            </div>
+          </FadeIn>
+        </div>
+
+        <FadeIn delay={600} duration={800}>
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-[0_40px_100px_rgba(0,0,0,0.45)] transition-transform duration-500 hover:-translate-y-1 lg:aspect-[5/4]">
+            <Image
+              src={`${IMG}/hero.png`}
+              alt={t.hero.image}
+              fill
+              priority
+              sizes="(min-width: 1024px) 45vw, 100vw"
+              className="object-cover object-center"
+            />
+            <div
+              aria-hidden
+              className="absolute inset-0"
+              style={{ background: "linear-gradient(180deg, transparent 65%, rgba(10,22,18,0.35) 100%)" }}
+            />
+          </div>
+        </FadeIn>
+      </div>
+    </section>
+  );
+}
+
+/* ----------------------------------------------------------------------- */
+/* Section shell                                                            */
 /* ----------------------------------------------------------------------- */
 
 function Section({
@@ -822,10 +565,9 @@ function Section({
   title,
   titleGold,
   sub,
-  intro,
   children,
   background,
-  decoration,
+  center = false,
 }: {
   id: string;
   num: string;
@@ -833,59 +575,42 @@ function Section({
   title: string;
   titleGold: string;
   sub?: string;
-  intro?: React.ReactNode;
   children?: React.ReactNode;
   background?: string;
-  decoration?: React.ReactNode;
+  center?: boolean;
 }) {
   return (
     <section
       id={id}
-      className="relative px-6 py-28 md:px-10 lg:px-14 lg:py-36"
+      className="relative px-6 py-24 md:px-10 lg:py-28"
       style={{ borderTop: `1px solid ${DIVIDER}`, background: background ?? "transparent" }}
     >
-      {decoration && (
-        <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-          {decoration}
-        </div>
-      )}
-      <div className="relative mx-auto max-w-[1400px]">
-        <InView className="grid gap-10 lg:grid-cols-[260px_1fr] lg:gap-16">
-          <div className="lg:sticky lg:top-24 lg:self-start">
-            <p className="font-mono text-[10px] font-medium uppercase tracking-[0.22em]" style={{ color: GOLD }}>
-              {num}
-            </p>
-            <p className="mt-3 text-[10px] font-medium uppercase tracking-[0.22em]" style={{ color: IVORY_MUTED }}>
-              {eyebrow}
-            </p>
-          </div>
+      <div className="relative mx-auto max-w-[1360px]">
+        <InView className={center ? "flex flex-col items-center text-center" : ""}>
+          <span
+            className="inline-flex items-center gap-2.5 rounded-full border px-3.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em]"
+            style={{ borderColor: "rgba(214,168,79,0.4)", color: GOLD, background: PANEL }}
+          >
+            <span className="font-mono" style={{ color: IVORY_MUTED }}>{num}</span>
+            {eyebrow}
+          </span>
 
-          <div>
-            <h2
-              className="text-[28px] font-medium leading-[1.06] tracking-[-0.025em] sm:text-[40px] lg:text-[48px]"
-              style={{ color: IVORY, textWrap: "balance" }}
+          <h2
+            className={`mt-6 text-[28px] font-semibold leading-[1.1] tracking-[-0.025em] sm:text-[38px] lg:text-[44px] ${center ? "max-w-[24ch]" : "max-w-[26ch]"}`}
+            style={{ color: IVORY, textWrap: "balance" }}
+          >
+            {title}
+            <span style={{ color: GOLD }}>{titleGold}</span>
+          </h2>
+          {sub && (
+            <p
+              className="mt-4 text-[15px] font-light leading-[1.65] tracking-tight"
+              style={{ color: IVORY, maxWidth: "56ch" }}
             >
-              {title}
-              <span style={{ color: GOLD }}>{titleGold}</span>
-            </h2>
-            {sub && (
-              <p
-                className="mt-5 text-[16px] font-light leading-[1.55] tracking-tight"
-                style={{ color: IVORY, maxWidth: "60ch" }}
-              >
-                {sub}
-              </p>
-            )}
-            {intro && (
-              <div
-                className="mt-6 text-[14.5px] font-light leading-[1.75]"
-                style={{ color: IVORY_DIM, maxWidth: "62ch" }}
-              >
-                {intro}
-              </div>
-            )}
-            {children}
-          </div>
+              {sub}
+            </p>
+          )}
+          <div className="mt-12 w-full">{children}</div>
         </InView>
       </div>
     </section>
@@ -893,47 +618,167 @@ function Section({
 }
 
 /* ----------------------------------------------------------------------- */
-/* Problem                                                                  */
+/* 01 Story — three SME profile cards                                       */
 /* ----------------------------------------------------------------------- */
 
-function ProblemSection({ t }: { t: T }) {
+function StorySection({ t }: { t: T }) {
   return (
     <Section
-      id="problem"
-      num={t.problem.num}
-      eyebrow={t.problem.eyebrow}
-      title={t.problem.title}
-      titleGold={t.problem.titleGold}
-      sub={t.problem.sub}
+      id="story"
+      num={t.story.num}
+      eyebrow={t.story.eyebrow}
+      title={t.story.title}
+      titleGold={t.story.titleGold}
+      sub={t.story.sub}
     >
-      <ProblemSplitVisual labels={t.problem.split} />
+      <div className="grid gap-5 md:grid-cols-3">
+        {t.story.cards.map((card, i) => (
+          <article
+            key={card.name}
+            className="group overflow-hidden rounded-2xl transition-transform duration-500 hover:-translate-y-1.5"
+            style={{ background: IVORY }}
+          >
+            <div className="relative aspect-[4/3] w-full overflow-hidden">
+              <Image
+                src={STORY_IMAGES[i]}
+                alt={card.image}
+                fill
+                sizes="(min-width: 768px) 33vw, 100vw"
+                className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.04]"
+              />
+            </div>
+            <div className="p-6">
+              <h3 className="text-[17px] font-semibold tracking-tight" style={{ color: CARD_INK }}>
+                {card.name}
+              </h3>
+              <p className="mt-2 text-[13.5px] leading-[1.6]" style={{ color: CARD_BODY }}>
+                {card.need}
+              </p>
+            </div>
+          </article>
+        ))}
+      </div>
     </Section>
   );
 }
 
 /* ----------------------------------------------------------------------- */
-/* Speed                                                                    */
+/* 02 Platform — three product cards with dashboard visuals                 */
 /* ----------------------------------------------------------------------- */
 
-function SpeedSection({ t }: { t: T }) {
+function PlatformSection({ t }: { t: T }) {
   return (
     <Section
-      id="speed"
-      num={t.speed.num}
-      eyebrow={t.speed.eyebrow}
-      title={t.speed.title}
-      titleGold={t.speed.titleGold}
-      decoration={
-        <GoldOrb className="absolute right-[-18%] top-1/2 h-[360px] w-[360px] -translate-y-1/2 opacity-50 lg:right-[-6%] lg:h-[640px] lg:w-[640px] lg:opacity-60" />
-      }
+      id="platform"
+      num={t.platform.num}
+      eyebrow={t.platform.eyebrow}
+      title={t.platform.title}
+      titleGold={t.platform.titleGold}
+      sub={t.platform.sub}
+      background={PANEL}
     >
-      <SpeedComparisonVisual labels={t.speed.visual} />
+      <div className="grid gap-5 md:grid-cols-3">
+        {t.platform.cards.map((card, i) => {
+          const Icon = PLATFORM_ICONS[i];
+          return (
+            <article
+              key={card.name}
+              className="group relative rounded-2xl p-6 transition-transform duration-500 hover:scale-[1.02] sm:p-7"
+              style={{ background: IVORY }}
+            >
+              <div className="flex items-center justify-between">
+                <span
+                  className="flex h-10 w-10 items-center justify-center rounded-full"
+                  style={{ background: "rgba(214,168,79,0.18)" }}
+                >
+                  <Icon className="h-5 w-5" strokeWidth={1.6} style={{ color: "#8A5A1F" }} />
+                </span>
+                <span
+                  className="rounded-full px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.14em] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  style={{ background: "rgba(18,32,25,0.08)", color: CARD_BODY }}
+                >
+                  {card.tip}
+                </span>
+              </div>
+              <h3 className="mt-5 text-[19px] font-semibold tracking-tight" style={{ color: CARD_INK }}>
+                {card.name}
+              </h3>
+              <p className="mt-2 min-h-[44px] text-[13.5px] leading-[1.6]" style={{ color: CARD_BODY }}>
+                {card.copy}
+              </p>
+              <div
+                className="relative mt-6 aspect-[4/3] w-full overflow-hidden rounded-xl border"
+                style={{ borderColor: "rgba(18,32,25,0.1)" }}
+              >
+                <Image
+                  src={PLATFORM_IMAGES[i]}
+                  alt={card.tip}
+                  fill
+                  sizes="(min-width: 768px) 30vw, 100vw"
+                  className="object-cover object-top"
+                />
+              </div>
+            </article>
+          );
+        })}
+      </div>
     </Section>
   );
 }
 
 /* ----------------------------------------------------------------------- */
-/* Ecosystem                                                                */
+/* 03 SACCO spotlight — photo left, benefit cards right                     */
+/* ----------------------------------------------------------------------- */
+
+function SaccoSection({ t }: { t: T }) {
+  return (
+    <Section
+      id="sacco"
+      num={t.sacco.num}
+      eyebrow={t.sacco.eyebrow}
+      title={t.sacco.title}
+      titleGold={t.sacco.titleGold}
+      sub={t.sacco.sub}
+    >
+      <div className="grid gap-6 lg:grid-cols-2 lg:items-stretch">
+        <div className="relative min-h-[320px] w-full overflow-hidden rounded-2xl transition-transform duration-500 hover:-translate-y-1 lg:min-h-0">
+          <Image
+            src={`${IMG}/sacco-spotlight.png`}
+            alt={t.sacco.image}
+            fill
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="object-cover object-center"
+          />
+        </div>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {t.sacco.benefits.map((b, i) => {
+            const Icon = SACCO_ICONS[i];
+            return (
+              <div
+                key={b}
+                className="flex flex-col justify-center gap-3 rounded-2xl p-6 transition-transform duration-500 hover:-translate-y-1"
+                style={{ background: IVORY }}
+              >
+                <span
+                  className="flex h-10 w-10 items-center justify-center rounded-full"
+                  style={{ background: "rgba(214,168,79,0.18)" }}
+                >
+                  <Icon className="h-5 w-5" strokeWidth={1.6} style={{ color: "#8A5A1F" }} />
+                </span>
+                <p className="text-[15px] font-semibold tracking-tight" style={{ color: CARD_INK }}>
+                  {b}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+/* ----------------------------------------------------------------------- */
+/* 04 Ecosystem — full ecosystem map visual                                 */
 /* ----------------------------------------------------------------------- */
 
 function EcosystemSection({ t }: { t: T }) {
@@ -945,296 +790,176 @@ function EcosystemSection({ t }: { t: T }) {
       title={t.ecosystem.title}
       titleGold={t.ecosystem.titleGold}
       sub={t.ecosystem.sub}
+      background={PANEL}
+      center
     >
-      <LenderEcosystemMap labels={t.ecosystem.map} />
+      <div
+        className="relative mx-auto aspect-[16/9] w-full max-w-[1100px] overflow-hidden rounded-2xl border shadow-[0_40px_100px_rgba(0,0,0,0.4)] transition-transform duration-500 hover:-translate-y-1"
+        style={{ borderColor: "rgba(214,168,79,0.3)" }}
+      >
+        <Image
+          src={`${IMG}/ecosystem-map.png`}
+          alt={t.ecosystem.image}
+          fill
+          sizes="(min-width: 1280px) 1100px, 100vw"
+          className="object-cover object-center"
+        />
+      </div>
     </Section>
   );
 }
 
 /* ----------------------------------------------------------------------- */
-/* How It Works                                                             */
+/* 05 Use cases — six image-led cards                                       */
 /* ----------------------------------------------------------------------- */
 
-function HowItWorksSection({ t }: { t: T }) {
+function UseCasesSection({ t }: { t: T }) {
   return (
     <Section
-      id="how-it-works"
-      num={t.how.num}
-      eyebrow={t.how.eyebrow}
-      title={t.how.title}
-      titleGold={t.how.titleGold}
+      id="usecases"
+      num={t.usecases.num}
+      eyebrow={t.usecases.eyebrow}
+      title={t.usecases.title}
+      titleGold={t.usecases.titleGold}
     >
-      <ParticipationFlow steps={t.how.steps} footer={t.how.footer} />
-    </Section>
-  );
-}
-
-/* ----------------------------------------------------------------------- */
-/* Institutions remain in control                                           */
-/* ----------------------------------------------------------------------- */
-
-function ControlSection({ t }: { t: T }) {
-  return (
-    <section
-      id="control"
-      className="relative px-6 py-28 md:px-10 lg:px-14 lg:py-36"
-      style={{ borderTop: `1px solid ${DIVIDER}` }}
-    >
-      <div className="relative mx-auto max-w-[1400px]">
-        <InView>
-          <div className="flex items-center gap-3">
-            <span className="font-mono text-[10px] font-medium uppercase tracking-[0.22em]" style={{ color: GOLD }}>
-              {t.control.num}
-            </span>
-            <span className="text-[10px] font-medium uppercase tracking-[0.22em]" style={{ color: IVORY_MUTED }}>
-              {t.control.eyebrow}
-            </span>
-          </div>
-
-          <div className="mt-10 grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
-            {/* Video — first on mobile, left on desktop */}
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {t.usecases.cards.map((card, i) => (
+          <article
+            key={card.name}
+            className="group relative overflow-hidden rounded-2xl transition duration-500 hover:-translate-y-1 hover:brightness-110"
+          >
             <div
-              className="overflow-hidden rounded-3xl transition-transform duration-500 hover:scale-[1.01]"
-              style={{
-                background: "#082820",
-                border: "1px solid rgba(214,168,79,0.35)",
-                boxShadow: "0 30px 80px rgba(0,0,0,0.35)",
-              }}
-            >
-              <AmbientVideo
-                src={CONTROL_VIDEO}
-                className="aspect-[4/3] h-full w-full object-cover"
+              aria-hidden
+              className="pointer-events-none absolute inset-0 z-10 rounded-2xl border-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              style={{ borderColor: GOLD }}
+            />
+            <div className="relative aspect-[16/10] w-full">
+              <Image
+                src={USECASE_IMAGES[i]}
+                alt={card.image}
+                fill
+                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.04]"
               />
             </div>
-
-            {/* Title, body, steps */}
-            <div>
-              <h2
-                className="text-[28px] font-medium leading-[1.08] tracking-[-0.025em] sm:text-[38px] lg:text-[44px]"
-                style={{ color: IVORY, textWrap: "balance" }}
-              >
-                {t.control.title}
-                <span style={{ color: GOLD }}>{t.control.titleGold}</span>
-              </h2>
-              <p
-                className="mt-5 text-[15px] font-light leading-[1.55] tracking-tight"
-                style={{ color: IVORY, maxWidth: "52ch" }}
-              >
-                {t.control.sub}
-              </p>
-              <div className="mt-5 space-y-4 text-[14px] font-light leading-[1.75]" style={{ color: IVORY_DIM, maxWidth: "54ch" }}>
-                {t.control.body.map((p, i) => (
-                  <p key={i}>{p}</p>
-                ))}
-              </div>
-
-              <ol className="relative mt-8">
-                <div
-                  aria-hidden
-                  className="absolute left-[15px] top-3 bottom-3 w-px"
-                  style={{ background: "rgba(214,168,79,0.35)" }}
-                />
-                {t.control.steps.map((s, i) => (
-                  <li key={s} className="relative flex items-center gap-4 py-2.5">
-                    <span
-                      className="relative z-10 flex h-8 w-8 flex-none items-center justify-center rounded-full text-[12px] font-semibold"
-                      style={{ background: "#082820", border: `1px solid ${GOLD}`, color: GOLD }}
-                    >
-                      {i + 1}
-                    </span>
-                    <span className="text-[14px] font-medium tracking-tight" style={{ color: IVORY }}>
-                      {s}
-                    </span>
-                  </li>
-                ))}
-              </ol>
-            </div>
-          </div>
-
-          <p
-            className="mt-12 border-l pl-5 text-[14px] font-light leading-[1.7]"
-            style={{ borderColor: GOLD, color: IVORY, maxWidth: "72ch" }}
-          >
-            {t.control.trust}
-          </p>
-        </InView>
-      </div>
-    </section>
-  );
-}
-
-/* ----------------------------------------------------------------------- */
-/* Private data stays private                                               */
-/* ----------------------------------------------------------------------- */
-
-function PrivacySection({ t }: { t: T }) {
-  return (
-    <Section
-      id="privacy"
-      num={t.privacy.num}
-      eyebrow={t.privacy.eyebrow}
-      title={t.privacy.title}
-      titleGold={t.privacy.titleGold}
-      sub={t.privacy.sub}
-    >
-      <PrivateRecordsVisual labels={t.privacy.visual} />
-    </Section>
-  );
-}
-
-/* ----------------------------------------------------------------------- */
-/* Trust                                                                    */
-/* ----------------------------------------------------------------------- */
-
-function TrustSection({ t }: { t: T }) {
-  return (
-    <Section
-      id="trust"
-      num={t.trust.num}
-      eyebrow={t.trust.eyebrow}
-      title={t.trust.title}
-      titleGold={t.trust.titleGold}
-      sub={t.trust.sub}
-    >
-      <InstitutionalTrustFramework pillars={t.trust.pillars} />
-    </Section>
-  );
-}
-
-/* ----------------------------------------------------------------------- */
-/* Technology                                                               */
-/* ----------------------------------------------------------------------- */
-
-function TechnologySection({ t }: { t: T }) {
-  return (
-    <Section
-      id="tech"
-      num={t.tech.num}
-      eyebrow={t.tech.eyebrow}
-      title={t.tech.title}
-      titleGold={t.tech.titleGold}
-      sub={t.tech.sub}
-    >
-      <BehindTheScenesInfra labels={t.tech.visual} />
-    </Section>
-  );
-}
-
-/* ----------------------------------------------------------------------- */
-/* Built for Ethiopia's productive economy                                  */
-/* ----------------------------------------------------------------------- */
-
-function ProductiveEconomySection({ t }: { t: T }) {
-  return (
-    <section
-      id="productive-economy"
-      className="relative isolate flex min-h-[520px] items-center overflow-hidden px-6 py-20 md:px-10 lg:min-h-[640px] lg:px-14"
-      style={{ borderTop: `1px solid ${DIVIDER}` }}
-    >
-      <AmbientVideo src={ECONOMY_VIDEO} className="absolute inset-0 -z-20 h-full w-full object-cover" />
-      <div aria-hidden className="absolute inset-0 -z-10" style={{ background: "rgba(6,59,46,0.68)" }} />
-      <div
-        aria-hidden
-        className="absolute inset-x-0 bottom-0 -z-10 h-40"
-        style={{ background: "linear-gradient(180deg, transparent 0%, rgba(214,168,79,0.14) 100%)" }}
-      />
-
-      <div className="relative mx-auto w-full max-w-[1400px]">
-        <InView className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
-          <div>
-            <div className="flex items-center gap-3">
-              <span className="font-mono text-[10px] font-medium uppercase tracking-[0.22em]" style={{ color: GOLD }}>
-                {t.productive.num}
-              </span>
-              <span className="text-[10px] font-medium uppercase tracking-[0.22em]" style={{ color: "rgba(242,237,223,0.66)" }}>
-                {t.productive.eyebrow}
-              </span>
-            </div>
-            <h2
-              className="mt-6 text-[30px] font-medium leading-[1.06] tracking-[-0.025em] sm:text-[42px] lg:text-[50px]"
-              style={{ color: IVORY, textWrap: "balance" }}
+            <div
+              className="absolute inset-x-0 bottom-0 z-10 px-5 pb-4 pt-12"
+              style={{ background: "linear-gradient(180deg, transparent 0%, rgba(10,22,18,0.88) 75%)" }}
             >
-              {t.productive.title}
-              <span style={{ color: GOLD }}>{t.productive.titleGold}</span>
-            </h2>
-            <p className="mt-5 text-[15px] font-light leading-[1.7]" style={{ color: "rgba(242,237,223,0.86)", maxWidth: "54ch" }}>
-              {t.productive.sub}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-            {t.productive.cards.map((c) => (
-              <div
-                key={c}
-                className="flex items-center border border-[#D6A84F]/25 px-4 py-5 text-[13px] font-medium leading-snug tracking-tight transition-all duration-300 hover:border-[#D6A84F] hover:brightness-110"
-                style={{ background: "rgba(8,40,32,0.55)", color: IVORY }}
-              >
-                {c}
-              </div>
-            ))}
-          </div>
-        </InView>
+              <p className="text-[14.5px] font-semibold tracking-tight" style={{ color: IVORY }}>
+                {card.name}
+              </p>
+            </div>
+          </article>
+        ))}
       </div>
-    </section>
+    </Section>
   );
 }
 
 /* ----------------------------------------------------------------------- */
-/* Final CTA                                                                */
+/* 06 Impact — partnership photo + metric cards                             */
 /* ----------------------------------------------------------------------- */
 
-function FinalCTASection({ t }: { t: T }) {
+function ImpactSection({ t }: { t: T }) {
   return (
-    <section
-      id="cta"
-      className="relative isolate overflow-hidden px-6 py-32 md:px-10 lg:px-14 lg:py-40"
-      style={{ borderTop: `1px solid ${DIVIDER}`, background: "#0B1A14" }}
+    <Section
+      id="impact"
+      num={t.impact.num}
+      eyebrow={t.impact.eyebrow}
+      title={t.impact.title}
+      titleGold={t.impact.titleGold}
+      background={PANEL}
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
-        style={{
-          background:
-            "radial-gradient(50% 50% at 50% 30%, rgba(214,168,79,0.14) 0%, transparent 70%)",
-        }}
-      />
-      <InView className="relative mx-auto max-w-[860px] text-center">
-        <p className="text-[11px] font-medium uppercase tracking-[0.22em]" style={{ color: GOLD }}>
-          {t.cta.eyebrow}
-        </p>
-        <h2
-          className="mt-6 text-[32px] font-medium leading-[1.06] tracking-[-0.025em] sm:text-[46px] lg:text-[56px]"
-          style={{ color: IVORY, textWrap: "balance" }}
-        >
-          {t.cta.title}
-          <span style={{ color: GOLD }}>{t.cta.titleGold}</span>
-        </h2>
-        <p className="mx-auto mt-5 max-w-[58ch] text-[15px] font-light leading-[1.55] tracking-tight" style={{ color: IVORY }}>
-          {t.cta.sub}
-        </p>
-        <div className="mt-12 flex flex-wrap items-center justify-center gap-6">
-          <a
-            href={CALENDLY}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex h-12 cursor-pointer items-center justify-center gap-2 px-7 text-[13px] font-semibold tracking-tight transition active:scale-[0.98] hover:brightness-110"
-            style={{ background: GOLD, color: BG }}
-          >
-            {t.cta.ctaPrimary}
-            <ArrowUpRight className="h-4 w-4" strokeWidth={1.7} />
-          </a>
-          <a
-            href={CALENDLY}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex h-12 cursor-pointer items-center gap-2 text-[13px] font-medium transition"
-            style={{ color: IVORY, borderBottom: `1px solid ${IVORY}`, paddingBottom: 2 }}
-          >
-            {t.cta.ctaSecondary}
-            <ArrowUpRight className="h-4 w-4" strokeWidth={1.7} />
-          </a>
+      <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-stretch">
+        <div className="relative min-h-[300px] w-full overflow-hidden rounded-2xl transition-transform duration-500 hover:-translate-y-1 lg:min-h-0">
+          <Image
+            src={`${IMG}/partnership.png`}
+            alt={t.impact.image}
+            fill
+            sizes="(min-width: 1024px) 45vw, 100vw"
+            className="object-cover object-center"
+          />
+          <div
+            aria-hidden
+            className="absolute inset-0"
+            style={{ background: "linear-gradient(180deg, transparent 60%, rgba(10,22,18,0.4) 100%)" }}
+          />
         </div>
-      </InView>
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
+          {t.impact.cards.map((card) => (
+            <div
+              key={card.label}
+              className="flex flex-col justify-center rounded-2xl border p-5 transition-transform duration-500 hover:-translate-y-1 sm:p-6"
+              style={{ borderColor: "rgba(214,168,79,0.22)", background: "rgba(10,22,18,0.55)" }}
+            >
+              <p
+                className="font-mono text-[24px] font-medium leading-none tracking-tight sm:text-[30px]"
+                style={{ color: GOLD, fontVariantNumeric: "tabular-nums" }}
+              >
+                {card.value}
+              </p>
+              <p className="mt-3 text-[12.5px] font-medium leading-snug sm:text-[13px]" style={{ color: IVORY }}>
+                {card.label}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+      <p className="mt-6 text-[11.5px]" style={{ color: IVORY_MUTED }}>
+        {t.impact.disclaimer}
+      </p>
+    </Section>
+  );
+}
+
+/* ----------------------------------------------------------------------- */
+/* 07 Partner CTA — warm photographic band                                  */
+/* ----------------------------------------------------------------------- */
+
+function PartnerCTA({ t }: { t: T }) {
+  return (
+    <section id="cta" className="relative px-6 py-24 md:px-10 lg:py-28" style={{ borderTop: `1px solid ${DIVIDER}` }}>
+      <div className="relative mx-auto max-w-[1360px] overflow-hidden rounded-3xl px-8 py-16 text-center sm:px-14 sm:py-24">
+        <Image
+          src={`${IMG}/cta-background.png`}
+          alt=""
+          fill
+          sizes="(min-width: 1440px) 1360px, 100vw"
+          className="object-cover object-center"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(180deg, rgba(10,22,18,0.66) 0%, rgba(10,22,18,0.45) 55%, rgba(10,22,18,0.7) 100%)" }}
+        />
+        <InView className="relative">
+          <h2
+            className="mx-auto max-w-[24ch] text-[30px] font-semibold leading-[1.1] tracking-[-0.025em] drop-shadow-[0_4px_24px_rgba(0,0,0,0.5)] sm:text-[42px]"
+            style={{ color: IVORY, textWrap: "balance" }}
+          >
+            {t.cta.title}
+          </h2>
+          <p
+            className="mx-auto mt-5 max-w-[54ch] text-[15px] font-light leading-[1.65] drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]"
+            style={{ color: "rgba(242,237,223,0.92)" }}
+          >
+            {t.cta.copy}
+          </p>
+          <div className="mt-10">
+            <a
+              href={CALENDLY}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-full px-8 py-3.5 text-[13.5px] font-semibold tracking-tight transition hover:brightness-110 active:scale-[0.98]"
+              style={{ background: `linear-gradient(180deg, ${GOLD}, #C08F35)`, color: "#1A1206" }}
+            >
+              {t.cta.button}
+              <ArrowUpRight className="h-4 w-4" strokeWidth={1.7} />
+            </a>
+          </div>
+        </InView>
+      </div>
     </section>
   );
 }
@@ -1243,7 +968,6 @@ function FinalCTASection({ t }: { t: T }) {
 /* Footer                                                                   */
 /* ----------------------------------------------------------------------- */
 
-/* Footer palette — stronger institutional green per spec */
 const F_BG = "#063B2E";
 const F_TEXT = "#F7F1E6";
 const F_MUTED = "rgba(247,241,230,0.68)";
@@ -1251,8 +975,8 @@ const F_GOLD = "#D6A84F";
 const F_BORDER = "rgba(214,168,79,0.22)";
 
 const FAIRWAY_URL = "https://www.fairway.global";
-const PLATFORM_HREFS = ["#how-it-works", "#control", "#privacy", "#ecosystem", "#trust"];
-const LEGAL_HREFS = ["#privacy", "#", CALENDLY];
+const PLATFORM_HREFS = ["#story", "#platform", "#sacco", "#ecosystem", "#impact"];
+const LEGAL_HREFS = ["#", "#", CALENDLY];
 
 function Footer({ lang, t }: { lang: Lang; t: T }) {
   const f = t.footer;
@@ -1265,15 +989,20 @@ function Footer({ lang, t }: { lang: Lang; t: T }) {
       style={{ background: F_BG, color: F_TEXT, borderTop: `1px solid ${F_BORDER}` }}
       aria-label={lang === "am" ? "የግርጌ ክፍል" : "Footer"}
     >
-      <CulturalPattern variant="dark" intensity={0.05} className="opacity-60" />
+      <Image
+        src={`${IMG}/footer-pattern.png`}
+        alt=""
+        fill
+        sizes="100vw"
+        className="pointer-events-none object-cover object-center opacity-30"
+      />
+      <CulturalPattern variant="dark" intensity={0.04} className="opacity-40" />
 
-      <div className="relative mx-auto max-w-[1400px] px-6 md:px-10 lg:px-14">
-        {/* Main grid */}
+      <div className="relative mx-auto max-w-[1360px] px-6 md:px-10">
         <div className="grid grid-cols-2 gap-x-8 gap-y-12 py-16 lg:grid-cols-[1.5fr_1fr_1fr_1fr] lg:gap-x-12">
-          {/* Brand */}
           <div className="col-span-2 lg:col-span-1">
             <p
-              className={`font-semibold tracking-tight ${lang === "am" ? "text-2xl" : "text-xl"}`}
+              className={`font-semibold ${lang === "am" ? "text-2xl tracking-tight" : "text-xl tracking-[0.14em]"}`}
               style={{ color: F_TEXT, fontFamily: amFont }}
             >
               {BRAND[lang]}
@@ -1305,7 +1034,6 @@ function Footer({ lang, t }: { lang: Lang; t: T }) {
             </div>
           </div>
 
-          {/* Platform */}
           <FooterColumn heading={f.platformHeading} amFont={amFont}>
             <ul className="space-y-2.5">
               {f.platformLinks.map((label, i) => (
@@ -1322,7 +1050,6 @@ function Footer({ lang, t }: { lang: Lang; t: T }) {
             </ul>
           </FooterColumn>
 
-          {/* Who it serves */}
           <FooterColumn heading={f.servesHeading} amFont={amFont}>
             <ul className="space-y-2.5">
               {f.serves.map((item) => (
@@ -1331,7 +1058,6 @@ function Footer({ lang, t }: { lang: Lang; t: T }) {
             </ul>
           </FooterColumn>
 
-          {/* Productive sectors */}
           <FooterColumn heading={f.sectorsHeading} amFont={amFont}>
             <ul className="space-y-2.5">
               {f.sectors.map((item) => (
@@ -1343,7 +1069,6 @@ function Footer({ lang, t }: { lang: Lang; t: T }) {
 
         <div className="h-px w-full" style={{ background: F_BORDER }} />
 
-        {/* Bottom legal row */}
         <div className="flex flex-col gap-6 py-10 lg:flex-row lg:items-start lg:justify-between">
           <div className="max-w-[72ch]">
             <p className="text-[12px] font-medium" style={{ color: F_TEXT }}>
@@ -1405,7 +1130,7 @@ function FooterColumn({
 function FooterItem({ children }: { children: React.ReactNode }) {
   return (
     <li className="flex items-baseline gap-2.5 text-[13px] font-light leading-snug" style={{ color: F_MUTED }}>
-      <span aria-hidden className="mt-1.5 inline-block h-[5px] w-[5px] flex-none" style={{ background: F_GOLD }} />
+      <span aria-hidden className="mt-1.5 inline-block h-[5px] w-[5px] flex-none rounded-full" style={{ background: F_GOLD }} />
       <span>{children}</span>
     </li>
   );

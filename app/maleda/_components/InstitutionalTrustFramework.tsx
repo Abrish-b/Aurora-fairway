@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { BadgeCheck, FileSearch, ScrollText, ShieldCheck, type LucideIcon } from "lucide-react";
 
-const GOLD = "#D6A84F";
+const GOLD = "#C8F031";
 const IVORY = "#F2EDDF";
 const DIVIDER = "rgba(242,237,223,0.10)";
 
@@ -32,7 +32,7 @@ export default function InstitutionalTrustFramework({ pillars }: { pillars: Pill
             aria-expanded={open}
             className="group relative flex h-full flex-col items-start gap-5 p-7 text-left transition-colors duration-300 cursor-pointer focus:outline-none"
             style={{
-              background: open ? "rgba(214,168,79,0.04)" : "transparent",
+              background: open ? "rgba(200,240,49,0.04)" : "transparent",
               borderColor: DIVIDER,
             }}
           >

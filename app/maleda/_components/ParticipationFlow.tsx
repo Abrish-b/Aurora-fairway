@@ -3,7 +3,7 @@
 import { ArrowRight, CheckCircle2, FileText, Landmark, Users } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-const GOLD = "#D6A84F";
+const GOLD = "#C8F031";
 const IVORY = "#F2EDDF";
 const IVORY_DIM = "rgba(242,237,223,0.62)";
 const IVORY_MUTED = "rgba(242,237,223,0.42)";
@@ -23,7 +23,7 @@ export default function ParticipationFlow({ steps, footer }: { steps: Step[]; fo
           <article
             key={s.title}
             className="relative flex flex-col gap-5 p-7"
-            style={{ background: "#0A1612" }}
+            style={{ background: "#0A0A0A" }}
           >
             <div className="flex items-center justify-between">
               <span
@@ -46,7 +46,7 @@ export default function ParticipationFlow({ steps, footer }: { steps: Step[]; fo
               <span
                 aria-hidden
                 className="pointer-events-none absolute -right-3 top-1/2 hidden h-6 w-6 -translate-y-1/2 items-center justify-center lg:flex"
-                style={{ background: "#0A1612", color: GOLD }}
+                style={{ background: "#0A0A0A", color: GOLD }}
               >
                 <ArrowRight size={14} strokeWidth={1.6} />
               </span>
@@ -56,7 +56,7 @@ export default function ParticipationFlow({ steps, footer }: { steps: Step[]; fo
       })}
       <p
         className="lg:col-span-4 px-7 pt-4 pb-1 text-[11px] font-medium uppercase tracking-[0.18em]"
-        style={{ background: "#0A1612", color: IVORY_MUTED }}
+        style={{ background: "#0A0A0A", color: IVORY_MUTED }}
       >
         {footer}
       </p>

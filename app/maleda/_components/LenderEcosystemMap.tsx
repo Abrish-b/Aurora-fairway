@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Banknote, Building2, Landmark, Sun, Users } from "lucide-react";
 
-const GOLD = "#D6A84F";
+const GOLD = "#C8F031";
 const IVORY = "#F2EDDF";
 const IVORY_DIM = "rgba(242,237,223,0.62)";
 const IVORY_MUTED = "rgba(242,237,223,0.42)";
@@ -108,7 +108,7 @@ export default function LenderEcosystemMap({ labels }: { labels: Labels }) {
                 )}
                 <circle
                   r={r}
-                  fill="#0A1612"
+                  fill="#0A0A0A"
                   stroke={isActive || isCenter ? GOLD : "rgba(242,237,223,0.30)"}
                   strokeWidth={isCenter ? 1.4 : 1}
                 />

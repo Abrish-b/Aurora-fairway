@@ -18,9 +18,9 @@ const ethiopic = Noto_Sans_Ethiopic({
 });
 
 export const metadata = {
-  title: "Aurora — Access global digital capital for productive lending",
+  title: "Maleda — A new dawn for Ethiopia's SME lending ecosystem",
   description:
-    "Aurora is structured capital access infrastructure for regulated lending institutions. Lenders continue lending; Aurora connects them with global digital capital participation.",
+    "Maleda helps SACCOs and lending institutions expand local-currency financing for Ethiopian SMEs through trusted digital lending infrastructure.",
 };
 
 export default function MaledaLayout({ children }: { children: ReactNode }) {
@@ -29,10 +29,12 @@ export default function MaledaLayout({ children }: { children: ReactNode }) {
       className={`${inter.variable} ${ethiopic.variable} relative antialiased`}
       style={{
         fontFamily: "var(--font-maleda-en), Inter, system-ui, sans-serif",
-        background: "#0A1612",
+        background: "#0A0A0A",
         color: "rgba(242,237,223,0.78)",
       }}
     >
+      {/* Keep overscroll dark while this route is mounted */}
+      <style>{`html, body { background: #0A0A0A; }`}</style>
       <ScrollProgress />
       {children}
     </div>

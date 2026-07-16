@@ -270,4 +270,13 @@ body {
   .sundown-live-pulse::after {
     animation: none !important;
   }
+
+  /* Scroll-driven reveals must resolve to fully visible, never freeze at 0 */
+  .reveal-up,
+  .reveal-up-soft,
+  .reveal-up-stagger > * {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const GOLD = "#D6A84F";
+const GOLD = "#C8F031";
 const IVORY = "#F2EDDF";
 const IVORY_DIM = "rgba(242,237,223,0.58)";
 const IVORY_MUTED = "rgba(242,237,223,0.40)";
@@ -130,7 +130,7 @@ function CenterGap({ resolved }: { resolved: boolean }) {
           style={{
             borderTop: `1px solid ${resolved ? GOLD : "rgba(242,237,223,0.30)"}`,
             borderBottom: `1px solid ${resolved ? GOLD : "rgba(242,237,223,0.30)"}`,
-            background: "#0A1612",
+            background: "#0A0A0A",
           }}
         >
           <p

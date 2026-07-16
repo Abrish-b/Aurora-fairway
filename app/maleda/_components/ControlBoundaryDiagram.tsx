@@ -2,7 +2,7 @@
 
 import { Building2, Sun } from "lucide-react";
 
-const GOLD = "#D6A84F";
+const GOLD = "#C8F031";
 const IVORY = "#F2EDDF";
 const IVORY_DIM = "rgba(242,237,223,0.62)";
 const IVORY_MUTED = "rgba(242,237,223,0.42)";
@@ -50,8 +50,8 @@ function Pane({
     <div
       className="p-8"
       style={{
-        background: emphasised ? "rgba(214,168,79,0.04)" : "transparent",
-        border: `1px solid ${emphasised ? "rgba(214,168,79,0.30)" : DIVIDER}`,
+        background: emphasised ? "rgba(200,240,49,0.04)" : "transparent",
+        border: `1px solid ${emphasised ? "rgba(200,240,49,0.30)" : DIVIDER}`,
       }}
     >
       <div className="flex items-center gap-3">

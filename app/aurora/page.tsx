@@ -7,21 +7,21 @@ import ScrollProgress from "./_components/ScrollProgress";
 
 import {
   ArrowRight,
-  ArrowUpRight,
   BadgeCheck,
   Banknote,
+  Boxes,
   FileSearch,
   FileText,
   Fingerprint,
-  Flag,
   KeyRound,
-  Landmark,
   LayoutDashboard,
   Menu,
+  Network,
   RefreshCw,
   ScanLine,
   Search,
-  Undo2,
+  Sparkles,
+  TrendingUp,
 } from "lucide-react";
 
 type IconType = ComponentType<{
@@ -40,15 +40,15 @@ const GOLD = "#F6B84B";
 const GOLD_LIGHT = "#FFCC73";
 const GOLD_DEEP = "#D99A2B";
 
-const PROPOSAL_URL = "https://github.com/fairway-global/aurora-proposal";
+const CONTACT = "mailto:hello@fairway.xyz?subject=Aurora%20%E2%80%94%20partnership";
 
 export const metadata: Metadata = {
   title: "Aurora - Open credit market infrastructure on Cardano",
   description:
-    "A Cardano Treasury proposal by Fairway, Fallen Icarus and Sundial: an open metadata standard, verification indexer, and a Treasury-backed lending pilot with Ethiopian SACCOs.",
+    "Aurora is the open verification and discovery layer for institutional credit on Cardano — a metadata standard, a verification indexer, and a live lending pilot with Ethiopian SACCOs. Built by Fairway with Fallen Icarus and Sundial.",
 };
 
-export default function AuroraProposalPage() {
+export default function AuroraPage() {
   return (
     <div
       className="min-h-screen font-sans antialiased"
@@ -63,9 +63,8 @@ export default function AuroraProposalPage() {
         <Phases />
         <Lifecycle />
         <Pilot />
-        <Milestones />
-        <Budget />
-        <Governance />
+        <WhyNow />
+        <Trust />
         <Answers />
         <FinalCTA />
       </main>
@@ -98,10 +97,10 @@ function Grain() {
 function Nav() {
   const links = [
     { href: "#phases", label: "Phases" },
+    { href: "#lifecycle", label: "How it works" },
     { href: "#pilot", label: "Pilot" },
-    { href: "#milestones", label: "Milestones" },
-    { href: "#budget", label: "Budget" },
-    { href: "#governance", label: "Governance" },
+    { href: "#why", label: "Why now" },
+    { href: "#trust", label: "Trust" },
   ];
 
   return (
@@ -124,7 +123,7 @@ function Nav() {
             className="ml-1 hidden border-l pl-3 text-[10px] font-bold uppercase tracking-[0.22em] sm:inline"
             style={{ borderColor: "rgba(255,204,115,0.3)", color: GOLD_LIGHT }}
           >
-            / Proposal
+            / Platform
           </span>
         </Link>
 
@@ -145,14 +144,12 @@ function Nav() {
 
         <div className="flex items-center gap-2">
           <a
-            href={PROPOSAL_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#cta"
             className="group hidden min-h-10 items-center justify-center gap-2 rounded-full bg-gradient-to-b from-[#ffe3a4] via-[#ffc95a] to-[#d99a2b] py-1 pl-5 pr-1.5 text-[12px] font-bold uppercase text-[#130b02] shadow-[0_14px_44px_rgba(246,184,75,0.22)] transition duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] hover:from-[#fff0c9] hover:to-[#f6b84b] active:scale-[0.98] sm:inline-flex"
           >
-            Read Proposal
+            Get early access
             <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#130b02]/12 transition duration-300 group-hover:-translate-y-[1px] group-hover:translate-x-[1px]">
-              <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={2} />
+              <ArrowRight className="h-3.5 w-3.5" strokeWidth={2} />
             </span>
           </a>
           <details className="group relative lg:hidden">
@@ -172,13 +169,11 @@ function Nav() {
                 </a>
               ))}
               <a
-                href={PROPOSAL_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#cta"
                 className="mt-2 flex min-h-10 items-center justify-center gap-1.5 rounded-[10px] bg-gradient-to-b from-[#ffe3a4] via-[#ffc95a] to-[#d99a2b] px-4 text-[12px] font-bold uppercase text-[#130b02]"
               >
-                Read Proposal
-                <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={2} />
+                Get early access
+                <ArrowRight className="h-3.5 w-3.5" strokeWidth={2} />
               </a>
             </div>
           </details>
@@ -194,10 +189,10 @@ function Nav() {
 
 function Hero() {
   const stats = [
-    { value: "2,900,000", unit: "ADA", label: "Treasury request" },
-    { value: "12", unit: "months", label: "Milestone-gated delivery" },
+    { value: "Live", unit: "", label: "Pilot lending in Ethiopia" },
+    { value: "Open", unit: "Apache 2.0", label: "Everything open source" },
+    { value: "eUTXO", unit: "", label: "Robust Cardano settlement" },
     { value: "~$100K", unit: "USDM", label: "Revolving pilot liquidity" },
-    { value: "Apache 2.0", unit: "", label: "Everything open source" },
   ];
 
   return (
@@ -227,7 +222,7 @@ function Hero() {
               }}
             >
               <span className="h-1 w-1 rounded-full bg-[#ffcc73] shadow-[0_0_8px_rgba(255,204,115,0.9)]" />
-              Cardano Treasury Proposal
+              Built on Cardano · Live pilot
             </div>
 
             <h1 className="mt-7 font-serif text-[42px] font-normal leading-[1.02] tracking-[-0.02em] drop-shadow-[0_14px_42px_rgba(0,0,0,0.65)] sm:text-[58px] lg:text-[68px]">
@@ -244,21 +239,19 @@ function Hero() {
               className="mt-6 max-w-[520px] text-[16px] leading-[1.7] drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)]"
               style={{ color: "rgba(244,239,227,0.85)" }}
             >
-              Aurora builds the verification and discovery layer for
-              institutional credit on Cardano — then proves it with real
+              Aurora is the verification and discovery layer for institutional
+              credit on Cardano — and we&apos;re proving it right now with real
               loans through Ethiopian savings cooperatives.
             </p>
 
             <div className="mt-9 flex flex-wrap items-center gap-3">
               <a
-                href={PROPOSAL_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#lifecycle"
                 className="group inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full bg-gradient-to-b from-[#ffe3a4] via-[#ffc95a] to-[#d99a2b] py-1 pl-7 pr-1.5 text-[13px] font-bold uppercase text-[#130b02] shadow-[0_20px_70px_rgba(246,184,75,0.28)] transition duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 hover:from-[#fff0c9] hover:to-[#f6b84b] active:scale-[0.98]"
               >
-                Read the Proposal
+                See how it works
                 <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#130b02]/12 transition duration-300 group-hover:-translate-y-[1px] group-hover:translate-x-[1px]">
-                  <ArrowUpRight className="h-4 w-4" strokeWidth={2} />
+                  <ArrowRight className="h-4 w-4" strokeWidth={2} />
                 </span>
               </a>
               <a
@@ -266,7 +259,7 @@ function Hero() {
                 className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border px-7 text-[13px] font-bold uppercase backdrop-blur transition duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-[#f6b84b]/10 active:scale-[0.98]"
                 style={{ borderColor: "rgba(246,184,75,0.55)", color: GOLD_LIGHT }}
               >
-                See the Pilot
+                See the pilot
                 <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
               </a>
             </div>
@@ -275,7 +268,7 @@ function Hero() {
               className="mt-8 text-[11px] font-semibold uppercase tracking-[0.2em]"
               style={{ color: FAINT }}
             >
-              Led by Fairway · with Fallen Icarus &amp; Sundial
+              Built by Fairway · with Fallen Icarus &amp; Sundial
             </p>
           </div>
         </div>
@@ -321,9 +314,9 @@ function Hero() {
 
 function SignalTicker() {
   const items: { label: string; logo?: string; invert?: boolean }[] = [
-    { label: "Fairway — lead", logo: "/brand/fairway-logo.png" },
-    { label: "Fallen Icarus — architecture" },
-    { label: "Sundial — capital readiness", logo: "/brand/sundial.png", invert: true },
+    { label: "Fairway", logo: "/brand/fairway-logo.png" },
+    { label: "Fallen Icarus" },
+    { label: "Sundial", logo: "/brand/sundial.png", invert: true },
     { label: "Built on Cardano", logo: "/brand/cardano.png" },
     { label: "CIP-89 beacon tokens" },
     { label: "Veridian credentials" },
@@ -394,7 +387,7 @@ function Phases() {
         >
           <div className="flex h-full flex-col rounded-[calc(24px-0.375rem)] bg-[#070f1c] p-7 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)] sm:p-9">
             <p className="text-[11px] font-bold uppercase tracking-[0.22em]" style={{ color: GOLD }}>
-              Phase 1 · Months 1–3
+              Phase 1 · Shipping now
             </p>
             <h3 className="mt-3 font-serif text-[28px] leading-tight sm:text-[32px]">
               Open infrastructure
@@ -402,7 +395,8 @@ function Phases() {
             <p className="mt-3 max-w-[440px] text-[14px] leading-[1.7]" style={{ color: DIM }}>
               Identity and compliance proofs attach to Loan Request UTxOs as
               optional transaction metadata. An open indexer verifies them
-              off-chain. Base contracts never change.
+              off-chain. We utilize the eUTXO model, so base contracts never
+              change.
             </p>
 
             <div
@@ -464,15 +458,15 @@ function Phases() {
             <div className="absolute inset-0 bg-gradient-to-t from-[#050B14] via-[#050B14]/35 to-transparent" />
             <div className="relative p-7 sm:p-9">
               <p className="text-[11px] font-bold uppercase tracking-[0.22em]" style={{ color: GOLD }}>
-                Phase 2 · Months 4–12
+                Phase 2 · In pilot
               </p>
               <h3 className="mt-3 font-serif text-[28px] leading-tight sm:text-[32px]">
                 Real lending, on-chain
               </h3>
               <p className="mt-3 text-[14px] leading-[1.7]" style={{ color: "rgba(244,239,227,0.78)" }}>
-                Treasury-backed pilot with Ethiopian SACCOs — regulated,
-                member-owned lenders. Every funding event, repayment and
-                credit history lands on-chain.
+                A live pilot with Ethiopian SACCOs — regulated, member-owned
+                lenders. Every funding event, repayment and credit history
+                lands on-chain.
               </p>
               <div
                 className="mt-6 grid grid-cols-3 gap-px overflow-hidden rounded-[12px] border"
@@ -626,9 +620,9 @@ function Lifecycle() {
 
 function Pilot() {
   const rounds = [
-    { name: "Round 1", share: 30, usdm: "≈30,000", grad: GOLD_LIGHT, note: "Mainnet live · at least two SACCOs" },
-    { name: "Round 2", share: 30, usdm: "≈30,000", grad: GOLD, note: "Unlocks on Round 1 repayments" },
-    { name: "Round 3", share: 40, usdm: "≈40,000", grad: GOLD_DEEP, note: "Unlocks on Round 2 repayments" },
+    { name: "Round 1", share: 30, grad: GOLD_LIGHT, note: "Mainnet live · first SACCOs onboarded" },
+    { name: "Round 2", share: 30, grad: GOLD, note: "Expands as Round 1 repays" },
+    { name: "Round 3", share: 40, grad: GOLD_DEEP, note: "Full rollout on proven repayment" },
   ];
 
   return (
@@ -687,7 +681,7 @@ function Pilot() {
           </ul>
         </div>
 
-        {/* Right: progressive tranches */}
+        {/* Right: progressive rounds */}
         <div
           className="rounded-[24px] border p-7 sm:p-9"
           style={{ borderColor: HAIR, background: "rgba(255,255,255,0.02)" }}
@@ -697,7 +691,7 @@ function Pilot() {
               Progressive deployment
             </p>
             <p className="font-mono text-[13px]" style={{ color: FAINT, fontVariantNumeric: "tabular-nums" }}>
-              700,000 ADA → ≈100,000 USDM
+              ≈$100K revolving liquidity
             </p>
           </div>
 
@@ -713,9 +707,6 @@ function Pilot() {
                     >
                       {r.share}%
                     </span>
-                  </p>
-                  <p className="font-mono text-[13px]" style={{ color: DIM, fontVariantNumeric: "tabular-nums" }}>
-                    {r.usdm} USDM
                   </p>
                 </div>
                 <div className="mt-2.5 h-3 overflow-hidden rounded-full" style={{ background: "rgba(244,239,227,0.07)" }}>
@@ -744,9 +735,8 @@ function Pilot() {
             }}
           >
             <RefreshCw className="mt-0.5 h-4 w-4 shrink-0" strokeWidth={1.5} style={{ color: GOLD }} />
-            Repayments recycle through multiple lending rounds. At the end,
-            remaining principal and Treasury-entitled proceeds return to the
-            Cardano Treasury.
+            Repayments recycle into the next round — capital is lent, not spent.
+            Every tranche has to earn the one after it before it deploys.
           </div>
         </div>
       </div>
@@ -755,209 +745,139 @@ function Pilot() {
 }
 
 /* ---------------------------------------------------------------- */
-/* Milestones                                                        */
+/* Why now — the opportunity (investors & dReps)                     */
 /* ---------------------------------------------------------------- */
 
-function Milestones() {
-  const milestones = [
-    { id: "M1", months: "Month 1", name: "Specification & design", ada: "300,000" },
-    { id: "M2", months: "Months 2–3", name: "Infrastructure on testnet", ada: "500,000" },
-    { id: "M3", months: "Months 4–5", name: "Pilot Round 1 · mainnet", ada: "400,000" },
-    { id: "M4", months: "Months 6–8", name: "Round 2 · market validation", ada: "500,000" },
-    { id: "M5", months: "Months 9–12", name: "Round 3 · handover & returns", ada: "500,000" },
+function WhyNow() {
+  const cards: { icon: IconType; title: string; copy: string }[] = [
+    {
+      icon: Sparkles,
+      title: "A real product, already live",
+      copy: "Reference infrastructure plus a live lending pilot — not a whitepaper. The rails work today.",
+    },
+    {
+      icon: Network,
+      title: "An open standard with network effects",
+      copy: "The metadata standard is open. Every wallet, indexer and lender that adopts it compounds value for the whole Cardano ecosystem.",
+    },
+    {
+      icon: TrendingUp,
+      title: "Unlocks institutional capital",
+      copy: "Verified discovery is the gate serious lenders need before they deploy on-chain. Aurora opens it.",
+    },
+    {
+      icon: Boxes,
+      title: "Robust by eUTXO",
+      copy: "We utilize Cardano's eUTXO model for deterministic settlement, with proofs riding beside each loan UTxO — no side system to drift out of sync.",
+    },
   ];
 
   return (
-    <Section id="milestones" glow>
+    <Section id="why">
       <SectionHeader
         num="04"
-        eyebrow="Milestones"
+        eyebrow="Why now"
         title={
           <>
-            Five gates.{" "}
+            On-chain credit is ready{" "}
             <em className="italic" style={{ color: GOLD_LIGHT }}>
-              No gate, no funds.
+              for real capital.
             </em>
           </>
         }
-        copy="Development ADA releases only on milestone approval; pilot liquidity releases only on demonstrated repayment."
-      />
-
-      <ol className="reveal-up-stagger mt-14 grid gap-8 lg:grid-cols-5 lg:gap-4">
-        {milestones.map((m, i) => (
-          <li key={m.id} className="relative lg:pt-9">
-            <div
-              aria-hidden
-              className="absolute left-0 top-[7px] hidden h-px w-full lg:block"
-              style={{
-                background:
-                  i === milestones.length - 1
-                    ? `linear-gradient(90deg, ${HAIR}, transparent)`
-                    : HAIR,
-              }}
-            />
-            <span
-              aria-hidden
-              className="absolute left-0 top-0 hidden h-[15px] w-[15px] rounded-full border-[3px] lg:block"
-              style={{ borderColor: GOLD, background: BG }}
-            />
-            <p className="font-mono text-[12px] uppercase tracking-[0.16em]" style={{ color: GOLD }}>
-              {m.id} · {m.months}
-            </p>
-            <h3 className="mt-2 text-[15px] font-semibold leading-snug">{m.name}</h3>
-            <p className="mt-3 font-mono text-[15px]" style={{ color: DIM, fontVariantNumeric: "tabular-nums" }}>
-              {m.ada}{" "}
-              <span className="text-[11px]" style={{ color: GOLD }}>
-                ADA
-              </span>
-            </p>
-          </li>
-        ))}
-      </ol>
-    </Section>
-  );
-}
-
-/* ---------------------------------------------------------------- */
-/* Budget                                                            */
-/* ---------------------------------------------------------------- */
-
-function Budget() {
-  const TOTAL = 2_900_000;
-  const segments: {
-    name: string;
-    ada: number;
-    color: string;
-    role: string;
-    outlined?: boolean;
-  }[] = [
-    { name: "Fairway", ada: 1_200_000, color: "#FFE3A4", role: "Infrastructure, pilot execution, onboarding" },
-    { name: "Sundial", ada: 450_000, color: "#FFC95A", role: "Capital Provider Readiness Framework" },
-    { name: "Fallen Icarus", ada: 250_000, color: "#E8A93C", role: "Credit market architecture & review" },
-    { name: "Shared", ada: 300_000, color: "#C1861F", role: "Audits, legal, hosting, contingency" },
-    { name: "Pilot liquidity", ada: 700_000, color: "transparent", role: "Revolving — returned to the Treasury", outlined: true },
-  ];
-
-  return (
-    <Section id="budget">
-      <SectionHeader
-        num="05"
-        eyebrow="Budget"
-        title={
-          <>
-            One number,{" "}
-            <em className="italic" style={{ color: GOLD_LIGHT }}>
-              fully itemized.
-            </em>
-          </>
-        }
+        copy="The lending logic already runs on-chain. What's missing is the trust layer that lets verified lenders participate with confidence — that's what we're building."
       />
 
       <div
-        className="reveal-up mt-12 rounded-[24px] border p-7 sm:p-10"
-        style={{ borderColor: HAIR, background: "rgba(255,255,255,0.02)" }}
+        className="reveal-up-stagger mt-12 grid gap-px overflow-hidden rounded-[24px] border sm:grid-cols-2"
+        style={{ borderColor: HAIR, background: HAIR }}
       >
-        <div className="flex flex-wrap items-baseline justify-between gap-4">
-          <p
-            className="font-mono text-[40px] leading-none tracking-tight sm:text-[52px]"
-            style={{ fontVariantNumeric: "tabular-nums" }}
+        {cards.map((c) => (
+          <article
+            key={c.title}
+            className="group bg-[#060d18] p-7 transition duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-[#081221] sm:p-9"
           >
-            2,900,000
-            <span className="ml-2 text-[18px]" style={{ color: GOLD }}>
-              ADA
-            </span>
-          </p>
-          <p className="text-[12px] font-semibold uppercase tracking-[0.16em]" style={{ color: FAINT }}>
-            ≈ $464K at a $0.16 reference price
-          </p>
-        </div>
-
-        <div className="mt-9 flex h-8 w-full gap-[2px] overflow-hidden rounded-[8px]">
-          {segments.map((s) => (
-            <div
-              key={s.name}
-              title={`${s.name}: ${s.ada.toLocaleString("en-US")} ADA`}
-              className="h-full min-w-[24px] rounded-[3px]"
-              style={{
-                width: `${(s.ada / TOTAL) * 100}%`,
-                background: s.outlined ? "rgba(246,184,75,0.08)" : s.color,
-                border: s.outlined ? "1.5px dashed rgba(246,184,75,0.6)" : "none",
-              }}
+            <c.icon
+              className="h-5 w-5 transition duration-500 group-hover:-translate-y-0.5"
+              strokeWidth={1.5}
+              style={{ color: GOLD }}
             />
-          ))}
-        </div>
+            <h3 className="mt-5 font-serif text-[22px] leading-tight sm:text-[24px]">
+              {c.title}
+            </h3>
+            <p className="mt-2.5 text-[13.5px] leading-[1.7]" style={{ color: DIM }}>
+              {c.copy}
+            </p>
+          </article>
+        ))}
+      </div>
 
-        <ul className="mt-7 grid gap-x-8 gap-y-4 sm:grid-cols-2 lg:grid-cols-5">
-          {segments.map((s) => (
-            <li key={s.name} className="flex flex-col gap-1.5">
-              <div className="flex items-center gap-2">
-                <span
-                  aria-hidden
-                  className="h-2.5 w-2.5 shrink-0 rounded-[3px]"
-                  style={{
-                    background: s.outlined ? "rgba(246,184,75,0.08)" : s.color,
-                    border: s.outlined ? "1.5px dashed rgba(246,184,75,0.6)" : "none",
-                  }}
-                />
-                <span className="text-[13px] font-semibold">{s.name}</span>
-              </div>
-              <p className="font-mono text-[14px]" style={{ color: DIM, fontVariantNumeric: "tabular-nums" }}>
-                {s.ada.toLocaleString("en-US")}
-              </p>
-              <p className="text-[11.5px] leading-[1.55]" style={{ color: FAINT }}>
-                {s.role}
-              </p>
-            </li>
-          ))}
-        </ul>
+      <div className="mt-8 flex flex-wrap items-center gap-3">
+        <a
+          href="#cta"
+          className="group inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full bg-gradient-to-b from-[#ffe3a4] via-[#ffc95a] to-[#d99a2b] py-1 pl-7 pr-1.5 text-[13px] font-bold uppercase text-[#130b02] shadow-[0_18px_50px_rgba(246,184,75,0.24)] transition duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 hover:from-[#fff0c9] hover:to-[#f6b84b] active:scale-[0.98]"
+        >
+          Partner with us
+          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#130b02]/12 transition duration-300 group-hover:-translate-y-[1px] group-hover:translate-x-[1px]">
+            <ArrowRight className="h-4 w-4" strokeWidth={2} />
+          </span>
+        </a>
+        <Link
+          href="/#stack"
+          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border px-7 text-[13px] font-bold uppercase backdrop-blur transition duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-[#f6b84b]/10 active:scale-[0.98]"
+          style={{ borderColor: "rgba(246,184,75,0.55)", color: GOLD_LIGHT }}
+        >
+          Explore the stack
+          <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+        </Link>
       </div>
     </Section>
   );
 }
 
 /* ---------------------------------------------------------------- */
-/* Governance                                                        */
+/* Trust & transparency                                              */
 /* ---------------------------------------------------------------- */
 
-function Governance() {
+function Trust() {
   const tiles: { icon: IconType; title: string; copy: string }[] = [
     {
-      icon: Landmark,
-      title: "Independent trustees",
-      copy: "2-of-3 Treasury multisig — custody never sits with the consortium.",
+      icon: Boxes,
+      title: "Open by default",
+      copy: "Everything ships open source under Apache 2.0 — no gatekeeper, no lock-in.",
     },
     {
-      icon: KeyRound,
-      title: "3-of-5 dev custody",
-      copy: "Development funds held with a majority of independent signers.",
-    },
-    {
-      icon: Flag,
-      title: "Milestone gating",
-      copy: "ADA releases only after milestone approval. Unspent funds refund.",
+      icon: BadgeCheck,
+      title: "On-chain & verifiable",
+      copy: "Every funding event and repayment is auditable by anyone, at any time.",
     },
     {
       icon: LayoutDashboard,
-      title: "dRep dashboard",
+      title: "dRep & investor dashboard",
       copy: "Live loan status, deployments and repayments — verifiable by anyone.",
     },
     {
-      icon: FileSearch,
-      title: "Audits every milestone",
-      copy: "Independent financial reconciliation published with each report.",
+      icon: KeyRound,
+      title: "Non-custodial",
+      copy: "Proofs and settlement never route custody through the consortium.",
     },
     {
-      icon: Undo2,
-      title: "Principal returns",
-      copy: "Remaining principal and Treasury-entitled proceeds go back at close.",
+      icon: FileSearch,
+      title: "Independent audits",
+      copy: "Financial reconciliation published openly, not on request.",
+    },
+    {
+      icon: RefreshCw,
+      title: "Portable credit histories",
+      copy: "An on-chain repayment record that compounds trust across the market.",
     },
   ];
 
   return (
-    <Section id="governance" glow>
+    <Section id="trust" glow>
       <SectionHeader
-        num="06"
-        eyebrow="Governance"
+        num="05"
+        eyebrow="Trust & transparency"
         title={
           <>
             Verify,{" "}
@@ -1005,22 +925,22 @@ function Answers() {
     },
     {
       q: "Does it change Cardano's lending contracts?",
-      a: "No. Proofs travel as optional transaction metadata; verification runs in an off-chain indexer. The base market stays permissionless.",
+      a: "No. Proofs travel as optional transaction metadata; verification runs in an off-chain indexer. The base market stays permissionless — that's a core part of what makes it robust.",
     },
     {
-      q: "Who holds the Treasury funds?",
-      a: "Independent Treasury Trustees on a 2-of-3 multisig, with published wallet addresses. Funds stay delegated to Abstain until approved.",
+      q: "Who provides the lending capital?",
+      a: "Capital providers fund verified loans directly; SACCOs underwrite and service them. Aurora is the rails in between and never takes custody.",
     },
     {
-      q: "What survives after the pilot?",
-      a: "The metadata standard, the indexer, institutional credit histories and the capital-provider framework — reusable by any builder, in any jurisdiction.",
+      q: "What's live today?",
+      a: "The metadata standard, the verification indexer, discovery APIs and a live SACCO pilot — reusable by any builder, in any jurisdiction.",
     },
   ];
 
   return (
     <Section id="answers">
       <SectionHeader
-        num="07"
+        num="06"
         eyebrow="Straight answers"
         title={
           <>
@@ -1068,33 +988,31 @@ function FinalCTA() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#050B14]/88 via-[#050B14]/50 to-[#050B14]/15" />
           <div className="relative px-8 py-16 sm:px-14 sm:py-24">
             <p className="text-[11px] font-bold uppercase tracking-[0.22em]" style={{ color: GOLD_LIGHT }}>
-              For dReps &amp; builders
+              For dReps, investors &amp; builders
             </p>
             <h2 className="mt-4 max-w-[560px] font-serif text-[34px] leading-[1.06] sm:text-[46px]">
-              An open standard deserves{" "}
+              Let&apos;s build robust credit markets{" "}
               <em className="italic" style={{ color: GOLD_LIGHT }}>
-                open review.
+                in the open.
               </em>
             </h2>
             <div className="mt-9 flex flex-wrap items-center gap-3">
               <a
-                href={PROPOSAL_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={CONTACT}
                 className="group inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full bg-gradient-to-b from-[#ffe3a4] via-[#ffc95a] to-[#d99a2b] py-1 pl-7 pr-1.5 text-[13px] font-bold uppercase text-[#130b02] shadow-[0_20px_70px_rgba(246,184,75,0.3)] transition duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 hover:from-[#fff0c9] hover:to-[#f6b84b] active:scale-[0.98]"
               >
-                Read the Full Proposal
+                Talk to the team
                 <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#130b02]/12 transition duration-300 group-hover:-translate-y-[1px] group-hover:translate-x-[1px]">
-                  <ArrowUpRight className="h-4 w-4" strokeWidth={2} />
+                  <ArrowRight className="h-4 w-4" strokeWidth={2} />
                 </span>
               </a>
-              <a
-                href="mailto:hello@fairway.xyz?subject=Aurora%20proposal"
+              <Link
+                href="/#stack"
                 className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border px-7 text-[13px] font-bold uppercase backdrop-blur transition duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-[#f6b84b]/10 active:scale-[0.98]"
                 style={{ borderColor: "rgba(246,184,75,0.55)", color: GOLD_LIGHT }}
               >
-                Talk to the Consortium
-              </a>
+                Explore the Aurora stack
+              </Link>
             </div>
           </div>
         </div>
@@ -1122,26 +1040,26 @@ function Footer() {
             />
             <span className="font-serif text-[22px] tracking-[0.24em]">AURORA</span>
             <span className="text-[11px] font-bold uppercase tracking-[0.22em]" style={{ color: GOLD }}>
-              / Proposal
+              / Platform
             </span>
           </Link>
           <p className="mt-5 max-w-[420px] text-[13.5px] leading-[1.75]" style={{ color: DIM }}>
             Open infrastructure for institutional credit markets on Cardano.
-            A Treasury proposal by Fairway, Fallen Icarus and Sundial.
+            Built by Fairway with Fallen Icarus and Sundial.
           </p>
           <p className="mt-8 text-[12px]" style={{ color: FAINT }}>
-            Copyright 2026 Aurora / Fairway. All rights reserved.
+            © 2026 Aurora / Fairway. All rights reserved.
           </p>
         </div>
         <FooterCol
-          title="Proposal"
+          title="Explore"
           links={[
             { label: "Phases", href: "#phases" },
-            { label: "Lifecycle", href: "#lifecycle" },
+            { label: "How it works", href: "#lifecycle" },
             { label: "Pilot", href: "#pilot" },
-            { label: "Milestones", href: "#milestones" },
-            { label: "Budget", href: "#budget" },
-            { label: "Governance", href: "#governance" },
+            { label: "Why now", href: "#why" },
+            { label: "Trust", href: "#trust" },
+            { label: "Answers", href: "#answers" },
           ]}
         />
         <FooterCol
@@ -1155,7 +1073,6 @@ function Footer() {
         <FooterCol
           title="Ecosystem"
           links={[
-            { label: "Full proposal", href: PROPOSAL_URL },
             { label: "fairway.global", href: "https://www.fairway.global" },
             { label: "Privacy", href: "#" },
             { label: "Terms", href: "#" },

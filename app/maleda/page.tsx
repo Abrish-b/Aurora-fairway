@@ -1133,5 +1133,5 @@ function FooterItem({ children }: { children: React.ReactNode }) {
       <span aria-hidden className="mt-1.5 inline-block h-[5px] w-[5px] flex-none rounded-full" style={{ background: F_GOLD }} />
       <span>{children}</span>
     </li>
-  );
+   );
 }

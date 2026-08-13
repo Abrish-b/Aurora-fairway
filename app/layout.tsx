@@ -25,15 +25,15 @@ const instrumentSerif = Instrument_Serif({
 export const metadata: Metadata = {
   metadataBase: new URL("https://aurora.fairway.xyz"),
   title: {
-    default: "Aurora - On-chain credit markets for Bitcoin",
+    default: "Aurora - Open credit-market infrastructure on Cardano",
     template: "%s - Aurora by Fairway",
   },
   description:
-    "Aurora is layered credit market infrastructure for Bitcoin-backed lending: identity, credit inputs, market discovery, and tokenized issuance built on Cardano with Sundial.",
+    "Aurora is open infrastructure for institutional credit markets on Cardano: a metadata standard, verification framework, discovery engine, filtering layer, and open APIs.",
   openGraph: {
-    title: "Aurora - On-chain credit markets for Bitcoin",
+    title: "Aurora - Open credit-market infrastructure on Cardano",
     description:
-      "Layered credit market infrastructure for Bitcoin-backed lending. Built on Cardano with Sundial.",
+      "Shared metadata, verification, discovery, filtering, and API infrastructure for Cardano credit markets. Apache 2.0 and protocol independent.",
     siteName: "Aurora by Fairway",
     type: "website",
   },

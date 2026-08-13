@@ -213,6 +213,78 @@ body {
   animation: sundownLivePulse 2.4s ease-out infinite;
 }
 
+/* ---------------------------------------------------------------- */
+/* Aurora — technical infrastructure surface                         */
+/* ---------------------------------------------------------------- */
+
+/* Faint drafting grid behind diagram panels */
+.aurora-blueprint {
+  background-image:
+    linear-gradient(rgba(244, 239, 227, 0.038) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(244, 239, 227, 0.038) 1px, transparent 1px);
+  background-size: 34px 34px;
+  background-position: center center;
+}
+
+/* Marching-ants connector rails between HTML pipeline stages */
+@keyframes auroraMarchX {
+  to { background-position: -20px 0; }
+}
+
+@keyframes auroraMarchY {
+  to { background-position: 0 20px; }
+}
+
+.aurora-flow-x {
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(246, 184, 75, 0.6) 0 6px,
+    rgba(246, 184, 75, 0) 6px 20px
+  );
+  animation: auroraMarchX 1.7s linear infinite;
+}
+
+.aurora-flow-y {
+  background-image: repeating-linear-gradient(
+    180deg,
+    rgba(246, 184, 75, 0.6) 0 6px,
+    rgba(246, 184, 75, 0) 6px 20px
+  );
+  animation: auroraMarchY 1.7s linear infinite;
+}
+
+/* Indexer scan line sweeping a stack of index rows */
+@keyframes auroraIndexScan {
+  0% { transform: translateY(0); opacity: 0; }
+  14% { opacity: 1; }
+  86% { opacity: 1; }
+  100% { transform: translateY(var(--aurora-scan, 58px)); opacity: 0; }
+}
+
+.aurora-index-scan {
+  animation: auroraIndexScan 3.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Swap-in for interactive panels whose content changes on selection */
+@keyframes auroraFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.aurora-fade-in {
+  animation: auroraFadeIn 0.32s cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+/* Query/API panels blinking a live cursor */
+@keyframes auroraCaret {
+  0%, 45% { opacity: 1; }
+  50%, 95% { opacity: 0.12; }
+}
+
+.aurora-caret {
+  animation: auroraCaret 1.5s steps(1, end) infinite;
+}
+
 /* Maleda — display heading utility (sans-serif, scoped via layout variable) */
 .font-display {
   font-family: var(--font-maleda-sans), Inter, system-ui, sans-serif;
@@ -267,8 +339,17 @@ body {
   .sundown-marquee,
   .sundown-dash-travel,
   .sundown-token-pulse,
-  .sundown-live-pulse::after {
+  .sundown-live-pulse::after,
+  .aurora-flow-x,
+  .aurora-flow-y,
+  .aurora-index-scan,
+  .aurora-caret,
+  .aurora-fade-in {
     animation: none !important;
+  }
+
+  .aurora-index-scan {
+    opacity: 0.5 !important;
   }
 
   /* Scroll-driven reveals must resolve to fully visible, never freeze at 0 */

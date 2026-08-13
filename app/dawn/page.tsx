@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -30,7 +31,13 @@ import BuiltByFairwayCard from "@/components/aurora/BuiltByFairwayCard";
 const GOLD_HOVER = "#B8892F";
 const GRAY_BODY = "#6F6F6F";
 
-export default function AuroraPage() {
+export const metadata: Metadata = {
+  title: "Bitcoin-backed credit-market stack",
+  description:
+    "A modular Bitcoin-backed credit-market stack combining identity, underwriting, loan discovery, and tokenized issuance across Cardano-native rails.",
+};
+
+export default function DawnPage() {
   return (
     <div className="min-h-screen bg-[#fffaf2] text-[#07111b] font-sans antialiased">
       <Nav />
@@ -81,7 +88,7 @@ function Nav() {
     { href: "#stack", label: "Stack" },
     { href: "#harmony", label: "Harmony" },
     { href: "#cardano", label: "Cardano" },
-    { href: "/aurora", label: "Proposal" },
+    { href: "/", label: "Aurora" },
     { href: "#faq", label: "FAQ" },
   ];
 
@@ -456,18 +463,18 @@ const stackLayers: StackLayerData[] = [
     number: "03",
     name: "Aurora",
     role: "Discovery & filtering",
-    short: "Verified discovery for institutional credit markets.",
+    short: "Open discovery and filtering for Cardano credit markets.",
     detail:
-      "Built with Fallen Icarus and Sundial. Adds identity proofs, compliance indexing, and lender-side filtering to Cardano credit markets — without rebuilding the rails.",
+      "Built with Sundial and Fallen Icarus. Adds a shared metadata standard, a verification framework, and open discovery APIs to Cardano credit markets — without changing the underlying lending logic.",
     bullets: [
-      "Identity proof metadata",
-      "Compliance indexer",
-      "Lender filtering",
+      "Metadata standard",
+      "Verification framework",
+      "Open discovery APIs",
     ],
     icon: Filter,
     logo: "/brand/Aurora-logo.png",
     logoAlt: "Aurora logo",
-    cta: { label: "Explore Aurora", href: "/aurora" },
+    cta: { label: "Explore Aurora", href: "/" },
     featured: true,
   },
   {
@@ -488,18 +495,18 @@ const stackLayers: StackLayerData[] = [
 const sundownInside = [
   {
     icon: Search,
-    title: "Discovery layer",
-    copy: "Surfaces compatible loan opportunities for verified participation.",
+    title: "Discovery Engine",
+    copy: "Indexes compatible Loan Request UTxOs and their associated metadata.",
   },
   {
     icon: ScanLine,
-    title: "Compliance-aware indexer",
-    copy: "Verifies proof envelopes, issuer authority, and expirations off-chain.",
+    title: "Verification Framework",
+    copy: "Evaluates verification references and other proof-based information.",
   },
   {
     icon: SlidersHorizontal,
-    title: "Lender policies",
-    copy: "Filter accepted proofs, issuers, jurisdictions, and risk bands.",
+    title: "Capital-provider filtering",
+    copy: "Filter by jurisdiction, ticket size, duration, asset, and verification.",
   },
 ];
 
@@ -687,7 +694,7 @@ function PartnershipSection() {
       </div>
       <div className="mt-6">
         <Link
-          href="/aurora"
+          href="/"
           className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-[#C89B3C]/45 bg-white px-7 text-[13px] font-bold uppercase text-[#101823] transition hover:-translate-y-0.5 hover:border-[#C89B3C] hover:bg-[#fff8e8]"
         >
           Explore Aurora
@@ -748,7 +755,7 @@ const faqItems: { q: string; a: ReactNode }[] = [
   },
   {
     q: "What is the Aurora proposal?",
-    a: "A Cardano Treasury proposal by Fairway, Fallen Icarus and Sundial: an open metadata standard, a verification indexer, and a Treasury-backed lending pilot with Ethiopian SACCOs.",
+    a: "A Cardano Treasury proposal by Fairway, with Sundial and Fallen Icarus: an open metadata standard, a verification framework, the Aurora Discovery Engine, open APIs, and reference implementations for Cardano credit markets. It is infrastructure-only — Aurora does not lend, originate, custody, or settle.",
   },
   {
     q: "What is Solstice?",
@@ -829,7 +836,7 @@ function Footer() {
     <footer className="border-t border-[#1B384C]/10 bg-[#f8f3eb] px-5 py-12 sm:px-8 lg:px-12">
       <div className="mx-auto grid max-w-[1180px] gap-10 md:grid-cols-12">
         <div className="md:col-span-5">
-          <Link href="/" className="inline-flex items-center gap-3">
+          <Link href="/dawn" className="inline-flex items-center gap-3">
             <Image
               src="/brand/aurora-logo-modified.png"
               alt="Aurora"
@@ -885,21 +892,21 @@ function Footer() {
           </p>
         </div>
         <FooterCol
-          title="Aurora"
+          title="Dawn"
           links={[
             { label: "Stack", href: "#stack" },
             { label: "How it works", href: "#harmony" },
-            { label: "Proposal", href: "/aurora" },
             { label: "Why Cardano", href: "#cardano" },
             { label: "FAQ", href: "#faq" },
           ]}
         />
         <FooterCol
-          title="Proposal"
+          title="Aurora"
           links={[
-            { label: "Overview", href: "/aurora" },
-            { label: "How it works", href: "/aurora#lifecycle" },
-            { label: "Pilot", href: "/aurora#pilot" },
+            { label: "Overview", href: "/" },
+            { label: "How it works", href: "/#how" },
+            { label: "Public outputs", href: "/#outputs" },
+            { label: "Governance", href: "/#governance" },
           ]}
         />
         <FooterCol
